@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { execSync } = require('child_process');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const axios = require('axios');
+const { GoogleGenAI  } = require("@google/genai");
 
 // 配置项
 const config = {
@@ -17,7 +15,7 @@ const config = {
 };
 
 // Google LLM API
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 // 加载翻译记忆和术语库
 let translationMemory = {};
@@ -112,14 +110,15 @@ async function translateWithLLM(text, targetLang) {
 // 调用Gemini API
 async function callGemini(prompt, model) {
     try {
-        const generationConfig = {
-            temperature: 0.1
-        };
-        const g_model = genAI.getGenerativeModel({ model: model, generationConfig });
+        const response = await genAI.models.generateContent({
+            model: model,
+            contents: prompt,
+            config: {
+                temperature: 0.1
+            }
+        });
 
-        const result = await g_model.generateContent(prompt);
-        const response = await result.response;
-        return response.text();
+        return response.text;
     } catch (error) {
         console.error('Gemini API error:', error);
         throw error;
