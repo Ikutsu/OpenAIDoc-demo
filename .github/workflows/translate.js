@@ -134,7 +134,7 @@ async function translateFile(filePath) {
     const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
     for (const targetLang of config.targetLanguages) {
-        const targetPath = path.join(config.sourceDir, "_" , targetLang);
+        const targetPath = path.join(config.sourceDir + "_" + targetLang, filePath.replace('docs/', ''));
 
         // 创建目标目录
         fs.mkdirSync(path.dirname(targetPath), { recursive: true });
