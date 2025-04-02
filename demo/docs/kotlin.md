@@ -6,7 +6,7 @@ title: Kotlin
 > You need around __10 min__ to do the tutorial.
 
 :::note
-update - 2025-04-02
+update - 2025-04-03
 :::
 
 ## Get the code
