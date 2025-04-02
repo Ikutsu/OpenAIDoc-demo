@@ -24,7 +24,7 @@ jobs:
         run: cd ${{ github.workspace }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm install @google/genai
 
       - name: Get all changed markdown files
         id: changed-markdown-files
@@ -34,15 +34,6 @@ jobs:
           files: |
             **.md
             docs/**.md
-
-      - name: List all changed files markdown files
-        if: steps.changed-markdown-files.outputs.any_changed == 'true'
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
-        run: |
-          for file in ${ALL_CHANGED_FILES}; do
-            echo "$file was changed"
-          done
 
       - name: Translate
         if: steps.changed-markdown-files.outputs.any_changed == 'true'

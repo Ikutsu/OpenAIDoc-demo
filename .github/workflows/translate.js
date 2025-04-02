@@ -10,8 +10,8 @@ const config = {
     modelConfigs: {
         'zh-CN': { provider: 'google', model: 'gemini-2.0-flash' }
     },
-    translationMemoryPath: './translation-memory.json',
-    terminologyPath: './terminology.json'
+    translationMemoryPath: './demo/translation-memory.json',
+    terminologyPath: './demo/terminology.json'
 };
 
 // Google LLM API
@@ -134,8 +134,7 @@ async function translateFile(filePath) {
     const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
     for (const targetLang of config.targetLanguages) {
-        const targetDir = path.join('./i18n', targetLang, 'docusaurus-plugin-content-docs/current');
-        const targetPath = path.join(targetDir, filePath.replace('docs/', ''));
+        const targetPath = path.join(config.sourceDir, "_" , targetLang);
 
         // 创建目标目录
         fs.mkdirSync(path.dirname(targetPath), { recursive: true });
