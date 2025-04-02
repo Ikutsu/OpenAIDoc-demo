@@ -45,11 +45,20 @@ jobs:
           done
 
       - name: Translate
-#        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: node .github/workflows/translate.js
+
+      - name: Commit and push changes
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add .
+          git commit -m 'Add translated files'
+          git push origin main
 
 #      - name: Build documentation website
 #        run: npm run build
