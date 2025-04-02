@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Change to root directory
+        run: cd ${{ github.workspace }}
+
       - name: Install dependencies
         run: npm install
 
