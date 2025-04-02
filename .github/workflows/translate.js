@@ -191,7 +191,7 @@ function getLangDisplayName(langCode) {
 
 // 主函数
 async function main() {
-    const changedFiles = process.env.ALL_CHANGED_FILES;
+    const changedFiles = process.env.ALL_CHANGED_FILES.split(/[\s,]+/);
     console.log(`Found ${changedFiles.length} changed files`);
 
     for (const file of changedFiles) {
