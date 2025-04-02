@@ -9,7 +9,7 @@ title: Kotlin
 update - 2024-10-21
 :::
 
-## Get the code - New test
+## Get the code - New
 
 :::info
 [The source code is available at on Github](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)
