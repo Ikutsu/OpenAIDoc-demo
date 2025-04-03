@@ -8,7 +8,7 @@ title: Kotlin
 更新 - 2025-04-04
 :::
 
-## 获取代码
+## 获取代码 - 新 API 测试
 
 :::info
 [源代码可在 Github 上找到](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)
@@ -130,7 +130,7 @@ class UserApplication : KoinComponent {
 
 ## 启动 Koin
 
-我们需要使用我们的应用程序启动 Koin。只需在应用程序的主入口点（我们的 `main` 函数）中调用 `startKoin()` 函数：
+我们需要使用我们的应用程序启动 Koin。只需在应用程序的主入口点，即我们的 `main` 函数中调用 `startKoin()` 函数：
 
 ```kotlin
 fun main() {
@@ -146,7 +146,7 @@ fun main() {
 `startKoin` 中的 `modules()` 函数加载给定的模块列表
 :::
 
-## Koin 模块：经典方式还是构造函数 DSL？
+## Koin 模块：经典或构造函数 DSL？
 
 这是我们应用程序的 Koin 模块声明：
 
