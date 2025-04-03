@@ -6,10 +6,10 @@ title: Kotlin
 > You need around __10 min__ to do the tutorial.
 
 :::note
-update - 2025-04-04
+update - 2024-10-21
 :::
 
-## Get the code - New API test
+## Get the code
 
 :::info
 [The source code is available at on Github](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)
