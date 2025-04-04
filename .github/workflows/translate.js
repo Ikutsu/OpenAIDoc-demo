@@ -11,9 +11,7 @@ const config = {
         'zh-CN': { provider: 'google', model: 'gemini-2.0-flash' }
     },
     translationMemoryPath: './demo/translation-memory.json',
-    terminologyPath: './demo/terminology.json',
-    segmentSizeLimit: 2000, // 设置段落大小限制（字符数）
-    segmentSeparators: ['\n## ', '\n### ', '\n#### ', '\n##### ', '\n###### ', '\n\n'], // 分段标识符
+    terminologyPath: './demo/terminology.json'
 };
 
 // Google LLM API
@@ -59,66 +57,69 @@ function extractFrontmatterAndContent(content) {
 
 // 将文档分割成段落
 function splitIntoSegments(content) {
-    // 预处理：保护代码块
-    const codeBlocks = [];
-    let contentWithPlaceholders = content;
-    
-    // 提取并保护所有代码块
-    const codeBlockRegex = /```[\s\S]*?```/g;
-    let match;
-    let index = 0;
-    
-    while ((match = codeBlockRegex.exec(content)) !== null) {
-        const placeholder = `__CODE_BLOCK_${index}__`;
-        codeBlocks.push(match[0]);
-        contentWithPlaceholders = contentWithPlaceholders.replace(match[0], placeholder);
-        index++;
-    }
-    
-    // 按标题和段落分隔
-    let segments = [];
-    
-    // 按主要分隔符分割
-    let tempSegments = [contentWithPlaceholders];
-    
-    for (const separator of config.segmentSeparators) {
-        let newSegments = [];
-        
-        for (const segment of tempSegments) {
-            if (!segment.trim()) continue;
-            
-            const parts = segment.split(separator);
-            
-            if (parts.length > 0) {
-                newSegments.push(parts[0]);
-                
-                for (let i = 1; i < parts.length; i++) {
-                    // 保留分隔符前缀，移除前导空格
-                    newSegments.push(separator.substring(1) + parts[i]);
-                }
-            }
+    const lines = content.split('\n');
+    const blocks = []; // 用于存储最终的文本块
+    let currentBlockLines = []; // 用于临时存储当前块的行
+    let inCodeBlock = false; // 标记是否在代码块内
+
+    // 辅助函数：当一个块结束时，将其添加到 blocks 数组
+    const finalizeCurrentBlock = () => {
+        // 只有当当前块有内容时才添加
+        if (currentBlockLines.length > 0) {
+            blocks.push(currentBlockLines.join('\n'));
         }
-        
-        tempSegments = newSegments;
-    }
-    
-    // 不再处理过长段落，直接使用分隔符分割后的结果
-    segments = tempSegments;
-    
-    // 恢复代码块
-    segments = segments.map(segment => {
-        let restoredSegment = segment;
-        for (let i = 0; i < codeBlocks.length; i++) {
-            const placeholder = `__CODE_BLOCK_${i}__`;
-            if (restoredSegment.includes(placeholder)) {
-                restoredSegment = restoredSegment.replace(placeholder, codeBlocks[i]);
+        currentBlockLines = []; // 清空，为下一个块做准备
+    };
+
+    // 遍历每一行来识别块
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmedLine = line.trim();
+
+        if (trimmedLine.startsWith('```') || trimmedLine.startsWith(':::') || trimmedLine.startsWith('---')) {
+            if (!inCodeBlock) { // 代码块开始
+                finalizeCurrentBlock(); // 结束之前的块
+                currentBlockLines.push(line); // 当前行是代码块的第一行
+                inCodeBlock = true;
+            } else { // 代码块结束
+                currentBlockLines.push(line); // 当前行是代码块的最后一行
+                inCodeBlock = false;
+                finalizeCurrentBlock(); // 将完整的代码块作为一个整体添加到 blocks
             }
+            continue; // 处理完代码块标记行，跳到下一行
         }
-        return restoredSegment;
-    });
-    
-    // 最终过滤空段落
-    return segments.filter(segment => segment.trim().length > 0);
+        // 如果在代码块内部，直接添加行到当前块
+        if (inCodeBlock) {
+            currentBlockLines.push(line);
+            continue; // 跳到下一行
+        }
+
+        // 空行通常表示一个块的结束
+        if (trimmedLine === '') {
+            finalizeCurrentBlock(); // 结束当前块
+            // 我们不把空行本身作为一个单独的块，它只是分隔符
+            continue; // 跳到下一行
+        }
+
+        // 标题行 (#) 通常也开始一个新的块
+        if (trimmedLine.startsWith('#')) {
+            finalizeCurrentBlock(); // 结束之前的块
+            currentBlockLines.push(line); // 标题行开始新的块
+            // 标题通常是单行，让下一行的逻辑来结束这个标题块
+            continue;
+        }
+
+        // 其他所有行（普通文本、列表项、引用等）都添加到当前块
+        // 如果 currentBlockLines 为空，意味着这是一个新块的开始
+        currentBlockLines.push(line);
+
+    } // 遍历结束
+
+    // 循环结束后，如果 currentBlockLines 中还有剩余内容，需要 finalizing
+    finalizeCurrentBlock();
+
+    // 返回所有分段的块
+    return blocks;
 }
 
 // 准备翻译提示词
@@ -193,34 +194,6 @@ async function callGemini(prompt, model) {
     }
 }
 
-// 处理翻译结果
-function processTranslatedText(translatedText) {
-    // 移除可能的代码块标记
-    let processed = translatedText;
-    
-    // 处理翻译结果被包裹在markdown代码块的情况
-    if (processed.startsWith('```markdown') && processed.endsWith('```')) {
-        processed = processed.slice(10, -3).trim();
-    }
-    
-    // 清理常见的格式问题
-    processed = processed
-        // 修复错误的换行符表示
-        .replace(/([^\\])\\n/g, '$1\n')
-        .replace(/^\\n/g, '\n')
-        .replace(/\\n$/g, '\n')
-        // 移除孤立的n字符
-        .replace(/(\s)n(\s)/g, '$1$2')
-        .replace(/^n\s/g, '')
-        .replace(/\sn$/g, '')
-        .replace(/\bn\b/g, '')
-        // 修复可能错误的Markdown格式
-        .replace(/```markdown\s/g, '```')
-        .replace(/\n{3,}/g, '\n\n');
-    
-    return processed;
-}
-
 // 翻译文件
 async function translateFile(filePath) {
     console.log(`Translating file: ${filePath}`);
@@ -249,108 +222,88 @@ async function translateFile(filePath) {
             const segments = splitIntoSegments(mainContent);
             console.log(`Divided document into ${segments.length} segments`);
             
-            // 创建段落映射以保持原始顺序
-            const segmentMap = new Map();
-            const pendingTranslations = [];
+            // 收集翻译结果
+            const translatedSegments = [];
             
-            // 准备所有翻译任务
             for (let i = 0; i < segments.length; i++) {
                 const segment = segments[i];
                 const segmentHash = getTextHash(segment);
                 
-                // 检查段落是否有翻译记忆
+                // 尝试使用翻译记忆
+                let translatedSegment;
                 if (translationMemory[targetLang] && translationMemory[targetLang][segmentHash]) {
                     console.log(`Using cached translation for segment ${i+1}/${segments.length}`);
-                    segmentMap.set(i, translationMemory[targetLang][segmentHash].translation);
+                    translatedSegment = translationMemory[targetLang][segmentHash].translation;
                 } else {
-                    console.log(`Preparing to translate segment ${i+1}/${segments.length} (${segment.length} chars)`);
-                    pendingTranslations.push({
-                        index: i,
-                        segment: segment,
-                        segmentHash: segmentHash
-                    });
-                }
-            }
-            
-            // 执行所有待处理的翻译
-            for (let i = 0; i < pendingTranslations.length; i++) {
-                const { index, segment, segmentHash } = pendingTranslations[i];
-                console.log(`Translating segment ${index+1}/${segments.length} (${segment.length} chars)`);
-                
-                let translatedSegment;
-                try {
-                    translatedSegment = await translateWithLLM(segment, targetLang, true);
-                    translatedSegment = processTranslatedText(translatedSegment);
-                } catch (error) {
-                    console.error(`Error translating segment ${index+1}:`, error);
-                    // 如果翻译失败，使用原文
-                    translatedSegment = segment;
+                    console.log(`Translating segment ${i+1}/${segments.length} (${segment.length} chars)`);
+                    try {
+                        translatedSegment = await translateWithLLM(segment, targetLang, true);
+                        translatedSegment = processTranslatedText(translatedSegment);
+                        
+                        // 保存段落翻译记忆
+                        if (!translationMemory[targetLang]) {
+                            translationMemory[targetLang] = {};
+                        }
+                        
+                        translationMemory[targetLang][segmentHash] = {
+                            source: segment,
+                            translation: translatedSegment,
+                            lastUpdated: new Date().toISOString()
+                        };
+                    } catch (error) {
+                        console.error(`Error translating segment ${i+1}:`, error);
+                        // 如果翻译失败，使用原文
+                        translatedSegment = segment;
+                    }
                 }
                 
-                // 保存段落翻译记忆
-                if (!translationMemory[targetLang]) {
-                    translationMemory[targetLang] = {};
-                }
-                
-                translationMemory[targetLang][segmentHash] = {
-                    source: segment,
-                    translation: translatedSegment,
-                    lastUpdated: new Date().toISOString()
-                };
-                
-                segmentMap.set(index, translatedSegment);
+                translatedSegments.push(translatedSegment);
             }
             
-            // 按原始顺序合并翻译结果
-            const translatedSegments = [];
-            for (let i = 0; i < segments.length; i++) {
-                translatedSegments.push(segmentMap.get(i));
-            }
-            
-            // 智能合并翻译段落
+            // 重建文档并确保保持原始格式
             translatedContent = frontmatter;
             
-            // 特殊处理第一个段落
+            // 添加第一个段落
             if (translatedSegments.length > 0) {
                 translatedContent += translatedSegments[0];
             }
             
-            // 合并其余段落，确保格式正确
+            // 添加剩余段落，确保段落之间有适当的分隔
             for (let i = 1; i < translatedSegments.length; i++) {
+                // 添加分隔空行，保持原始文档的段落结构
+                // 根据段落的内容确定如何添加空行
                 const currentSegment = translatedSegments[i];
-                const prevSegment = translatedSegments[i-1];
                 
-                // 检查是否需要添加换行
-                // 1. 如果当前段落以标题开始，确保前面有空行
-                // 2. 如果上一段落以代码块结束，确保有空行
-                const isCurrentStartingWithHeading = /^#{1,6}\s/.test(currentSegment.trim());
-                const isPrevEndingWithCodeBlock = prevSegment.trim().endsWith('```');
+                // 判断当前段落的类型
+                const isHeading = currentSegment.trim().startsWith('#');
+                const isCodeBlock = currentSegment.trim().startsWith('```') || 
+                                   currentSegment.trim().startsWith(':::') || 
+                                   currentSegment.trim().startsWith('---');
                 
-                if (isCurrentStartingWithHeading && !prevSegment.endsWith('\n\n')) {
-                    if (prevSegment.endsWith('\n')) {
-                        translatedContent += '\n';
-                    } else {
-                        translatedContent += '\n\n';
+                // 根据段落类型添加空行
+                if (isHeading || isCodeBlock) {
+                    // 标题和代码块前添加两个换行
+                    if (!translatedContent.endsWith('\n\n')) {
+                        if (translatedContent.endsWith('\n')) {
+                            translatedContent += '\n';
+                        } else {
+                            translatedContent += '\n\n';
+                        }
                     }
-                } else if (isPrevEndingWithCodeBlock && !prevSegment.endsWith('\n\n')) {
-                    translatedContent += '\n\n';
-                } else if (!prevSegment.endsWith('\n')) {
-                    translatedContent += '\n';
+                } else {
+                    // 普通段落前添加两个换行
+                    if (!translatedContent.endsWith('\n\n')) {
+                        if (translatedContent.endsWith('\n')) {
+                            translatedContent += '\n';
+                        } else {
+                            translatedContent += '\n\n';
+                        }
+                    }
                 }
                 
+                // 添加段落内容
                 translatedContent += currentSegment;
             }
-            
-            // 最终清理整个翻译文档
-            translatedContent = translatedContent
-                // 清理可能的空代码块
-                .replace(/```\s*```/g, '')
-                // 限制连续换行
-                .replace(/\n{3,}/g, '\n\n')
-                // 确保代码块完整性
-                .replace(/```([^`]*?)(?!\n```)/g, '```$1\n```')
-                // 最终检查孤立的n字符
-                .replace(/\bn\b/g, '');
             
             // 保存整个文件的翻译记忆
             translationMemory[targetLang][fileHash] = {
