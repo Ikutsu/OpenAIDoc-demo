@@ -238,8 +238,7 @@ async function translateFile(filePath) {
                     console.log(`Translating segment ${i+1}/${segments.length} (${segment.length} chars)`);
                     try {
                         translatedSegment = await translateWithLLM(segment, targetLang, true);
-                        translatedSegment = processTranslatedText(translatedSegment);
-                        
+
                         // 保存段落翻译记忆
                         if (!translationMemory[targetLang]) {
                             translationMemory[targetLang] = {};
