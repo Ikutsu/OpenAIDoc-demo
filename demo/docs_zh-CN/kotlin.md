@@ -82,7 +82,7 @@ val appModule = module {
 
 ## UserService 组件
 
-让我们编写 UserService 组件来请求默认用户：
+让我们写一个 UserService 组件来请求默认用户：
 
 ```kotlin
 class UserService(private val userRepository: UserRepository) {
@@ -130,7 +130,7 @@ class UserApplication : KoinComponent {
 
 ## 启动 Koin
 
-我们需要使用我们的应用程序启动 Koin。只需在应用程序的主入口点（我们的 `main` 函数）中调用 `startKoin()` 函数：
+我们需要使用我们的应用程序启动 Koin。只需在应用程序的主入口点，即我们的 `main` 函数中调用 `startKoin()` 函数：
 
 ```kotlin
 fun main() {
