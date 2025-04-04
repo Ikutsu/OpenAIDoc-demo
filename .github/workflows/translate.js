@@ -173,6 +173,8 @@ function prepareTranslationPrompt(sourceText, targetLang, isSegment = true) {
 6. 翻译风格应保持技术文档的专业性和简洁性
 7. 对于无法确定的专有名词，保留英文原文
 8. ${isSegment ? '这是文档的一个片段，专注于翻译当前内容' : '翻译整个文档，保持文档作为一个整体'}
+9. **非常重要**：不要在翻译中引入多余的字符，特别是不要使用"\\n"或单独的"n"字符来表示换行
+10. 保持Markdown格式的一致性，确保代码块标记（\`\`\`）正确配对
 
 ## 术语表
 ${relevantTerms || '无相关术语'}
@@ -221,11 +223,20 @@ async function callGemini(prompt, model) {
 
 // 处理翻译结果
 function processTranslatedText(translatedText) {
-    // 处理可能返回的代码块格式
-    if (translatedText.startsWith('```markdown') && translatedText.endsWith('```')) {
-        return translatedText.slice(10, -3).trim();
+    // 移除可能的代码块标记
+    let processed = translatedText;
+    if (processed.startsWith('```markdown') && processed.endsWith('```')) {
+        processed = processed.slice(10, -3).trim();
     }
-    return translatedText;
+    
+    // 清理错误的换行符表示
+    processed = processed.replace(/([^\\])\\n/g, '$1\n');  // 处理非转义的 \n
+    processed = processed.replace(/\bn\b/g, '');  // 移除孤立的 n 字符
+    
+    // 修复可能错误的 Markdown 格式
+    processed = processed.replace(/```markdown\n/g, '');
+    
+    return processed;
 }
 
 // 翻译文件
@@ -287,8 +298,30 @@ async function translateFile(filePath) {
                 translatedSegments.push(translatedSegment);
             }
             
-            // 合并翻译后的段落
-            translatedContent = frontmatter + translatedSegments.join('');
+            // 合并翻译后的段落时检查连接处
+            translatedContent = frontmatter;
+            
+            for (let i = 0; i < translatedSegments.length; i++) {
+                if (i > 0) {
+                    // 检查段落连接处是否需要添加换行符
+                    const prevEndsWithNewline = translatedSegments[i-1].endsWith('\n');
+                    const currentStartsWithMarkdown = translatedSegments[i].startsWith('```') || 
+                                                      translatedSegments[i].startsWith('## ') || 
+                                                      translatedSegments[i].startsWith('### ');
+                    
+                    if (!prevEndsWithNewline && !currentStartsWithMarkdown) {
+                        translatedContent += '\n';
+                    }
+                }
+                
+                translatedContent += translatedSegments[i];
+            }
+            
+            // 最终检查整个翻译结果
+            translatedContent = translatedContent
+                .replace(/```\s+```/g, '')  // 移除空代码块
+                .replace(/\n{3,}/g, '\n\n') // 限制连续换行数量
+                .replace(/\bn\b/g, '');     // 再次检查孤立的n字符
             
             // 保存整个文件的翻译记忆
             translationMemory[targetLang][fileHash] = {
