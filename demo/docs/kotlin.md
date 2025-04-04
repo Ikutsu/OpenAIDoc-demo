@@ -83,7 +83,7 @@ val appModule = module {
 
 ## The UserService Component
 
-Let's write the UserService component to request the default user and see what we can get:
+Let's write the UserService component to request the default user:
 
 ```kotlin
 class UserService(private val userRepository: UserRepository) {

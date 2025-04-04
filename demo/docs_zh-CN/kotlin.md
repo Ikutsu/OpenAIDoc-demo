@@ -72,7 +72,7 @@ val appModule = module {
 }
 ```
 
-让我们声明我们的第一个组件。我们想要一个 `UserRepository` 的单例，通过创建一个 `UserRepositoryImpl` 的实例
+让我们声明我们的第一个组件。我们通过创建一个 `UserRepositoryImpl` 的实例来提供一个 `UserRepository` 的单例。
 
 ```kotlin
 val appModule = module {
@@ -82,7 +82,7 @@ val appModule = module {
 
 ## UserService 组件
 
-让我们编写 UserService 组件来请求默认用户，看看我们能得到什么：
+让我们写一个 UserService 组件来请求默认用户，看看我们能得到什么：
 
 ```kotlin
 class UserService(private val userRepository: UserRepository) {
