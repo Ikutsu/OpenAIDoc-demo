@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { GoogleGenAI  } = require("@google/genai");
+const { GoogleGenAI } = require("@google/genai");
 
 // 配置项
 const config = {
@@ -11,7 +11,9 @@ const config = {
         'zh-CN': { provider: 'google', model: 'gemini-2.0-flash' }
     },
     translationMemoryPath: './demo/translation-memory.json',
-    terminologyPath: './demo/terminology.json'
+    terminologyPath: './demo/terminology.json',
+    segmentSizeLimit: 2000, // 设置段落大小限制（字符数）
+    segmentSeparators: ['\n## ', '\n### ', '\n#### ', '\n##### ', '\n###### ', '\n\n'], // 分段标识符
 };
 
 // Google LLM API
@@ -36,8 +38,8 @@ try {
     terminology = { terms: {} };
 }
 
-// 计算文件的哈希值
-function getFileHash(content) {
+// 计算文本的哈希值
+function getTextHash(content) {
     return crypto.createHash('md5').update(content).digest('hex');
 }
 
@@ -55,8 +57,100 @@ function extractFrontmatterAndContent(content) {
     return { frontmatter: '', mainContent: content };
 }
 
+// 将文档分割成段落
+function splitIntoSegments(content) {
+    let segments = [];
+    let currentSegment = '';
+    
+    // 首先按照标题和空行分隔符进行初步分割
+    let tempSegments = [content];
+    
+    for (const separator of config.segmentSeparators) {
+        let newSegments = [];
+        
+        for (const segment of tempSegments) {
+            // 跳过空段落
+            if (!segment.trim()) continue;
+            
+            // 检查当前段落是否包含代码块
+            const codeBlockMatches = segment.match(/```[\s\S]*?```/g);
+            if (codeBlockMatches) {
+                // 如果包含代码块，暂时将代码块替换为占位符
+                const placeholders = {};
+                let segmentWithPlaceholders = segment;
+                
+                codeBlockMatches.forEach((codeBlock, index) => {
+                    const placeholder = `__CODE_BLOCK_${index}__`;
+                    placeholders[placeholder] = codeBlock;
+                    segmentWithPlaceholders = segmentWithPlaceholders.replace(codeBlock, placeholder);
+                });
+                
+                // 对替换后的文本进行分段
+                const subSegments = segmentWithPlaceholders.split(separator);
+                
+                // 恢复代码块
+                subSegments.forEach((subSegment, index) => {
+                    Object.keys(placeholders).forEach(placeholder => {
+                        subSegments[index] = subSegments[index].replace(placeholder, placeholders[placeholder]);
+                    });
+                });
+                
+                // 添加分隔符前缀（除了第一个段落）
+                if (subSegments.length > 0) {
+                    newSegments.push(subSegments[0]);
+                    for (let i = 1; i < subSegments.length; i++) {
+                        newSegments.push(separator.substring(1) + subSegments[i]);
+                    }
+                }
+            } else {
+                // 如果不包含代码块，直接分段
+                const subSegments = segment.split(separator);
+                
+                if (subSegments.length > 0) {
+                    newSegments.push(subSegments[0]);
+                    for (let i = 1; i < subSegments.length; i++) {
+                        newSegments.push(separator.substring(1) + subSegments[i]);
+                    }
+                }
+            }
+        }
+        
+        tempSegments = newSegments;
+    }
+    
+    // 然后处理超长段落
+    for (const segment of tempSegments) {
+        // 跳过空段落
+        if (!segment.trim()) continue;
+        
+        // 如果当前段落超过大小限制且不包含代码块，尝试在句子边界分割
+        if (segment.length > config.segmentSizeLimit && !segment.includes('```')) {
+            const sentences = segment.match(/[^.!?]+[.!?]+/g) || [segment];
+            
+            for (const sentence of sentences) {
+                if (currentSegment.length + sentence.length > config.segmentSizeLimit && currentSegment.length > 0) {
+                    segments.push(currentSegment);
+                    currentSegment = sentence;
+                } else {
+                    currentSegment += sentence;
+                }
+            }
+            
+            if (currentSegment.length > 0) {
+                segments.push(currentSegment);
+                currentSegment = '';
+            }
+        } else {
+            // 保持代码块完整性或处理小段落
+            segments.push(segment);
+        }
+    }
+    
+    return segments.filter(segment => segment.trim().length > 0);
+}
+
 // 准备翻译提示词
-function prepareTranslationPrompt(sourceText, targetLang) {
+function prepareTranslationPrompt(sourceText, targetLang, isSegment = true) {
     // 获取相关术语
     const relevantTerms = Object.entries(terminology.terms)
         .filter(([term]) => sourceText.includes(term))
@@ -68,7 +162,7 @@ function prepareTranslationPrompt(sourceText, targetLang) {
 你是一位精通技术文档翻译的专业翻译系统，负责将英文技术文档准确翻译为${getLangDisplayName(targetLang)}。请严格遵循以下要求：
 
 ## 任务定义
-将给定的技术文档从英文翻译为${getLangDisplayName(targetLang)}，保持专业性和准确性。这是关于Kotlin依赖注入框架Koin的文档。
+将给定的技术文档${isSegment ? '片段' : ''}从英文翻译为${getLangDisplayName(targetLang)}，保持专业性和准确性。这是关于Kotlin依赖注入框架Koin的文档。
 
 ## 翻译要求
 1. 保持所有Markdown格式、代码块和链接不变
@@ -78,7 +172,7 @@ function prepareTranslationPrompt(sourceText, targetLang) {
 5. 技术概念必须准确翻译，不能有歧义
 6. 翻译风格应保持技术文档的专业性和简洁性
 7. 对于无法确定的专有名词，保留英文原文
-8. 翻译整个文档，不分段处理，保持文档作为一个整体
+8. ${isSegment ? '这是文档的一个片段，专注于翻译当前内容' : '翻译整个文档，保持文档作为一个整体'}
 
 ## 术语表
 ${relevantTerms || '无相关术语'}
@@ -96,9 +190,9 @@ ${sourceText}
 }
 
 // 调用LLM API进行翻译
-async function translateWithLLM(text, targetLang) {
+async function translateWithLLM(text, targetLang, isSegment = true) {
     const modelConfig = config.modelConfigs[targetLang];
-    const prompt = prepareTranslationPrompt(text, targetLang);
+    const prompt = prepareTranslationPrompt(text, targetLang, isSegment);
 
     if (modelConfig.provider === 'google') {
         return await callGemini(prompt, modelConfig.model);
@@ -125,11 +219,20 @@ async function callGemini(prompt, model) {
     }
 }
 
+// 处理翻译结果
+function processTranslatedText(translatedText) {
+    // 处理可能返回的代码块格式
+    if (translatedText.startsWith('```markdown') && translatedText.endsWith('```')) {
+        return translatedText.slice(10, -3).trim();
+    }
+    return translatedText;
+}
+
 // 翻译文件
 async function translateFile(filePath) {
     console.log(`Translating file: ${filePath}`);
     const content = fs.readFileSync(filePath, 'utf8');
-    const fileHash = getFileHash(content);
+    const fileHash = getTextHash(content);
 
     const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
@@ -149,21 +252,45 @@ async function translateFile(filePath) {
         // 翻译内容（保留 frontmatter）
         let translatedContent;
         if (mainContent.trim()) {
-            translatedContent = await translateWithLLM(mainContent, targetLang);
-
-            // 处理可能返回的代码块格式
-            if (translatedContent.startsWith('```markdown') && translatedContent.endsWith('```')) {
-                translatedContent = translatedContent.slice(10, -3).trim();
+            // 分段翻译
+            const segments = splitIntoSegments(mainContent);
+            console.log(`Divided document into ${segments.length} segments`);
+            
+            let translatedSegments = [];
+            
+            for (let i = 0; i < segments.length; i++) {
+                const segment = segments[i];
+                const segmentHash = getTextHash(segment);
+                
+                // 检查段落是否有翻译记忆
+                let translatedSegment;
+                if (translationMemory[targetLang] && translationMemory[targetLang][segmentHash]) {
+                    console.log(`Using cached translation for segment ${i+1}/${segments.length}`);
+                    translatedSegment = translationMemory[targetLang][segmentHash].translation;
+                } else {
+                    console.log(`Translating segment ${i+1}/${segments.length} (${segment.length} chars)`);
+                    translatedSegment = await translateWithLLM(segment, targetLang, true);
+                    translatedSegment = processTranslatedText(translatedSegment);
+                    
+                    // 保存段落翻译记忆
+                    if (!translationMemory[targetLang]) {
+                        translationMemory[targetLang] = {};
+                    }
+                    
+                    translationMemory[targetLang][segmentHash] = {
+                        source: segment,
+                        translation: translatedSegment,
+                        lastUpdated: new Date().toISOString()
+                    };
+                }
+                
+                translatedSegments.push(translatedSegment);
             }
-
-            // 完整文档 = 原始 frontmatter + 翻译后的内容
-            translatedContent = frontmatter + translatedContent;
-
-            // 保存到翻译记忆
-            if (!translationMemory[targetLang]) {
-                translationMemory[targetLang] = {};
-            }
-
+            
+            // 合并翻译后的段落
+            translatedContent = frontmatter + translatedSegments.join('');
+            
+            // 保存整个文件的翻译记忆
             translationMemory[targetLang][fileHash] = {
                 source: content,
                 translation: translatedContent,
