@@ -9,7 +9,7 @@ title: Kotlin
 update - 2024-10-21
 :::
 
-## Get the code - Old ref
+## Get the code
 
 :::info
 [The source code is available at on Github](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)
@@ -83,7 +83,7 @@ val appModule = module {
 
 ## The UserService Component
 
-Let's write the UserService component to request the default user:
+Let's write the UserService component to request the default user and see what we can get:
 
 ```kotlin
 class UserService(private val userRepository: UserRepository) {
