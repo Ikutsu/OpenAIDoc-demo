@@ -1,0 +1,214 @@
+{
+  "zh-CN": {
+    "2625e43e727e447b002953e091eb2569": {
+      "source": "\n> This tutorial lets you write a Kotlin application and use Koin dependency injection to retrieve your components.\n> You need around __10 min__ to do the tutorial.",
+      "translation": "\n> 本教程将引导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。\n> 完成本教程大约需要 __10 分钟__。",
+      "lastUpdated": "2025-04-04T21:18:17.607Z"
+    },
+    "8239762bb2253234efb500b7b1283937": {
+      "source": "\n:::note\nupdate - 2024-10-21\n:::\n",
+      "translation": "\n:::note\n更新 - 2024-10-21\n:::",
+      "lastUpdated": "2025-04-04T21:18:18.099Z"
+    },
+    "2b8a2a04eabb59f5c5daefb95038a477": {
+      "source": "## Get the code",
+      "translation": "\n## 获取代码",
+      "lastUpdated": "2025-04-04T21:18:18.507Z"
+    },
+    "dff31b3cd033ab7da3a9970809a3d2ef": {
+      "source": "\n:::info\n[The source code is available at on Github](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::\n",
+      "translation": "\n:::info\n[源代码可在 Github 上找到](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::",
+      "lastUpdated": "2025-04-04T21:18:19.061Z"
+    },
+    "adec9a59431af90a3caaa956d798a450": {
+      "source": "## Setup",
+      "translation": "\n## 设置",
+      "lastUpdated": "2025-04-04T21:18:19.427Z"
+    },
+    "336aebf36184c59b1f4c228aced73354": {
+      "source": "\nFirst, check that the `koin-core` dependency is added like below:",
+      "translation": "\n首先，请检查是否已添加 `koin-core` 依赖项，如下所示：",
+      "lastUpdated": "2025-04-04T21:18:19.892Z"
+    },
+    "f919eeb7618fc7f36b725aba8958ab36": {
+      "source": "\n```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n",
+      "translation": "```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:18:20.384Z"
+    },
+    "22c71e24831487e7a3df82ccd5c4fb41": {
+      "source": "## Application Overview",
+      "translation": "\n## 应用概览",
+      "lastUpdated": "2025-04-04T21:18:20.807Z"
+    },
+    "fe235b29ab51e8daa7ef2560ed036f18": {
+      "source": "\nThe idea of the application is to manage a list of users, and display it in our `UserApplication` class:",
+      "translation": "\n这个应用程序的目的是管理一个用户列表，并在我们的 `UserApplication` 类中显示它：",
+      "lastUpdated": "2025-04-04T21:18:21.255Z"
+    },
+    "e662bad775c76ad9f6f4a51c861f9ae2": {
+      "source": "\n> Users -> UserRepository -> UserService -> UserApplication\n",
+      "translation": "\n> 用户 -> UserRepository -> UserService -> UserApplication",
+      "lastUpdated": "2025-04-04T21:18:21.669Z"
+    },
+    "0cc83334c1693f06bf97e898167c0ccf": {
+      "source": "## The \"User\" Data",
+      "translation": "\n## “用户”数据",
+      "lastUpdated": "2025-04-04T21:18:22.063Z"
+    },
+    "2f3ecc7b6d06b31e2b893d85abc16ef5": {
+      "source": "\nWe will manage a collection of Users. Here is the data class: ",
+      "translation": "\n我们将管理一个 User 的集合。以下是数据类：",
+      "lastUpdated": "2025-04-04T21:18:22.460Z"
+    },
+    "71350dd797745eb2cfd40ac781f184b0": {
+      "source": "\n```kotlin\ndata class User(val name : String)\n```",
+      "translation": "```kotlin\ndata class User(val name : String)\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:18:22.898Z"
+    },
+    "64db9c9f4ca248e0610dc9732e699dc3": {
+      "source": "\nWe create a \"Repository\" component to manage the list of users (add users or find one by name). Here below, the `UserRepository` interface and its implementation:",
+      "translation": "\n我们创建一个 “Repository” 组件来管理用户列表（添加用户或按名称查找）。下面是 `UserRepository` 接口及其实现：",
+      "lastUpdated": "2025-04-04T21:18:23.416Z"
+    },
+    "e6fb86adf50e66753ff5fbf96348587e": {
+      "source": "\n```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n",
+      "translation": "```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:18:24.270Z"
+    },
+    "c64f3d2f68732f166a0b7591dd0be104": {
+      "source": "## The Koin module",
+      "translation": "\n## Koin 模块",
+      "lastUpdated": "2025-04-04T21:18:24.695Z"
+    },
+    "83247d8f9b88a18e4d66e4c30831d207": {
+      "source": "\nUse the `module` function to declare a Koin module. A Koin module is the place where we define all our components to be injected.",
+      "translation": "\n使用 `module` 函数来声明一个 Koin 模块。Koin 模块是我们定义所有要注入的组件的地方。",
+      "lastUpdated": "2025-04-04T21:18:25.179Z"
+    },
+    "bbf221730c88bd4b4af3530fd6ea1921": {
+      "source": "\n```kotlin\nval appModule = module {\n    \n}\n```",
+      "translation": "\n```kotlin\nval appModule = module {\n    \n}\n```",
+      "lastUpdated": "2025-04-04T21:18:25.627Z"
+    },
+    "1037ef4e2d71e89665c740ba22615ed2": {
+      "source": "\nLet's declare our first component. We want a singleton of `UserRepository`, by creating an instance of `UserRepositoryImpl`",
+      "translation": "\n让我们声明我们的第一个组件。我们想要一个 `UserRepository` 的单例，通过创建一个 `UserRepositoryImpl` 的实例。",
+      "lastUpdated": "2025-04-04T21:18:26.107Z"
+    },
+    "e4e303b55b2f84e3ff3ef064f73659a5": {
+      "source": "\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n",
+      "translation": "```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:18:26.685Z"
+    },
+    "7abd49e56aa3686c71f3a30206791023": {
+      "source": "## The UserService Component",
+      "translation": "\n## UserService 组件",
+      "lastUpdated": "2025-04-04T21:18:27.078Z"
+    },
+    "f14e0de3f5a0a3fb983eb69a22bbac1d": {
+      "source": "\nLet's write the UserService component to request the default user:",
+      "translation": "\n让我们编写 UserService 组件来请求默认用户：",
+      "lastUpdated": "2025-04-04T21:18:27.463Z"
+    },
+    "46a75b912d74a2dd49d27a8cc6f2e991": {
+      "source": "\n```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```",
+      "translation": "```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:18:27.991Z"
+    },
+    "2b69881ea9103eb19b79df058a0c508b": {
+      "source": "\n> UserRepository is referenced in UserPresenter`s constructor",
+      "translation": "\n> UserRepository 在 UserPresenter 的构造函数中被引用",
+      "lastUpdated": "2025-04-04T21:18:28.409Z"
+    },
+    "717edecfffd8b1fa7880cb1112daf7c3": {
+      "source": "\nWe declare `UserService` in our Koin module. We declare it as a `single` definition:",
+      "translation": "\n我们在 Koin 模块中声明 `UserService`。我们将其声明为 `single` 定义：",
+      "lastUpdated": "2025-04-04T21:18:28.900Z"
+    },
+    "4598b1c8cda4e718aa6475196d755ddf": {
+      "source": "\n```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n```",
+      "translation": "```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n```\n```",
+      "lastUpdated": "2025-04-04T21:18:29.410Z"
+    },
+    "b09002987079e868c959e7c62e49be5c": {
+      "source": "\n> The `get()` function allow to ask Koin to resolve the needed dependency.\n",
+      "translation": "\n> `get()` 函数允许请求 Koin 解析所需的依赖项。",
+      "lastUpdated": "2025-04-04T21:18:29.868Z"
+    },
+    "37cab9a1c1ab2e8262c35ff82947112d": {
+      "source": "## Injecting Dependencies in UserApplication",
+      "translation": "\n## 在 UserApplication 中注入依赖",
+      "lastUpdated": "2025-04-04T21:18:30.307Z"
+    },
+    "2d5fb762267b97b6c5c95fc9374e10e6": {
+      "source": "\nThe `UserApplication` class will help bootstrap instances out of Koin. It will resolve the `UserService`, thanks to `KoinComponent` interface. This allows to inject it with the `by inject()` delegate function: ",
+      "translation": "\n`UserApplication` 类将帮助从 Koin 中引导实例。由于 `KoinComponent` 接口，它将解析 `UserService`。这允许使用 `by inject()` 委托函数注入它：",
+      "lastUpdated": "2025-04-04T21:18:30.835Z"
+    },
+    "864c1573924c2d1ac78e13ed46afb8fe": {
+      "source": "\n```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // display our data\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n```",
+      "translation": "```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // display our data\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:18:31.460Z"
+    },
+    "ddd7b253fec7d23960fda86ab2156504": {
+      "source": "\nThat's it, your app is ready.",
+      "translation": "\n就这样，你的应用就准备好了。",
+      "lastUpdated": "2025-04-04T21:18:31.885Z"
+    },
+    "9684b9eaaa67a2865d3e22ccba4fb79d": {
+      "source": "\n:::info\nThe `by inject()` function allows us to retrieve Koin instances, in any class that extends `KoinComponent`\n:::",
+      "translation": "\n:::info\n`by inject()` 函数允许我们在任何继承自 `KoinComponent` 的类中检索 Koin 实例。\n:::",
+      "lastUpdated": "2025-04-04T21:18:32.379Z"
+    },
+    "24ac468edb32500782678e7e794b0420": {
+      "source": "## Start Koin",
+      "translation": "\n## 启动 Koin",
+      "lastUpdated": "2025-04-04T21:18:32.785Z"
+    },
+    "3e0d192c5bcfd1d2f3b57ddc139e40d4": {
+      "source": "\nWe need to start Koin with our application. Just call the `startKoin()` function in the application's main entry point, our `main` function:",
+      "translation": "\n我们需要用我们的应用程序启动 Koin。只需在应用程序的主入口点，也就是我们的 `main` 函数中调用 `startKoin()` 函数：",
+      "lastUpdated": "2025-04-04T21:18:33.292Z"
+    },
+    "dcf7e092ef5e84254ab3949cebd4a91f": {
+      "source": "\n```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```",
+      "translation": "\n```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```",
+      "lastUpdated": "2025-04-04T21:18:33.811Z"
+    },
+    "8795b2fb03e8e0dd99e8b12fe4413d0d": {
+      "source": "\n:::info\nThe `modules()` function in `startKoin` load the given list of modules\n:::\n",
+      "translation": "\n:::info\n`startKoin` 中的 `modules()` 函数用于加载给定的模块列表。\n:::",
+      "lastUpdated": "2025-04-04T21:18:34.281Z"
+    },
+    "d80b61b0c15f98760bf6549f9c32e55e": {
+      "source": "## Koin module: classic or constructor DSL?",
+      "translation": "\n## Koin 模块：经典 DSL 还是构造器 DSL？",
+      "lastUpdated": "2025-04-04T21:18:34.704Z"
+    },
+    "75d3d96711ba16e2a9853e64aff3692f": {
+      "source": "\nHere is the Koin module declaration for our app:",
+      "translation": "\n这是我们应用的 Koin 模块声明：",
+      "lastUpdated": "2025-04-04T21:18:35.092Z"
+    },
+    "a18b23ad6729c1460b00a6295003d487": {
+      "source": "\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n```",
+      "translation": "```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:18:35.611Z"
+    },
+    "b70c03b78168b5ce58ba3877ec4eb752": {
+      "source": "\nWe can write it in a more compact way, by using constructors:",
+      "translation": "\n我们可以用构造函数以更紧凑的方式编写它：",
+      "lastUpdated": "2025-04-04T21:18:36.030Z"
+    },
+    "0d7539cf47d36eca149f7ee73b388860": {
+      "source": "\n```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n",
+      "translation": "```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:18:36.564Z"
+    },
+    "580cc99e5b3dcfd0d03b73410111cecb": {
+      "source": "---\ntitle: Kotlin\n---\n\n> This tutorial lets you write a Kotlin application and use Koin dependency injection to retrieve your components.\n> You need around __10 min__ to do the tutorial.\n\n:::note\nupdate - 2024-10-21\n:::\n\n## Get the code\n\n:::info\n[The source code is available at on Github](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::\n\n## Setup\n\nFirst, check that the `koin-core` dependency is added like below:\n\n```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n\n## Application Overview\n\nThe idea of the application is to manage a list of users, and display it in our `UserApplication` class:\n\n> Users -> UserRepository -> UserService -> UserApplication\n\n## The \"User\" Data\n\nWe will manage a collection of Users. Here is the data class: \n\n```kotlin\ndata class User(val name : String)\n```\n\nWe create a \"Repository\" component to manage the list of users (add users or find one by name). Here below, the `UserRepository` interface and its implementation:\n\n```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n\n## The Koin module\n\nUse the `module` function to declare a Koin module. A Koin module is the place where we define all our components to be injected.\n\n```kotlin\nval appModule = module {\n    \n}\n```\n\nLet's declare our first component. We want a singleton of `UserRepository`, by creating an instance of `UserRepositoryImpl`\n\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n\n## The UserService Component\n\nLet's write the UserService component to request the default user:\n\n```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```\n\n> UserRepository is referenced in UserPresenter`s constructor\n\nWe declare `UserService` in our Koin module. We declare it as a `single` definition:\n\n```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n```\n\n> The `get()` function allow to ask Koin to resolve the needed dependency.\n\n## Injecting Dependencies in UserApplication\n\nThe `UserApplication` class will help bootstrap instances out of Koin. It will resolve the `UserService`, thanks to `KoinComponent` interface. This allows to inject it with the `by inject()` delegate function: \n\n```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // display our data\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n```\n\nThat's it, your app is ready.\n\n:::info\nThe `by inject()` function allows us to retrieve Koin instances, in any class that extends `KoinComponent`\n:::\n\n\n## Start Koin\n\nWe need to start Koin with our application. Just call the `startKoin()` function in the application's main entry point, our `main` function:\n\n```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```\n\n:::info\nThe `modules()` function in `startKoin` load the given list of modules\n:::\n\n## Koin module: classic or constructor DSL?\n\nHere is the Koin module declaration for our app:\n\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n```\n\nWe can write it in a more compact way, by using constructors:\n\n```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n",
+      "translation": "---\ntitle: Kotlin\n---\n\n> 本教程将引导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。\n> 完成本教程大约需要 __10 分钟__。\n\n:::note\n更新 - 2024-10-21\n:::\n\n## 获取代码\n\n:::info\n[源代码可在 Github 上找到](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::\n\n## 设置\n\n首先，请检查是否已添加 `koin-core` 依赖项，如下所示：```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n\n## 应用概览\n\n这个应用程序的目的是管理一个用户列表，并在我们的 `UserApplication` 类中显示它：\n\n> 用户 -> UserRepository -> UserService -> UserApplication\n\n## “用户”数据\n\n我们将管理一个 User 的集合。以下是数据类：```kotlin\ndata class User(val name : String)\n\n我们创建一个 “Repository” 组件来管理用户列表（添加用户或按名称查找）。下面是 `UserRepository` 接口及其实现：```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n\n## Koin 模块\n\n使用 `module` 函数来声明一个 Koin 模块。Koin 模块是我们定义所有要注入的组件的地方。\n\n```kotlin\nval appModule = module {\n    \n}\n```\n\n让我们声明我们的第一个组件。我们想要一个 `UserRepository` 的单例，通过创建一个 `UserRepositoryImpl` 的实例。```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n\n## UserService 组件\n\n让我们编写 UserService 组件来请求默认用户：```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```\n\n> UserRepository 在 UserPresenter 的构造函数中被引用\n\n我们在 Koin 模块中声明 `UserService`。我们将其声明为 `single` 定义：```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n\n> `get()` 函数允许请求 Koin 解析所需的依赖项。\n\n## 在 UserApplication 中注入依赖\n\n`UserApplication` 类将帮助从 Koin 中引导实例。由于 `KoinComponent` 接口，它将解析 `UserService`。这允许使用 `by inject()` 委托函数注入它：```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // display our data\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n\n就这样，你的应用就准备好了。\n\n:::info\n`by inject()` 函数允许我们在任何继承自 `KoinComponent` 的类中检索 Koin 实例。\n:::\n\n## 启动 Koin\n\n我们需要用我们的应用程序启动 Koin。只需在应用程序的主入口点，也就是我们的 `main` 函数中调用 `startKoin()` 函数：\n\n```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```\n\n:::info\n`startKoin` 中的 `modules()` 函数用于加载给定的模块列表。\n:::\n\n## Koin 模块：经典 DSL 还是构造器 DSL？\n\n这是我们应用的 Koin 模块声明：```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n\n我们可以用构造函数以更紧凑的方式编写它：```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:18:36.565Z"
+    }
+  }
+}
