@@ -41,9 +41,10 @@ function extractFrontmatterAndContent(content) {
 // 加载之前翻译过的相关文件作为参考
 function loadPreviousTranslations(targetLang, currentFilePath) {
     try {
-        // 计算对应翻译文件的路径
+        // 计算对应翻译文件的路径 - 修正计算方式
+        const targetDir = config.sourceDir + '_' + targetLang;
         const relativePath = currentFilePath.replace(config.sourceDir.replace('./', ''), '');
-        const previousTranslationPath = relativePath.replace('docs', 'docs_' + targetLang);
+        const previousTranslationPath = path.join(targetDir, relativePath);
         
         // 检查是否存在对应的翻译文件
         if (!fs.existsSync(previousTranslationPath)) {
@@ -156,7 +157,10 @@ async function translateFile(filePath) {
     const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
     for (const targetLang of config.targetLanguages) {
-        const targetPath = path.join(config.sourceDir + "_" + targetLang, filePath.replace(config.sourceDir.replace('./', ''), ''));
+        // 修正生成的目标文件路径计算方式
+        const targetDir = config.sourceDir + '_' + targetLang;
+        const relativePath = filePath.replace(config.sourceDir.replace('./', ''), '');
+        const targetPath = path.join(targetDir, relativePath);
 
         // 创建目标目录
         fs.mkdirSync(path.dirname(targetPath), { recursive: true });
