@@ -129,6 +129,9 @@ function processTranslatedText(translatedText) {
     if (processed.startsWith('```markdown') && processed.endsWith('```')) {
         processed = processed.slice(10, -3).trim();
     }
+
+    // 移除孤立的n字符
+    processed = processed.replace(/\bn\b/g, '');
     
     return processed;
 }
