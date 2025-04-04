@@ -1,14 +1,14 @@
 ---
 title: Kotlin
 ---
-> 本教程将指导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。
+> 本教程将引导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。
 > 完成本教程大约需要 __10 分钟__。
 
 :::note
 更新 - 2024-10-21
 :::
 
-## 获取代码 - 旧参考
+## 获取代码
 
 :::info
 [源代码可在 Github 上找到](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)
@@ -16,7 +16,7 @@ title: Kotlin
 
 ## 设置
 
-首先，请检查是否已添加 `koin-core` 依赖项，如下所示：
+首先，检查是否已添加 `koin-core` 依赖项，如下所示：
 
 ```groovy
 dependencies {
@@ -32,7 +32,7 @@ dependencies {
 
 > Users -> UserRepository -> UserService -> UserApplication
 
-## "User" 数据
+## “User” 数据
 
 我们将管理一个 User 集合。以下是数据类：
 
@@ -40,7 +40,7 @@ dependencies {
 data class User(val name : String)
 ```
 
-我们创建一个 "Repository" 组件来管理用户列表（添加用户或按名称查找用户）。以下是 `UserRepository` 接口及其实现：
+我们创建一个 “Repository” 组件来管理用户列表（添加用户或按名称查找用户）。以下是 `UserRepository` 接口及其实现：
 
 ```kotlin
 interface UserRepository {
@@ -82,7 +82,7 @@ val appModule = module {
 
 ## UserService 组件
 
-让我们编写 UserService 组件来请求默认用户：
+让我们编写 UserService 组件来请求默认用户，看看我们能得到什么：
 
 ```kotlin
 class UserService(private val userRepository: UserRepository) {
@@ -122,7 +122,7 @@ class UserApplication : KoinComponent {
 }
 ```
 
-就这样，你的应用程序已准备就绪。
+就是这样，你的应用程序已准备就绪。
 
 :::info
 `by inject()` 函数允许我们在任何扩展 `KoinComponent` 的类中检索 Koin 实例
@@ -130,7 +130,7 @@ class UserApplication : KoinComponent {
 
 ## 启动 Koin
 
-我们需要使用我们的应用程序启动 Koin。只需在应用程序的主入口点（我们的 `main` 函数）中调用 `startKoin()` 函数：
+我们需要使用我们的应用程序启动 Koin。只需在应用程序的主入口点，即我们的 `main` 函数中调用 `startKoin()` 函数：
 
 ```kotlin
 fun main() {
