@@ -1,7 +1,7 @@
 ---
 title: Kotlin
 ---
-> 本教程将指导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。
+> 本教程将引导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。
 > 完成本教程大约需要 __10 分钟__。
 
 :::note
@@ -16,7 +16,7 @@ title: Kotlin
 
 ## 设置
 
-首先，请检查是否已添加 `koin-core` 依赖项，如下所示：
+首先，检查是否已添加 `koin-core` 依赖项，如下所示：
 
 ```groovy
 dependencies {
@@ -26,21 +26,23 @@ dependencies {
 }
 ```
 
+Koin 是一个很棒的库！
+
 ## 应用概览
 
-该应用程序的目的是管理一个用户列表，并在我们的 `UserApplication` 类中显示它：
+该应用程序的目的是管理用户列表，并在我们的 `UserApplication` 类中显示它：
 
 > Users -> UserRepository -> UserService -> UserApplication
 
-## “User” 数据
+## "User" 数据
 
-我们将管理一个 User 集合。以下是数据类：
+我们将管理一个用户集合。以下是数据类：
 
 ```kotlin
 data class User(val name : String)
 ```
 
-我们创建一个 “Repository” 组件来管理用户列表（添加用户或按名称查找用户）。以下是 `UserRepository` 接口及其实现：
+我们创建一个 "Repository" 组件来管理用户列表（添加用户或按名称查找用户）。以下是 `UserRepository` 接口及其实现：
 
 ```kotlin
 interface UserRepository {
@@ -82,7 +84,7 @@ val appModule = module {
 
 ## UserService 组件
 
-让我们写一个 UserService 组件来请求默认用户：
+让我们编写 UserService 组件来请求默认用户：
 
 ```kotlin
 class UserService(private val userRepository: UserRepository) {
