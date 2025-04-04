@@ -1,0 +1,414 @@
+{
+  "zh-CN": {
+    "2625e43e727e447b002953e091eb2569": {
+      "source": "\n> This tutorial lets you write a Kotlin application and use Koin dependency injection to retrieve your components.\n> You need around __10 min__ to do the tutorial.",
+      "translation": "> 本教程将引导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。\n> 完成本教程大约需要 __10 分钟__。",
+      "lastUpdated": "2025-04-04T21:26:41.690Z"
+    },
+    "8239762bb2253234efb500b7b1283937": {
+      "source": "\n:::note\nupdate - 2024-10-21\n:::\n",
+      "translation": ":::note\n更新 - 2024-10-21\n:::",
+      "lastUpdated": "2025-04-04T21:26:42.370Z"
+    },
+    "cfb808ff4eda1f4502fd88f6edbf0924": {
+      "source": "## Get the code - Test",
+      "translation": "## 获取代码 - 测试",
+      "lastUpdated": "2025-04-04T21:26:42.805Z"
+    },
+    "dff31b3cd033ab7da3a9970809a3d2ef": {
+      "source": "\n:::info\n[The source code is available at on Github](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::\n",
+      "translation": ":::info\n[源代码可在 Github 上找到](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::",
+      "lastUpdated": "2025-04-04T21:26:43.363Z"
+    },
+    "adec9a59431af90a3caaa956d798a450": {
+      "source": "## Setup",
+      "translation": "## 设置",
+      "lastUpdated": "2025-04-04T21:26:43.769Z"
+    },
+    "336aebf36184c59b1f4c228aced73354": {
+      "source": "\nFirst, check that the `koin-core` dependency is added like below:",
+      "translation": "首先，请检查是否已添加 `koin-core` 依赖项，如下所示：",
+      "lastUpdated": "2025-04-04T21:26:44.296Z"
+    },
+    "f919eeb7618fc7f36b725aba8958ab36": {
+      "source": "\n```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n",
+      "translation": "```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:26:44.852Z"
+    },
+    "22c71e24831487e7a3df82ccd5c4fb41": {
+      "source": "## Application Overview",
+      "translation": "## 应用概览",
+      "lastUpdated": "2025-04-04T21:26:45.293Z"
+    },
+    "fe235b29ab51e8daa7ef2560ed036f18": {
+      "source": "\nThe idea of the application is to manage a list of users, and display it in our `UserApplication` class:",
+      "translation": "这个应用程序的目的是管理一个用户列表，并在我们的 `UserApplication` 类中显示它：",
+      "lastUpdated": "2025-04-04T21:26:45.806Z"
+    },
+    "e662bad775c76ad9f6f4a51c861f9ae2": {
+      "source": "\n> Users -> UserRepository -> UserService -> UserApplication\n",
+      "translation": "> 用户 -> UserRepository -> UserService -> UserApplication",
+      "lastUpdated": "2025-04-04T21:26:46.258Z"
+    },
+    "0cc83334c1693f06bf97e898167c0ccf": {
+      "source": "## The \"User\" Data",
+      "translation": "## “用户”数据",
+      "lastUpdated": "2025-04-04T21:26:46.919Z"
+    },
+    "2f3ecc7b6d06b31e2b893d85abc16ef5": {
+      "source": "\nWe will manage a collection of Users. Here is the data class: ",
+      "translation": "我们将管理一个 User 的集合。以下是数据类：",
+      "lastUpdated": "2025-04-04T21:26:47.382Z"
+    },
+    "71350dd797745eb2cfd40ac781f184b0": {
+      "source": "\n```kotlin\ndata class User(val name : String)\n```",
+      "translation": "```kotlin\ndata class User(val name : String)\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:26:47.829Z"
+    },
+    "64db9c9f4ca248e0610dc9732e699dc3": {
+      "source": "\nWe create a \"Repository\" component to manage the list of users (add users or find one by name). Here below, the `UserRepository` interface and its implementation:",
+      "translation": "我们创建一个 “Repository” 组件来管理用户列表（添加用户或通过名称查找用户）。下面是 `UserRepository` 接口及其实现：",
+      "lastUpdated": "2025-04-04T21:26:48.360Z"
+    },
+    "e6fb86adf50e66753ff5fbf96348587e": {
+      "source": "\n```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n",
+      "translation": "```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:26:49.220Z"
+    },
+    "c64f3d2f68732f166a0b7591dd0be104": {
+      "source": "## The Koin module",
+      "translation": "## Koin 模块",
+      "lastUpdated": "2025-04-04T21:26:49.635Z"
+    },
+    "83247d8f9b88a18e4d66e4c30831d207": {
+      "source": "\nUse the `module` function to declare a Koin module. A Koin module is the place where we define all our components to be injected.",
+      "translation": "使用 `module` 函数来声明一个 Koin 模块。Koin 模块是我们定义所有要注入的组件的地方。",
+      "lastUpdated": "2025-04-04T21:26:50.152Z"
+    },
+    "bbf221730c88bd4b4af3530fd6ea1921": {
+      "source": "\n```kotlin\nval appModule = module {\n    \n}\n```",
+      "translation": "```kotlin\nval appModule = module {\n    \n}\n```",
+      "lastUpdated": "2025-04-04T21:26:50.608Z"
+    },
+    "1037ef4e2d71e89665c740ba22615ed2": {
+      "source": "\nLet's declare our first component. We want a singleton of `UserRepository`, by creating an instance of `UserRepositoryImpl`",
+      "translation": "让我们声明我们的第一个组件。我们想要一个 `UserRepository` 的单例，通过创建一个 `UserRepositoryImpl` 的实例。",
+      "lastUpdated": "2025-04-04T21:26:51.121Z"
+    },
+    "e4e303b55b2f84e3ff3ef064f73659a5": {
+      "source": "\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n",
+      "translation": "```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:26:51.582Z"
+    },
+    "7abd49e56aa3686c71f3a30206791023": {
+      "source": "## The UserService Component",
+      "translation": "## UserService 组件",
+      "lastUpdated": "2025-04-04T21:26:51.993Z"
+    },
+    "f14e0de3f5a0a3fb983eb69a22bbac1d": {
+      "source": "\nLet's write the UserService component to request the default user:",
+      "translation": "让我们编写 UserService 组件来请求默认用户：",
+      "lastUpdated": "2025-04-04T21:26:52.471Z"
+    },
+    "46a75b912d74a2dd49d27a8cc6f2e991": {
+      "source": "\n```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```",
+      "translation": "```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:26:53.059Z"
+    },
+    "2b69881ea9103eb19b79df058a0c508b": {
+      "source": "\n> UserRepository is referenced in UserPresenter`s constructor",
+      "translation": "> UserRepository 在 UserPresenter 的构造函数中被引用",
+      "lastUpdated": "2025-04-04T21:26:53.528Z"
+    },
+    "717edecfffd8b1fa7880cb1112daf7c3": {
+      "source": "\nWe declare `UserService` in our Koin module. We declare it as a `single` definition:",
+      "translation": "我们在 Koin 模块中声明 `UserService`。我们将其声明为 `single` 定义：",
+      "lastUpdated": "2025-04-04T21:26:53.989Z"
+    },
+    "4598b1c8cda4e718aa6475196d755ddf": {
+      "source": "\n```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n```",
+      "translation": "```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n```\n```",
+      "lastUpdated": "2025-04-04T21:26:54.529Z"
+    },
+    "b09002987079e868c959e7c62e49be5c": {
+      "source": "\n> The `get()` function allow to ask Koin to resolve the needed dependency.\n",
+      "translation": "> `get()` 函数允许请求 Koin 解析所需的依赖项。",
+      "lastUpdated": "2025-04-04T21:26:55.018Z"
+    },
+    "37cab9a1c1ab2e8262c35ff82947112d": {
+      "source": "## Injecting Dependencies in UserApplication",
+      "translation": "## 在 UserApplication 中注入依赖",
+      "lastUpdated": "2025-04-04T21:26:55.515Z"
+    },
+    "2d5fb762267b97b6c5c95fc9374e10e6": {
+      "source": "\nThe `UserApplication` class will help bootstrap instances out of Koin. It will resolve the `UserService`, thanks to `KoinComponent` interface. This allows to inject it with the `by inject()` delegate function: ",
+      "translation": "`UserApplication` 类将帮助从 Koin 中引导实例。由于 `KoinComponent` 接口，它将解析 `UserService`。这允许使用 `by inject()` 委托函数注入它：",
+      "lastUpdated": "2025-04-04T21:26:56.129Z"
+    },
+    "864c1573924c2d1ac78e13ed46afb8fe": {
+      "source": "\n```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // display our data\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n```",
+      "translation": "```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // 显示我们的数据\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n```",
+      "lastUpdated": "2025-04-04T21:26:56.796Z"
+    },
+    "ddd7b253fec7d23960fda86ab2156504": {
+      "source": "\nThat's it, your app is ready.",
+      "translation": "就这样，你的应用就准备好了。",
+      "lastUpdated": "2025-04-04T21:26:57.258Z"
+    },
+    "9684b9eaaa67a2865d3e22ccba4fb79d": {
+      "source": "\n:::info\nThe `by inject()` function allows us to retrieve Koin instances, in any class that extends `KoinComponent`\n:::",
+      "translation": ":::info\n`by inject()` 函数允许我们在任何继承自 `KoinComponent` 的类中检索 Koin 实例。\n:::",
+      "lastUpdated": "2025-04-04T21:26:57.777Z"
+    },
+    "24ac468edb32500782678e7e794b0420": {
+      "source": "## Start Koin",
+      "translation": "## 启动 Koin",
+      "lastUpdated": "2025-04-04T21:26:58.194Z"
+    },
+    "3e0d192c5bcfd1d2f3b57ddc139e40d4": {
+      "source": "\nWe need to start Koin with our application. Just call the `startKoin()` function in the application's main entry point, our `main` function:",
+      "translation": "我们需要用我们的应用程序启动 Koin。只需在应用程序的主入口点，也就是我们的 `main` 函数中调用 `startKoin()` 函数：",
+      "lastUpdated": "2025-04-04T21:26:58.736Z"
+    },
+    "dcf7e092ef5e84254ab3949cebd4a91f": {
+      "source": "\n```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```",
+      "translation": "```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```",
+      "lastUpdated": "2025-04-04T21:26:59.287Z"
+    },
+    "8795b2fb03e8e0dd99e8b12fe4413d0d": {
+      "source": "\n:::info\nThe `modules()` function in `startKoin` load the given list of modules\n:::\n",
+      "translation": ":::info\n`startKoin` 中的 `modules()` 函数用于加载给定的模块列表。\n:::",
+      "lastUpdated": "2025-04-04T21:26:59.785Z"
+    },
+    "d80b61b0c15f98760bf6549f9c32e55e": {
+      "source": "## Koin module: classic or constructor DSL?",
+      "translation": "## Koin 模块：经典 DSL 还是构造器 DSL？",
+      "lastUpdated": "2025-04-04T21:27:00.305Z"
+    },
+    "75d3d96711ba16e2a9853e64aff3692f": {
+      "source": "\nHere is the Koin module declaration for our app:",
+      "translation": "这是我们应用的 Koin 模块声明：",
+      "lastUpdated": "2025-04-04T21:27:00.749Z"
+    },
+    "a18b23ad6729c1460b00a6295003d487": {
+      "source": "\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n```",
+      "translation": "```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n```\n```",
+      "lastUpdated": "2025-04-04T21:27:01.255Z"
+    },
+    "b70c03b78168b5ce58ba3877ec4eb752": {
+      "source": "\nWe can write it in a more compact way, by using constructors:",
+      "translation": "我们可以用更紧凑的方式来编写它，通过使用构造器：",
+      "lastUpdated": "2025-04-04T21:27:01.718Z"
+    },
+    "0d7539cf47d36eca149f7ee73b388860": {
+      "source": "\n```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n",
+      "translation": "```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:27:02.213Z"
+    },
+    "44347b04424c089818419a29ae10aa15": {
+      "source": "---\ntitle: Kotlin\n---\n\n> This tutorial lets you write a Kotlin application and use Koin dependency injection to retrieve your components.\n> You need around __10 min__ to do the tutorial.\n\n:::note\nupdate - 2024-10-21\n:::\n\n## Get the code - Test\n\n:::info\n[The source code is available at on Github](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::\n\n## Setup\n\nFirst, check that the `koin-core` dependency is added like below:\n\n```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n\n## Application Overview\n\nThe idea of the application is to manage a list of users, and display it in our `UserApplication` class:\n\n> Users -> UserRepository -> UserService -> UserApplication\n\n## The \"User\" Data\n\nWe will manage a collection of Users. Here is the data class: \n\n```kotlin\ndata class User(val name : String)\n```\n\nWe create a \"Repository\" component to manage the list of users (add users or find one by name). Here below, the `UserRepository` interface and its implementation:\n\n```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n\n## The Koin module\n\nUse the `module` function to declare a Koin module. A Koin module is the place where we define all our components to be injected.\n\n```kotlin\nval appModule = module {\n    \n}\n```\n\nLet's declare our first component. We want a singleton of `UserRepository`, by creating an instance of `UserRepositoryImpl`\n\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n\n## The UserService Component\n\nLet's write the UserService component to request the default user:\n\n```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```\n\n> UserRepository is referenced in UserPresenter`s constructor\n\nWe declare `UserService` in our Koin module. We declare it as a `single` definition:\n\n```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n```\n\n> The `get()` function allow to ask Koin to resolve the needed dependency.\n\n## Injecting Dependencies in UserApplication\n\nThe `UserApplication` class will help bootstrap instances out of Koin. It will resolve the `UserService`, thanks to `KoinComponent` interface. This allows to inject it with the `by inject()` delegate function: \n\n```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // display our data\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n```\n\nThat's it, your app is ready.\n\n:::info\nThe `by inject()` function allows us to retrieve Koin instances, in any class that extends `KoinComponent`\n:::\n\n\n## Start Koin\n\nWe need to start Koin with our application. Just call the `startKoin()` function in the application's main entry point, our `main` function:\n\n```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```\n\n:::info\nThe `modules()` function in `startKoin` load the given list of modules\n:::\n\n## Koin module: classic or constructor DSL?\n\nHere is the Koin module declaration for our app:\n\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n```\n\nWe can write it in a more compact way, by using constructors:\n\n```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n",
+      "translation": "---\ntitle: Kotlin\n---\n> 本教程将引导你编写一个 Kotlin 应用程序，并使用 Koin 依赖注入来检索你的组件。\n> 完成本教程大约需要 __10 分钟__。\n:::note\n更新 - 2024-10-21\n:::\n\n## 获取代码 - 测试\n:::info\n[源代码可在 Github 上找到](https://github.com/InsertKoinIO/koin-getting-started/tree/main/kotlin)\n:::\n\n## 设置\n首先，请检查是否已添加 `koin-core` 依赖项，如下所示：\n```\n```groovy\ndependencies {\n    \n    // Koin for Kotlin apps\n    compile \"io.insert-koin:koin-core:$koin_version\"\n}\n```\n```\n\n## 应用概览\n这个应用程序的目的是管理一个用户列表，并在我们的 `UserApplication` 类中显示它：\n> 用户 -> UserRepository -> UserService -> UserApplication\n\n## “用户”数据\n我们将管理一个 User 的集合。以下是数据类：\n```\n```kotlin\ndata class User(val name : String)\n\n我们创建一个 “Repository” 组件来管理用户列表（添加用户或通过名称查找用户）。下面是 `UserRepository` 接口及其实现：\n```\n```kotlin\ninterface UserRepository {\n    fun findUser(name : String): User?\n    fun addUsers(users : List<User>)\n}\n\nclass UserRepositoryImpl : UserRepository {\n\n    private val _users = arrayListOf<User>()\n\n    override fun findUser(name: String): User? {\n        return _users.firstOrNull { it.name == name }\n    }\n\n    override fun addUsers(users : List<User>) {\n        _users.addAll(users)\n    }\n}\n```\n```\n\n## Koin 模块\n使用 `module` 函数来声明一个 Koin 模块。Koin 模块是我们定义所有要注入的组件的地方。\n```\n```kotlin\nval appModule = module {\n    \n}\n```\n```\n\n让我们声明我们的第一个组件。我们想要一个 `UserRepository` 的单例，通过创建一个 `UserRepositoryImpl` 的实例。\n```\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n}\n```\n```\n\n## UserService 组件\n让我们编写 UserService 组件来请求默认用户：\n```\n```kotlin\nclass UserService(private val userRepository: UserRepository) {\n\n    fun getDefaultUser() : User = userRepository.findUser(DefaultData.DEFAULT_USER.name) ?: error(\"Can't find default user\")\n}\n```\n```\n\n> UserRepository 在 UserPresenter 的构造函数中被引用\n我们在 Koin 模块中声明 `UserService`。我们将其声明为 `single` 定义：\n```\n```kotlin\nval appModule = module {\n     single<UserRepository> { UserRepositoryImpl() }\n     single { UserService(get()) }\n}\n\n> `get()` 函数允许请求 Koin 解析所需的依赖项。\n\n## 在 UserApplication 中注入依赖\n`UserApplication` 类将帮助从 Koin 中引导实例。由于 `KoinComponent` 接口，它将解析 `UserService`。这允许使用 `by inject()` 委托函数注入它：\n```\n```kotlin\nclass UserApplication : KoinComponent {\n\n    private val userService : UserService by inject()\n\n    // 显示我们的数据\n    fun sayHello(){\n        val user = userService.getDefaultUser()\n        val message = \"Hello '$user'!\"\n        println(message)\n    }\n}\n```\n```\n\n就这样，你的应用就准备好了。\n:::info\n`by inject()` 函数允许我们在任何继承自 `KoinComponent` 的类中检索 Koin 实例。\n:::\n\n## 启动 Koin\n我们需要用我们的应用程序启动 Koin。只需在应用程序的主入口点，也就是我们的 `main` 函数中调用 `startKoin()` 函数：\n```\n```kotlin\nfun main() {\n    startKoin {\n        modules(appModule)\n    }\n\n    UserApplication().sayHello()\n}\n```\n```\n\n:::info\n`startKoin` 中的 `modules()` 函数用于加载给定的模块列表。\n:::\n\n## Koin 模块：经典 DSL 还是构造器 DSL？\n这是我们应用的 Koin 模块声明：\n```\n```kotlin\nval appModule = module {\n    single<UserRepository> { UserRepositoryImpl() }\n    single { UserService(get()) }\n}\n\n我们可以用更紧凑的方式来编写它，通过使用构造器：\n```\n```kotlin\nval appModule = module {\n    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }\n    singleOf(::UserService)\n}\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:27:02.214Z"
+    },
+    "a1c0de5389c72d4346c89e85865c922e": {
+      "source": "\nKoin is a DSL, a lightweight container and a pragmatic API. Once you have declared your definitions within Koin modules, you are ready to start the Koin container.\n",
+      "translation": "Koin 是一个 DSL、一个轻量级容器和一个实用的 API。一旦你在 Koin 模块中声明了你的定义，你就可以启动 Koin 容器了。",
+      "lastUpdated": "2025-04-04T21:27:02.868Z"
+    },
+    "a19e0f8f9def0fd7931fbd05f72dbe11": {
+      "source": "### The startKoin function",
+      "translation": "### startKoin 函数",
+      "lastUpdated": "2025-04-04T21:27:03.280Z"
+    },
+    "e8aa089243980540bab031749ba6bbd2": {
+      "source": "\nThe `startKoin` function is the main entry point to launch Koin container. It needs a *list of Koin modules* to run.\nModules are loaded and definitions are ready to be resolved by the Koin container.",
+      "translation": "`startKoin` 函数是启动 Koin 容器的主要入口点。它需要一个 *Koin 模块列表* 才能运行。\n模块被加载，并且定义已准备好被 Koin 容器解析。",
+      "lastUpdated": "2025-04-04T21:27:03.951Z"
+    },
+    "3163c413cc1b1f8b8afe958fd505085b": {
+      "source": "\n.Starting Koin\n```kotlin\n// start a KoinApplication in Global context\nstartKoin {\n    // declare used modules\n    modules(coffeeAppModule)\n}\n```",
+      "translation": "```.启动 Koin\n```kotlin\n// 在全局上下文中启动 KoinApplication\nstartKoin {\n    // 声明使用的模块\n    modules(coffeeAppModule)\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:27:04.550Z"
+    },
+    "2c97ecccf354c704afd92459807dc819": {
+      "source": "\nOnce `startKoin` has been called, Koin will read all your modules & definitions. Koin is then ready for any `get()` or `by inject()` call to retrieve the needed instance.",
+      "translation": "一旦 `startKoin` 被调用，Koin 将会读取你所有的模块和定义。然后 Koin 就可以通过 `get()` 或 `by inject()` 调用来检索所需的实例了。",
+      "lastUpdated": "2025-04-04T21:27:05.147Z"
+    },
+    "9204da9630b9b56876c1e6583fc1c7ec": {
+      "source": "\nYour Koin container can have several options:",
+      "translation": "你的 Koin 容器可以有几个选项：",
+      "lastUpdated": "2025-04-04T21:27:05.614Z"
+    },
+    "ef16135c094bdb3b6f2a44b800e56896": {
+      "source": "\n* `logger` - to enable logging - see logging.adoc#_logging,logging section\n* `properties()`, `fileProperties( )` or `environmentProperties( )` to load properties from environment, koin.properties file, extra properties ... - see properties.adoc#_lproperties,properties section",
+      "translation": "* `logger` - 启用日志 - 参见 logging.adoc#_logging,logging 部分\n* `properties()`, `fileProperties( )` 或 `environmentProperties( )` - 从环境变量、koin.properties 文件、额外属性等加载属性 - 参见 properties.adoc#_lproperties,properties 部分",
+      "lastUpdated": "2025-04-04T21:27:06.279Z"
+    },
+    "f9bc430b859a899e8ccc72b07195ec72": {
+      "source": "\n\n:::info\n The `startKoin` can't be called more than once. If you need several point to load modules, use the `loadKoinModules` function.\n:::\n",
+      "translation": ":::info\n`startKoin` 只能被调用一次。如果你需要多个地方加载模块，使用 `loadKoinModules` 函数。\n:::",
+      "lastUpdated": "2025-04-04T21:27:06.821Z"
+    },
+    "59fd7744571fd2eedd8c366ee5cdf044": {
+      "source": "### Behind the start - Koin instance under the hood",
+      "translation": "### 启动背后 - Koin实例的内部原理",
+      "lastUpdated": "2025-04-04T21:27:07.312Z"
+    },
+    "e2e33c55896adea9d8865f5e02336ba0": {
+      "source": "\nWhen we start Koin, we create a `KoinApplication` instance that represents the Koin container configuration instance. Once launched, it will produce a `Koin` instance resulting of your modules and options.\nThis `Koin` instance is then hold by the `GlobalContext`, to be used by any `KoinComponent` class.",
+      "translation": "当我们启动 Koin 时，我们会创建一个 `KoinApplication` 实例，它代表 Koin 容器配置实例。一旦启动，它将生成一个 `Koin` 实例，该实例是你的模块和选项的结果。\n然后，这个 `Koin` 实例由 `GlobalContext` 持有，供任何 `KoinComponent` 类使用。",
+      "lastUpdated": "2025-04-04T21:27:08.109Z"
+    },
+    "6cc57277d58a967464074833d7b5f402": {
+      "source": "\nThe `GlobalContext` is a default JVM context strategy for Koin. It's called by `startKoin` and register to `GlobalContext`. This will allow us to register a different kind of context, in the perspective of Koin Multiplatform.\n",
+      "translation": "`GlobalContext` 是 Koin 的默认 JVM 上下文策略。它由 `startKoin` 调用并注册到 `GlobalContext`。这将允许我们注册不同类型的上下文，从 Koin Multiplatform 的角度来看。",
+      "lastUpdated": "2025-04-04T21:27:08.724Z"
+    },
+    "a95115f895822205a86cb3f822a363ab": {
+      "source": "### Loading modules after startKoin",
+      "translation": "### 在 startKoin 之后加载模块",
+      "lastUpdated": "2025-04-04T21:27:09.151Z"
+    },
+    "2d5a6ebf6a220c5359b7732eecef9c29": {
+      "source": "\nYou can't call the `startKoin` function more than once. But you can use directly the `loadKoinModules()` functions.",
+      "translation": "你不能多次调用 `startKoin` 函数。但是你可以直接使用 `loadKoinModules()` 函数。",
+      "lastUpdated": "2025-04-04T21:27:09.680Z"
+    },
+    "107134b4d29b8c675cfaca388c05dfc3": {
+      "source": "\nThis function is interesting for SDK makers who want to use Koin, because they don't need to use the `starKoin()` function and just use the `loadKoinModules` at the start of their library.",
+      "translation": "这个函数对于想要使用 Koin 的 SDK 开发者来说非常有用，因为他们不需要使用 `starKoin()` 函数，只需在其库的启动时使用 `loadKoinModules` 即可。",
+      "lastUpdated": "2025-04-04T21:27:10.262Z"
+    },
+    "241a466c0e61a45cf2c0e8815acda5a0": {
+      "source": "\n```kotlin\nloadKoinModules(module1,module2 ...)\n```\n",
+      "translation": "```kotlin\nloadKoinModules(module1,module2 ...)\n```\n",
+      "lastUpdated": "2025-04-04T21:27:10.714Z"
+    },
+    "4cdd13b122aa32a40020baec90cd363f": {
+      "source": "### Unloading modules",
+      "translation": "### 卸载模块\n",
+      "lastUpdated": "2025-04-04T21:27:11.118Z"
+    },
+    "ae4b802381694c88349d2513d7cbbe5c": {
+      "source": "\nit's possible also to unload a bunch of definition, and then release theirs instance with the given function:",
+      "translation": "也可以卸载一批定义，然后使用给定的函数释放它们的实例：",
+      "lastUpdated": "2025-04-04T21:27:11.604Z"
+    },
+    "e977c68f3b44c6e69c805fcebb7e6e4c": {
+      "source": "\n```kotlin\nunloadKoinModules(module1,module2 ...)\n```",
+      "translation": "```kotlin\nunloadKoinModules(module1,module2 ...)\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:27:12.086Z"
+    },
+    "bd6f63786c9d7ee298fc834e45de5ef1": {
+      "source": "### Stop Koin - closing all resources",
+      "translation": "### 停止 Koin - 关闭所有资源",
+      "lastUpdated": "2025-04-04T21:27:12.544Z"
+    },
+    "00f8c70fecf3eaa10edbf638c624e6e2": {
+      "source": "\nYou can close all the Koin resources and drop instances & definitions. For this you can use the `stopKoin()` function from anywhere, to stop the Koin `GlobalContext`.\nElse on a `KoinApplication` instance, just call `close()`",
+      "translation": "你可以关闭所有 Koin 资源并删除实例和定义。为此，你可以从任何地方使用 `stopKoin()` 函数来停止 Koin `GlobalContext`。\n或者，在 `KoinApplication` 实例上，只需调用 `close()`。",
+      "lastUpdated": "2025-04-04T21:27:13.262Z"
+    },
+    "335bee6ef0bad9150d36ed5c7ce07b0c": {
+      "source": "## Logging",
+      "translation": "## 日志",
+      "lastUpdated": "2025-04-04T21:27:13.710Z"
+    },
+    "e95921512068397b3378b44c32902f5f": {
+      "source": "\nKoin has a simple logging API to log any Koin activity (allocation, lookup ...). The logging API is represented by the class below:",
+      "translation": "Koin 提供了一个简单的日志 API 来记录任何 Koin 活动（分配、查找 ...）。日志 API 由以下类表示：",
+      "lastUpdated": "2025-04-04T21:27:14.201Z"
+    },
+    "927016cff6be9e9e3741feb81c7f9f9e": {
+      "source": "\nKoin Logger",
+      "translation": "Koin 日志",
+      "lastUpdated": "2025-04-04T21:27:14.621Z"
+    },
+    "a7eb5411ae2abf7419bd7db4cb1c651e": {
+      "source": "\n```kotlin\nabstract class Logger(var level: Level = Level.INFO) {\n\n    abstract fun log(level: Level, msg: MESSAGE)\n\n    fun debug(msg: MESSAGE) {\n        log(Level.DEBUG, msg)\n    }\n\n    fun info(msg: MESSAGE) {\n        log(Level.INFO, msg)\n    }\n\n    fun error(msg: MESSAGE) {\n        log(Level.ERROR, msg)\n    }\n}\n```",
+      "translation": "\n```kotlin\nabstract class Logger(var level: Level = Level.INFO) {\n\n    abstract fun log(level: Level, msg: MESSAGE)\n\n    fun debug(msg: MESSAGE) {\n        log(Level.DEBUG, msg)\n    }\n\n    fun info(msg: MESSAGE) {\n        log(Level.INFO, msg)\n    }\n\n    fun error(msg: MESSAGE) {\n        log(Level.ERROR, msg)\n    }\n}\n```",
+      "lastUpdated": "2025-04-04T21:27:15.450Z"
+    },
+    "27921ee96331185154f597bf483478fc": {
+      "source": "\nKoin proposes some implementation of logging, in function of the target platform:",
+      "translation": "Koin根据目标平台的不同，提供了一些日志记录的实现：",
+      "lastUpdated": "2025-04-04T21:27:15.932Z"
+    },
+    "e2744a27386f868995f9ea953902b37a": {
+      "source": "\n* `PrintLogger` - directly log into console (included in `koin-core`)\n* `EmptyLogger` - log nothing (included in `koin-core`)\n* `SLF4JLogger` - Log with SLF4J. Used by ktor and spark (`koin-logger-slf4j` project)\n* `AndroidLogger` - log into Android Logger (included in `koin-android`)\n",
+      "translation": "* `PrintLogger` - 直接输出到控制台 (包含在 `koin-core` 中)\n* `EmptyLogger` - 不输出任何内容 (包含在 `koin-core` 中)\n* `SLF4JLogger` - 使用 SLF4J 输出。被 ktor 和 spark 使用 ( `koin-logger-slf4j` 项目)\n* `AndroidLogger` - 输出到 Android Logger (包含在 `koin-android` 中)",
+      "lastUpdated": "2025-04-04T21:27:16.802Z"
+    },
+    "ab0937b6835bd6a54bc7455e2548c87b": {
+      "source": "### Set logging at start",
+      "translation": "### 启动时设置日志",
+      "lastUpdated": "2025-04-04T21:27:17.266Z"
+    },
+    "f1fcd132d4165a2901ec2af14811ceed": {
+      "source": "\nBy default, By default Koin use the `EmptyLogger`. You can use directly the `PrintLogger` as following:",
+      "translation": "默认情况下，Koin 使用 `EmptyLogger`。您可以直接使用 `PrintLogger`，如下所示：",
+      "lastUpdated": "2025-04-04T21:27:17.802Z"
+    },
+    "9d46f793051c636c36a6e281fe7badab": {
+      "source": "\n```kotlin\nstartKoin {\n    logger(LEVEL.INFO)\n}\n```",
+      "translation": "\n```kotlin\nstartKoin {\n    logger(LEVEL.INFO)\n}\n```",
+      "lastUpdated": "2025-04-04T21:27:18.304Z"
+    },
+    "3410042e9daa52ee04398a297a339d42": {
+      "source": "## Loading properties",
+      "translation": "## 加载属性",
+      "lastUpdated": "2025-04-04T21:27:18.723Z"
+    },
+    "cbcb04a9c1629a7e55f975337e23ee80": {
+      "source": "\nYou can load several type of properties at start:",
+      "translation": "```你可以在启动时加载几种类型的属性：\n```\n",
+      "lastUpdated": "2025-04-04T21:27:19.188Z"
+    },
+    "50ceef06736a9b8bb8c30e6bb9706c55": {
+      "source": "\n* environment properties - load *system* properties\n* koin.properties file - load properties from `/src/main/resources/koin.properties` file\n* \"extra\" start properties - map of values passed at `startKoin` function\n",
+      "translation": "```\n* environment properties - 加载 *系统* 属性\n* koin.properties file - 从 `/src/main/resources/koin.properties` 文件加载属性\n* \"extra\" start properties - 在 `startKoin` 函数传递的值的映射\n\n```\n",
+      "lastUpdated": "2025-04-04T21:27:19.843Z"
+    },
+    "a008fd2d6942fed10aa03cb015c76c03": {
+      "source": "### Read property from a module",
+      "translation": "### 从模块读取属性",
+      "lastUpdated": "2025-04-04T21:27:20.260Z"
+    },
+    "20ec3128b5b9c042f872564f1413ceac": {
+      "source": "\nBe sure to load properties at Koin start:",
+      "translation": "请确保在 Koin 启动时加载属性：",
+      "lastUpdated": "2025-04-04T21:27:20.690Z"
+    },
+    "b49d31d5bdfcf08c8bb343a82add0442": {
+      "source": "\n```kotlin\nstartKoin {\n    // Load properties from the default location\n    // (i.e. `/src/main/resources/koin.properties`)\n    fileProperties()\n}\n```",
+      "translation": "```\n```kotlin\nstartKoin {\n    // Load properties from the default location\n    // (i.e. `/src/main/resources/koin.properties`)\n    fileProperties()\n}\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:27:21.307Z"
+    },
+    "5dfb1fc54be246c861691f3040f4c73c": {
+      "source": "\nIn a Koin module, you can get a property by its key:",
+      "translation": "在 Koin 模块中，你可以通过键来获取一个属性：",
+      "lastUpdated": "2025-04-04T21:27:21.815Z"
+    },
+    "fcbb72feb6e913f449750c1600dcb437": {
+      "source": "\nin /src/main/resources/koin.properties file\n```java\n// Key - value\nserver_url=http://service_url\n```",
+      "translation": "```在 /src/main/resources/koin.properties 文件中\n```java\n// Key - value\nserver_url=http://service_url\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:27:22.335Z"
+    },
+    "421feb1c0beb7eeaf8c502b630e7f212": {
+      "source": "\nJust load it with `getProperty` function:",
+      "translation": "使用 `getProperty` 函数加载它：",
+      "lastUpdated": "2025-04-04T21:27:22.753Z"
+    },
+    "a100c9e38e60c8a39ef5c1838d2de592": {
+      "source": "\n```kotlin\nval myModule = module {\n\n    // use the \"server_url\" key to retrieve its value\n    single { MyService(getProperty(\"server_url\")) }\n}\n```\n",
+      "translation": "```kotlin\nval myModule = module {\n\n    // 使用 \"server_url\" 键来检索它的值\n    single { MyService(getProperty(\"server_url\")) }\n}\n```\n",
+      "lastUpdated": "2025-04-04T21:27:23.353Z"
+    },
+    "bb9bb1e156efbc7c4cd4e0b6fd5c65f7": {
+      "source": "---\ntitle: Start Koin\n---\n\n\nKoin is a DSL, a lightweight container and a pragmatic API. Once you have declared your definitions within Koin modules, you are ready to start the Koin container.\n\n### The startKoin function\n\nThe `startKoin` function is the main entry point to launch Koin container. It needs a *list of Koin modules* to run.\nModules are loaded and definitions are ready to be resolved by the Koin container.\n\n.Starting Koin\n```kotlin\n// start a KoinApplication in Global context\nstartKoin {\n    // declare used modules\n    modules(coffeeAppModule)\n}\n```\n\nOnce `startKoin` has been called, Koin will read all your modules & definitions. Koin is then ready for any `get()` or `by inject()` call to retrieve the needed instance.\n\nYour Koin container can have several options:\n\n* `logger` - to enable logging - see logging.adoc#_logging,logging section\n* `properties()`, `fileProperties( )` or `environmentProperties( )` to load properties from environment, koin.properties file, extra properties ... - see properties.adoc#_lproperties,properties section\n\n\n:::info\n The `startKoin` can't be called more than once. If you need several point to load modules, use the `loadKoinModules` function.\n:::\n\n### Behind the start - Koin instance under the hood\n\nWhen we start Koin, we create a `KoinApplication` instance that represents the Koin container configuration instance. Once launched, it will produce a `Koin` instance resulting of your modules and options.\nThis `Koin` instance is then hold by the `GlobalContext`, to be used by any `KoinComponent` class.\n\nThe `GlobalContext` is a default JVM context strategy for Koin. It's called by `startKoin` and register to `GlobalContext`. This will allow us to register a different kind of context, in the perspective of Koin Multiplatform.\n\n### Loading modules after startKoin\n\nYou can't call the `startKoin` function more than once. But you can use directly the `loadKoinModules()` functions.\n\nThis function is interesting for SDK makers who want to use Koin, because they don't need to use the `starKoin()` function and just use the `loadKoinModules` at the start of their library.\n\n```kotlin\nloadKoinModules(module1,module2 ...)\n```\n\n### Unloading modules\n\nit's possible also to unload a bunch of definition, and then release theirs instance with the given function:\n\n```kotlin\nunloadKoinModules(module1,module2 ...)\n```\n\n\n### Stop Koin - closing all resources\n\nYou can close all the Koin resources and drop instances & definitions. For this you can use the `stopKoin()` function from anywhere, to stop the Koin `GlobalContext`.\nElse on a `KoinApplication` instance, just call `close()`\n\n\n## Logging\n\nKoin has a simple logging API to log any Koin activity (allocation, lookup ...). The logging API is represented by the class below:\n\nKoin Logger\n\n```kotlin\nabstract class Logger(var level: Level = Level.INFO) {\n\n    abstract fun log(level: Level, msg: MESSAGE)\n\n    fun debug(msg: MESSAGE) {\n        log(Level.DEBUG, msg)\n    }\n\n    fun info(msg: MESSAGE) {\n        log(Level.INFO, msg)\n    }\n\n    fun error(msg: MESSAGE) {\n        log(Level.ERROR, msg)\n    }\n}\n```\n\nKoin proposes some implementation of logging, in function of the target platform:\n\n* `PrintLogger` - directly log into console (included in `koin-core`)\n* `EmptyLogger` - log nothing (included in `koin-core`)\n* `SLF4JLogger` - Log with SLF4J. Used by ktor and spark (`koin-logger-slf4j` project)\n* `AndroidLogger` - log into Android Logger (included in `koin-android`)\n\n### Set logging at start\n\nBy default, By default Koin use the `EmptyLogger`. You can use directly the `PrintLogger` as following:\n\n```kotlin\nstartKoin {\n    logger(LEVEL.INFO)\n}\n```\n\n\n## Loading properties\n\nYou can load several type of properties at start:\n\n* environment properties - load *system* properties\n* koin.properties file - load properties from `/src/main/resources/koin.properties` file\n* \"extra\" start properties - map of values passed at `startKoin` function\n\n### Read property from a module\n\nBe sure to load properties at Koin start:\n\n```kotlin\nstartKoin {\n    // Load properties from the default location\n    // (i.e. `/src/main/resources/koin.properties`)\n    fileProperties()\n}\n```\n\nIn a Koin module, you can get a property by its key:\n\nin /src/main/resources/koin.properties file\n```java\n// Key - value\nserver_url=http://service_url\n```\n\nJust load it with `getProperty` function:\n\n```kotlin\nval myModule = module {\n\n    // use the \"server_url\" key to retrieve its value\n    single { MyService(getProperty(\"server_url\")) }\n}\n```\n",
+      "translation": "---\ntitle: Start Koin\n---\nKoin 是一个 DSL、一个轻量级容器和一个实用的 API。一旦你在 Koin 模块中声明了你的定义，你就可以启动 Koin 容器了。\n\n### startKoin 函数\n`startKoin` 函数是启动 Koin 容器的主要入口点。它需要一个 *Koin 模块列表* 才能运行。\n模块被加载，并且定义已准备好被 Koin 容器解析。\n```\n```.启动 Koin\n```\n```kotlin\n// 在全局上下文中启动 KoinApplication\nstartKoin {\n    // 声明使用的模块\n    modules(coffeeAppModule)\n}\n```\n```\n\n一旦 `startKoin` 被调用，Koin 将会读取你所有的模块和定义。然后 Koin 就可以通过 `get()` 或 `by inject()` 调用来检索所需的实例了。\n你的 Koin 容器可以有几个选项：\n* `logger` - 启用日志 - 参见 logging.adoc#_logging,logging 部分\n* `properties()`, `fileProperties( )` 或 `environmentProperties( )` - 从环境变量、koin.properties 文件、额外属性等加载属性 - 参见 properties.adoc#_lproperties,properties 部分\n:::info\n`startKoin` 只能被调用一次。如果你需要多个地方加载模块，使用 `loadKoinModules` 函数。\n:::\n\n### 启动背后 - Koin实例的内部原理\n当我们启动 Koin 时，我们会创建一个 `KoinApplication` 实例，它代表 Koin 容器配置实例。一旦启动，它将生成一个 `Koin` 实例，该实例是你的模块和选项的结果。\n然后，这个 `Koin` 实例由 `GlobalContext` 持有，供任何 `KoinComponent` 类使用。\n`GlobalContext` 是 Koin 的默认 JVM 上下文策略。它由 `startKoin` 调用并注册到 `GlobalContext`。这将允许我们注册不同类型的上下文，从 Koin Multiplatform 的角度来看。\n\n### 在 startKoin 之后加载模块\n你不能多次调用 `startKoin` 函数。但是你可以直接使用 `loadKoinModules()` 函数。\n这个函数对于想要使用 Koin 的 SDK 开发者来说非常有用，因为他们不需要使用 `starKoin()` 函数，只需在其库的启动时使用 `loadKoinModules` 即可。\n```\n```kotlin\nloadKoinModules(module1,module2 ...)\n```\n```\n\n### 卸载模块\n也可以卸载一批定义，然后使用给定的函数释放它们的实例：\n```\n```kotlin\nunloadKoinModules(module1,module2 ...)\n\n### 停止 Koin - 关闭所有资源\n你可以关闭所有 Koin 资源并删除实例和定义。为此，你可以从任何地方使用 `stopKoin()` 函数来停止 Koin `GlobalContext`。\n或者，在 `KoinApplication` 实例上，只需调用 `close()`。\n\n## 日志\nKoin 提供了一个简单的日志 API 来记录任何 Koin 活动（分配、查找 ...）。日志 API 由以下类表示：\nKoin 日志\n\n```\n```kotlin\nabstract class Logger(var level: Level = Level.INFO) {\n\n    abstract fun log(level: Level, msg: MESSAGE)\n\n    fun debug(msg: MESSAGE) {\n        log(Level.DEBUG, msg)\n    }\n\n    fun info(msg: MESSAGE) {\n        log(Level.INFO, msg)\n    }\n\n    fun error(msg: MESSAGE) {\n        log(Level.ERROR, msg)\n    }\n}\n```\n```\n\nKoin根据目标平台的不同，提供了一些日志记录的实现：\n* `PrintLogger` - 直接输出到控制台 (包含在 `koin-core` 中)\n* `EmptyLogger` - 不输出任何内容 (包含在 `koin-core` 中)\n* `SLF4JLogger` - 使用 SLF4J 输出。被 ktor 和 spark 使用 ( `koin-logger-slf4j` 项目)\n* `AndroidLogger` - 输出到 Android Logger (包含在 `koin-android` 中)\n\n### 启动时设置日志\n默认情况下，Koin 使用 `EmptyLogger`。您可以直接使用 `PrintLogger`，如下所示：\n\n```\n```kotlin\nstartKoin {\n    logger(LEVEL.INFO)\n}\n```\n```\n\n## 加载属性\n```\n```你可以在启动时加载几种类型的属性：\n\n* environment properties - 加载 *系统* 属性\n* koin.properties file - 从 `/src/main/resources/koin.properties` 文件加载属性\n* \"extra\" start properties - 在 `startKoin` 函数传递的值的映射\n\n```\n```\n\n### 从模块读取属性\n请确保在 Koin 启动时加载属性：\nkotlin\nstartKoin {\n    // Load properties from the default location\n    // (i.e. `/src/main/resources/koin.properties`)\n    fileProperties()\n}\n\n在 Koin 模块中，你可以通过键来获取一个属性：\n```\n```在 /src/main/resources/koin.properties 文件中\n```\n```java\n// Key - value\nserver_url=http://service_url\n\n使用 `getProperty` 函数加载它：\n```\n```kotlin\nval myModule = module {\n\n    // 使用 \"server_url\" 键来检索它的值\n    single { MyService(getProperty(\"server_url\")) }\n}\n```\n```\n",
+      "lastUpdated": "2025-04-04T21:27:23.353Z"
+    }
+  }
+}
