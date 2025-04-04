@@ -122,6 +122,17 @@ function splitIntoSegments(content) {
     return blocks;
 }
 
+function processTranslatedText(translatedText) {
+    let processed = translatedText;
+    
+    // 移除可能的markdown包装
+    if (processed.startsWith('```markdown') && processed.endsWith('```')) {
+        processed = processed.slice(10, -3).trim();
+    }
+    
+    return processed;
+}
+
 // 准备翻译提示词
 function prepareTranslationPrompt(sourceText, targetLang, isSegment = true) {
     // 获取相关术语
@@ -238,6 +249,7 @@ async function translateFile(filePath) {
                     console.log(`Translating segment ${i+1}/${segments.length} (${segment.length} chars)`);
                     try {
                         translatedSegment = await translateWithLLM(segment, targetLang, true);
+                        translatedSegment = processTranslatedText(translatedSegment);
 
                         // 保存段落翻译记忆
                         if (!translationMemory[targetLang]) {
