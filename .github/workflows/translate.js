@@ -102,6 +102,7 @@ function prepareTranslationPrompt(sourceText, targetLang, currentFilePath) {
 5. 避免机械翻译常见的生硬、不通顺的句式结构
 6. 译文应当读起来就像是原生中文写就，而非翻译而来
 7. 调整句子结构使其符合中文表达习惯，不必刻意保持原文的句子结构
+8. 采用适合技术文档的描述用词用语
 
 ## 技术要求
 1. 保持所有Markdown格式、代码块和链接不变
