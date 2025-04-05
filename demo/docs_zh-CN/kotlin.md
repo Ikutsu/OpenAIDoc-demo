@@ -108,7 +108,7 @@ val appModule = module {
 
 ## 在 UserApplication 中注入依赖项
 
-`UserApplication` 类将帮助从 Koin 中引导实例。它将解析 `UserService`，这要归功于 `KoinComponent` 接口。这允许使用 `by inject()` 委托函数注入它：
+`UserApplication` 类会从 Koin 中引导实例。它将解析 `UserService`，这要归功于 `KoinComponent` 接口。这允许使用 `by inject()` 委托函数注入它：
 
 ```kotlin
 class UserApplication : KoinComponent {

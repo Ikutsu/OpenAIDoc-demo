@@ -124,6 +124,8 @@ async function translateWithLLM(text, targetLang, filePath) {
     const modelConfig = config.modelConfigs[targetLang];
     const prompt = prepareTranslationPrompt(text, targetLang, filePath);
 
+    console.log(prompt);
+
     if (modelConfig.provider === 'google') {
         return await callGemini(prompt, modelConfig.model);
     }
