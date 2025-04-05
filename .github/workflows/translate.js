@@ -46,13 +46,17 @@ function loadPreviousTranslations(targetLang, currentFilePath) {
         const relativePath = currentFilePath.replace(config.sourceDir.replace('./', ''), '');
         const previousTranslationPath = path.join(targetDir, relativePath);
         
+        console.log(`尝试加载参考翻译: ${previousTranslationPath}`);
+        
         // 检查是否存在对应的翻译文件
         if (!fs.existsSync(previousTranslationPath)) {
+            console.log(`参考翻译文件不存在: ${previousTranslationPath}`);
             return [];
         }
         
         // 读取之前的翻译内容
         const content = fs.readFileSync(previousTranslationPath, 'utf8');
+        console.log(`成功加载参考翻译文件: ${previousTranslationPath}`);
         
         return [{
             file: previousTranslationPath,
@@ -74,13 +78,13 @@ function prepareTranslationPrompt(sourceText, targetLang, currentFilePath) {
         .join('\n');
     
     // 获取同名的之前翻译文件作为参考
-    const previousTranslations = loadPreviousTranslations(sourceText, targetLang, currentFilePath);
+    const previousTranslations = loadPreviousTranslations(targetLang, currentFilePath);
     
     // 构建参考翻译部分
     let translationReferences = '';
     if (previousTranslations.length > 0) {
         translationReferences = '\n## 参考翻译（参考以下之前翻译过的文档，保持风格和术语一致性）\n';
-        translationReferences += `### 之前的翻译版本\n\`\`\`\n${previousTranslations[0]}\n\`\`\`\n\n`;
+        translationReferences += `### 之前的翻译版本\n\`\`\`\n${previousTranslations[0].content}\n\`\`\`\n\n`;
     }
 
     return `# 翻译指令
