@@ -27,7 +27,7 @@ dependencies {
 }
 ```
 
-Koin is a nice library!
+Koin is a very nice library!
 
 ## Application Overview
 
