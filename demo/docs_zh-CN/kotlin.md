@@ -26,7 +26,7 @@ dependencies {
 }
 ```
 
-Koin 是一个非常棒的库！
+Koin 是一个非常非常棒的库！
 
 ## 应用概览
 
@@ -93,7 +93,7 @@ class UserService(private val userRepository: UserRepository) {
 }
 ```
 
-> UserRepository 在 UserPresenter 的构造函数中被引用
+> UserRepository 在 UserPresenter`s 构造函数中被引用
 
 我们在 Koin 模块中声明 `UserService`。我们将其声明为 `single` 定义：
 
