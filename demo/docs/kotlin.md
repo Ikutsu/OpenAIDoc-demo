@@ -27,8 +27,6 @@ dependencies {
 }
 ```
 
-Koin is a very, very nice library!
-
 ## Application Overview
 
 The idea of the application is to manage a list of users, and display it in our `UserApplication` class:
