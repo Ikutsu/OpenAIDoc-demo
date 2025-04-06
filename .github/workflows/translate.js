@@ -2,15 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { GoogleGenAI  } = require("@google/genai");
 
-// 配置项
-const config = {
-    sourceDir: './demo/docs',
-    targetLanguages: ['zh-CN'],
-    modelConfigs: {
-        'zh-CN': { provider: 'google', model: 'gemini-2.0-flash' }
-    },
-    terminologyPath: './demo/terminology.json'
-};
+// 从配置文件加载配置项
+const configPath = path.resolve(__dirname, './translate-config.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 // Google LLM API
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
@@ -38,28 +32,42 @@ function extractFrontmatterAndContent(content) {
     return { frontmatter: '', mainContent: content };
 }
 
+// 计算目标文件路径
+function getTargetPath(filePath, targetLang) {
+    // 如果是简体中文，直接存在 baseDir/docs 下
+    if (targetLang === 'zh-Hans') {
+        const baseDir = process.env.BASE_DIR || '.';
+        const relativePath = path.relative(config.sourceDir, filePath);
+        return path.join(baseDir, 'docs', relativePath);
+    } 
+    // 其他语言存在 i18n/[语言]/content-docs/current 下
+    else {
+        const baseDir = process.env.BASE_DIR || '.';
+        const relativePath = path.relative(config.sourceDir, filePath);
+        return path.join(baseDir, 'i18n', targetLang, 'content-docs', 'current', relativePath);
+    }
+}
+
 // 加载之前翻译过的相关文件作为参考
 function loadPreviousTranslations(targetLang, currentFilePath) {
     try {
-        // 计算对应翻译文件的路径 - 修正计算方式
-        const targetDir = config.sourceDir + '_' + targetLang;
-        const relativePath = currentFilePath.replace(config.sourceDir.replace('./', ''), '');
-        const previousTranslationPath = path.join(targetDir, relativePath);
+        // 计算对应翻译文件的路径
+        const targetPath = getTargetPath(currentFilePath, targetLang);
         
-        console.log(`尝试加载参考翻译: ${previousTranslationPath}`);
+        console.log(`尝试加载参考翻译: ${targetPath}`);
         
         // 检查是否存在对应的翻译文件
-        if (!fs.existsSync(previousTranslationPath)) {
-            console.log(`参考翻译文件不存在: ${previousTranslationPath}`);
+        if (!fs.existsSync(targetPath)) {
+            console.log(`参考翻译文件不存在: ${targetPath}`);
             return [];
         }
         
         // 读取之前的翻译内容
-        const content = fs.readFileSync(previousTranslationPath, 'utf8');
-        console.log(`成功加载参考翻译文件: ${previousTranslationPath}`);
+        const content = fs.readFileSync(targetPath, 'utf8');
+        console.log(`成功加载参考翻译文件: ${targetPath}`);
         
         return [{
-            file: previousTranslationPath,
+            file: targetPath,
             content: content
         }];
         
@@ -142,7 +150,7 @@ async function callGemini(prompt, model) {
             model: model,
             contents: prompt,
             config: {
-                temperature: 0.1
+                temperature: 1
             }
         });
 
@@ -161,10 +169,8 @@ async function translateFile(filePath) {
     const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
     for (const targetLang of config.targetLanguages) {
-        // 修正生成的目标文件路径计算方式
-        const targetDir = config.sourceDir + '_' + targetLang;
-        const relativePath = filePath.replace(config.sourceDir.replace('./', ''), '');
-        const targetPath = path.join(targetDir, relativePath);
+        // 使用新的路径计算函数
+        const targetPath = getTargetPath(filePath, targetLang);
 
         // 创建目标目录
         fs.mkdirSync(path.dirname(targetPath), { recursive: true });
@@ -194,15 +200,13 @@ async function translateFile(filePath) {
 
 // 获取语言显示名称
 function getLangDisplayName(langCode) {
-    const names = {
-        'zh-CN': '简体中文'
-    };
-    return names[langCode] || langCode;
+    return config.languageNames[langCode] || langCode;
 }
 
 // 主函数
 async function main() {
     const changedFiles = process.env.ALL_CHANGED_FILES.split(/[\s,]+/);
+    const baseDir = process.env.BASE_DIR;
     console.log(`Found ${changedFiles.length} changed files`);
 
     for (const file of changedFiles) {
