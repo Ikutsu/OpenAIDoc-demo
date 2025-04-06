@@ -164,7 +164,17 @@ async function callGemini(prompt, model) {
 // 翻译文件
 async function translateFile(filePath) {
     console.log(`Translating file: ${filePath}`);
-    const content = fs.readFileSync(filePath, 'utf8');
+    
+    // 修正文件路径，需要从external-repo中读取源文件
+    const absoluteFilePath = path.resolve('external-repo', filePath);
+    
+    // 检查文件是否存在
+    if (!fs.existsSync(absoluteFilePath)) {
+        console.error(`File not found: ${absoluteFilePath}`);
+        return;
+    }
+    
+    const content = fs.readFileSync(absoluteFilePath, 'utf8');
 
     const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
@@ -205,11 +215,16 @@ function getLangDisplayName(langCode) {
 
 // 主函数
 async function main() {
-    const changedFiles = process.env.ALL_CHANGED_FILES.split(/[\s,]+/);
+    const changedFiles = process.env.ALL_CHANGED_FILES.split(/[\s,]+/).filter(file => file.trim());
     console.log(`Found ${changedFiles.length} changed files`);
 
     for (const file of changedFiles) {
-        await translateFile(file);
+        try {
+            await translateFile(file);
+        } catch (error) {
+            console.error(`Error translating ${file}:`, error);
+            // 继续处理下一个文件
+        }
     }
 
     console.log('Translation completed');

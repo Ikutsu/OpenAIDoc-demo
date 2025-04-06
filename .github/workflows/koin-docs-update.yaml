@@ -31,9 +31,9 @@ jobs:
       - name: Check last run timestamp
         id: last-run
         run: |
-          if [ -f ".github/workflows/last_check_koin.txt" ]; then
+          if [ -f ".github/last_check_koin.txt" ]; then
             echo "first_run=false" >> $GITHUB_OUTPUT
-            echo "last_commit=$(cat .github/workflows/last_check_koin.txt)" >> $GITHUB_OUTPUT
+            echo "last_commit=$(cat .github/last_check_koin.txt)" >> $GITHUB_OUTPUT
           else
             echo "first_run=true" >> $GITHUB_OUTPUT
           fi
@@ -52,9 +52,10 @@ jobs:
         id: all-files
         if: steps.last-run.outputs.first_run == 'true'
         run: |
-          cd external-repo/docs
+          cd external-repo
           # 查找所有 md 文件并转换为空格分隔的列表格式，与 tj-actions/changed-files 输出格式保持一致
-          ALL_FILES=$(find . -name "*.md" | tr '\n' ' ' | sed 's/ $//')
+          # 在输出的文件路径前添加 docs/ 前缀
+          ALL_FILES=$(find docs -name "*.md" | tr '\n' ' ' | sed 's/ $//')
           echo "all_changed_files=$ALL_FILES" >>  $GITHUB_OUTPUT
 
       - name: Prepare files for translation
@@ -77,7 +78,7 @@ jobs:
           
           # 更新最后检查的提交
           cd external-repo
-          git rev-parse HEAD > ../.github/workflows/last_check_koin.txt
+          git rev-parse HEAD > ../.github/last_check_koin.txt
 
       - name: Translate
         if: steps.prepare-translation.outputs.any_changed == 'true'
