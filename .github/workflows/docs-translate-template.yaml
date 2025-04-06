@@ -1,10 +1,6 @@
 name: Docs translate template
 on:
-  push:
-    paths:
-      - 'demo/docs/**/*.md'
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   translate-and-deploy:
