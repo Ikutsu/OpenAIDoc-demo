@@ -40,7 +40,8 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add .
+          # 排除 package.json 和 package-lock.json 文件
+          git add . ':!package.json' ':!package-lock.json'
           git commit -m 'Add translated files'
           git push origin main
 

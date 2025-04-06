@@ -32,6 +32,108 @@ function extractFrontmatterAndContent(content) {
     return { frontmatter: '', mainContent: content };
 }
 
+// 解析和修改 frontmatter
+function parseFrontmatter(frontmatter) {
+    if (!frontmatter) return { frontmatterObj: {}, rawFrontmatter: '' };
+    
+    // 去掉 frontmatter 的分隔符
+    const contentOnly = frontmatter.replace(/^---\n/, '').replace(/\n---\n$/, '');
+    
+    // 解析 frontmatter 内容为对象
+    const frontmatterObj = {};
+    const lines = contentOnly.split('\n');
+    
+    for (const line of lines) {
+        const colonIndex = line.indexOf(':');
+        if (colonIndex !== -1) {
+            const key = line.substring(0, colonIndex).trim();
+            let value = line.substring(colonIndex + 1).trim();
+            
+            // 处理带引号的值
+            if ((value.startsWith('"') && value.endsWith('"')) || 
+                (value.startsWith("'") && value.endsWith("'"))) {
+                value = value.substring(1, value.length - 1);
+            }
+            
+            frontmatterObj[key] = value;
+        }
+    }
+    
+    return { frontmatterObj, rawFrontmatter: contentOnly };
+}
+
+// 生成 frontmatter 字符串
+function generateFrontmatter(frontmatterObj) {
+    let result = '---\n';
+    
+    for (const [key, value] of Object.entries(frontmatterObj)) {
+        // 如果值包含特殊字符或空格，用引号括起来
+        const needsQuotes = /[:"\s]/.test(value);
+        result += `${key}: ${needsQuotes ? `"${value.replace(/"/g, '\\"')}"` : value}\n`;
+    }
+    
+    result += '---\n';
+    return result;
+}
+
+// 翻译 frontmatter 中的标题
+async function translateFrontmatter(frontmatter, targetLang, filePath) {
+    if (!frontmatter) return '';
+    
+    const { frontmatterObj, rawFrontmatter } = parseFrontmatter(frontmatter);
+    
+    // 检查是否为 koin.md 文件，如果是，添加 slug: /
+    const fileName = path.basename(filePath);
+    if (fileName === 'koin.md' || fileName === 'index.md') {
+        frontmatterObj.slug = '/';
+        console.log(`为文件 ${fileName} 添加了 slug: / 设置`);
+    }
+    
+    // 检查是否有需要翻译的字段
+    const fieldsToTranslate = ['title', 'description', 'sidebar_label'];
+    const hasFieldsToTranslate = fieldsToTranslate.some(field => frontmatterObj[field]);
+    
+    if (!hasFieldsToTranslate) {
+        // 即使没有需要翻译的字段，仍需要生成新的 frontmatter 以包含可能添加的 slug
+        return generateFrontmatter(frontmatterObj);
+    }
+    
+    // 准备要翻译的文本
+    const textsToTranslate = [];
+    for (const field of fieldsToTranslate) {
+        if (frontmatterObj[field]) {
+            textsToTranslate.push(`${field}: ${frontmatterObj[field]}`);
+        }
+    }
+    
+    if (textsToTranslate.length === 0) {
+        return generateFrontmatter(frontmatterObj);
+    }
+    
+    // 将字段拼接成文本进行翻译
+    const textToTranslate = textsToTranslate.join('\n');
+    const translatedText = await translateWithLLM(textToTranslate, targetLang, filePath);
+    const cleanedTranslatedText = cleanupTranslation(translatedText);
+    
+    // 将翻译结果解析回对象
+    const translatedLines = cleanedTranslatedText.split('\n');
+    for (const line of translatedLines) {
+        const colonIndex = line.indexOf(':');
+        if (colonIndex !== -1) {
+            const key = line.substring(0, colonIndex).trim();
+            let value = line.substring(colonIndex + 1).trim();
+            
+            // 如果是我们要翻译的字段，更新值
+            if (fieldsToTranslate.includes(key) && frontmatterObj[key]) {
+                frontmatterObj[key] = value;
+            }
+        }
+    }
+    
+    // 生成新的 frontmatter
+    return generateFrontmatter(frontmatterObj);
+}
+
 // 计算目标文件路径
 function getTargetPath(filePath, targetLang) {
     // 如果是简体中文，直接存在 baseDir/docs 下
@@ -134,7 +236,7 @@ async function translateWithLLM(text, targetLang, filePath) {
     const modelConfig = config.modelConfigs[targetLang];
     const prompt = prepareTranslationPrompt(text, targetLang, filePath);
 
-    console.log(prompt);
+    console.log(`Translating to ${targetLang} using ${modelConfig.provider}:${modelConfig.model}`);
 
     if (modelConfig.provider === 'google') {
         return await callGemini(prompt, modelConfig.model);
@@ -185,27 +287,57 @@ async function translateFile(filePath) {
         // 创建目标目录
         fs.mkdirSync(path.dirname(targetPath), { recursive: true });
 
-        // 翻译内容（保留 frontmatter）
+        // 翻译 frontmatter
+        const translatedFrontmatter = await translateFrontmatter(frontmatter, targetLang, filePath);
+
+        // 翻译内容
         let translatedContent;
         if (mainContent.trim()) {
             translatedContent = await translateWithLLM(mainContent, targetLang, filePath);
 
-            // 处理可能返回的代码块格式
-            if (translatedContent.startsWith('```markdown') && translatedContent.endsWith('```')) {
-                translatedContent = translatedContent.slice(10, -3).trim();
-            }
+            // 清理翻译结果中的多余内容
+            translatedContent = cleanupTranslation(translatedContent);
 
-            // 完整文档 = 原始 frontmatter + 翻译后的内容
-            translatedContent = frontmatter + translatedContent;
+            // 完整文档 = 翻译后的 frontmatter + 翻译后的内容
+            translatedContent = translatedFrontmatter + translatedContent;
         } else {
-            // 只有 frontmatter 的情况，直接复制
-            translatedContent = content;
+            // 只有 frontmatter 的情况，使用翻译后的 frontmatter
+            translatedContent = translatedFrontmatter;
         }
 
         // 写入翻译后的文件
         fs.writeFileSync(targetPath, translatedContent);
         console.log(`Translated to ${targetLang}: ${targetPath}`);
     }
+}
+
+// 清理翻译结果中的多余内容
+function cleanupTranslation(text) {
+    // 移除开头的 markdown 代码块标记
+    if (text.startsWith('```markdown')) {
+        text = text.replace(/^```markdown\n/, '');
+    } else if (text.startsWith('```md')) {
+        text = text.replace(/^```md\n/, '');
+    } else if (text.startsWith('```')) {
+        text = text.replace(/^```\n/, '');
+    }
+    
+    // 移除结尾的 markdown 代码块标记
+    if (text.endsWith('```')) {
+        text = text.replace(/```$/, '');
+    }
+    
+    // 移除多余的 'n' 字符（通常出现在翻译API的错误输出中）
+    text = text.replace(/([^\\])\\n/g, '$1\n'); // 将不是转义字符的 \n 替换为实际换行
+    text = text.replace(/^\\n/g, '\n'); // 处理行首的 \n
+    
+    // 移除多余的空行
+    text = text.replace(/\n{3,}/g, '\n\n');
+    
+    // 移除可能的多余空格
+    text = text.trim();
+    
+    return text;
 }
 
 // 获取语言显示名称

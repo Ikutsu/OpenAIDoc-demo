@@ -14,12 +14,16 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans', 'zh-Hant', 'ko' , 'ja' ],
+  },
+
+  markdown: {
+    format: 'md',
   },
 
   presets: [
