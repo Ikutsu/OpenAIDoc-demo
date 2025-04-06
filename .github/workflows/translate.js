@@ -44,7 +44,7 @@ function getTargetPath(filePath, targetLang) {
     else {
         const baseDir = process.env.BASE_DIR || '.';
         const relativePath = path.relative(config.sourceDir, filePath);
-        return path.join(baseDir, 'i18n', targetLang, 'content-docs', 'current', relativePath);
+        return path.join(baseDir, 'i18n', targetLang, 'docusaurus-plugin-content-docs', 'current', relativePath);
     }
 }
 
@@ -206,7 +206,6 @@ function getLangDisplayName(langCode) {
 // 主函数
 async function main() {
     const changedFiles = process.env.ALL_CHANGED_FILES.split(/[\s,]+/);
-    const baseDir = process.env.BASE_DIR;
     console.log(`Found ${changedFiles.length} changed files`);
 
     for (const file of changedFiles) {

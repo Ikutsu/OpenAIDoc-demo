@@ -31,9 +31,9 @@ jobs:
       - name: Check last run timestamp
         id: last-run
         run: |
-          if [ -f "last_check.txt" ]; then
+          if [ -f ".github/workflows/last_check_koin.txt" ]; then
             echo "first_run=false" >> $GITHUB_OUTPUT
-            echo "last_commit=$(cat last_check.txt)" >> $GITHUB_OUTPUT
+            echo "last_commit=$(cat .github/workflows/last_check_koin.txt)" >> $GITHUB_OUTPUT
           else
             echo "first_run=true" >> $GITHUB_OUTPUT
           fi
@@ -54,7 +54,7 @@ jobs:
         run: |
           cd external-repo/docs
           # 查找所有 md 文件并转换为空格分隔的列表格式，与 tj-actions/changed-files 输出格式保持一致
-          ALL_FILES=$(find docs -name "*.md" | tr '\n' ' ' | sed 's/ $//')
+          ALL_FILES=$(find . -name "*.md" | tr '\n' ' ' | sed 's/ $//')
           echo "all_changed_files=$ALL_FILES" >>  $GITHUB_OUTPUT
 
       - name: Prepare files for translation
@@ -77,7 +77,7 @@ jobs:
           
           # 更新最后检查的提交
           cd external-repo
-          git rev-parse HEAD > ../last_check.txt
+          git rev-parse HEAD > ../.github/workflows/last_check_koin.txt
 
       - name: Translate
         if: steps.prepare-translation.outputs.any_changed == 'true'
@@ -91,9 +91,9 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          # 排除 package.json 和 package-lock.json 文件
-          git add . ':!package.json' ':!package-lock.json'
-          git commit -m '添加翻译文件并更新检查记录 $(date +%Y-%m-%d)'
+          # 排除 package.json、package-lock.json 文件和 external-repo 目录
+          git add . ':!package.json' ':!package-lock.json' ':!external-repo' ':!external-repo/**'
+          git commit -m '添加翻译文件并更新检查记录'
           git push origin main
 
       - name: Create summary
