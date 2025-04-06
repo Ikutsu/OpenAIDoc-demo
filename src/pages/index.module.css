@@ -1,0 +1,288 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.mainContainer {
+  padding: 2rem 2rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  min-height: calc(100vh - var(--ifm-navbar-height) - 10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.heroSection {
+  text-align: center;
+  margin-bottom: 5rem;
+  padding-top: 2rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #4D6CFA 0%, #6b85fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  opacity: 0.8;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(400px, 1fr));
+  grid-template-rows: repeat(2, auto);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-grow: 1;
+  align-self: center;
+}
+
+.card {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  height: 240px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.cardContent {
+  padding: 2.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  position: relative;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.cardDescription {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.cardIcon {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 48px;
+  height: 48px;
+  opacity: 0.3;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 0.3s ease;
+}
+
+/* 卡片特定样式 */
+.koinCard {
+  background: linear-gradient(135deg, rgba(249, 178, 51, 0.1) 0%, rgba(249, 178, 51, 0.2) 100%);
+  border-left: none;
+}
+
+.koinCard .cardTitle {
+  position: relative;
+  width: fit-content;
+  padding-bottom: 8px;
+}
+
+.koinCard .cardTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #F9B233;
+}
+
+.koinCard:hover .cardTitle {
+  color: #F9B233;
+}
+
+.koinCard:hover .cardDescription {
+  color: rgba(249, 178, 51, 0.8);
+}
+
+.koinCard:hover .cardIcon {
+  opacity: 0.5;
+}
+
+.koinCard .cardIcon {
+  background-image: url('/img/koin_logo.png');
+}
+
+.kotlinCard {
+  background: linear-gradient(135deg, rgba(127, 82, 255, 0.1) 0%, rgba(127, 82, 255, 0.2) 100%);
+  border-left: none;
+}
+
+.kotlinCard .cardTitle {
+  position: relative;
+  width: fit-content;
+  padding-bottom: 8px;
+}
+
+.kotlinCard .cardTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #7F52FF;
+}
+
+.kotlinCard:hover .cardTitle {
+  color: #7F52FF;
+}
+
+.kotlinCard:hover .cardDescription {
+  color: rgba(127, 82, 255, 0.8);
+}
+
+.kotlinCard:hover .cardIcon {
+  opacity: 0.5;
+}
+
+.kotlinCard .cardIcon {
+  background-image: url('/img/kotlin_Icon.png');
+}
+
+.ktorCard {
+  background: linear-gradient(135deg, rgba(177, 37, 234, 0.1) 0%, rgba(177, 37, 234, 0.2) 100%);
+  border-left: none;
+}
+
+.ktorCard .cardTitle {
+  position: relative;
+  width: fit-content;
+  padding-bottom: 8px;
+}
+
+.ktorCard .cardTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #B125EA;
+}
+
+.ktorCard:hover .cardTitle {
+  color: #B125EA;
+}
+
+.ktorCard:hover .cardDescription {
+  color: rgba(177, 37, 234, 0.8);
+}
+
+.ktorCard:hover .cardIcon {
+  opacity: 0.5;
+}
+
+.ktorCard .cardIcon {
+  background-image: url('/img/ktor_logo.png');
+}
+
+.sqldelightCard {
+  background: linear-gradient(135deg, rgba(210, 82, 43, 0.1) 0%, rgba(210, 82, 43, 0.2) 100%);
+  border-left: none;
+}
+
+.sqldelightCard .cardTitle {
+  position: relative;
+  width: fit-content;
+  padding-bottom: 8px;
+}
+
+.sqldelightCard .cardTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #D2522B;
+}
+
+.sqldelightCard:hover .cardTitle {
+  color: #D2522B;
+}
+
+.sqldelightCard:hover .cardDescription {
+  color: rgba(210, 82, 43, 0.8);
+}
+
+.sqldelightCard:hover .cardIcon {
+  opacity: 0.5;
+}
+
+.sqldelightCard .cardIcon {
+  background-image: url('/img/sqldelight_logo.png');
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.2rem;
+  }
+  
+  .mainContainer {
+    padding: 2rem 1rem;
+  }
+  
+  .heroSection {
+    margin-bottom: 3rem;
+    padding-top: 1rem;
+  }
+  
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+.homeLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
