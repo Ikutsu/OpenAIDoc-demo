@@ -1,6 +1,6 @@
 {
   "sourceDir": "./docs",
-  "targetLanguages": ["zh-Hans", "zh-Hant", "ko", "ja"],
+  "targetLanguages": ["zh-Hans"],
   "modelConfigs": {
     "zh-Hans": { "provider": "google", "model": "gemini-2.0-flash" },
     "zh-Hant": { "provider": "google", "model": "gemini-2.0-flash" },
