@@ -132,14 +132,15 @@ jobs:
             echo "any_changed=false" >> $GITHUB_OUTPUT
           fi
           
-          # 更新最后检查的提交
+          # 保存当前提交的SHA以便后续更新
           cd koin-repo
-          git rev-parse HEAD > ../.github/last_check_koin.txt
+          echo "KOIN_CURRENT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
           
           cd ../koin-annotations-repo
-          git rev-parse HEAD > ../.github/last_check_koin_annotations.txt
+          echo "ANNOTATIONS_CURRENT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Translate Koin docs
+        id: translate-koin
         if: steps.prepare-translation.outputs.koin_any_changed == 'true'
         env:
           BASE_DIR: ./koin
@@ -150,6 +151,7 @@ jobs:
         run: node .github/workflows/translate.js
 
       - name: Translate Koin-Annotations docs
+        id: translate-annotations
         if: steps.prepare-translation.outputs.annotations_any_changed == 'true'
         env:
           BASE_DIR: ./koin-annotations
@@ -158,6 +160,14 @@ jobs:
           CHANGED_FILES: ${{ env.ANNOTATIONS_CHANGED_FILES }}
           REPO_PATH: koin-annotations-repo
         run: node .github/workflows/translate.js
+
+      - name: Update last check timestamps
+        if: success() && steps.prepare-translation.outputs.any_changed == 'true'
+        run: |
+          # 只有在前面所有步骤都成功时才更新最后检查的提交
+          echo "${{ env.KOIN_CURRENT_COMMIT }}" > .github/last_check_koin.txt
+          echo "${{ env.ANNOTATIONS_CURRENT_COMMIT }}" > .github/last_check_koin_annotations.txt
+          echo "已更新检查记录时间戳"
 
       - name: Commit and push changes
         if: steps.prepare-translation.outputs.any_changed == 'true'

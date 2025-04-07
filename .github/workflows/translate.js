@@ -4,7 +4,63 @@ const { GoogleGenAI  } = require("@google/genai");
 
 // 从配置文件加载配置项
 const configPath = path.resolve(__dirname, './translate-config.json');
-const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+let config = {}; 
+
+try {
+    config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    
+    // 确保必要的配置项存在
+    if (!config.sourceDir) {
+        console.log('配置文件中缺少 sourceDir，使用默认值 "./external-repo"');
+        config.sourceDir = './external-repo';
+    }
+    
+    if (!config.targetLanguages || !Array.isArray(config.targetLanguages) || config.targetLanguages.length === 0) {
+        console.log('配置文件中缺少 targetLanguages，使用默认值 ["zh-Hans"]');
+        config.targetLanguages = ['zh-Hans'];
+    }
+    
+    if (!config.terminologyPath) {
+        console.log('配置文件中缺少 terminologyPath，使用默认值 "./terminology.json"');
+        config.terminologyPath = './terminology.json';
+    }
+    
+    if (!config.modelConfigs) {
+        console.log('配置文件中缺少 modelConfigs，使用默认配置');
+        config.modelConfigs = {
+            'zh-Hans': { provider: 'google', model: 'gemini-1.5-pro' }
+        };
+    }
+    
+    if (!config.languageNames) {
+        console.log('配置文件中缺少 languageNames，使用默认配置');
+        config.languageNames = {
+            'zh-Hans': '简体中文',
+            'zh-Hant': '繁體中文',
+            'ko': '韩语',
+            'ja': '日语'
+        };
+    }
+    
+} catch (error) {
+    console.error('读取配置文件失败:', error);
+    console.log('使用默认配置');
+    
+    config = {
+        sourceDir: './external-repo',
+        targetLanguages: ['zh-Hans'],
+        terminologyPath: './terminology.json',
+        modelConfigs: {
+            'zh-Hans': { provider: 'google', model: 'gemini-1.5-pro' }
+        },
+        languageNames: {
+            'zh-Hans': '简体中文',
+            'zh-Hant': '繁體中文',
+            'ko': '韩语',
+            'ja': '日语'
+        }
+    };
+}
 
 // Google LLM API
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
@@ -90,6 +146,11 @@ function fixBrokenLinks(content, filePath) {
             replacer: (match, text, link) => {
                 // 针对于常见的"../../setup/koin#android"这类链接问题
                 console.log(`  修复相对路径链接: ${match} -> [${text}](../../setup/${link}.md)`);
+                // 如果链接为空或未定义，直接返回原链接
+                if (!link) {
+                    console.log(`  警告: 链接为空 - ${match}`);
+                    return match;
+                }
                 // 如果链接中包含#，需要分离出来
                 const parts = link.split('#');
                 if (parts.length > 1) {
@@ -385,6 +446,11 @@ async function callGemini(prompt, model) {
 async function translateFile(filePath) {
     console.log(`Translating file: ${filePath}`);
     
+    if (!filePath) {
+        console.error('无效的文件路径');
+        return;
+    }
+    
     // 修正文件路径，需要从external-repo中读取源文件
     const absoluteFilePath = path.resolve('external-repo', filePath);
     
@@ -394,41 +460,60 @@ async function translateFile(filePath) {
         return;
     }
     
-    let content = fs.readFileSync(absoluteFilePath, 'utf8');
-    
-    // 在翻译前修复损坏链接
-    content = fixBrokenLinks(content, filePath);
+    try {
+        let content = fs.readFileSync(absoluteFilePath, 'utf8');
+        
+        // 在翻译前修复损坏链接
+        content = fixBrokenLinks(content, filePath);
 
-    const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
+        const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
-    for (const targetLang of config.targetLanguages) {
-        // 使用新的路径计算函数
-        const targetPath = getTargetPath(filePath, targetLang);
+        for (const targetLang of config.targetLanguages) {
+            try {
+                // 使用新的路径计算函数
+                const targetPath = getTargetPath(filePath, targetLang);
+                
+                if (!targetPath) {
+                    console.error(`无法获取目标路径: ${filePath} -> ${targetLang}`);
+                    continue;
+                }
 
-        // 创建目标目录
-        fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+                // 创建目标目录
+                fs.mkdirSync(path.dirname(targetPath), { recursive: true });
 
-        // 翻译 frontmatter
-        const translatedFrontmatter = await translateFrontmatter(frontmatter, targetLang, filePath);
+                // 翻译 frontmatter
+                const translatedFrontmatter = await translateFrontmatter(frontmatter, targetLang, filePath);
 
-        // 翻译内容
-        let translatedContent;
-        if (mainContent.trim()) {
-            translatedContent = await translateWithLLM(mainContent, targetLang, filePath);
+                // 翻译内容
+                let translatedContent;
+                if (mainContent && mainContent.trim()) {
+                    translatedContent = await translateWithLLM(mainContent, targetLang, filePath);
 
-            // 清理翻译结果中的多余内容
-            translatedContent = cleanupTranslation(translatedContent);
+                    // 检查翻译结果
+                    if (!translatedContent) {
+                        console.error(`翻译结果为空: ${filePath} -> ${targetLang}`);
+                        continue;
+                    }
 
-            // 完整文档 = 翻译后的 frontmatter + 翻译后的内容
-            translatedContent = translatedFrontmatter + translatedContent;
-        } else {
-            // 只有 frontmatter 的情况，使用翻译后的 frontmatter
-            translatedContent = translatedFrontmatter;
+                    // 清理翻译结果中的多余内容
+                    translatedContent = cleanupTranslation(translatedContent);
+
+                    // 完整文档 = 翻译后的 frontmatter + 翻译后的内容
+                    translatedContent = translatedFrontmatter + translatedContent;
+                } else {
+                    // 只有 frontmatter 的情况，使用翻译后的 frontmatter
+                    translatedContent = translatedFrontmatter;
+                }
+
+                // 写入翻译后的文件
+                fs.writeFileSync(targetPath, translatedContent);
+                console.log(`Translated to ${targetLang}: ${targetPath}`);
+            } catch (langError) {
+                console.error(`Error translating to ${targetLang}: ${langError.message}`);
+            }
         }
-
-        // 写入翻译后的文件
-        fs.writeFileSync(targetPath, translatedContent);
-        console.log(`Translated to ${targetLang}: ${targetPath}`);
+    } catch (fileError) {
+        console.error(`Error processing file ${filePath}: ${fileError.message}`);
     }
 }
 
@@ -468,8 +553,16 @@ function getLangDisplayName(langCode) {
 
 // 主函数
 async function main() {
-    const changedFiles = process.env.ALL_CHANGED_FILES.split(/[\s,]+/).filter(file => file.trim());
+    const changedFilesInput = process.env.ALL_CHANGED_FILES || '';
+    console.log(`环境变量 ALL_CHANGED_FILES: ${changedFilesInput}`);
+    
+    const changedFiles = changedFilesInput.split(/[\s,]+/).filter(file => file.trim());
     console.log(`Found ${changedFiles.length} changed files`);
+
+    if (changedFiles.length === 0) {
+        console.log('没有找到需要翻译的文件，如果需要指定文件，请设置 ALL_CHANGED_FILES 环境变量');
+        return;
+    }
 
     for (const file of changedFiles) {
         try {
