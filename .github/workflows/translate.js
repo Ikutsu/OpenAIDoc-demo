@@ -395,8 +395,8 @@ async function translateFile(filePath) {
         return;
     }
     
-    // 修正文件路径，需要从external-repo中读取源文件
-    const absoluteFilePath = path.resolve('external-repo', filePath);
+    // 修正文件路径，需要从REPO_PATH中读取源文件
+    const absoluteFilePath = path.resolve(process.env.REPO_PATH, filePath);
     
     // 检查文件是否存在
     if (!fs.existsSync(absoluteFilePath)) {
