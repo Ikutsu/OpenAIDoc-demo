@@ -178,7 +178,7 @@ class NavFragment : Fragment() {
 
 ## ViewModel Generic API
 
-Koin 提供了一些“底层” API，可以直接调整你的 `ViewModel` 实例。可用的函数是 `viewModelForClass`，用于 `ComponentActivity` 和 `Fragment`：
+Koin 提供了一些“底层” API，可以直接调整你的 `ViewModel` 实例。可用的函数是 `viewModelForClass`，用于 `ComponentActivity` 和 `Fragment`:
 
 ```kotlin
 ComponentActivity.viewModelForClass(

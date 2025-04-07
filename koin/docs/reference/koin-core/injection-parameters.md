@@ -115,5 +115,5 @@ params.get<String>() == "a_string"
 ```
 
 :::note
-你可以使用 `parametersOf` 或 `parameterArrayOf` "级联" 参数注入，以根据索引使用值。 或者使用 `parametersOf` 或 `parameterSetOf` 根据类型进行级联以进行解析。
+  你可以使用 `parametersOf` 或 `parameterArrayOf` "级联" 参数注入，以根据索引使用值。 或者使用 `parametersOf` 或 `parameterSetOf` 根据类型进行级联以进行解析。 
 :::

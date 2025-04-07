@@ -16,7 +16,7 @@ interface KoinExtension {
 }
 ```
 
-该接口允许确保你获得一个 `Koin` 实例，并且在 Koin 关闭时调用该扩展。
+该接口允许确保你获得一个 `Koin` 实例，并且在 Koin 关闭时调用该扩展。当 Koin 关闭时，该扩展也会被调用。
 
 ## 启动一个扩展
 
@@ -38,4 +38,3 @@ fun KoinApplication.coroutinesEngine() {
 
 ```kotlin
 val Koin.coroutinesEngine: KoinCoroutinesEngine get() = extensionManager.getExtension(EXTENSION_NAME)
-```

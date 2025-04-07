@@ -60,7 +60,7 @@ module {
 }
 ```
 
-## Android 反射 DSL (自 3.2 起已弃用)
+## Android 反射 DSL（自 3.2 起已弃用）
 
 :::caution
 Koin 反射 DSL 现在已弃用。请使用上面的 Koin 构造函数 DSL

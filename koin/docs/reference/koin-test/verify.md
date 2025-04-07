@@ -5,7 +5,7 @@ Koin 允许你验证你的配置模块，避免在运行时发现依赖注入（
 
 ## 使用 Verify() 进行 Koin 配置检查 - 仅限 JVM [3.3]
 
-在 Koin 模块上使用 `verify()` 扩展函数。就是这样！在底层，这将验证所有构造函数类，并与 Koin 配置进行交叉检查，以了解是否为此依赖项声明了组件。如果失败，该函数将抛出 `MissingKoinDefinitionException` 异常。
+在 Koin 模块上使用 `verify()` 扩展函数。就是这样！在底层，这将验证所有构造函数类，并与 Koin 配置进行交叉检查，以了解是否为此依赖项声明了组件。如果失败，该函数将抛出一个 `MissingKoinDefinitionException` 异常。
 
 ```kotlin
 val niaAppModule = module {
@@ -86,4 +86,3 @@ class NiaAppModuleCheck {
         )
     }
 }
-```

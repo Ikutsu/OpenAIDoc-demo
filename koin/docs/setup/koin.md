@@ -223,4 +223,3 @@ dependencies {
     testImplementation("io.insert-koin:koin-test-junit4")
     testImplementation("io.insert-koin:koin-android-test")
 }
-```

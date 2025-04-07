@@ -1,7 +1,7 @@
 ---
 title: "Koin 注解入门"
 ---
-Koin Annotations 项目的目标是以非常快速和直观的方式帮助声明 Koin 定义，并为你生成所有底层 Koin DSL。 借助 Kotlin 编译器，我们的目标是帮助开发者提升开发体验，从而快速扩展 🚀。
+Koin Annotations 项目的目标是以非常快速和直观的方式帮助声明 Koin definition（定义），并为你生成所有底层 Koin DSL。 借助 Kotlin 编译器，我们的目标是帮助开发者提升开发体验，从而快速扩展 🚀。
 
 ## 快速开始
 
@@ -25,7 +25,7 @@ class MyModule
 使用 `org.koin.ksp.generated.*` 导入，如下所示，以便能够使用生成的代码：
 
 ```kotlin
-// 使用 Koin Generation（Koin 代码生成）
+// 使用 Koin 代码生成
 import org.koin.ksp.generated.*
 
 fun main() {

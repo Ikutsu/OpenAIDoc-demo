@@ -9,7 +9,7 @@ title: "Ktor & Koin 隔离上下文"
 
 ```kotlin
 fun Application.main() {
-    // Install Koin plugin
+    // 安装 Koin 插件 (Install Koin plugin)
     install(KoinIsolated) {
         slf4jLogger()
         modules(helloAppModule)

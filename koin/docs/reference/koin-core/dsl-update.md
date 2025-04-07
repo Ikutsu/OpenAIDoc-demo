@@ -106,5 +106,5 @@ val factory = koin.get<MyFactory> { parametersOf(id)}
 ## Reflection Based DSL (Deprecated since 3.2) （基于反射的 DSL (自 3.2 起已弃用)）
 
 :::caution
-Koin Reflection DSL 现在已弃用。 请使用上面的 Koin 构造函数 DSL
+Koin Reflection DSL 现在已弃用。 请使用上面的 Koin Constructor DSL
 :::

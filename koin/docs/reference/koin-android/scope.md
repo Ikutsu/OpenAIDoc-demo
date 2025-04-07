@@ -1,5 +1,5 @@
 ---
-title: "管理 Android 作用域 (Scopes)"
+title: "管理 Android 作用域"
 ---
 ## 使用 Android 生命周期
 
@@ -279,4 +279,3 @@ class MyActivity2 : ScopeActivity() {
         val userSession = get<UserSession>()
     }
 }
-```

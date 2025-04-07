@@ -161,7 +161,7 @@ custom_edit_url: null
   - iOS - `internal fun globalContextByMemoryModel(): KoinContext` 使用 `MutableGlobalContext`
 
 `koin-compose`
-  - 函数 `KoinApplication(moduleList: () -> List<Module>, content: @Composable () -> Unit)` 已删除，支持 `KoinContext` 和 `KoinAndroidContext`
+  - 函数 `KoinApplication(moduleList: () -> List<Module>, content: @Composable () -> Unit)` 已删除，支持 `KoinContext`, 和 `KoinAndroidContext`
 
 ## 3.4.3
 
@@ -188,20 +188,20 @@ custom_edit_url: null
 `koin-androidx-compose`
   - 新的 `get()`
   - 新的 `getViewModel()`
-  - 新的作用域 `KoinActivityScope`、`KoinFragmentScope`
+  - 新的作用域 `KoinActivityScope`, `KoinFragmentScope`
 
 `koin-androidx-compose-navigation` - 用于导航的新模块
   - 新的 `koinNavViewModel()`
 
 `koin-compose` - 用于 Compose 的新多平台 API
-  - `koinInject`、`rememberKoinInject`
+  - `koinInject`, `rememberKoinInject`
   - `KoinApplication`
 
 ### Experimental 🚧
 
 `koin-compose` - 用于 Compose 的新实验性多平台 API
   - `rememberKoinModules`
-  - `KoinScope`、`rememberKoinScope`
+  - `KoinScope`, `rememberKoinScope`
 
 ### Deprecation ⚠️
 
@@ -212,7 +212,7 @@ custom_edit_url: null
 ### Breaking 💥
 
 `koin-android`
-  - `LifecycleScopeDelegate` 现在已删除
+  - `LifecycleScopeDelegate` is now removed
 
 `koin-androidx-compose`
-  - 删除了 `getStateViewModel`，支持 `koinViewModel`
+  - Removed `getStateViewModel` in favor of `koinViewModel`

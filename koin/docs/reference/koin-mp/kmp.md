@@ -140,5 +140,4 @@ struct ContentView: View {
 ### 新的 Native 内存管理
 
 使用根 [gradle.properties](https://kotlinlang.org/docs/native-memory-manager.html) 激活实验性功能。
-
     ```

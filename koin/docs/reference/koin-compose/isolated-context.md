@@ -1,5 +1,5 @@
 ---
-title: "使用 Compose 应用实现隔离上下文（Isolated Context）"
+title: "使用 Compose 应用实现隔离上下文"
 ---
 使用 Compose 应用程序，你可以通过[隔离上下文](/reference/koin-core/context-isolation.md)以相同的方式处理 SDK 或白标（white label）应用程序，从而避免将你的 Koin 定义与最终用户的定义混淆。
 

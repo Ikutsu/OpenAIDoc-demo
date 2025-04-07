@@ -1,7 +1,7 @@
 ---
 title: "上下文隔离 (Context Isolation)"
 ---
-## 什么是上下文隔离？
+## 什么是上下文隔离 (Context Isolation)？
 
 对于SDK开发者来说，你也可以用非全局的方式使用 Koin：使用 Koin 来为你的库进行依赖注入（DI），并通过隔离你的上下文来避免任何使用你的库和 Koin 的人产生的冲突。
 
@@ -73,4 +73,3 @@ class MyClassTest : KoinTest {
         koin.loadModules(listOf(module))
     }
 }
-```

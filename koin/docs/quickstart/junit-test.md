@@ -89,4 +89,3 @@ class HelloMockTest : KoinTest {
         Mockito.verify(service,times(1)).hello()
     }
 }
-```

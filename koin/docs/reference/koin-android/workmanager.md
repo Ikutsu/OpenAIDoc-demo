@@ -103,4 +103,3 @@ fun Application.setupWorkManagerFactory(
                     delegatingWorkerFactory.addFactory(it)
                 }
 }
-```

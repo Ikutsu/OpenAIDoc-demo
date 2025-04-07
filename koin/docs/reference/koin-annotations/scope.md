@@ -99,7 +99,7 @@ class MyFactory(
 上面的代码等效于生成的代码：
 
 ```kotlin
-factory { Myfactory(getScope("my_scope_id").get()) }
+factory { MyFactory(getScope("my_scope_id").get()) }
 ```
 
 此示例表明 `MyFactory` 组件将从具有 id "my_scope_id" 的作用域实例解析 `MyScopedComponent` 组件。需要使用正确的作用域定义创建使用 id "my_scope_id" 创建的此作用域。

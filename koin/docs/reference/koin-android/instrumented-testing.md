@@ -68,4 +68,3 @@ private val instrumentedTestModule = module {
 val koinTestRule = KoinTestRule(
     modules = listOf(productionModule, instrumentedTestModule)
 )
-```

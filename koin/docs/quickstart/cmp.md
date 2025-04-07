@@ -1,5 +1,5 @@
 ---
-title: "Compose Multiplatform - 共享 UI"
+title: "Compose Multiplatform - Shared UI"
 ---
 > 本教程将指导你编写一个 Android 应用程序，并使用 Koin 依赖注入来获取你的组件。
 > 完成本教程大约需要 __15 分钟__。
