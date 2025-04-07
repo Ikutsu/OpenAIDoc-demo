@@ -1,5 +1,5 @@
 ---
-title: "Koin 嵌入式"
+title: "Koin Embedded"
 custom_edit_url: null
 ---
 Koin Embedded 是一个新的 Koin 项目，目标是 Android/Kotlin SDK 和库开发者。
