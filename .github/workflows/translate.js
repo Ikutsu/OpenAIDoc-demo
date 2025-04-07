@@ -28,7 +28,7 @@ try {
     if (!config.modelConfigs) {
         console.log('配置文件中缺少 modelConfigs，使用默认配置');
         config.modelConfigs = {
-            'zh-Hans': { provider: 'google', model: 'gemini-1.5-pro' }
+            'zh-Hans': { provider: 'google', model: 'gemini-2.0-flash' }
         };
     }
     
@@ -51,7 +51,7 @@ try {
         targetLanguages: ['zh-Hans'],
         terminologyPath: './terminology.json',
         modelConfigs: {
-            'zh-Hans': { provider: 'google', model: 'gemini-1.5-pro' }
+            'zh-Hans': { provider: 'google', model: 'gemini-2.0-flash' }
         },
         languageNames: {
             'zh-Hans': '简体中文',
@@ -553,14 +553,14 @@ function getLangDisplayName(langCode) {
 
 // 主函数
 async function main() {
-    const changedFilesInput = process.env.ALL_CHANGED_FILES || '';
-    console.log(`环境变量 ALL_CHANGED_FILES: ${changedFilesInput}`);
+    const changedFilesInput = process.env.CHANGED_FILES || '';
+    console.log(`环境变量 CHANGED_FILES: ${changedFilesInput}`);
     
     const changedFiles = changedFilesInput.split(/[\s,]+/).filter(file => file.trim());
     console.log(`Found ${changedFiles.length} changed files`);
 
     if (changedFiles.length === 0) {
-        console.log('没有找到需要翻译的文件，如果需要指定文件，请设置 ALL_CHANGED_FILES 环境变量');
+        console.log('没有找到需要翻译的文件，如果需要指定文件，请设置 CHANGED_FILES 环境变量');
         return;
     }
 
