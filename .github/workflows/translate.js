@@ -15,6 +15,17 @@ function fixBrokenLinks(content, filePath) {
     
     // 定义链接修复规则
     const linkFixRules = [
+        // 0. 去掉链接中的#及其后面的所有内容
+        {
+            pattern: /\[([^\]]+)\]\(([^#\)]+)(#[^\)]*)?\)/g,
+            replacer: (match, text, link, hash) => {
+                if (hash) {
+                    console.log(`  移除链接中的#及其后面的内容: ${match} -> [${text}](${link})`);
+                    return `[${text}](${link})`;
+                }
+                return match;
+            }
+        },
         // 1. 将 `/docs/` 开头的链接修改为正确的路径
         {
             pattern: /\[([^\]]+)\]\(\/docs\/([^\)]+)\)/g,
@@ -31,38 +42,6 @@ function fixBrokenLinks(content, filePath) {
                 return `[${text}](${url})`;
             }
         },
-        // 3. 将绝对路径链接转换为相对路径链接 (特别针对于 Docusaurus 无法解析的路径)
-        {
-            pattern: /\[([^\]]+)\]\(\/([^\/][^\)]+)\)/g,
-            replacer: (match, text, link) => {
-                // 计算相对路径
-                const currentDir = path.dirname(filePath.replace(config.sourceDir, ''));
-                let targetPath = `/${link}`;
-                // 如果原始路径包含锚点，需要保留
-                const hashPos = link.indexOf('#');
-                let hash = '';
-                if (hashPos !== -1) {
-                    hash = link.substring(hashPos);
-                    link = link.substring(0, hashPos);
-                }
-                
-                // 获取相对路径
-                let relativePath = path.relative(currentDir, path.dirname(`/${link}`));
-                if (!relativePath.startsWith('.')) {
-                    relativePath = './' + relativePath;
-                }
-                
-                // 拼接文件名
-                const fileName = path.basename(link);
-                relativePath = path.join(relativePath, fileName).replace(/\\/g, '/');
-                
-                // 添加 hash
-                relativePath = relativePath + hash;
-                
-                console.log(`  转换绝对路径为相对路径: ${match} -> [${text}](${relativePath})`);
-                return `[${text}](${relativePath})`;
-            }
-        },
         // 4. 为相对路径添加 .md 扩展名
         {
             pattern: /\[([^\]]+)\]\((\.\.\/[^\.][^\)]*)(#[^\)]+)?\)/g,
@@ -74,7 +53,18 @@ function fixBrokenLinks(content, filePath) {
                 return match;
             }
         },
-        // 5. 修复带有百分号编码的链接
+        // 5. 为绝对路径添加 .md 扩展名
+        {
+            pattern: /\[([^\]]+)\]\(\/([^\.][^\)]*)(#[^\)]+)?\)/g,
+            replacer: (match, text, absPath, hash = '') => {
+                if (!absPath.endsWith('.md') && !absPath.endsWith('/')) {
+                    console.log(`  为绝对路径添加 .md 扩展名: ${match} -> [${text}](/${absPath}.md${hash || ''})`);
+                    return `[${text}](/${absPath}.md${hash || ''})`;
+                }
+                return match;
+            }
+        },
+        // 6. 修复带有百分号编码的链接
         {
             pattern: /%5B([^\]]+)%5D\(%5B([^\)]+)%5D\)/g,
             replacer: (match, text, url) => {
@@ -84,25 +74,6 @@ function fixBrokenLinks(content, filePath) {
                 return `[${decodedText}](${decodedUrl})`;
             }
         },
-        // 6. 修复特殊的 Docusaurus 链接格式
-        {
-            pattern: /\[([^\]]+)\]\(\.\.\/\.\.\/setup\/([^\)]+)\)/g,
-            replacer: (match, text, link) => {
-                // 针对于常见的"../../setup/koin#android"这类链接问题
-                console.log(`  修复相对路径链接: ${match} -> [${text}](../../setup/${link}.md)`);
-                // 如果链接为空或未定义，直接返回原链接
-                if (!link) {
-                    console.log(`  警告: 链接为空 - ${match}`);
-                    return match;
-                }
-                // 如果链接中包含#，需要分离出来
-                const parts = link.split('#');
-                if (parts.length > 1) {
-                    return `[${text}](../../setup/${parts[0]}.md#${parts[1]})`;
-                }
-                return `[${text}](../../setup/${link}.md)`;
-            }
-        }
     ];
     
     // 应用所有修复规则

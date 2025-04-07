@@ -154,7 +154,7 @@ jobs:
         id: translate-annotations
         if: steps.prepare-translation.outputs.annotations_any_changed == 'true'
         env:
-          BASE_DIR: ./koin-annotations
+          BASE_DIR: ./koin
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           CHANGED_FILES: ${{ env.ANNOTATIONS_CHANGED_FILES }}
           REPO_PATH: koin-annotations-repo
