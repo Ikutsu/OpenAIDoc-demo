@@ -4,63 +4,7 @@ const { GoogleGenAI  } = require("@google/genai");
 
 // 从配置文件加载配置项
 const configPath = path.resolve(__dirname, './translate-config.json');
-let config = {}; 
-
-try {
-    config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-    
-    // 确保必要的配置项存在
-    if (!config.sourceDir) {
-        console.log('配置文件中缺少 sourceDir，使用默认值 "./external-repo"');
-        config.sourceDir = './external-repo';
-    }
-    
-    if (!config.targetLanguages || !Array.isArray(config.targetLanguages) || config.targetLanguages.length === 0) {
-        console.log('配置文件中缺少 targetLanguages，使用默认值 ["zh-Hans"]');
-        config.targetLanguages = ['zh-Hans'];
-    }
-    
-    if (!config.terminologyPath) {
-        console.log('配置文件中缺少 terminologyPath，使用默认值 "./terminology.json"');
-        config.terminologyPath = './terminology.json';
-    }
-    
-    if (!config.modelConfigs) {
-        console.log('配置文件中缺少 modelConfigs，使用默认配置');
-        config.modelConfigs = {
-            'zh-Hans': { provider: 'google', model: 'gemini-2.0-flash' }
-        };
-    }
-    
-    if (!config.languageNames) {
-        console.log('配置文件中缺少 languageNames，使用默认配置');
-        config.languageNames = {
-            'zh-Hans': '简体中文',
-            'zh-Hant': '繁體中文',
-            'ko': '韩语',
-            'ja': '日语'
-        };
-    }
-    
-} catch (error) {
-    console.error('读取配置文件失败:', error);
-    console.log('使用默认配置');
-    
-    config = {
-        sourceDir: './external-repo',
-        targetLanguages: ['zh-Hans'],
-        terminologyPath: './terminology.json',
-        modelConfigs: {
-            'zh-Hans': { provider: 'google', model: 'gemini-2.0-flash' }
-        },
-        languageNames: {
-            'zh-Hans': '简体中文',
-            'zh-Hant': '繁體中文',
-            'ko': '韩语',
-            'ja': '日语'
-        }
-    };
-}
+let config = {};
 
 // Google LLM API
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
