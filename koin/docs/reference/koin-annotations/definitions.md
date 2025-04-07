@@ -1,7 +1,7 @@
 ---
-title: 带有注释的定义
+title: 使用注解的定义
 ---
-Koin Annotations 允许声明与常规 Koin DSL 相同类型的定义，但使用注解（annotations）。 只需使用所需的注解标记你的类，它就会为你生成一切！
+Koin 注解（Annotations）允许声明与常规 Koin DSL 相同类型的定义，但使用注解（annotations）。 只需使用所需的注解标记你的类，它就会为你生成一切！
 
 例如，等效于 `single { MyComponent(get()) }` DSL 声明，只需使用 `@Single` 标记即可，如下所示：
 
@@ -10,7 +10,7 @@ Koin Annotations 允许声明与常规 Koin DSL 相同类型的定义，但使�
 class MyComponent(val myDependency : MyDependency)
 ```
 
-Koin Annotations 保持与 Koin DSL 相同的语义。 你可以使用以下定义声明你的组件：
+Koin 注解（Annotations）保持与 Koin DSL 相同的语义。 你可以使用以下定义声明你的组件：
 
 - `@Single` - 单例实例（在 DSL 中用 `single { }` 声明）
 - `@Factory` - 工厂实例。 每次需要实例时重新创建。（在 DSL 中用 `factory { }` 声明）
@@ -186,7 +186,7 @@ public class ComponentWithProps(
 
 ### @PropertyValue - 具有默认值的属性（自 1.4 起）
 
-Koin Annotations 允许你直接从你的代码中使用 `@PropertyValue` 注解为属性定义默认值。
+Koin 注解（Annotations）允许你直接从你的代码中使用 `@PropertyValue` 注解为属性定义默认值。
 让我们继续我们的示例：
 
 ```kotlin

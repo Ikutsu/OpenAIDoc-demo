@@ -86,4 +86,3 @@ actual class PlatformHelper(
 actual class PlatformHelper(){
     actual fun getName(): String = "I'm Native"
 }
-```
