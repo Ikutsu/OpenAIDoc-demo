@@ -14,11 +14,17 @@ jobs:
         with:
           fetch-depth: 0  # 获取完整历史以进行差异比较
 
-      - name: Checkout external repository
+      - name: Checkout Koin repository
         uses: actions/checkout@v4
         with:
           repository: InsertKoinIO/koin
-          path: external-repo
+          path: koin-repo
+
+      - name: Checkout Koin Annotations repository
+        uses: actions/checkout@v4
+        with:
+          repository: InsertKoinIO/koin-annotations
+          path: koin-annotations-repo
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -28,8 +34,8 @@ jobs:
       - name: Install dependencies
         run: npm install @google/genai
 
-      - name: Check last run timestamp
-        id: last-run
+      - name: Check last run timestamp for Koin
+        id: last-run-koin
         run: |
           if [ -f ".github/last_check_koin.txt" ]; then
             echo "first_run=false" >> $GITHUB_OUTPUT
@@ -38,53 +44,119 @@ jobs:
             echo "first_run=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Get changed markdown files
-        id: changed-files
-        if: steps.last-run.outputs.first_run == 'false'
+      - name: Check last run timestamp for Koin-Annotations
+        id: last-run-annotations
+        run: |
+          if [ -f ".github/last_check_koin_annotations.txt" ]; then
+            echo "first_run=false" >> $GITHUB_OUTPUT
+            echo "last_commit=$(cat .github/last_check_koin_annotations.txt)" >> $GITHUB_OUTPUT
+          else
+            echo "first_run=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get changed markdown files for Koin
+        id: changed-files-koin
+        if: steps.last-run-koin.outputs.first_run == 'false'
         uses: tj-actions/changed-files@v46.0.3
         with:
-          path: external-repo
-          base_sha: ${{ steps.last-run.outputs.last_commit }}
+          path: koin-repo
+          base_sha: ${{ steps.last-run-koin.outputs.last_commit }}
           files: |
             docs/**/*.md
 
-      - name: Get all markdown files (first run)
-        id: all-files
-        if: steps.last-run.outputs.first_run == 'true'
+      - name: Get changed markdown files for Koin-Annotations
+        id: changed-files-annotations
+        if: steps.last-run-annotations.outputs.first_run == 'false'
+        uses: tj-actions/changed-files@v46.0.3
+        with:
+          path: koin-annotations-repo
+          base_sha: ${{ steps.last-run-annotations.outputs.last_commit }}
+          files: |
+            docs/**/*.md
+
+      - name: Get all markdown files for Koin (first run)
+        id: all-files-koin
+        if: steps.last-run-koin.outputs.first_run == 'true'
         run: |
-          cd external-repo
-          # 查找所有 md 文件并转换为空格分隔的列表格式，与 tj-actions/changed-files 输出格式保持一致
-          # 在输出的文件路径前添加 docs/ 前缀
+          cd koin-repo
+          ALL_FILES=$(find docs -name "*.md" | tr '\n' ' ' | sed 's/ $//')
+          echo "all_changed_files=$ALL_FILES" >>  $GITHUB_OUTPUT
+
+      - name: Get all markdown files for Koin-Annotations (first run)
+        id: all-files-annotations
+        if: steps.last-run-annotations.outputs.first_run == 'true'
+        run: |
+          cd koin-annotations-repo
           ALL_FILES=$(find docs -name "*.md" | tr '\n' ' ' | sed 's/ $//')
           echo "all_changed_files=$ALL_FILES" >>  $GITHUB_OUTPUT
 
       - name: Prepare files for translation
         id: prepare-translation
         run: |
-          if [ "${{ steps.last-run.outputs.first_run }}" == "true" ]; then
+          # 处理 Koin 仓库文件
+          if [ "${{ steps.last-run-koin.outputs.first_run }}" == "true" ]; then
             # 首次运行 - 使用所有文件
-            echo "ALL_CHANGED_FILES=${{ steps.all-files.outputs.all_changed_files }}" >> $GITHUB_ENV
-            echo "any_changed=true" >> $GITHUB_OUTPUT
+            echo "KOIN_CHANGED_FILES=${{ steps.all-files-koin.outputs.all_changed_files }}" >> $GITHUB_ENV
+            echo "koin_any_changed=true" >> $GITHUB_OUTPUT
           else
             # 后续运行 - 使用变更的文件
-            echo "ALL_CHANGED_FILES=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_ENV
+            echo "KOIN_CHANGED_FILES=${{ steps.changed-files-koin.outputs.all_changed_files }}" >> $GITHUB_ENV
           
-            if [ -n "${{ steps.changed-files.outputs.all_changed_files }}" ]; then
-              echo "any_changed=true" >> $GITHUB_OUTPUT
+            if [ -n "${{ steps.changed-files-koin.outputs.all_changed_files }}" ]; then
+              echo "koin_any_changed=true" >> $GITHUB_OUTPUT
             else
-              echo "any_changed=false" >> $GITHUB_OUTPUT
+              echo "koin_any_changed=false" >> $GITHUB_OUTPUT
             fi
           fi
           
+          # 处理 Koin-Annotations 仓库文件
+          if [ "${{ steps.last-run-annotations.outputs.first_run }}" == "true" ]; then
+            # 首次运行 - 使用所有文件
+            echo "ANNOTATIONS_CHANGED_FILES=${{ steps.all-files-annotations.outputs.all_changed_files }}" >> $GITHUB_ENV
+            echo "annotations_any_changed=true" >> $GITHUB_OUTPUT
+          else
+            # 后续运行 - 使用变更的文件
+            echo "ANNOTATIONS_CHANGED_FILES=${{ steps.changed-files-annotations.outputs.all_changed_files }}" >> $GITHUB_ENV
+          
+            if [ -n "${{ steps.changed-files-annotations.outputs.all_changed_files }}" ]; then
+              echo "annotations_any_changed=true" >> $GITHUB_OUTPUT
+            else
+              echo "annotations_any_changed=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+          
+          # 任一仓库有变更
+          if [[ "${{ steps.last-run-koin.outputs.first_run }}" == "true" || "${{ steps.last-run-annotations.outputs.first_run }}" == "true" || -n "${{ steps.changed-files-koin.outputs.all_changed_files }}" || -n "${{ steps.changed-files-annotations.outputs.all_changed_files }}" ]]; then
+            echo "any_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "any_changed=false" >> $GITHUB_OUTPUT
+          fi
+          
           # 更新最后检查的提交
-          cd external-repo
+          cd koin-repo
           git rev-parse HEAD > ../.github/last_check_koin.txt
+          
+          cd ../koin-annotations-repo
+          git rev-parse HEAD > ../.github/last_check_koin_annotations.txt
 
-      - name: Translate
-        if: steps.prepare-translation.outputs.any_changed == 'true'
+      - name: Translate Koin docs
+        if: steps.prepare-translation.outputs.koin_any_changed == 'true'
         env:
           BASE_DIR: ./koin
+          START_PAGE: koin.md
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          CHANGED_FILES: ${{ env.KOIN_CHANGED_FILES }}
+          REPO_PATH: koin-repo
+        run: node .github/workflows/translate.js
+
+      - name: Translate Koin-Annotations docs
+        if: steps.prepare-translation.outputs.annotations_any_changed == 'true'
+        env:
+          BASE_DIR: ./koin-annotations
+          START_PAGE: koin-annotations.md
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          CHANGED_FILES: ${{ env.ANNOTATIONS_CHANGED_FILES }}
+          REPO_PATH: koin-annotations-repo
         run: node .github/workflows/translate.js
 
       - name: Commit and push changes
@@ -92,25 +164,47 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          # 排除 package.json、package-lock.json 文件和 external-repo 目录
-          git add . ':!package.json' ':!package-lock.json' ':!external-repo' ':!external-repo/**'
+          # 排除不需要提交的文件和目录
+          git add . ':!package.json' ':!package-lock.json' ':!koin-repo' ':!koin-repo/**' ':!koin-annotations-repo' ':!koin-annotations-repo/**'
           git commit -m '添加翻译文件并更新检查记录'
           git push origin main
 
       - name: Create summary
         run: |
-          if [ "${{ steps.last-run.outputs.first_run }}" == "true" ]; then
-            echo "## 首次运行 - 已处理所有文档文件" >> $GITHUB_STEP_SUMMARY
-            FILES="${{ steps.all-files.outputs.all_changed_files }}"
+          echo "## 文档更新检测" >> $GITHUB_STEP_SUMMARY
+          
+          # Koin 仓库摘要
+          echo "### Koin 仓库" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.last-run-koin.outputs.first_run }}" == "true" ]; then
+            echo "首次运行 - 已处理所有文档文件" >> $GITHUB_STEP_SUMMARY
+            FILES="${{ steps.all-files-koin.outputs.all_changed_files }}"
             COUNT=$(echo "$FILES" | wc -w)
             echo "共处理 $COUNT 个文件" >> $GITHUB_STEP_SUMMARY
           else
-            echo "## 文档更新检测" >> $GITHUB_STEP_SUMMARY
-          
-            if [ -z "${{ steps.changed-files.outputs.all_changed_files }}" ]; then
+            if [ -z "${{ steps.changed-files-koin.outputs.all_changed_files }}" ]; then
               echo "没有检测到文档变更" >> $GITHUB_STEP_SUMMARY
             else
-              CHANGED_FILES="${{ steps.changed-files.outputs.all_changed_files }}"
+              CHANGED_FILES="${{ steps.changed-files-koin.outputs.all_changed_files }}"
+              COUNT=$(echo "$CHANGED_FILES" | wc -w)
+              echo "检测到 $COUNT 个文件变更:" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              echo "$CHANGED_FILES" | tr ' ' '\n' >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+          
+          # Koin-Annotations 仓库摘要
+          echo "### Koin-Annotations 仓库" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.last-run-annotations.outputs.first_run }}" == "true" ]; then
+            echo "首次运行 - 已处理所有文档文件" >> $GITHUB_STEP_SUMMARY
+            FILES="${{ steps.all-files-annotations.outputs.all_changed_files }}"
+            COUNT=$(echo "$FILES" | wc -w)
+            echo "共处理 $COUNT 个文件" >> $GITHUB_STEP_SUMMARY
+          else
+            if [ -z "${{ steps.changed-files-annotations.outputs.all_changed_files }}" ]; then
+              echo "没有检测到文档变更" >> $GITHUB_STEP_SUMMARY
+            else
+              CHANGED_FILES="${{ steps.changed-files-annotations.outputs.all_changed_files }}"
               COUNT=$(echo "$CHANGED_FILES" | wc -w)
               echo "检测到 $COUNT 个文件变更:" >> $GITHUB_STEP_SUMMARY
               echo '```' >> $GITHUB_STEP_SUMMARY

@@ -28,61 +28,100 @@ export default function Home(): ReactNode {
         </div>
         
         <div className={styles.cardsContainer}>
-          <Link to="https://koin.openaidoc.org" className={clsx(styles.card, styles.koinCard)}>
+          <Link to="https://koin.openaidoc.org" className={clsx(styles.card, styles.koinCard)} data-aos="fade-up" data-aos-delay="100">
             <div className={styles.cardContent}>
-              <h2 className={styles.cardTitle}>Koin</h2>
-              <p className={styles.cardDescription}>
-                <Translate
-                  id="homepage.card.koin.description"
-                  description="Description of Koin framework">
-                  轻量级的依赖注入框架，为Kotlin应用设计
-                </Translate>
-              </p>
+              <div>
+                <h2 className={styles.cardTitle}>Koin</h2>
+                <p className={styles.cardDescription}>
+                  <Translate
+                    id="homepage.card.koin.description"
+                    description="Description of Koin framework">
+                    轻量级的依赖注入框架，为Kotlin应用设计
+                  </Translate>
+                </p>
+              </div>
+              <div className={styles.cardMeta}>
+                <span className={styles.cardTag}>DI</span>
+                <span className={styles.cardTag}>Kotlin</span>
+              </div>
               <div className={styles.cardIcon}></div>
             </div>
           </Link>
           
-          <Link to="https://kotlin.openaidoc.org" className={clsx(styles.card, styles.kotlinCard)}>
+          <Link to="https://kotlin.openaidoc.org" className={clsx(styles.card, styles.kotlinCard)} data-aos="fade-up" data-aos-delay="200">
             <div className={styles.cardContent}>
-              <h2 className={styles.cardTitle}>Kotlin</h2>
-              <p className={styles.cardDescription}>
-                <Translate
-                  id="homepage.card.kotlin.description"
-                  description="Description of Kotlin language">
-                  现代、简洁且安全的编程语言
-                </Translate>
-              </p>
+              <div>
+                <h2 className={styles.cardTitle}>Kotlin</h2>
+                <p className={styles.cardDescription}>
+                  <Translate
+                    id="homepage.card.kotlin.description"
+                    description="Description of Kotlin language">
+                    现代、简洁且安全的编程语言
+                  </Translate>
+                </p>
+              </div>
+              <div className={styles.cardMeta}>
+                <span className={styles.cardTag}>语言</span>
+                <span className={styles.cardTag}>跨平台</span>
+              </div>
               <div className={styles.cardIcon}></div>
             </div>
           </Link>
           
-          <Link to="https://ktor.openaidoc.org" className={clsx(styles.card, styles.ktorCard)}>
+          <Link to="https://ktor.openaidoc.org" className={clsx(styles.card, styles.ktorCard)} data-aos="fade-up" data-aos-delay="300">
             <div className={styles.cardContent}>
-              <h2 className={styles.cardTitle}>Ktor</h2>
-              <p className={styles.cardDescription}>
-                <Translate
-                  id="homepage.card.ktor.description"
-                  description="Description of Ktor framework">
-                  为Kotlin打造的异步Web框架
-                </Translate>
-              </p>
+              <div>
+                <h2 className={styles.cardTitle}>Ktor</h2>
+                <p className={styles.cardDescription}>
+                  <Translate
+                    id="homepage.card.ktor.description"
+                    description="Description of Ktor framework">
+                    为Kotlin打造的异步Web框架
+                  </Translate>
+                </p>
+              </div>
+              <div className={styles.cardMeta}>
+                <span className={styles.cardTag}>Web</span>
+                <span className={styles.cardTag}>异步</span>
+              </div>
               <div className={styles.cardIcon}></div>
             </div>
           </Link>
           
-          <Link to="https://sqldelight.openaidoc.org" className={clsx(styles.card, styles.sqldelightCard)}>
+          <Link to="https://sqldelight.openaidoc.org" className={clsx(styles.card, styles.sqldelightCard)} data-aos="fade-up" data-aos-delay="400">
             <div className={styles.cardContent}>
-              <h2 className={styles.cardTitle}>SQLDelight</h2>
-              <p className={styles.cardDescription}>
-                <Translate
-                  id="homepage.card.sqldelight.description"
-                  description="Description of SQLDelight">
-                  从SQL语句生成类型安全的Kotlin代码
-                </Translate>
-              </p>
+              <div>
+                <h2 className={styles.cardTitle}>SQLDelight</h2>
+                <p className={styles.cardDescription}>
+                  <Translate
+                    id="homepage.card.sqldelight.description"
+                    description="Description of SQLDelight">
+                    从SQL语句生成类型安全的Kotlin代码
+                  </Translate>
+                </p>
+              </div>
+              <div className={styles.cardMeta}>
+                <span className={styles.cardTag}>SQL</span>
+                <span className={styles.cardTag}>数据库</span>
+              </div>
               <div className={styles.cardIcon}></div>
             </div>
           </Link>
+        </div>
+        
+        <div className={styles.footerBanner}>
+          <div className={styles.bannerContent}>
+            <h2 className={styles.bannerTitle}>
+              <Translate id="homepage.banner.title">
+                开始探索文档
+              </Translate>
+            </h2>
+            <p className={styles.bannerDescription}>
+              <Translate id="homepage.banner.description">
+                选择上方任一技术栈，开始探索详尽的文档和示例
+              </Translate>
+            </p>
+          </div>
         </div>
       </main>
     </Layout>

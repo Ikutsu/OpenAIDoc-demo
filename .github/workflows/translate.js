@@ -9,6 +9,124 @@ const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 // Google LLM API
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
+// 修复 Markdown 文件中的损坏链接
+function fixBrokenLinks(content, filePath) {
+    console.log(`正在修复文件中的损坏链接: ${filePath}`);
+    
+    // 定义链接修复规则
+    const linkFixRules = [
+        // 1. 将 `/docs/` 开头的链接修改为正确的路径
+        {
+            pattern: /\[([^\]]+)\]\(\/docs\/([^\)]+)\)/g,
+            replacer: (match, text, link) => {
+                console.log(`  修复 /docs/ 链接: ${match} -> [${text}](/${link})`);
+                return `[${text}](/${link})`;
+            }
+        },
+        // 2. 修复格式错误的链接，如 [text]([url](link))
+        {
+            pattern: /\[([^\]]+)\]\(\[url\]\(([^\)]+)\)\)/g,
+            replacer: (match, text, url) => {
+                console.log(`  修复格式错误的链接: ${match} -> [${text}](${url})`);
+                return `[${text}](${url})`;
+            }
+        },
+        // 3. 将绝对路径链接转换为相对路径链接 (特别针对于 Docusaurus 无法解析的路径)
+        {
+            pattern: /\[([^\]]+)\]\(\/([^\/][^\)]+)\)/g,
+            replacer: (match, text, link) => {
+                // 计算相对路径
+                const currentDir = path.dirname(filePath.replace(config.sourceDir, ''));
+                let targetPath = `/${link}`;
+                // 如果原始路径包含锚点，需要保留
+                const hashPos = link.indexOf('#');
+                let hash = '';
+                if (hashPos !== -1) {
+                    hash = link.substring(hashPos);
+                    link = link.substring(0, hashPos);
+                }
+                
+                // 获取相对路径
+                let relativePath = path.relative(currentDir, path.dirname(`/${link}`));
+                if (!relativePath.startsWith('.')) {
+                    relativePath = './' + relativePath;
+                }
+                
+                // 拼接文件名
+                const fileName = path.basename(link);
+                relativePath = path.join(relativePath, fileName).replace(/\\/g, '/');
+                
+                // 添加 hash
+                relativePath = relativePath + hash;
+                
+                console.log(`  转换绝对路径为相对路径: ${match} -> [${text}](${relativePath})`);
+                return `[${text}](${relativePath})`;
+            }
+        },
+        // 4. 为相对路径添加 .md 扩展名
+        {
+            pattern: /\[([^\]]+)\]\((\.\.\/[^\.][^\)]*)(#[^\)]+)?\)/g,
+            replacer: (match, text, relPath, hash = '') => {
+                if (!relPath.endsWith('.md') && !relPath.endsWith('/')) {
+                    console.log(`  为相对路径添加 .md 扩展名: ${match} -> [${text}](${relPath}.md${hash || ''})`);
+                    return `[${text}](${relPath}.md${hash || ''})`;
+                }
+                return match;
+            }
+        },
+        // 5. 修复带有百分号编码的链接
+        {
+            pattern: /%5B([^\]]+)%5D\(%5B([^\)]+)%5D\)/g,
+            replacer: (match, text, url) => {
+                const decodedText = decodeURIComponent(text);
+                const decodedUrl = decodeURIComponent(url);
+                console.log(`  修复百分号编码链接: ${match} -> [${decodedText}](${decodedUrl})`);
+                return `[${decodedText}](${decodedUrl})`;
+            }
+        },
+        // 6. 修复特殊的 Docusaurus 链接格式
+        {
+            pattern: /\[([^\]]+)\]\(\.\.\/\.\.\/setup\/([^\)]+)\)/g,
+            replacer: (match, text, link) => {
+                // 针对于常见的"../../setup/koin#android"这类链接问题
+                console.log(`  修复相对路径链接: ${match} -> [${text}](../../setup/${link}.md)`);
+                // 如果链接中包含#，需要分离出来
+                const parts = link.split('#');
+                if (parts.length > 1) {
+                    return `[${text}](../../setup/${parts[0]}.md#${parts[1]})`;
+                }
+                return `[${text}](../../setup/${link}.md)`;
+            }
+        }
+    ];
+    
+    // 应用所有修复规则
+    let modifiedContent = content;
+    let totalFixes = 0;
+    
+    linkFixRules.forEach(({ pattern, replacer }) => {
+        let fixCount = 0;
+        modifiedContent = modifiedContent.replace(pattern, (...args) => {
+            fixCount++;
+            return replacer(...args);
+        });
+        
+        if (fixCount > 0) {
+            totalFixes += fixCount;
+            console.log(`  应用规则修复了 ${fixCount} 个链接`);
+        }
+    });
+    
+    // 输出修复结果统计
+    if (totalFixes > 0) {
+        console.log(`在文件 ${filePath} 中修复了 ${totalFixes} 个损坏链接`);
+    } else {
+        console.log(`文件 ${filePath} 中未发现需要修复的链接`);
+    }
+    
+    return modifiedContent;
+}
+
 // 加载术语库
 let terminology = {};
 
@@ -84,7 +202,7 @@ async function translateFrontmatter(frontmatter, targetLang, filePath) {
     
     // 检查是否为 koin.md 文件，如果是，添加 slug: /
     const fileName = path.basename(filePath);
-    if (fileName === 'koin.md' || fileName === 'index.md') {
+    if (fileName === process.env.START_PAGE) {
         frontmatterObj.slug = '/';
         console.log(`为文件 ${fileName} 添加了 slug: / 设置`);
     }
@@ -276,7 +394,10 @@ async function translateFile(filePath) {
         return;
     }
     
-    const content = fs.readFileSync(absoluteFilePath, 'utf8');
+    let content = fs.readFileSync(absoluteFilePath, 'utf8');
+    
+    // 在翻译前修复损坏链接
+    content = fixBrokenLinks(content, filePath);
 
     const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 

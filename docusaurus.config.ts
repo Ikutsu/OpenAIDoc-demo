@@ -34,7 +34,32 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-  themeConfig: themeConfigs
+  themeConfig: themeConfigs,
+  
+  // 添加 AOS 动画库脚本
+  scripts: [
+    {
+      src: 'https://unpkg.com/aos@next/dist/aos.js',
+      defer: true,
+      onload: `
+        // 初始化 AOS
+        document.addEventListener('DOMContentLoaded', function() {
+          AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true
+          });
+        });
+      `
+    }
+  ],
+  
+  // 添加 AOS 动画库样式
+  stylesheets: [
+    {
+      href: 'https://unpkg.com/aos@next/dist/aos.css',
+    }
+  ]
 };
 
 export default config;
