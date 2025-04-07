@@ -6,7 +6,7 @@ import themeConfigs from './themeConfig'
 
 const config: Config = {
   title: 'OpenAIDoc',
-  favicon: '../img/favicon.ico',
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://kotlin.openaidoc.org',
@@ -29,8 +29,9 @@ const config: Config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: './sidebars.ts',
+          editLocalizedFiles: true,
           editUrl:
-            'https://github.com/BinaryTape/Open-Docs/kotlin',
+            'https://github.com/BinaryTape/Open-Docs/blob/main/kotlin',
         },
         blog: false,
         theme: {
