@@ -54,9 +54,53 @@ jobs:
             echo "first_run=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Get current commit for Koin
+        id: current-commit-koin
+        run: |
+          cd koin-repo
+          echo "current_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Get current commit for Koin-Annotations
+        id: current-commit-annotations
+        run: |
+          cd koin-annotations-repo
+          echo "current_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Check if commits have changed
+        id: check-commits
+        run: |
+          # 检查 Koin 仓库的 commit 是否变化
+          if [ "${{ steps.last-run-koin.outputs.first_run }}" == "true" ]; then
+            echo "koin_changed=true" >> $GITHUB_OUTPUT
+          elif [ "${{ steps.last-run-koin.outputs.last_commit }}" != "${{ steps.current-commit-koin.outputs.current_commit }}" ]; then
+            echo "koin_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "koin_changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # 检查 Koin-Annotations 仓库的 commit 是否变化
+          if [ "${{ steps.last-run-annotations.outputs.first_run }}" == "true" ]; then
+            echo "annotations_changed=true" >> $GITHUB_OUTPUT
+          elif [ "${{ steps.last-run-annotations.outputs.last_commit }}" != "${{ steps.current-commit-annotations.outputs.current_commit }}" ]; then
+            echo "annotations_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "annotations_changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # 任一仓库有变化
+          if [[ "${{ steps.check-commits.outputs.koin_changed }}" == "true" || "${{ steps.check-commits.outputs.annotations_changed }}" == "true" ]]; then
+            echo "any_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "any_changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "Koin 仓库变化: ${{ steps.check-commits.outputs.koin_changed }}"
+          echo "Koin-Annotations 仓库变化: ${{ steps.check-commits.outputs.annotations_changed }}"
+          echo "任一仓库变化: ${{ steps.check-commits.outputs.any_changed }}"
+
       - name: Get changed markdown files for Koin
         id: changed-files-koin
-        if: steps.last-run-koin.outputs.first_run == 'false'
+        if: steps.check-commits.outputs.koin_changed == 'true'
         uses: tj-actions/changed-files@v46.0.3
         with:
           path: koin-repo
@@ -66,7 +110,7 @@ jobs:
 
       - name: Get changed markdown files for Koin-Annotations
         id: changed-files-annotations
-        if: steps.last-run-annotations.outputs.first_run == 'false'
+        if: steps.check-commits.outputs.annotations_changed == 'true'
         uses: tj-actions/changed-files@v46.0.3
         with:
           path: koin-annotations-repo
@@ -140,7 +184,6 @@ jobs:
           echo "ANNOTATIONS_CURRENT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Translate Koin docs
-        id: translate-koin
         if: steps.prepare-translation.outputs.koin_any_changed == 'true'
         env:
           BASE_DIR: ./koin
@@ -151,7 +194,6 @@ jobs:
         run: node .github/workflows/translate.js
 
       - name: Translate Koin-Annotations docs
-        id: translate-annotations
         if: steps.prepare-translation.outputs.annotations_any_changed == 'true'
         env:
           BASE_DIR: ./koin
@@ -179,8 +221,14 @@ jobs:
           git push origin main
 
       - name: Create summary
+        if: always()
         run: |
           echo "## 文档更新检测" >> $GITHUB_STEP_SUMMARY
+          
+          # 检查 commit 是否变化
+          echo "### Commit 变化检测" >> $GITHUB_STEP_SUMMARY
+          echo "- Koin 仓库: ${{ steps.check-commits.outputs.koin_changed }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Koin-Annotations 仓库: ${{ steps.check-commits.outputs.annotations_changed }}" >> $GITHUB_STEP_SUMMARY
           
           # Koin 仓库摘要
           echo "### Koin 仓库" >> $GITHUB_STEP_SUMMARY
