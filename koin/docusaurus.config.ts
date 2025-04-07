@@ -1,6 +1,6 @@
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import themeConfigs from '../themeConfig'
+import themeConfigs from './themeConfig'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
