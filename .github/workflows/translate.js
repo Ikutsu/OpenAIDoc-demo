@@ -4,7 +4,7 @@ const { GoogleGenAI  } = require("@google/genai");
 
 // 从配置文件加载配置项
 const configPath = path.resolve(__dirname, './translate-config.json');
-let config = {};
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 // Google LLM API
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
