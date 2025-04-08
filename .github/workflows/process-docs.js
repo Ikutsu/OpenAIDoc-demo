@@ -212,30 +212,23 @@ function convertAdmonitions(content) {
 
     // 1. 处理带有明确样式标记的提示框
 
-    // 处理以>开头，后面跟着{style="xxx"}的格式
+    // 处理警告框
     newContent = newContent.replace(
-        /(?:^|\n)((?:>\s*.*\n)+)>\s*\n>\s*\{style="([^"]+)"\}/gm,
-        (match, blockContent, style) => {
-            // 确定提示框类型
-            let admonitionType = 'note'; // 默认类型
-            switch (style.toLowerCase()) {
-                case 'tip':
-                    admonitionType = 'tip';
-                    break;
-                case 'warning':
-                    admonitionType = 'caution';
-                    break;
-                case 'note':
-                    admonitionType = 'note';
-                    break;
-                case 'info':
-                    admonitionType = 'info';
-                    break;
-            }
-
+        /> ([\s\S]*?)\n> \n> \{style="warning"\}/g,
+        (match, p1) => {
             // 使用共享函数清理内容
-            const cleanedContent = cleanMarkdownReferences(blockContent);
-            return `:::${admonitionType}\n${cleanedContent}\n:::`;
+            const cleanedContent = cleanMarkdownReferences(p1);
+            return `:::caution\n${cleanedContent}\n:::`;
+        }
+    );
+
+    // 处理提示框
+    newContent = newContent.replace(
+        /> ([\s\S]*?)\n> \n> \{style="tip"\}/g,
+        (match, p1) => {
+            // 使用共享函数清理内容
+            const cleanedContent = cleanMarkdownReferences(p1);
+            return `:::tip\n${cleanedContent}\n:::`;
         }
     );
 
