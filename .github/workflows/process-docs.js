@@ -15,6 +15,648 @@ const changedFiles = process.env.KOTLIN_CHANGED_FILES ? process.env.KOTLIN_CHANG
 const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
+let a = `
+<table> 
+<tr>
+<th>
+Release info
+</th>
+<th>
+Release highlights
+</th>
+<th>
+Compatible Kotlin version
+</th>
+</tr>
+<tr>
+<td>
+
+**0.8.4**
+
+Released: 06 December, 2024
+
+</td>
+<td>
+
+* Support for Kotlin’s [K2 mode](k2-compiler-migration-guide.md#support-in-ides) for improved stability and code analysis.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.8.3**
+
+Released: 23 July, 2024
+
+</td>
+<td>
+
+* Fixes for Xcode compatibility issues.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.8.2**
+
+Released: 16 May, 2024
+
+</td>
+<td>
+
+* Support for Android Studio Jellyfish and for the new Canary version, Koala.
+* Added declarations of `
+sourceCompatibility ` and `
+targetCompatibility ` in the shared module.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.8.1**
+
+Released: 9 November, 2023
+
+</td>
+<td>
+
+* Updated Kotlin to 1.9.20.
+* Updated Jetpack Compose to 1.5.4.
+* Enabled Gradle build and configuration caches by default.
+* Refactored build configurations for the new Kotlin version.
+* iOS framework is now static by default.
+* Fixed an issue running on iOS devices with Xcode 15.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.8.0**
+
+Released: 5 October, 2023
+
+</td>
+<td>
+
+* [KT-60169](https://youtrack.jetbrains.com/issue/KT-60169) Migrated on the Gradle version catalog.
+* [KT-59269](https://youtrack.jetbrains.com/issue/KT-59269) Renamed `
+android ` to `
+androidTarget `.
+* [KT-59269](https://youtrack.jetbrains.com/issue/KT-59269) Updated Kotlin and dependency versions.
+* [KTIJ-26773](https://youtrack.jetbrains.com/issue/KTIJ-26773) Refactored to use ` - destination ` argument instead of ` - sdk ` and ` - arch `.
+* [KTIJ-25839](https://youtrack.jetbrains.com/issue/KTIJ-25839) Refactored generated file names.
+* [KTIJ-27058](https://youtrack.jetbrains.com/issue/KTIJ-27058) Added the JVM target config.
+* [KTIJ-27160](https://youtrack.jetbrains.com/issue/KTIJ-27160) Supported Xcode 15.0.
+* [KTIJ-27158](https://youtrack.jetbrains.com/issue/KTIJ-27158) Moved the new module wizard to the experimental state.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.6.0**
+
+Released: 24 May, 2023
+
+</td>
+<td>
+
+* Support of the new Canary Android Studio Hedgehog.
+* Updated versions of Kotlin, Gradle, and libraries in the Multiplatform project.
+* Applied new [`
+targetHierarchy.default()
+`](whatsnew1820.md#new-approach-to-source-set-hierarchy) in the Multiplatform project.
+* Applied source set name suffixes to platform-specific files in the Multiplatform project.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.5.3**
+
+Released: 12 April, 2023
+
+</td>
+<td>
+
+* Updated Kotlin and Compose versions.
+* Fixed an Xcode project scheme parsing.
+* Added a scheme product type check.
+* `
+iosApp ` scheme is now selected by default if presented.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.5.2**
+
+Released: 30 January, 2023
+
+</td>
+<td>
+
+* [Fixed a problem with Kotlin/Native debugger (slow Spotlight indexing)](https://youtrack.jetbrains.com/issue/KT-55988).
+* [Fixed Kotlin/Native debugger in multimodule projects](https://youtrack.jetbrains.com/issue/KT-24450).
+* [New build for Android Studio Giraffe 2022.3.1 Canary](https://youtrack.jetbrains.com/issue/KT-55274).
+* [Added provisioning flags for an iOS app build](https://youtrack.jetbrains.com/issue/KT-55204).
+* [Added inherited paths to the **Framework Search Paths** option in a generated iOS project](https://youtrack.jetbrains.com/issue/KT-55402).
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.5.1**
+
+Released: 30 November, 2022
+
+</td>
+<td>
+
+* [Fixed new project generation: delete an excess "app" directory](https://youtrack.jetbrains.com/issue/KTIJ-23790).
+
+</td>
+<td>
+
+* [Kotlin 1.7.0—*](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.5.0**
+
+Released: 22 November, 2022
+
+</td>
+<td>
+
+* [Changed the default option for iOS framework distribution: now it is **Regular framework**](https://youtrack.jetbrains.com/issue/KT-54086).
+* [Moved `
+MyApplicationTheme ` to a separate file in a generated Android project](https://youtrack.jetbrains.com/issue/KT-53991).
+* [Updated generated Android project](https://youtrack.jetbrains.com/issue/KT-54658).
+* [Fixed an issue with unexpected erasing of new project directory](https://youtrack.jetbrains.com/issue/KTIJ-23707).
+
+</td>
+<td>
+
+* [Kotlin 1.7.0—*](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.3.4**
+
+Released: 12 September, 2022
+
+</td>
+<td>
+
+* [Migrated Android app to Jetpack Compose](https://youtrack.jetbrains.com/issue/KT-53162).
+* [Removed outdated HMPP flags](https://youtrack.jetbrains.com/issue/KT-52248).
+* [Removed package name from Android manifest](https://youtrack.jetbrains.com/issue/KTIJ-22633).
+* [Updated `.gitignore ` for Xcode projects](https://youtrack.jetbrains.com/issue/KT-53703).
+* [Updated wizard project for better illustration expect/actual](https://youtrack.jetbrains.com/issue/KT-53928).
+* [Updated compatibility with Canary build of Android Studio](https://youtrack.jetbrains.com/issue/KTIJ-22063).
+* [Updated minimum Android SDK to 21 for Android app](https://youtrack.jetbrains.com/issue/KTIJ-22505).
+* [Fixed an issue with the first launch after installation Xcode](https://youtrack.jetbrains.com/issue/KTIJ-22645).
+* [Fixed an issues with Apple run configuration on M1](https://youtrack.jetbrains.com/issue/KTIJ-21781).
+* [Fixed an issue with `
+local.properties ` on Windows OS](https://youtrack.jetbrains.com/issue/KTIJ-22037).
+* [Fixed an issue with Kotlin/Native debugger on Canary build of Android Studio](https://youtrack.jetbrains.com/issue/KT-53976).
+
+</td>
+<td>
+
+* [Kotlin 1.7.0—1.7.*](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.3.3**
+
+Released: 9 June, 2022
+
+</td>
+<td>
+
+* Updated dependency on Kotlin IDE plugin 1.7.0.
+
+</td>
+<td>
+
+* [Kotlin 1.7.0—1.7.*](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.3.2**
+
+Released: 4 April, 2022
+
+</td>
+<td>
+
+* Fixed the performance problem with the iOS application debug on Android Studio 2021.2 and 2021.3.
+
+</td>
+<td>
+
+* [Kotlin 1.5.0—1.6.*](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.3.1**
+
+Released: 15 February, 2022
+
+</td>
+<td>
+
+* [Enabled M1 iOS simulator in Kotlin Multiplatform Mobile wizards](https://youtrack.jetbrains.com/issue/KT-51105).
+* Improved performance for indexing XcProjects: [KT-49777](https://youtrack.jetbrains.com/issue/KT-49777), [KT-50779](https://youtrack.jetbrains.com/issue/KT-50779).
+* Build scripts clean up: use `
+kotlin("test")
+` instead of `
+kotlin("test-common")
+` and `
+kotlin("test-annotations-common")
+`.
+* Increase compatibility range with [Kotlin plugin version](https://youtrack.jetbrains.com/issue/KTIJ-20167).
+* [Fixed the problem with JVM debug on Windows host](https://youtrack.jetbrains.com/issue/KT-50699).
+* [Fixed the problem with the invalid version after disabling the plugin](https://youtrack.jetbrains.com/issue/KT-50966).
+
+</td>
+<td>
+
+* [Kotlin 1.5.0—1.6.*](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.3.0**
+
+Released: 16 November, 2021
+
+</td>
+<td>
+
+* [New Kotlin Multiplatform Library wizard](https://youtrack.jetbrains.com/issue/KTIJ-19367).
+* Support for the new type of Kotlin Multiplatform library distribution: [XCFramework](multiplatform-build-native-binaries.md#build-xcframeworks).
+* Enabled [hierarchical project structure](multiplatform-hierarchy.md#manual-configuration) for new cross-platform mobile projects.
+* Support for [explicit iOS targets declaration](https://youtrack.jetbrains.com/issue/KT-46861).
+* [Enabled Kotlin Multiplatform Mobile plugin wizards on non-Mac machines](https://youtrack.jetbrains.com/issue/KT-48614).
+* [Support for subfolders in the Kotlin Multiplatform module wizard](https://youtrack.jetbrains.com/issue/KT-47923).
+* [Support for Xcode `
+Assets.xcassets ` file](https://youtrack.jetbrains.com/issue/KT-49571).
+* [Fixed the plugin classloader exception](https://youtrack.jetbrains.com/issue/KT-48103).
+* Updated the CocoaPods Gradle Plugin template.
+* Kotlin/Native debugger type evaluation improvements.
+* Fixed iOS device launching with Xcode 13.
+
+</td>
+<td>
+
+* [Kotlin 1.6.0](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.7**
+
+Released: August 2, 2021
+
+</td>
+<td>
+
+* [Added Xcode configuration option for AppleRunConfiguration](https://youtrack.jetbrains.com/issue/KTIJ-19054).
+* [Added support Apple M1 simulators](https://youtrack.jetbrains.com/issue/KT-47618).
+* [Added information about Xcode integration options in Project Wizard](https://youtrack.jetbrains.com/issue/KT-47466).
+* [Added error notification after a project with CocoaPods was generated, but the CocoaPods gem has not been installed](https://youtrack.jetbrains.com/issue/KT-47329).
+* [Added support Apple M1 simulator target in generated shared module with Kotlin 1.5.30](https://youtrack.jetbrains.com/issue/KT-47631).
+* [Cleared generated Xcode project with Kotlin 1.5.20](https://youtrack.jetbrains.com/issue/KT-47465).
+* Fixed launching Xcode Release configuration on a real iOS device.
+* Fixed simulator launching with Xcode 12.5.
+
+</td>
+<td>
+
+* [Kotlin 1.5.10](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.6**
+
+Released: June 10, 2021
+
+</td>
+<td>
+
+* Compatibility with Android Studio Bumblebee Canary 1.
+* Support for [Kotlin 1.5.20](whatsnew1520.md): using the new framework-packing task for Kotlin/Native in the Project Wizard.
+
+</td>
+<td>
+
+* [Kotlin 1.5.10](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.5**
+
+Released: May 25, 2021
+
+</td>
+<td>
+
+* [Fixed compatibility with Android Studio Arctic Fox 2020.3.1 Beta 1 and higher](https://youtrack.jetbrains.com/issue/KT-46834).
+
+</td>
+<td>
+
+* [Kotlin 1.5.10](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.4**
+
+Released: May 5, 2021
+
+</td>
+<td>
+
+Use this version of the plugin with Android Studio 4.2 or Android Studio 2020.3.1 Canary 8 or higher.
+* Compatibility with [Kotlin 1.5.0](whatsnew15.md).
+* [Ability to use the CocoaPods dependency manager in the Kotlin Multiplatform module for iOS integration](https://youtrack.jetbrains.com/issue/KT-45946).
+
+</td>
+<td>
+
+* [Kotlin 1.5.0](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.3**
+
+Released: April 5, 2021
+
+</td>
+<td>
+
+* [The Project Wizard: improvements in naming modules](https://youtrack.jetbrains.com/issues?q=issue%20id:%20KT-43449,%20KT-44060,%20KT-41520,%20KT-45282).
+* [Ability to use the CocoaPods dependency manager in the Project Wizard for iOS integration](https://youtrack.jetbrains.com/issue/KT-45478).
+* [Better readability of gradle.properties in new projects](https://youtrack.jetbrains.com/issue/KT-42908).
+* [Sample tests are no longer generated if "Add sample tests for Shared Module" is unchecked](https://youtrack.jetbrains.com/issue/KT-43441).
+* [Fixes and other improvements](https://youtrack.jetbrains.com/issues?q=Subsystems:%20%7BKMM%20Plugin%7D%20Type:%20Feature,%20Bug%20State:%20-Obsolete,%20-%7BAs%20designed%7D,%20-Answered,%20-Incomplete%20resolved%20date:%202021-03-10%20..%202021-03-25).
+
+</td>
+<td>
+
+* [Kotlin 1.4.30](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.2**
+
+Released: March 3, 2021
+
+</td>
+<td>
+
+* [Ability to open Xcode-related files in Xcode](https://youtrack.jetbrains.com/issue/KT-44970).
+* [Ability to set up a location for the Xcode project file in the iOS run configuration](https://youtrack.jetbrains.com/issue/KT-44968).
+* [Support for Android Studio 2020.3.1 Canary 8](https://youtrack.jetbrains.com/issue/KT-45162).
+* [Fixes and other improvements](https://youtrack.jetbrains.com/issues?q=tag:%20KMM-0.2.2%20).
+
+</td>
+<td>
+
+* [Kotlin 1.4.30](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.1**
+
+Released: February 15, 2021
+
+</td>
+<td>
+
+Use this version of the plugin with Android Studio 4.2.
+* Infrastructure improvements.
+* [Fixes and other improvements](https://youtrack.jetbrains.com/issues?q=tag:%20KMM-0.2.1%20).
+
+</td>
+<td>
+
+* [Kotlin 1.4.30](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.2.0**
+
+Released: November 23, 2020
+
+</td>
+<td>
+
+* [Support for iPad devices](https://youtrack.jetbrains.com/issue/KT-41932).
+* [Support for custom scheme names that are configured in Xcode](https://youtrack.jetbrains.com/issue/KT-41677).
+* [Ability to add custom build steps for the iOS run configuration](https://youtrack.jetbrains.com/issue/KT-41678).
+* [Ability to debug a custom Kotlin/Native binary](https://youtrack.jetbrains.com/issue/KT-40954).
+* [Simplified the code generated by Kotlin Multiplatform Mobile Wizards](https://youtrack.jetbrains.com/issue/KT-41712).
+* [Removed support for the Kotlin Android Extensions plugin](https://youtrack.jetbrains.com/issue/KT-42121), which is deprecated in Kotlin 1.4.20.
+* [Fixed saving physical device configuration after disconnecting from the host](https://youtrack.jetbrains.com/issue/KT-42390).
+* Other fixes and improvements.
+
+</td>
+<td>
+
+* [Kotlin 1.4.20](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.1.3**
+
+Released: October 2, 2020
+
+</td>
+<td>
+
+* Added compatibility with iOS 14 and Xcode 12.
+* Fixed naming in platform tests created by the Kotlin Multiplatform Mobile Wizard.
+
+</td>
+<td>
+
+* [Kotlin 1.4.10](releases.md#release-details)
+* [Kotlin 1.4.20](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.1.2**
+
+Released: September 29, 2020
+
+</td>
+<td>
+
+ * Fixed compatibility with [Kotlin 1.4.20-M1](eap.md#build-details).
+ * Enabled error reporting to JetBrains by default.
+
+</td>
+<td>
+
+* [Kotlin 1.4.10](releases.md#release-details)
+* [Kotlin 1.4.20](releases.md#release-details)
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+**0.1.1**
+
+Released: September 10, 2020
+
+</td>
+<td>
+
+* Fixed compatibility with Android Studio Canary 8 and higher.
+
+</td>
+<td>
+
+* [Kotlin 1.4.10](releases.md#release-details)
+* [Kotlin 1.4.20](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**0.1.0**
+
+Released: August 31, 2020
+
+</td>
+<td>
+
+* The first version of the Kotlin Multiplatform Mobile plugin. Learn more in the [blog post](https://blog.jetbrains.com/kotlin/2020/08/kotlin-multiplatform-mobile-goes-alpha/).
+
+</td>
+<td>
+
+* [Kotlin 1.4.0](releases.md#release-details)
+* [Kotlin 1.4.10](releases.md#release-details)
+
+</td>
+</tr>
+
+</table>
+      `;
+a = convertFrontmatter(a, 'a.md'); // 步骤1
+a = convertAdmonitions(a); // 步骤2
+a = convertDeflistToList(a); // 步骤5
+a = convertIncludes(a); // 步骤6 - 处理include和snippet标签
+a = convertTabs(a); // 步骤7
+a = removeKotlinRunnable(a); // 步骤8
+a = formatHtmlTags(a); // 步骤9
+// 最后处理图片
+a = convertImages(a); // 步骤3
+a = convertVideos(a); // 步骤4
+a = sanitizeMdxContent(a);
+console.log(a);
+
 // 处理文件
 if (files.length > 0) {
     console.log(`开始处理 ${files.length} 个文件...`);
@@ -59,13 +701,16 @@ function processFile(filePath, varsFilePath) {
     let transformedContent = content;
     transformedContent = convertFrontmatter(transformedContent, filePath); // 步骤1
     transformedContent = convertAdmonitions(transformedContent); // 步骤2
-    transformedContent = convertVideos(transformedContent); // 步骤4
     transformedContent = convertDeflistToList(transformedContent); // 步骤5
     transformedContent = convertIncludes(transformedContent); // 步骤6 - 处理include和snippet标签
     transformedContent = convertTabs(transformedContent); // 步骤7
     transformedContent = removeKotlinRunnable(transformedContent); // 步骤8
     transformedContent = formatHtmlTags(transformedContent); // 步骤9
-    transformedContent = convertImages(transformedContent); // 步骤3
+    transformedContent = convertImages(transformedContent); // 步骤3 - 图片处理
+    transformedContent = convertVideos(transformedContent); // 步骤4 - 视频处理
+
+    // 最后，清理可能导致MDX编译错误的内容
+    transformedContent = sanitizeMdxContent(transformedContent);
 
     // 如果提供了变量文件，应用变量替换
     if (varsFilePath && fs.existsSync(varsFilePath)) {
@@ -330,123 +975,102 @@ function formatHtmlTags(content) {
     // 确保</p>前面有换行
     result = result.replace(/\s*<\/p>/g, '\n   </p>');
 
-    // 处理表格单元格 - 使用更直接的替换方法
-    // 1. 替换所有<td>为<td>\n   
-    result = result.replace(/<td>/g, '<td>\n   ');
+    // 只去除标签前的缩进空格，保留换行符
+    // 处理行首的<ul>标签，去除缩进空格
+    result = result.replace(/^(\s+)<ul>/gm, '<ul>');
 
-    // 2. 确保</td>前面有换行
-    result = result.replace(/\s*<\/td>/g, '\n   </td>');
+    // 处理行首的<td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<td([^>]*)>/gm, '<td$2>');
 
-    // 3. 修复可能出现的多余空行和缩进
-    result = result.replace(/<td>\n   \s*\n\s*/g, '<td>\n   ');
+    // 处理行首的</td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<\/td>/gm, '</td>');
 
     return result;
 }
 
 // 步骤3: 转换图片标记
 function convertImages(content) {
-    let newContent = content;
+    // 修复错误的图片标签闭合符号
+    let newContent = content.replace(
+        /<img([^>]*?)\/\/>/g,
+        '<img$1/>'
+    );
 
-    // 转换带宽度和类型的图片为JSX格式
+    // 第1步：转换Markdown格式的图片为HTML格式，特殊处理带大括号属性的情况
     newContent = newContent.replace(
-        /!\[(.*?)\]\((.*?)\)\{width=(\d+)\}\{type="joined"\}/g,
-        (match, alt, src, width) => {
-            // 检查src是否是http链接
-            if (src.startsWith('http://') || src.startsWith('https://')) {
-                return `<img src="${src}" width="${width}" alt="${alt}" style={{verticalAlign: 'middle'}}/>`;
+            /!\[(.*?)\]\((.*?)\)(\{.*?\})?/g,
+            (match, alt, src, attrs) => {
+                console.log(`处理图片: alt=${alt}, src=${src}, attrs=${attrs || '无属性'}`);
+
+                // 构建基本图片标签
+                let imgTag = `<img src="${src.startsWith('http') ? src : `/img/${src}`}" alt="${alt}"`;
+            
+            // 解析可能存在的属性
+            if (attrs) {
+                // 处理width属性
+                const widthMatch = attrs.match(/width=["']?(\d+)["']?/);
+                if (widthMatch && widthMatch[1]) {
+                    console.log(`找到宽度属性: ${widthMatch[1]}`);
+                    imgTag += ` width="${widthMatch[1]}"`;
+                }
+            }
+            
+            // 添加默认样式和关闭标签
+            imgTag += ` style={{verticalAlign: 'middle'}}/>`;
+            console.log(`生成的图片标签: ${imgTag}`);
+            
+            return imgTag;
+        }
+    );
+    
+    // 第2步：处理HTML图片标签后的大括号属性 - 处理形如 width="350" 的格式
+    newContent = newContent.replace(
+        /(<img[^>]*?)(\/?>)\s*\{([^{}]*?)width=["']?(\d+)["']?([^{}]*?)\}/g,
+        (match, imgTag, closing, attrsBefore, width, attrsAfter) => {
+            console.log(`处理图片标签后的大括号属性(引号格式): ${match}`);
+            
+            // 检查图片标签是否已有width属性
+            if (imgTag.includes('width=')) {
+                return `${imgTag}${closing}`;
             } else {
-                return `<img src="/img/${src}" width="${width}" alt="${alt}" style={{verticalAlign: 'middle'}}/>`;
+                return `${imgTag} width="${width}"${closing}`;
             }
         }
     );
-
-    // 转换带宽度的图片为JSX格式
+    
+    // 第3步：处理HTML图片标签后的大括号属性 - 处理形如 width=350 的格式
     newContent = newContent.replace(
-        /!\[(.*?)\]\((.*?)\)\{width=(\d+)\}/g,
-        (match, alt, src, width) => {
-            // 检查src是否是http链接
-            if (src.startsWith('http://') || src.startsWith('https://')) {
-                return `<img src="${src}" width="${width}" alt="${alt}" style={{verticalAlign: 'middle'}}/>`;
+        /(<img[^>]*?)(\/?>)\s*\{([^{}]*?)width=(\d+)([^{}]*?)\}/g,
+        (match, imgTag, closing, attrsBefore, width, attrsAfter) => {
+            console.log(`处理图片标签后的大括号属性(无引号格式): ${match}`);
+            
+            // 检查图片标签是否已有width属性
+            if (imgTag.includes('width=')) {
+                return `${imgTag}${closing}`;
             } else {
-                return `<img src="/img/${src}" width="${width}" alt="${alt}" style={{verticalAlign: 'middle'}}/>`;
+                return `${imgTag} width="${width}"${closing}`;
             }
         }
     );
-
-    // 转换标准图片
+    
+    // 第4步：移除所有剩余的图片标签后的大括号
     newContent = newContent.replace(
-        /!\[(.*?)\]\((.*?)\)/g,
-        (match, alt, src) => {
-            // 检查src是否是http链接
-            if (src.startsWith('http://') || src.startsWith('https://')) {
-                return `<img src="${src}" alt="${alt}" style={{verticalAlign: 'middle'}}/>`;
-            } else {
-                return `<img src="/img/${src}" alt="${alt}" style={{verticalAlign: 'middle'}}/>`;
-            }
-        }
+        /(<img[^>]*?\/?>)\s*\{[^{}]*?\}/g,
+        '$1'
     );
-
-    // 修复已有的图片标签中错误的src路径（移除http链接前的/img/前缀）
+    
+    // 第5步：确保所有图片标签都正确闭合
     newContent = newContent.replace(
-        /<img([^>]*?)src="\/img\/(https?:\/\/[^"]+)"([^>]*?)>/g,
-        '<img$1src="$2"$3>'
+        /<img([^>]*?)>(?!\s*\/)/g,
+        '<img$1/>'
     );
-
-    // 删除<img>标签后的{type="joined"}
+    
+    // 第6步：修复双斜杠闭合问题 - 特殊处理可能出现的多余斜杠
     newContent = newContent.replace(
-        /<img (.*?)\/>\{type="joined"\}/g,
-        '<img $1/>'
+        /<img([^>]*?)\/{2,}>/g,
+        '<img$1/>'
     );
-
-    // 修复格式不正确的alt属性（引号匹配问题）
-    newContent = newContent.replace(
-        /<img([^>]*?)alt="([^"]*?)([^>]*?)>/g,
-        (match, beforeAlt, altValue, afterAlt) => {
-            // 检查afterAlt是否包含另一个引号，这可能表示alt属性被错误地截断
-            if (!afterAlt.includes('"')) {
-                return match; // 如果没有发现问题，保持不变
-            }
-
-            // 尝试重建完整的标签
-            const fullTag = match;
-            const parts = fullTag.split('alt="');
-            if (parts.length < 2) return match;
-
-            const beforeAltPart = parts[0];
-            const afterAltStart = parts[1];
-
-            // 找到第二个引号位置
-            const secondQuotePos = afterAltStart.indexOf('"');
-            if (secondQuotePos < 0) return match;
-
-            // 正确的alt值
-            const correctAltValue = afterAltStart.substring(0, secondQuotePos);
-
-            // 剩余的标签内容
-            const restOfTag = afterAltStart.substring(secondQuotePos + 1);
-
-            // 重建标签
-            return `${beforeAltPart}alt="${correctAltValue}"${restOfTag}`;
-        }
-    );
-
-    // 为已有的没有style属性的img标签添加垂直对齐样式
-    newContent = newContent.replace(
-        /<img\s+([^>]*?)(?:\/?>)/g,
-        (match, attributes) => {
-            // 检查是否已有style属性
-            if (attributes.includes('style=')) {
-                return match; // 如果已有style，保持不变
-            }
-            // 如果img标签末尾是自闭合的
-            if (match.endsWith('/>')) {
-                return match.replace('/>', " style={{verticalAlign: 'middle'}}/>");
-            }
-            // 如果img标签是非自闭合的
-            return match.replace('>', " style={{verticalAlign: 'middle'}}/>");
-        }
-    );
-
+    
     return newContent;
 }
 
@@ -492,29 +1116,37 @@ function convertTabs(content) {
 
         // 转换各种格式的tabs和tab标签
 
-        // 转换<tabs>标签（小写）
-        content = content.replace(/<tabs\s+group="([^"]*)">/g, '<Tabs>');
+        // 转换<tabs>标签（小写）- 带group属性
+        content = content.replace(/<tabs\s+group\s*=\s*["']([^"']*)["']\s*>/g, '<Tabs groupId="$1">');
+        
+        // 转换<tabs>标签（小写）- 不带属性
         content = content.replace(/<tabs>/g, '<Tabs>');
         content = content.replace(/<\/tabs>/g, '</Tabs>');
 
         // 转换已经使用大写的<Tabs>标签但可能有group属性
-        content = content.replace(/<Tabs\s+group="([^"]*)">/g, '<Tabs>');
+        content = content.replace(/<Tabs\s+group\s*=\s*["']([^"']*)["']\s*>/g, '<Tabs groupId="$1">');
 
-        // 转换<tab>标签（小写）- 带group-key
+        // 转换<tab>标签（小写）- 带id, title和group-key三个属性
         content = content.replace(
-            /<tab\s+title="([^"]+)"\s+group-key="([^"]+)">/g,
+            /<tab\s+id\s*=\s*["']([^"']*)["']\s+title\s*=\s*["']([^"']*)["']\s+group-key\s*=\s*["']([^"']*)["']\s*>/g,
+            '<TabItem value="$1" label="$2" default={$3 === "kotlin"}>'
+        );
+
+        // 转换<tab>标签（小写）- 带title和group-key属性
+        content = content.replace(
+            /<tab\s+title\s*=\s*["']([^"']*)["']\s+group-key\s*=\s*["']([^"']*)["']\s*>/g,
             '<TabItem value="$2" label="$1" default={$2 === "kotlin"}>'
         );
 
-        // 转换<tab>标签（小写）- 带id
+        // 转换<tab>标签（小写）- 带id和title
         content = content.replace(
-            /<tab\s+id="([^"]+)"\s+title="([^"]+)">/g,
+            /<tab\s+id\s*=\s*["']([^"']*)["']\s+title\s*=\s*["']([^"']*)["']\s*>/g,
             '<TabItem value="$1" label="$2">'
         );
 
-        // 转换简单的<tab>标签（小写）
+        // 转换简单的<tab>标签（小写）- 只带title
         content = content.replace(
-            /<tab\s+title="([^"]+)">/g,
+            /<tab\s+title\s*=\s*["']([^"']*)["']\s*>/g,
             '<TabItem value="$1" label="$1">'
         );
 
@@ -525,13 +1157,35 @@ function convertTabs(content) {
     return content;
 }
 
-// 步骤8: 移除kotlin-runnable相关标记
+// 步骤8: 移除kotlin-runnable相关标记和其他特殊属性标记
 function removeKotlinRunnable(content) {
     let result = content;
 
-    // 处理带有属性的kotlin-runnable标记
-    // 匹配形如 {kotlin-runnable="true" kotlin-min-compiler-version="1.5" validate="false"} 的标记
-    result = result.replace(/\{kotlin-runnable(?:="[^"]*")?(?:\s+[a-zA-Z-]+="[^"]*")*\}/g, '');
+    // 匹配所有可能的Kotlin代码块标记组合
+    // 这个正则表达式可以匹配任意顺序的属性，只要大括号中包含kotlin-runnable或validate等属性
+    result = result.replace(/\{(?:[a-zA-Z-]+="[^"]*"(?:\s+|))+\}/g, (match) => {
+        // 检查是否是Kotlin相关标记
+        if (match.includes('kotlin-runnable') ||
+            match.includes('kotlin-min-compiler-version') ||
+            match.includes('validate=')) {
+            return ''; // 移除整个标记
+        }
+        // 检查是否是折叠相关标记
+        if (match.includes('initial-collapse-state=') && 
+            match.includes('collapsible=')) {
+            return ''; // 移除整个标记
+        }
+        return match; // 非相关标记保持不变
+    });
+
+    // 移除Markdown链接后面的CSS类大括号，例如{:.typo-float-right.kto-button.kto-button_size_m.kto-button_mode_outline}
+    result = result.replace(/\]\([^)]+\)\{:[.a-zA-Z0-9_-]+\}/g, (match) => {
+        // 提取链接部分，移除CSS类大括号
+        return match.replace(/\{:[.a-zA-Z0-9_-]+\}/, '');
+    });
+
+    // 移除单独一行上的折叠标记
+    result = result.replace(/^\{initial-collapse-state="[^"]*"\s+collapsible="[^"]*"\}\s*$/gm, '');
 
     // 移除单独一行上的{kotlin-runnable...}标记
     result = result.replace(/^\{kotlin-runnable.*?\}\s*$/gm, '');
@@ -586,41 +1240,26 @@ function replaceVariables(content, varsFilePath) {
         return content; // 出错时返回原内容
     }
 }
-
+// convertDeflistToList
 // 步骤10: 将deflist转换为普通列表
-function convertDeflistToList(content) {
-    // 使用正则表达式匹配完整的deflist块
-    return content.replace(
-        /<deflist(?:\s+[^>]*)?>([\s\S]*?)<\/deflist>/g,
-        (match, deflistContent) => {
-            // 提取所有def项
-            const defItems = [];
-            let defRegex = /<def\s+title="([^"]+)">([\s\S]*?)<\/def>/g;
-            let defMatch;
+function convertDeflistToList(htmlContent) {
+  // 移除deflist开始和结束标签
+  let result = htmlContent.replace(/<deflist.*?>/g, '');
+  result = result.replace(/<\/deflist>/g, '');
+  
+  // 将def标签的title属性内容转换为h3标题，保留def中的内容
+  result = result.replace(/<def title="(.*?)".*?>([\s\S]*?)<\/def>/g, (match, title, content) => {
+    return `<h3>${title}</h3>${content}`;
+  });
+  
+    // 处理行首的<td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<h3([^>]*)>/gm, '<h3$2>');
 
-            while ((defMatch = defRegex.exec(deflistContent)) !== null) {
-                const title = defMatch[1];
-                const content = defMatch[2].trim();
-                defItems.push({ title, content });
-            }
+    result = result.replace(/^(\s+)<p([^>]*)>/gm, '<p$2>');
+    // 处理行首的</td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<\/p>/gm, '</p>');
 
-            // 转换为无序列表，不添加样式
-            let result = '<ul>\n';
-
-            defItems.forEach(item => {
-                // 添加列表项和标题，不添加样式
-                result += `  <li>\n`;
-                result += `    <h3>${item.title}</h3>\n`;
-
-                // 添加内容（保留原始HTML）
-                result += `    <div>${item.content}</div>\n`;
-                result += `  </li>\n`;
-            });
-
-            result += '</ul>';
-            return result;
-        }
-    );
+  return result;
 }
 
 // 步骤11: 处理include和snippet标签
@@ -649,6 +1288,124 @@ function convertIncludes(content) {
     result = result.replace(
         /<!--\s*<include(?:[^>]*)>\s*-->/g,
         '{/* Commented out include tag */}'
+    );
+
+    return result;
+}
+
+// 新函数: 清理可能导致MDX编译错误的内容
+function sanitizeMdxContent(content) {
+    let result = content;
+
+    // 修复可能错误的Tab闭合标签
+    result = result.replace(/<\/TabItem>\s*<\/tab>/g, '</TabItem>');
+    result = result.replace(/<\/tab>\s*<\/Tabs>/g, '</TabItem></Tabs>');
+
+    // 处理<code-block>标签，将其转换为Markdown代码块
+    result = result.replace(
+        /<code-block\s+lang="([^"]+)">\s*([\s\S]*?)\s*<\/code-block>/g,
+        (match, language, code) => {
+            // 清理代码中可能导致问题的字符
+            const cleanedCode = code
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .trim();
+            
+            // 转换为Markdown代码块格式
+            return `\`\`\`${language}\n${cleanedCode}\n\`\`\``;
+        }
+    );
+
+    // 处理表格中的{<b>xxx</b>yyy}格式 - 转换为纯文本格式
+    result = result.replace(
+        /\{<b>(.*?)<\/b>(.*?)\}/g,
+        (match, boldPart, normalPart) => {
+            // 将其转换为**加粗部分**普通部分格式
+            return `**${boldPart}**${normalPart}`;
+        }
+    );
+
+    // 处理箭头符号 "->", 将其转换为HTML实体或代码格式
+    result = result.replace(
+        /([^\w`]|^)(->|--&gt;)([^\w`]|$)/g,
+        (match, before, arrow, after) => {
+            return `${before}\`→\`${after}`;
+        }
+    );
+
+    // 处理箭头符号 "<-", 将其转换为HTML实体或代码格式
+    result = result.replace(
+        /([^\w`]|^)(<-|&lt;-)([^\w`]|$)/g,
+        (match, before, arrow, after) => {
+            return `${before}\`←\`${after}`;
+        }
+    );
+
+    // 处理文档中说明的箭头符号含义
+    result = result.replace(
+        /"(->\s*and\s*<-|->|<-)\s*indicate[^"]*"/g,
+        (match) => {
+            return match.replace(/->/g, '→').replace(/<-/g, '←');
+        }
+    );
+
+    // 处理邮箱地址，将其包装在代码块中，防止@符号被解析为JSX
+    result = result.replace(
+        /(<|&lt;)([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(&gt;|>)/g,
+        '`$1$2$3`'
+    );
+
+    // 特别处理列表项中的 <=数字 格式，如 <=1.9.0: 
+    result = result.replace(
+        /([^\w`]|^)(<=)(\d+(?:\.\d+)*)/g,
+        (match, before, operator, version) => {
+            return `${before}&lt;=${version}`;
+        }
+    );
+
+    // 特别处理列表项开头的 * <=数字 格式
+    result = result.replace(
+        /^(\s*[*-]\s+)(<=)(\d+(?:\.\d+)*)/gm,
+        (match, listMarker, operator, version) => {
+            return `${listMarker}&lt;=${version}`;
+        }
+    );
+
+    // 处理<数字这种格式，防止被解析为JSX标签，但不处理已转换的TabItem标签
+    result = result.replace(
+        /([^\w`<]|^)(<)(?!TabItem|\/TabItem)(\d+[^\s>]*)/g,
+        (match, before, openBracket, number) => {
+            return `${before}&lt;${number}`;
+        }
+    );
+
+    // 处理>=符号，防止被解析为JSX标签的一部分
+    result = result.replace(
+        /&gt;=\s*(\d+)/g,
+        '&gt;= $1'
+    );
+
+    // 处理以数字开头的属性或者文本片段
+    result = result.replace(
+        /-\s*&gt;\s*(\d+):/g,
+        '-&gt; $1:'
+    );
+
+    // 处理代码块中可能出现的特殊字符，但保留已有的HTML实体
+    result = result.replace(
+        /```([a-z]*)\n([\s\S]*?)```/g,
+        (match, language, code) => {
+            // 使用一种简单的方法：先替换&lt;和&gt;为临时标记，然后处理<和>，最后恢复临时标记
+            let processedCode = code
+                .replace(/&lt;/g, '###LT###')
+                .replace(/&gt;/g, '###GT###')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/###LT###/g, '&lt;')
+                .replace(/###GT###/g, '&gt;');
+                
+            return '```' + language + '\n' + processedCode + '```';
+        }
     );
 
     return result;
