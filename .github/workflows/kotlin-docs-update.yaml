@@ -144,14 +144,14 @@ jobs:
           echo "文件重组完成"
 
       - name: Update last check timestamps
-        if: success() && steps.prepare-translation.outputs.any_changed == 'true'
+        if: success() && steps.prepare-translation.outputs.kotlin_any_changed == 'true'
         run: |
           # 只有在前面所有步骤都成功时才更新最后检查的提交
           echo "${{ steps.current-commit-kotlin.outputs.current_commit }}" > .github/last_check_kotlin.txt
           echo "已更新检查记录时间戳"
 
       - name: Commit and push changes
-        if: steps.prepare-translation.outputs.any_changed == 'true'
+        if: steps.prepare-translation.outputs.kotlin_any_changed == 'true'
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
