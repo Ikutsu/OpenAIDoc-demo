@@ -10,13 +10,15 @@ const fs = require('fs');
 const path = require('path');
 
 // 获取环境变量中的文件列表
+const repoPath = process.env.REPO_PATH || 'kotlin-repo';
 const changedFiles = process.env.KOTLIN_CHANGED_FILES ? process.env.KOTLIN_CHANGED_FILES.split(' ') : [];
+const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
 // 处理文件
-if (changedFiles.length > 0) {
-  console.log(`开始处理 ${changedFiles.length} 个文件...`);
-  processFiles(changedFiles, varsFilePath);
+if (files.length > 0) {
+  console.log(`开始处理 ${files.length} 个文件...`);
+  processFiles(files, varsFilePath);
 } else {
   console.log('没有检测到需要处理的文件');
 }

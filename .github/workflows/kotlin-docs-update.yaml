@@ -88,6 +88,7 @@ jobs:
         if: steps.prepare-translation.outputs.kotlin_any_changed == 'true'
         env:
           START_PAGE: getting-started.md
+          REPO_PATH: kotlin-repo
         run: |
           # 检查v.list文件是否存在
           if [ -f "kotlin-repo/docs/v.list" ]; then
