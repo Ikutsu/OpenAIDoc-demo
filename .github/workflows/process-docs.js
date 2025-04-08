@@ -148,137 +148,115 @@ function convertFrontmatter(content, inputFile) {
     return newContent;
 }
 
-// 创建一个共享函数来处理所有admonition内容中的">"符号，保留代码块的格式
+// 创建一个共享函数来处理所有admonition内容中的">"符号
 function cleanMarkdownReferences(content) {
-    // 先检查是否包含代码块
-    if (content.includes('```')) {
-        const lines = content.split('\n');
-        let inCodeBlock = false;
-        let cleanedLines = [];
+    let cleanedContent = content;
 
-        for (const line of lines) {
-            if (line.includes('```')) {
-                inCodeBlock = !inCodeBlock;
-                cleanedLines.push(line.replace(/^>[\s]*/, ''));
-            } else if (inCodeBlock) {
-                // 在代码块内，只移除>前缀，保留缩进和空格
-                cleanedLines.push(line.replace(/^>[\s]*/, ''));
-            } else {
-                // 不在代码块内，完全清理>符号
-                cleanedLines.push(line.replace(/^>[\s]*/, ''));
-            }
-        }
+    // 使用更精确的方法替换Markdown引用符号
+    // 1. 单独一行的">"
+    cleanedContent = cleanedContent.replace(/^>$/gm, '');
 
-        return cleanedLines.join('\n');
-    } else {
-        // 对于不包含代码块的内容，使用之前的清理逻辑
-        let cleanedContent = content;
+    // 2. 行首的"> "（带空格）
+    cleanedContent = cleanedContent.replace(/^> /gm, '');
 
-        // 使用更精确的方法替换Markdown引用符号
-        // 1. 单独一行的">"
-        cleanedContent = cleanedContent.replace(/^>$/gm, '');
+    // 3. 行首的">"（不带空格）
+    cleanedContent = cleanedContent.replace(/^>/gm, '');
 
-        // 2. 行首的"> "（带空格）
-        cleanedContent = cleanedContent.replace(/^> /gm, '');
+    // 4. 行中的"\n> "
+    cleanedContent = cleanedContent.replace(/\n> /g, '\n');
 
-        // 3. 行首的">"（不带空格）
-        cleanedContent = cleanedContent.replace(/^>/gm, '');
+    // 5. 行中的"\n>"
+    cleanedContent = cleanedContent.replace(/\n>/g, '\n');
 
-        // 4. 行中的"\n> "
-        cleanedContent = cleanedContent.replace(/\n> /g, '\n');
+    // 6. 行首有缩进空格后跟">"的情况
+    cleanedContent = cleanedContent.replace(/^(\s+)>/gm, '$1');
 
-        // 5. 行中的"\n>"
-        cleanedContent = cleanedContent.replace(/\n>/g, '\n');
+    // 7. 行首有缩进空格后跟"> "的情况
+    cleanedContent = cleanedContent.replace(/^(\s+)> /gm, '$1');
 
-        // 6. 行首有缩进空格后跟">"的情况
-        cleanedContent = cleanedContent.replace(/^(\s+)>/gm, '$1');
+    // 8. 处理换行后缩进空格再跟">"的情况
+    cleanedContent = cleanedContent.replace(/\n(\s+)>/g, '\n$1');
 
-        // 7. 行首有缩进空格后跟"> "的情况
-        cleanedContent = cleanedContent.replace(/^(\s+)> /gm, '$1');
+    // 9. 处理换行后缩进空格再跟"> "的情况
+    cleanedContent = cleanedContent.replace(/\n(\s+)> /g, '\n$1');
 
-        // 8. 处理换行后缩进空格再跟">"的情况
-        cleanedContent = cleanedContent.replace(/\n(\s+)>/g, '\n$1');
-
-        // 9. 处理换行后缩进空格再跟"> "的情况
-        cleanedContent = cleanedContent.replace(/\n(\s+)> /g, '\n$1');
-
-        return cleanedContent;
-    }
+    return cleanedContent;
 }
 
 // 步骤2: 转换提示框
 function convertAdmonitions(content) {
-    let newContent = content;
+    // 使用新的更高效的处理函数替代原有复杂逻辑
+    let newContent = convertAllAdmonitions(content);
 
-    // 1. 处理带有明确样式标记的提示框
-
-    // 处理警告框
+    // 转换tldr为info
     newContent = newContent.replace(
-        /> ([\s\S]*?)\n> \n> \{style="warning"\}/g,
-        (match, p1) => {
+        /<tldr>([\s\S]*?)<\/tldr>/g,
+        ':::info\n$1\n:::'
+    );
+
+    // 转换primary-label
+    newContent = newContent.replace(/<primary-label ref="[^"]*"\/>/g, '');
+
+    // 删除文档中剩余的{style="xxx"}标记
+    newContent = newContent.replace(/\{style="[^"]*"\s*\}/g, '');
+
+    // 处理admonition内部的>符号
+    // 识别所有的admonition块并清理内部格式
+    newContent = newContent.replace(
+        /:::(tip|caution|note|info|warning)([\s\S]*?):::/g,
+        (match, type, content) => {
             // 使用共享函数清理内容
-            const cleanedContent = cleanMarkdownReferences(p1);
-            return `:::caution\n${cleanedContent}\n:::`;
+            const cleanedContent = cleanMarkdownReferences(content);
+            return `:::${type}${cleanedContent}:::`;
         }
     );
 
-    // 处理提示框
-    newContent = newContent.replace(
-        /> ([\s\S]*?)\n> \n> \{style="tip"\}/g,
-        (match, p1) => {
-            // 使用共享函数清理内容
-            const cleanedContent = cleanMarkdownReferences(p1);
-            return `:::tip\n${cleanedContent}\n:::`;
-        }
-    );
+    return newContent;
+}
 
-    // 2. 处理单独一行的style标记
-    // 寻找形如 {style="note"} 的行，将其与前面的内容合并为提示框
-    newContent = newContent.replace(
-        /((?:(?:^|\n)>[\s\S]*?)+)(?:\n\{style="([^"]+)"\})/g,
-        (match, blockContent, style) => {
-            // 确定提示框类型
-            let admonitionType = 'note'; // 默认类型
-            switch (style.toLowerCase()) {
-                case 'tip':
-                    admonitionType = 'tip';
-                    break;
-                case 'warning':
-                    admonitionType = 'caution';
-                    break;
-                case 'note':
-                    admonitionType = 'note';
-                    break;
-                case 'info':
-                    admonitionType = 'info';
-                    break;
-            }
+// 更全面的提示框转换函数 - 高效处理不同类型提示框
+function convertAllAdmonitions(content) {
+    const admonitionTypes = {
+        "note": "note",
+        "tip": "tip",
+        "warning": "caution",
+        "info": "info"
+    };
 
-            // 使用共享函数清理内容，但保留代码块原样
-            const lines = blockContent.split('\n');
-            let inCodeBlock = false;
-            let cleanedLines = [];
+    let result = content;
 
-            for (const line of lines) {
-                if (line.includes('```')) {
-                    inCodeBlock = !inCodeBlock;
-                    cleanedLines.push(line.replace(/^>[\s]*/, ''));
-                } else if (inCodeBlock) {
-                    // 在代码块内，只移除>前缀
-                    cleanedLines.push(line.replace(/^>[\s]*/, ''));
-                } else {
-                    // 不在代码块内，完全清理>符号
-                    cleanedLines.push(line.replace(/^>[\s]*/, ''));
-                }
-            }
+    // 1. 先处理标准格式的 {style="xxx"} 提示框
+    for (const [styleType, docusaurusType] of Object.entries(admonitionTypes)) {
+        // 处理形如 > 内容 {style="note"} 的格式
+        const stylePattern = new RegExp(
+            `((?:^|\\n)>([\\s\\S]*?))\\n\\{style="${styleType}"\\}`,
+            'gm'
+        );
 
-            const cleanedContent = cleanedLines.join('\n');
-            return `:::${admonitionType}\n${cleanedContent}\n:::`;
-        }
-    );
+        result = result.replace(stylePattern, (match, blockContent) => {
+            // 清理>符号
+            const cleanedContent = blockContent
+                .split('\n')
+                .map(line => line.replace(/^>\s?/, ''))
+                .join('\n');
 
-    // 3. 处理以>开头，后面跟着{type = "xxx"}的格式，支持花括号内外有空格
-    newContent = newContent.replace(
+            return `:::${docusaurusType}\n${cleanedContent.trim()}\n:::`;
+        });
+
+        // 处理带换行的格式 > 内容\n> \n> {style="note"}
+        const longStylePattern = new RegExp(
+            `> ([\\s\\S]*?)\\n> \\n> \\{style="${styleType}"\\}`,
+            'g'
+        );
+
+        result = result.replace(longStylePattern, (match, content) => {
+            const cleanedContent = cleanMarkdownReferences(content);
+            return `:::${docusaurusType}\n${cleanedContent}\n:::`;
+        });
+    }
+
+    // 2. 处理带type属性的提示框
+    result = result.replace(
         />([\s\S]*?)(?:\n|$)(?:\n\{\s*type\s*=?\s*["'](\w+)["']\s*\})/g,
         (match, content, type) => {
             // 确定提示框类型
@@ -300,48 +278,13 @@ function convertAdmonitions(content) {
                 }
             }
 
-            // 使用共享函数清理内容
+            // 清理内容
             const cleanedContent = cleanMarkdownReferences(content);
             return `:::${admonitionType}\n${cleanedContent}\n:::`;
         }
     );
 
-    // 4. 处理其他特殊标记
-
-    // 转换tldr为info
-    newContent = newContent.replace(
-        /<tldr>([\s\S]*?)<\/tldr>/g,
-        ':::info\n$1\n:::'
-    );
-
-    // 转换primary-label
-    newContent = newContent.replace(/<primary-label ref="[^"]*"\/>/g, '');
-
-    // 5. 删除文档中剩余的{style="xxx"}标记
-    newContent = newContent.replace(/\{style="[^"]*"\s*\}/g, '');
-
-    // 6. 特殊处理：检测并修复错误分割的代码块
-    // 这段代码会检查是否有以:::开头后面紧跟着代码块的情况，并修复它们
-    newContent = newContent.replace(
-        /:::(tip|caution|note|info|warning)\n([\s\S]*?)(?=:::)(?=[\s\S]*?```)/g,
-        (match, type, content) => {
-            // 检查是否包含未闭合的代码块
-            if ((content.match(/```/g) || []).length % 2 !== 0) {
-                // 如果内容中有奇数个```标记，说明代码块被分割了
-                // 尝试重新合并内容
-                const nextPart = newContent.substring(newContent.indexOf(match) + match.length);
-                const codeBlockEnd = nextPart.indexOf('```');
-                if (codeBlockEnd !== -1) {
-                    // 找到代码块结束位置，将其包含在当前admonition中
-                    const codeBlockContent = nextPart.substring(0, codeBlockEnd + 3);
-                    return `:::${type}\n${content}${codeBlockContent}`;
-                }
-            }
-            return match;
-        }
-    );
-
-    return newContent;
+    return result;
 }
 
 // 步骤6: 格式化HTML标签
@@ -409,35 +352,29 @@ function convertImages(content) {
     newContent = newContent.replace(
             /!\[(.*?)\]\((.*?)\)(\{.*?\})?/g,
             (match, alt, src, attrs) => {
-                console.log(`处理图片: alt=${alt}, src=${src}, attrs=${attrs || '无属性'}`);
-
                 // 构建基本图片标签
                 let imgTag = `<img src="${src.startsWith('http') ? src : `/img/${src}`}" alt="${alt}"`;
             
-            // 解析可能存在的属性
-            if (attrs) {
-                // 处理width属性
-                const widthMatch = attrs.match(/width=["']?(\d+)["']?/);
-                if (widthMatch && widthMatch[1]) {
-                    console.log(`找到宽度属性: ${widthMatch[1]}`);
-                    imgTag += ` width="${widthMatch[1]}"`;
+                // 解析可能存在的属性
+                if (attrs) {
+                    // 处理width属性
+                    const widthMatch = attrs.match(/width=["']?(\d+)["']?/);
+                    if (widthMatch && widthMatch[1]) {
+                        imgTag += ` width="${widthMatch[1]}"`;
+                    }
                 }
+                
+                // 添加默认样式和关闭标签
+                imgTag += ` style={{verticalAlign: 'middle'}}/>`;
+                
+                return imgTag;
             }
-            
-            // 添加默认样式和关闭标签
-            imgTag += ` style={{verticalAlign: 'middle'}}/>`;
-            console.log(`生成的图片标签: ${imgTag}`);
-            
-            return imgTag;
-        }
     );
     
     // 第2步：处理HTML图片标签后的大括号属性 - 处理形如 width="350" 的格式
     newContent = newContent.replace(
         /(<img[^>]*?)(\/?>)\s*\{([^{}]*?)width=["']?(\d+)["']?([^{}]*?)\}/g,
         (match, imgTag, closing, attrsBefore, width, attrsAfter) => {
-            console.log(`处理图片标签后的大括号属性(引号格式): ${match}`);
-            
             // 检查图片标签是否已有width属性
             if (imgTag.includes('width=')) {
                 return `${imgTag}${closing}`;
@@ -451,8 +388,6 @@ function convertImages(content) {
     newContent = newContent.replace(
         /(<img[^>]*?)(\/?>)\s*\{([^{}]*?)width=(\d+)([^{}]*?)\}/g,
         (match, imgTag, closing, attrsBefore, width, attrsAfter) => {
-            console.log(`处理图片标签后的大括号属性(无引号格式): ${match}`);
-            
             // 检查图片标签是否已有width属性
             if (imgTag.includes('width=')) {
                 return `${imgTag}${closing}`;
