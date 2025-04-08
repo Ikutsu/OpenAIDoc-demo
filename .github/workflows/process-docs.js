@@ -82,6 +82,9 @@ function processFile(filePath, varsFilePath) {
         transformedContent = replaceVariables(transformedContent, varsFilePath); // 步骤10
     }
 
+    // 在处理文件后添加这一步
+    transformedContent = decodeHtmlEntitiesInTables(transformedContent);
+
     // 直接写回原文件
     fs.writeFileSync(filePath, transformedContent, 'utf8');
     console.log(`已处理文件: ${filePath}`);
@@ -899,4 +902,19 @@ function restoreReactComponents(content) {
     });
     
     return result;
+}
+
+// 添加一个函数处理HTML表格中的实体编码
+function decodeHtmlEntitiesInTables(content) {
+  // 查找表格内容
+  return content.replace(
+    /(<table>[\s\S]*?<\/table>)/g, 
+    function(match) {
+      // 将HTML实体解码回原始HTML标签
+      return match
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+    }
+  );
 }
