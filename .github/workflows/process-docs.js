@@ -79,34 +79,30 @@ function processFile(filePath, varsFilePath) {
 
 // 步骤1: 转换Frontmatter
 function convertFrontmatter(content, inputFile) {
-    // 从注释中提取标题
-    const titleMatch = content.match(/\[\/\/\]: # \(title: (.*?)\)/);
-    const title = titleMatch ? titleMatch[1] : path.basename(inputFile, path.extname(inputFile));
+    // 从注释中提取标题 - 使用更精确的模式匹配
+    // 这个正则表达式使用非贪婪模式并避免在括号内部提前终止
+    const titleMatch = content.match(/\[\/\/\]: # \(title: ([\s\S]*?)\)(?:\n|$)/);
+    const title = titleMatch ? titleMatch[1].trim() : path.basename(inputFile, path.extname(inputFile));
 
-    // 从注释中提取描述
-    const descriptionMatch = content.match(/\[\/\/\]: # \(description: (.*?)\)/);
-    const description = descriptionMatch ? descriptionMatch[1] : '';
+    // 从注释中提取描述 - 使用更精确的模式匹配
+    const descriptionMatch = content.match(/\[\/\/\]: # \(description: ([\s\S]*?)\)(?:\n|$)/);
+    const description = descriptionMatch ? descriptionMatch[1].trim() : '';
 
     // 处理标题中的转义字符
     let processedTitle = title;
     if (processedTitle) {
-        // 解析转义序列，如\(变为(, \)变为)等
+        // 解析转义序列，如\(变为(, \)变为), \"变为"等
         processedTitle = processedTitle.replace(/\\(.)/g, '$1');
 
-        // 移除所有Markdown转义符号后的字符串
         console.log(`处理标题: "${title}" -> "${processedTitle}"`);
     }
 
-    // 移除原始的标题注释
-    let newContent = content.replace(/\[\/\/\]: # \(title: .*?\)\n/, '');
+    // 移除原始的标题注释 - 使用更精确的模式匹配
+    let newContent = content.replace(/\[\/\/\]: # \(title: [\s\S]*?\)(?:\n|$)/, '');
 
-    // 移除原始的描述注释
-    newContent = newContent.replace(/\[\/\/\]: # \(description: .*?\)\n/, '');
+    // 移除原始的描述注释 - 使用更精确的模式匹配
+    newContent = newContent.replace(/\[\/\/\]: # \(description: [\s\S]*?\)(?:\n|$)/, '');
 
-    // 检查标题是否包含特殊字符（冒号、逗号、问号等）
-    const hasSpecialChars = /[:!?#,[\]{}|><%@()]/.test(processedTitle);
-    // 格式化标题，如果包含特殊字符，则用双引号括起来
-    const formattedTitle = hasSpecialChars ? `"${processedTitle}"` : processedTitle;
 
     // 获取START_PAGE环境变量，默认为getting-started.md
     const startPage = process.env.START_PAGE || 'getting-started.md';
@@ -117,14 +113,14 @@ function convertFrontmatter(content, inputFile) {
     // 添加Docusaurus frontmatter，包括描述（如果有）
     if (isStartPage) {
         console.log(`为起始页 ${inputFile} 添加slug: /属性`);
-        let frontmatter = `---\ntitle: ${formattedTitle}\nslug: /\n`;
+        let frontmatter = `---\ntitle: ${processedTitle}\nslug: /\n`;
         if (description) {
             frontmatter += `description: ${description}\n`;
         }
         frontmatter += `---\n\n`;
         newContent = frontmatter + newContent;
     } else {
-        let frontmatter = `---\ntitle: ${formattedTitle}\n`;
+        let frontmatter = `---\ntitle: ${processedTitle}\n`;
         if (description) {
             frontmatter += `description: ${description}\n`;
         }
@@ -134,6 +130,7 @@ function convertFrontmatter(content, inputFile) {
 
     return newContent;
 }
+
 
 // 创建一个共享函数来处理所有admonition内容中的">"符号
 function cleanMarkdownReferences(content) {
@@ -397,10 +394,40 @@ function convertImages(content) {
         '<img $1/>'
     );
 
-    // 修复不规范的style属性值
+    // 修复不规范的style属性值 - 修复这个正则表达式，确保完整匹配style属性
     newContent = newContent.replace(
-        /style="block"/g,
-        'style={{display: "block"}}'
+        /<img([^>]*?)style="([^"]*?)"([^>]*?)>/g,
+        (match, before, styleValue, after) => {
+            // 如果style已经是JSX格式，不处理
+            if (styleValue.includes('{{') && styleValue.includes('}}')) {
+                return match;
+            }
+            return `<img${before}style={{verticalAlign: 'middle'}}${after}>`;
+        }
+    );
+
+    // 修复错误的JSX style格式
+    newContent = newContent.replace(
+        /<img([^>]*?)([^s][^t][^y][^l][^e][^\s]*){{verticalAlign: 'middle'}}([^>]*?)>/g,
+        '<img$1 style={{verticalAlign: \'middle\'}}$3>'
+    );
+
+    // 修复style属性中错误的引号使用
+    newContent = newContent.replace(
+        /<img([^>]*?)\s+\'([^\']*?)\'}}\/>/g,
+        '<img$1 style={{verticalAlign: \'middle\'}}\/>'
+    );
+
+    // 修复缺少style=的情况
+    newContent = newContent.replace(
+        /<img([^>]*?)\s+\{\{([^}]*?)\}\}([^>]*?)>/g,
+        (match, before, styleContent, after) => {
+            // 如果before或after已经包含style=，则不添加
+            if (before.includes('style=') || after.includes('style=')) {
+                return match;
+            }
+            return `<img${before} style={{${styleContent}}}${after}>`;
+        }
     );
 
     // 为已有的没有style属性的img标签添加垂直对齐样式
