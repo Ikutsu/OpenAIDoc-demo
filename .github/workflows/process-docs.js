@@ -59,13 +59,13 @@ function processFile(filePath, varsFilePath) {
     let transformedContent = content;
     transformedContent = convertFrontmatter(transformedContent, filePath); // 步骤1
     transformedContent = convertAdmonitions(transformedContent); // 步骤2
-    transformedContent = convertImages(transformedContent); // 步骤3
     transformedContent = convertVideos(transformedContent); // 步骤4
     transformedContent = convertDeflistToList(transformedContent); // 步骤5
     transformedContent = convertIncludes(transformedContent); // 步骤6 - 处理include和snippet标签
     transformedContent = convertTabs(transformedContent); // 步骤7
     transformedContent = removeKotlinRunnable(transformedContent); // 步骤8
     transformedContent = formatHtmlTags(transformedContent); // 步骤9
+    transformedContent = convertImages(transformedContent); // 步骤3
 
     // 如果提供了变量文件，应用变量替换
     if (varsFilePath && fs.existsSync(varsFilePath)) {
@@ -103,6 +103,10 @@ function convertFrontmatter(content, inputFile) {
     // 移除原始的描述注释 - 使用更精确的模式匹配
     newContent = newContent.replace(/\[\/\/\]: # \(description: [\s\S]*?\)(?:\n|$)/, '');
 
+    // 检查标题是否包含特殊字符（冒号、逗号、问号等）
+    const hasSpecialChars = /[:!?#,[\]{}|><%@()]/.test(processedTitle);
+    // 格式化标题，如果包含特殊字符，则用双引号括起来
+    const formattedTitle = hasSpecialChars ? `"${processedTitle}"` : processedTitle;
 
     // 获取START_PAGE环境变量，默认为getting-started.md
     const startPage = process.env.START_PAGE || 'getting-started.md';
@@ -113,14 +117,14 @@ function convertFrontmatter(content, inputFile) {
     // 添加Docusaurus frontmatter，包括描述（如果有）
     if (isStartPage) {
         console.log(`为起始页 ${inputFile} 添加slug: /属性`);
-        let frontmatter = `---\ntitle: ${processedTitle}\nslug: /\n`;
+        let frontmatter = `---\ntitle: ${formattedTitle}\nslug: /\n`;
         if (description) {
             frontmatter += `description: ${description}\n`;
         }
         frontmatter += `---\n\n`;
         newContent = frontmatter + newContent;
     } else {
-        let frontmatter = `---\ntitle: ${processedTitle}\n`;
+        let frontmatter = `---\ntitle: ${formattedTitle}\n`;
         if (description) {
             frontmatter += `description: ${description}\n`;
         }
@@ -394,39 +398,35 @@ function convertImages(content) {
         '<img $1/>'
     );
 
-    // 修复不规范的style属性值 - 修复这个正则表达式，确保完整匹配style属性
+    // 修复格式不正确的alt属性（引号匹配问题）
     newContent = newContent.replace(
-        /<img([^>]*?)style="([^"]*?)"([^>]*?)>/g,
-        (match, before, styleValue, after) => {
-            // 如果style已经是JSX格式，不处理
-            if (styleValue.includes('{{') && styleValue.includes('}}')) {
-                return match;
+        /<img([^>]*?)alt="([^"]*?)([^>]*?)>/g,
+        (match, beforeAlt, altValue, afterAlt) => {
+            // 检查afterAlt是否包含另一个引号，这可能表示alt属性被错误地截断
+            if (!afterAlt.includes('"')) {
+                return match; // 如果没有发现问题，保持不变
             }
-            return `<img${before}style={{verticalAlign: 'middle'}}${after}>`;
-        }
-    );
 
-    // 修复错误的JSX style格式
-    newContent = newContent.replace(
-        /<img([^>]*?)([^s][^t][^y][^l][^e][^\s]*){{verticalAlign: 'middle'}}([^>]*?)>/g,
-        '<img$1 style={{verticalAlign: \'middle\'}}$3>'
-    );
+            // 尝试重建完整的标签
+            const fullTag = match;
+            const parts = fullTag.split('alt="');
+            if (parts.length < 2) return match;
 
-    // 修复style属性中错误的引号使用
-    newContent = newContent.replace(
-        /<img([^>]*?)\s+\'([^\']*?)\'}}\/>/g,
-        '<img$1 style={{verticalAlign: \'middle\'}}\/>'
-    );
+            const beforeAltPart = parts[0];
+            const afterAltStart = parts[1];
 
-    // 修复缺少style=的情况
-    newContent = newContent.replace(
-        /<img([^>]*?)\s+\{\{([^}]*?)\}\}([^>]*?)>/g,
-        (match, before, styleContent, after) => {
-            // 如果before或after已经包含style=，则不添加
-            if (before.includes('style=') || after.includes('style=')) {
-                return match;
-            }
-            return `<img${before} style={{${styleContent}}}${after}>`;
+            // 找到第二个引号位置
+            const secondQuotePos = afterAltStart.indexOf('"');
+            if (secondQuotePos < 0) return match;
+
+            // 正确的alt值
+            const correctAltValue = afterAltStart.substring(0, secondQuotePos);
+
+            // 剩余的标签内容
+            const restOfTag = afterAltStart.substring(secondQuotePos + 1);
+
+            // 重建标签
+            return `${beforeAltPart}alt="${correctAltValue}"${restOfTag}`;
         }
     );
 
