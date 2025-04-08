@@ -15,7 +15,75 @@ const changedFiles = process.env.KOTLIN_CHANGED_FILES ? process.env.KOTLIN_CHANG
 const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
+const text = `<table>
+   <tr>
+       <td>Kotlin 1.9.0 and earlier (a standard setup)</td>
+       <td>Kotlin 1.9.20</td>
+   </tr>
+   <tr>
+<td>
 
+\`\`\`kotlin
+kotlin {
+    androidTarget()
+    iosArm64()
+    iosSimulatorArm64()
+
+    sourceSets {
+        val commonMain by getting
+
+        val iosMain by creating {
+            dependsOn(commonMain)
+        }
+
+        val iosArm64Main by getting {
+            dependsOn(iosMain)
+        }
+
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+    }
+}
+\`\`\`
+
+</td>
+<td>
+
+\`\`\`kotlin
+kotlin {
+    androidTarget()
+    iosArm64()
+    iosSimulatorArm64()
+
+    // The iosMain source set is created automatically
+}
+\`\`\`
+
+</td>
+</tr>
+</table>`;
+// 首先处理HTML注释，保护它们不被其他转换修改
+let a = protectHtmlComments(text);
+
+// 应用所有转换
+a = convertFrontmatter(a, 'a.md'); // 步骤1
+a = convertAdmonitions(a); // 步骤2
+a = convertDeflistToList(a); // 步骤5
+a = convertIncludes(a); // 步骤6 - 处理include和snippet标签
+a = convertTabs(a); // 步骤7
+a = removeKotlinRunnable(a); // 步骤8
+a = formatHtmlTags(a); // 步骤9
+a = convertImages(a); // 步骤3 - 图片处理
+a = convertVideos(a); // 步骤4 - 视频处理
+
+// 最后，清理可能导致MDX编译错误的内容
+a = sanitizeMdxContent(a);
+
+// 恢复被保护的HTML注释
+a = restoreHtmlComments(a);
+
+console.log(a);
 
 // 处理文件
 if (files.length > 0) {
@@ -348,10 +416,13 @@ function formatHtmlTags(content) {
     result = result.replace(/^(\s+)<ul>/gm, '<ul>');
 
     // 处理行首的<td>标签，去除缩进空格
-    result = result.replace(/^(\s+)<td([^>]*)>/gm, '<td$2>');
+    result = result.replace(/^(\s+)<td([^>]*)>/gm, '<td$2>\n');
 
     // 处理行首的</td>标签，去除缩进空格
     result = result.replace(/^(\s+)<\/td>/gm, '</td>');
+
+    // 处理行尾的</td>标签，在前面添加换行
+    result = result.replace(/([^\s])<\/td>/g, "$1\n</td>");
 
     // 处理行首的<td>标签，去除缩进空格
     result = result.replace(/^(\s+)<tr([^>]*)>/gm, '<tr$2>');
@@ -360,10 +431,13 @@ function formatHtmlTags(content) {
     result = result.replace(/^(\s+)<\/tr>/gm, '</tr>');
 
     // 处理行首的<td>标签，去除缩进空格
-    result = result.replace(/^(\s+)<table([^>]*)>/gm, '<tr$2>');
+    result = result.replace(/^(\s+)<table([^>]*)>/gm, '<table$2>');
 
     // 处理行首的</td>标签，去除缩进空格
-    result = result.replace(/^(\s+)<\/table>/gm, '</tr>');
+    result = result.replace(/^(\s+)<\/table>/gm, '</table>');
+
+    // 处理行首的</td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<\/p>/gm, '</p>');
 
     return result;
 }
@@ -828,6 +902,15 @@ function sanitizeMdxContent(content) {
     result = result.replace(/default=\{([^}]*?) === &quot;([^}]*?)&quot;\}/g, 'default={$1 === "$2"}');
     result = result.replace(/default=\{([^}]*?) === &#39;([^}]*?)&#39;\}/g, 'default={$1 === \'$2\'}');
 
+    // 处理混合形式的表格标签（开始标签是HTML形式，结束标签是实体形式，或反之）
+    result = result.replace(/<tr>[\s\S]*?&lt;\/tr&gt;/g, function(match) {
+        return match.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    });
+
+    result = result.replace(/&lt;tr&gt;[\s\S]*?<\/tr>/g, function(match) {
+        return match.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    });
+
     return result;
 }
 
@@ -918,15 +1001,27 @@ function restoreReactComponents(content) {
 
 // 添加一个函数处理HTML表格中的实体编码
 function decodeHtmlEntitiesInTables(content) {
-  // 查找表格内容
-  return content.replace(
-    /(<table>[\s\S]*?<\/table>)/g, 
+  // 先处理整个文档中以&lt;table&gt;开头的表格（完全是实体形式的表格）
+  let result = content.replace(
+    /&lt;table&gt;[\s\S]*?&lt;\/table&gt;/g,
     function(match) {
-      // 将HTML实体解码回原始HTML标签
       return match
         .replace(/&lt;/g, '<')
         .replace(/&gt;/g, '>')
         .replace(/&amp;/g, '&');
     }
   );
+  
+  // 再处理已经是HTML形式的表格
+  result = result.replace(
+    /(<table>[\s\S]*?<\/table>)/g, 
+    function(match) {
+      return match
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+    }
+  );
+  
+  return result;
 }
