@@ -353,6 +353,18 @@ function formatHtmlTags(content) {
     // 处理行首的</td>标签，去除缩进空格
     result = result.replace(/^(\s+)<\/td>/gm, '</td>');
 
+    // 处理行首的<td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<tr([^>]*)>/gm, '<tr$2>');
+
+    // 处理行首的</td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<\/tr>/gm, '</tr>');
+
+    // 处理行首的<td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<table([^>]*)>/gm, '<tr$2>');
+
+    // 处理行首的</td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<\/table>/gm, '</tr>');
+
     return result;
 }
 
