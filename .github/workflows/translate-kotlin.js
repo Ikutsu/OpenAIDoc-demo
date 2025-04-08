@@ -10,6 +10,7 @@ const path = require('path');
 const baseDir = process.env.BASE_DIR || './kotlin';
 const repoPath = process.env.REPO_PATH || 'kotlin-repo';
 const changedFiles = process.env.CHANGED_FILES ? process.env.CHANGED_FILES.split(' ') : [];
+const files = changedFiles.map(file => path.join(repoPath, file));
 
 console.log(`基础目录: ${baseDir}`);
 console.log(`仓库路径: ${repoPath}`);
@@ -46,7 +47,7 @@ function processChangedFiles() {
   let processed = 0;
   let skipped = 0;
   
-  changedFiles.forEach(filePath => {
+  files.forEach(filePath => {
     if (!filePath || !filePath.trim()) {
       skipped++;
       return;
