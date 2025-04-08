@@ -15,54 +15,16 @@ const changedFiles = process.env.KOTLIN_CHANGED_FILES ? process.env.KOTLIN_CHANG
 const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
-const text = `<table>
-   <tr>
-       <td>Kotlin 1.9.0 and earlier (a standard setup)</td>
-       <td>Kotlin 1.9.20</td>
-   </tr>
-   <tr>
-<td>
-
-\`\`\`kotlin
-kotlin {
-    androidTarget()
-    iosArm64()
-    iosSimulatorArm64()
-
-    sourceSets {
-        val commonMain by getting
-
-        val iosMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val iosArm64Main by getting {
-            dependsOn(iosMain)
-        }
-
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
-        }
-    }
-}
-\`\`\`
-
-</td>
-<td>
-
-\`\`\`kotlin
-kotlin {
-    androidTarget()
-    iosArm64()
-    iosSimulatorArm64()
-
-    // The iosMain source set is created automatically
-}
-\`\`\`
-
-</td>
-</tr>
-</table>`;
+const text = `
+> On the JVM, if the object is an instance of a functional Java interface (that means a Java interface with a single 
+> abstract method), you can create it using a lambda expression prefixed with the type of the interface:
+>
+>\`\`\`kotlin
+> val listener = ActionListener { println("clicked") }
+> \`\`\`
+>
+{style="note"}
+`;
 // 首先处理HTML注释，保护它们不被其他转换修改
 let a = protectHtmlComments(text);
 
@@ -216,40 +178,62 @@ function convertFrontmatter(content, inputFile) {
     return newContent;
 }
 
-
-// 创建一个共享函数来处理所有admonition内容中的">"符号
+// 创建一个共享函数来处理所有admonition内容中的">"符号，保留代码块的格式
 function cleanMarkdownReferences(content) {
-    let cleanedContent = content;
+    // 先检查是否包含代码块
+    if (content.includes('```')) {
+        const lines = content.split('\n');
+        let inCodeBlock = false;
+        let cleanedLines = [];
 
-    // 使用更精确的方法替换Markdown引用符号
-    // 1. 单独一行的">"
-    cleanedContent = cleanedContent.replace(/^>$/gm, '');
+        for (const line of lines) {
+            if (line.includes('```')) {
+                inCodeBlock = !inCodeBlock;
+                cleanedLines.push(line.replace(/^>[\s]*/, ''));
+            } else if (inCodeBlock) {
+                // 在代码块内，只移除>前缀，保留缩进和空格
+                cleanedLines.push(line.replace(/^>[\s]*/, ''));
+            } else {
+                // 不在代码块内，完全清理>符号
+                cleanedLines.push(line.replace(/^>[\s]*/, ''));
+            }
+        }
 
-    // 2. 行首的"> "（带空格）
-    cleanedContent = cleanedContent.replace(/^> /gm, '');
+        return cleanedLines.join('\n');
+    } else {
+        // 对于不包含代码块的内容，使用之前的清理逻辑
+        let cleanedContent = content;
 
-    // 3. 行首的">"（不带空格）
-    cleanedContent = cleanedContent.replace(/^>/gm, '');
+        // 使用更精确的方法替换Markdown引用符号
+        // 1. 单独一行的">"
+        cleanedContent = cleanedContent.replace(/^>$/gm, '');
 
-    // 4. 行中的"\n> "
-    cleanedContent = cleanedContent.replace(/\n> /g, '\n');
+        // 2. 行首的"> "（带空格）
+        cleanedContent = cleanedContent.replace(/^> /gm, '');
 
-    // 5. 行中的"\n>"
-    cleanedContent = cleanedContent.replace(/\n>/g, '\n');
+        // 3. 行首的">"（不带空格）
+        cleanedContent = cleanedContent.replace(/^>/gm, '');
 
-    // 6. 行首有缩进空格后跟">"的情况
-    cleanedContent = cleanedContent.replace(/^(\s+)>/gm, '$1');
+        // 4. 行中的"\n> "
+        cleanedContent = cleanedContent.replace(/\n> /g, '\n');
 
-    // 7. 行首有缩进空格后跟"> "的情况
-    cleanedContent = cleanedContent.replace(/^(\s+)> /gm, '$1');
+        // 5. 行中的"\n>"
+        cleanedContent = cleanedContent.replace(/\n>/g, '\n');
 
-    // 8. 处理换行后缩进空格再跟">"的情况
-    cleanedContent = cleanedContent.replace(/\n(\s+)>/g, '\n$1');
+        // 6. 行首有缩进空格后跟">"的情况
+        cleanedContent = cleanedContent.replace(/^(\s+)>/gm, '$1');
 
-    // 9. 处理换行后缩进空格再跟"> "的情况
-    cleanedContent = cleanedContent.replace(/\n(\s+)> /g, '\n$1');
+        // 7. 行首有缩进空格后跟"> "的情况
+        cleanedContent = cleanedContent.replace(/^(\s+)> /gm, '$1');
 
-    return cleanedContent;
+        // 8. 处理换行后缩进空格再跟">"的情况
+        cleanedContent = cleanedContent.replace(/\n(\s+)>/g, '\n$1');
+
+        // 9. 处理换行后缩进空格再跟"> "的情况
+        cleanedContent = cleanedContent.replace(/\n(\s+)> /g, '\n$1');
+
+        return cleanedContent;
+    }
 }
 
 // 步骤2: 转换提示框
@@ -258,37 +242,108 @@ function convertAdmonitions(content) {
 
     // 1. 处理带有明确样式标记的提示框
 
-    // 处理警告框
+    // 处理以>开头，后面跟着{style="xxx"}的格式
     newContent = newContent.replace(
-        /> ([\s\S]*?)\n> \n> \{style="warning"\}/g,
-        (match, p1) => {
+        /(?:^|\n)((?:>\s*.*\n)+)>\s*\n>\s*\{style="([^"]+)"\}/gm,
+        (match, blockContent, style) => {
+            // 确定提示框类型
+            let admonitionType = 'note'; // 默认类型
+            switch (style.toLowerCase()) {
+                case 'tip':
+                    admonitionType = 'tip';
+                    break;
+                case 'warning':
+                    admonitionType = 'caution';
+                    break;
+                case 'note':
+                    admonitionType = 'note';
+                    break;
+                case 'info':
+                    admonitionType = 'info';
+                    break;
+            }
+
             // 使用共享函数清理内容
-            const cleanedContent = cleanMarkdownReferences(p1);
-            return `:::caution\n${cleanedContent}\n:::`;
+            const cleanedContent = cleanMarkdownReferences(blockContent);
+            return `:::${admonitionType}\n${cleanedContent}\n:::`;
         }
     );
 
-    // 处理提示框
+    // 2. 处理单独一行的style标记
+    // 寻找形如 {style="note"} 的行，将其与前面的内容合并为提示框
     newContent = newContent.replace(
-        /> ([\s\S]*?)\n> \n> \{style="tip"\}/g,
-        (match, p1) => {
-            // 使用共享函数清理内容
-            const cleanedContent = cleanMarkdownReferences(p1);
-            return `:::tip\n${cleanedContent}\n:::`;
+        /((?:(?:^|\n)>[\s\S]*?)+)(?:\n\{style="([^"]+)"\})/g,
+        (match, blockContent, style) => {
+            // 确定提示框类型
+            let admonitionType = 'note'; // 默认类型
+            switch (style.toLowerCase()) {
+                case 'tip':
+                    admonitionType = 'tip';
+                    break;
+                case 'warning':
+                    admonitionType = 'caution';
+                    break;
+                case 'note':
+                    admonitionType = 'note';
+                    break;
+                case 'info':
+                    admonitionType = 'info';
+                    break;
+            }
+
+            // 使用共享函数清理内容，但保留代码块原样
+            const lines = blockContent.split('\n');
+            let inCodeBlock = false;
+            let cleanedLines = [];
+
+            for (const line of lines) {
+                if (line.includes('```')) {
+                    inCodeBlock = !inCodeBlock;
+                    cleanedLines.push(line.replace(/^>[\s]*/, ''));
+                } else if (inCodeBlock) {
+                    // 在代码块内，只移除>前缀
+                    cleanedLines.push(line.replace(/^>[\s]*/, ''));
+                } else {
+                    // 不在代码块内，完全清理>符号
+                    cleanedLines.push(line.replace(/^>[\s]*/, ''));
+                }
+            }
+
+            const cleanedContent = cleanedLines.join('\n');
+            return `:::${admonitionType}\n${cleanedContent}\n:::`;
         }
     );
 
-    // 处理注意框
+    // 3. 处理以>开头，后面跟着{type = "xxx"}的格式，支持花括号内外有空格
     newContent = newContent.replace(
-        /> ([\s\S]*?)\n> \n> \{style="note"\}/g,
-        (match, p1) => {
+        />([\s\S]*?)(?:\n|$)(?:\n\{\s*type\s*=?\s*["'](\w+)["']\s*\})/g,
+        (match, content, type) => {
+            // 确定提示框类型
+            let admonitionType = 'note'; // 默认类型
+            if (type) {
+                switch (type.toLowerCase()) {
+                    case 'tip':
+                        admonitionType = 'tip';
+                        break;
+                    case 'warning':
+                        admonitionType = 'caution';
+                        break;
+                    case 'note':
+                        admonitionType = 'note';
+                        break;
+                    case 'info':
+                        admonitionType = 'info';
+                        break;
+                }
+            }
+
             // 使用共享函数清理内容
-            const cleanedContent = cleanMarkdownReferences(p1);
-            return `:::note\n${cleanedContent}\n:::`;
+            const cleanedContent = cleanMarkdownReferences(content);
+            return `:::${admonitionType}\n${cleanedContent}\n:::`;
         }
     );
 
-    // 2. 处理其他特殊标记
+    // 4. 处理其他特殊标记
 
     // 转换tldr为info
     newContent = newContent.replace(
@@ -299,94 +354,31 @@ function convertAdmonitions(content) {
     // 转换primary-label
     newContent = newContent.replace(/<primary-label ref="[^"]*"\/>/g, '');
 
-    // 3. 删除文档中剩余的{style="xxx"}标记
-    newContent = newContent.replace(/\{style="[^"]*"\}/g, '');
+    // 5. 删除文档中剩余的{style="xxx"}标记
+    newContent = newContent.replace(/\{style="[^"]*"\s*\}/g, '');
 
-    // 4. 处理admonition内部的>符号
-    // 首先识别所有的admonition块
+    // 6. 特殊处理：检测并修复错误分割的代码块
+    // 这段代码会检查是否有以:::开头后面紧跟着代码块的情况，并修复它们
     newContent = newContent.replace(
-        /:::(tip|caution|note|info|warning)([\s\S]*?):::/g,
+        /:::(tip|caution|note|info|warning)\n([\s\S]*?)(?=:::)(?=[\s\S]*?```)/g,
         (match, type, content) => {
-            // 使用共享函数清理内容
-            const cleanedContent = cleanMarkdownReferences(content);
-            return `:::${type}${cleanedContent}:::`;
-        }
-    );
-
-    // 5. 处理没有明确样式标记的独立提示框
-    // 这种方法更简单直接：通过行分割，识别以>开头的块
-    const lines = newContent.split('\n');
-    const processedLines = [];
-    let inBlockquote = false;
-    let blockquoteContent = [];
-
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-
-        // 检查是否是以>开头的行
-        if (line.trim().startsWith('> ')) {
-            if (!inBlockquote) {
-                inBlockquote = true;
-            }
-            // 收集内容，去掉>前缀
-            blockquoteContent.push(line.replace(/^> /, ''));
-        }
-        // 空的>行，跳过但继续收集
-        else if (line.trim() === '>') {
-            if (inBlockquote) {
-                blockquoteContent.push('');
-            }
-        }
-        // 如果是其他行，结束当前引用块
-        else {
-            if (inBlockquote) {
-                // 只有当blockquoteContent不为空，且不在admonition内才转换
-                const content = blockquoteContent.join('\n');
-                if (content.trim() && !content.includes(':::')) {
-                    processedLines.push(':::tip');
-                    processedLines.push(...blockquoteContent);
-                    processedLines.push(':::');
-                } else {
-                    // 否则保持原样
-                    processedLines.push(...blockquoteContent.map(l => `> ${l}`));
+            // 检查是否包含未闭合的代码块
+            if ((content.match(/```/g) || []).length % 2 !== 0) {
+                // 如果内容中有奇数个```标记，说明代码块被分割了
+                // 尝试重新合并内容
+                const nextPart = newContent.substring(newContent.indexOf(match) + match.length);
+                const codeBlockEnd = nextPart.indexOf('```');
+                if (codeBlockEnd !== -1) {
+                    // 找到代码块结束位置，将其包含在当前admonition中
+                    const codeBlockContent = nextPart.substring(0, codeBlockEnd + 3);
+                    return `:::${type}\n${content}${codeBlockContent}`;
                 }
-
-                inBlockquote = false;
-                blockquoteContent = [];
             }
-
-            processedLines.push(line);
-        }
-    }
-
-    // 处理文件末尾可能的引用块
-    if (inBlockquote && blockquoteContent.length > 0) {
-        const content = blockquoteContent.join('\n');
-        if (content.trim() && !content.includes(':::')) {
-            processedLines.push(':::tip');
-            processedLines.push(...blockquoteContent);
-            processedLines.push(':::');
-        } else {
-            processedLines.push(...blockquoteContent.map(l => `> ${l}`));
-        }
-    }
-
-    // 在处理完admonition后，应用HTML标签格式化
-    let result = processedLines.join('\n');
-    result = result.replace(
-        /:::(tip|caution|note|info|warning)([\s\S]*?):::/g,
-        (match, type, content) => {
-            // 使用共享函数清理内容
-            let cleanedContent = cleanMarkdownReferences(content);
-
-            // 格式化HTML标签
-            const formattedContent = formatHtmlTags(cleanedContent);
-
-            return `:::${type}${formattedContent}:::`;
+            return match;
         }
     );
 
-    return result;
+    return newContent;
 }
 
 // 步骤6: 格式化HTML标签
@@ -754,9 +746,27 @@ function sanitizeMdxContent(content) {
     // 首先保护React组件不被其他规则修改
     result = protectReactComponents(result);
 
-    // 修复可能错误的Tab闭合标签
-    result = result.replace(/<\/TabItem>\s*<\/tab>/g, '</TabItem>');
-    result = result.replace(/<\/tab>\s*<\/Tabs>/g, '</TabItem></Tabs>');
+    // 移除文档ID标记，如 {id="get-length-of-null-java"}
+    result = result.replace(/\{id="[^"]*"\}/g, '');
+
+    
+    // 移除文档nullable标记，如 {nullable="true"}
+    result = result.replace(/\{nullable="[^"]*"\}/g, '');
+
+    // 移除各种类型标记，支持多种格式
+    // 格式1: {type="note"}, {type = "note"}, { type="note" }, { type = "note" }
+    result = result.replace(/\{\s*type\s*=?\s*["'](\w+)["']\s*\}/g, '');
+    // 格式2: {type=note}, {type note}, { type=note }, { type note }
+    result = result.replace(/\{\s*type\s*=?\s*(\w+)\s*\}/g, '');
+    
+    // 转义命令行参数和选项中的花括号
+    
+    // 1. 处理形如 -xxx {options} 的命令行选项格式，包括没有管道符的情况
+    result = result.replace(/([-]\w+)\s+\{([^{}]+)\}/g, '$1 _{$2}_');
+    
+    // 2. 处理独立的多选项花括号，如 {a|b|c|d}，无论有多少个管道符号
+    result = result.replace(/\{([^{}|]+(?:\|[^{}|]+)+)\}/g, '\\{$1\\}');
+    
 
     // 处理<code-block>标签，将其转换为Markdown代码块
     result = result.replace(
@@ -779,40 +789,6 @@ function sanitizeMdxContent(content) {
         (match, boldPart, normalPart) => {
             // 将其转换为**加粗部分**普通部分格式
             return `**${boldPart}**${normalPart}`;
-        }
-    );
-
-    // 处理箭头符号 "->", 将其转换为HTML实体或代码格式，但跳过占位符
-    result = result.replace(
-        /([^\w`]|^)(->|--&gt;)([^\w`]|$)/g,
-        (match, before, arrow, after) => {
-            // 如果是在占位符内部（HTML注释占位符），则不处理
-            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_') || 
-                before.includes('__REACT_') || after.includes('__REACT_')) {
-                return match;
-            }
-            return `${before}\`→\`${after}`;
-        }
-    );
-
-    // 处理箭头符号 "<-", 将其转换为HTML实体或代码格式，但跳过占位符
-    result = result.replace(
-        /([^\w`]|^)(<-|&lt;-)([^\w`]|$)/g,
-        (match, before, arrow, after) => {
-            // 如果是在占位符内部（HTML注释占位符），则不处理
-            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_') || 
-                before.includes('__REACT_') || after.includes('__REACT_')) {
-                return match;
-            }
-            return `${before}\`←\`${after}`;
-        }
-    );
-
-    // 处理文档中说明的箭头符号含义
-    result = result.replace(
-        /"(->\s*and\s*<-|->|<-)\s*indicate[^"]*"/g,
-        (match) => {
-            return match.replace(/->/g, '→').replace(/<-/g, '←');
         }
     );
 
@@ -842,74 +818,8 @@ function sanitizeMdxContent(content) {
         }
     );
 
-    // 处理<数字这种格式，防止被解析为JSX标签，但不处理已转换的TabItem标签
-    result = result.replace(
-        /([^\w`<]|^)(<)(?!TabItem|\/TabItem|Tabs|\/Tabs)(\d+[^\s>]*)/g,
-        (match, before, openBracket, number) => {
-            // 跳过React组件占位符
-            if (before.includes('__REACT_') || before.includes('__HTML_COMMENT_')) {
-                return match;
-            }
-            return `${before}&lt;${number}`;
-        }
-    );
-
-    // 处理>=符号，防止被解析为JSX标签的一部分
-    result = result.replace(
-        /&gt;=\s*(\d+)/g,
-        '&gt;= $1'
-    );
-
-    // 处理以数字开头的属性或者文本片段
-    result = result.replace(
-        /-\s*&gt;\s*(\d+):/g,
-        '-&gt; $1:'
-    );
-
-    // 处理代码块中可能出现的特殊字符，但保留已有的HTML实体
-    result = result.replace(
-        /```([a-z]*)\n([\s\S]*?)```/g,
-        (match, language, code) => {
-            // 使用一种简单的方法：先替换&lt;和&gt;为临时标记，然后处理<和>，最后恢复临时标记
-            let processedCode = code
-                .replace(/&lt;/g, '###LT###')
-                .replace(/&gt;/g, '###GT###')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/###LT###/g, '&lt;')
-                .replace(/###GT###/g, '&gt;');
-                
-            return '```' + language + '\n' + processedCode + '```';
-        }
-    );
-
     // 恢复被保护的React组件
     result = restoreReactComponents(result);
-
-    // 修复所有错误编码的Tabs和TabItem组件标签
-    result = result.replace(/&lt;(\/?)Tabs(\s+[^>]*)?&gt;/g, '<$1Tabs$2>');
-    result = result.replace(/&lt;(\/?)TabItem(\s+[^>]*)?&gt;/g, '<$1TabItem$2>');
-    
-    // 修复半转换的标签（前尖括号正常，后尖括号被转义）
-    result = result.replace(/<(Tabs|TabItem)([^>]*?)&gt;/g, '<$1$2>');
-    result = result.replace(/<\/(Tabs|TabItem)&gt;/g, '</$1>');
-    
-    // 修复JSX属性中的表达式
-    result = result.replace(/default=\{([^}]*?)&quot;([^}]*?)&quot;\}/g, 'default={$1"$2"}');
-    result = result.replace(/default=\{([^}]*?)&#39;([^}]*?)&#39;\}/g, 'default={$1\'$2\'}');
-    
-    // 特别处理 default={kotlin === "kotlin"} 这类表达式
-    result = result.replace(/default=\{([^}]*?) === &quot;([^}]*?)&quot;\}/g, 'default={$1 === "$2"}');
-    result = result.replace(/default=\{([^}]*?) === &#39;([^}]*?)&#39;\}/g, 'default={$1 === \'$2\'}');
-
-    // 处理混合形式的表格标签（开始标签是HTML形式，结束标签是实体形式，或反之）
-    result = result.replace(/<tr>[\s\S]*?&lt;\/tr&gt;/g, function(match) {
-        return match.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-    });
-
-    result = result.replace(/&lt;tr&gt;[\s\S]*?<\/tr>/g, function(match) {
-        return match.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-    });
 
     return result;
 }
