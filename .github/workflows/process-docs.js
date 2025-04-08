@@ -15,6 +15,8 @@ const changedFiles = process.env.KOTLIN_CHANGED_FILES ? process.env.KOTLIN_CHANG
 const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
+
+
 // 处理文件
 if (files.length > 0) {
     console.log(`开始处理 ${files.length} 个文件...`);
@@ -55,8 +57,10 @@ function processFile(filePath, varsFilePath) {
     // 读取输入文件
     const content = fs.readFileSync(filePath, 'utf8');
 
+    // 首先处理HTML注释，保护它们不被其他转换修改
+    let transformedContent = protectHtmlComments(content);
+
     // 应用所有转换
-    let transformedContent = content;
     transformedContent = convertFrontmatter(transformedContent, filePath); // 步骤1
     transformedContent = convertAdmonitions(transformedContent); // 步骤2
     transformedContent = convertDeflistToList(transformedContent); // 步骤5
@@ -69,6 +73,9 @@ function processFile(filePath, varsFilePath) {
 
     // 最后，清理可能导致MDX编译错误的内容
     transformedContent = sanitizeMdxContent(transformedContent);
+
+    // 恢复被保护的HTML注释
+    transformedContent = restoreHtmlComments(transformedContent);
 
     // 如果提供了变量文件，应用变量替换
     if (varsFilePath && fs.existsSync(varsFilePath)) {
@@ -683,18 +690,26 @@ function sanitizeMdxContent(content) {
         }
     );
 
-    // 处理箭头符号 "->", 将其转换为HTML实体或代码格式
+    // 处理箭头符号 "->", 将其转换为HTML实体或代码格式，但跳过占位符
     result = result.replace(
         /([^\w`]|^)(->|--&gt;)([^\w`]|$)/g,
         (match, before, arrow, after) => {
+            // 如果是在占位符内部（HTML注释占位符），则不处理
+            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_')) {
+                return match;
+            }
             return `${before}\`→\`${after}`;
         }
     );
 
-    // 处理箭头符号 "<-", 将其转换为HTML实体或代码格式
+    // 处理箭头符号 "<-", 将其转换为HTML实体或代码格式，但跳过占位符
     result = result.replace(
         /([^\w`]|^)(<-|&lt;-)([^\w`]|$)/g,
         (match, before, arrow, after) => {
+            // 如果是在占位符内部（HTML注释占位符），则不处理
+            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_')) {
+                return match;
+            }
             return `${before}\`←\`${after}`;
         }
     );
@@ -731,7 +746,7 @@ function sanitizeMdxContent(content) {
 
     // 处理<数字这种格式，防止被解析为JSX标签，但不处理已转换的TabItem标签
     result = result.replace(
-        /([^\w`<]|^)(<)(?!TabItem|\/TabItem)(\d+[^\s>]*)/g,
+        /([^\w`<]|^)(<)(?!TabItem|\/TabItem|Tabs|\/Tabs)(\d+[^\s>]*)/g,
         (match, before, openBracket, number) => {
             return `${before}&lt;${number}`;
         }
@@ -766,5 +781,49 @@ function sanitizeMdxContent(content) {
         }
     );
 
+    // 将错误编码的React组件转换回正常格式
+    result = result.replace(/&lt;(\/?)Tabs(\s+[^>]*)?&gt;/g, '<$1Tabs$2>');
+    result = result.replace(/&lt;(\/?)TabItem(\s+[^>]*)?&gt;/g, '<$1TabItem$2>');
+
+    return result;
+}
+
+// 新增函数：保护HTML注释
+function protectHtmlComments(content) {
+    const commentPlaceholders = {};
+    let placeholderIndex = 0;
+    
+    // 使用一个唯一的占位符替换每个HTML注释
+    const result = content.replace(/<!--[\s\S]*?-->/g, (match) => {
+        const placeholder = `__HTML_COMMENT_${placeholderIndex}__`;
+        commentPlaceholders[placeholder] = match;
+        placeholderIndex++;
+        return placeholder;
+    });
+    
+    // 存储占位符映射到全局变量，以便后续恢复
+    global.commentPlaceholders = commentPlaceholders;
+    
+    return result;
+}
+
+// 新增函数：恢复HTML注释
+function restoreHtmlComments(content) {
+    let result = content;
+    
+    // 获取之前存储的占位符映射
+    const commentPlaceholders = global.commentPlaceholders || {};
+    
+    // 恢复所有HTML注释
+    Object.keys(commentPlaceholders).forEach(placeholder => {
+        const comment = commentPlaceholders[placeholder];
+        // 使用全局替换，确保所有占位符都被替换
+        const regex = new RegExp(placeholder, 'g');
+        result = result.replace(regex, comment);
+    });
+    
+    // 将MDX注释转换为HTML注释（如果还需要这一步）
+    result = result.replace(/\{\/\*\s*Commented out include tag\s*\*\/\}/g, '<!-- Commented out include tag -->');
+    
     return result;
 }
