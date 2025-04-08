@@ -46,7 +46,7 @@ jobs:
 
       - name: Get changed markdown files for Kotlin
         id: changed-files-kotlin
-        if: steps.last-run-kotlin.outputs.last_commit != steps.current-commit-kotlin.outputs.current_commit
+        if: steps.last-run-kotlin.outputs.first_run == 'false' || steps.last-run-kotlin.outputs.last_commit != steps.current-commit-kotlin.outputs.current_commit
         uses: tj-actions/changed-files@v46.0.3
         with:
           path: kotlin-repo

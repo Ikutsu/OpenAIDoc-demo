@@ -22,10 +22,6 @@ const config: Config = {
     locales: ['zh-Hans', 'zh-Hant', 'ko' , 'ja' ],
   },
 
-  markdown: {
-    format: 'md',
-  },
-
   presets: [
     [
       'classic',
