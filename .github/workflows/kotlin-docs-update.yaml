@@ -1,0 +1,189 @@
+name: Kotlin docs update
+
+on:
+#  schedule:
+#    - cron: '0 0 * * 0'  # 每周日 UTC 时间 0:00 运行
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  check-external-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史以进行差异比较
+
+      - name: Checkout Kotlin repository
+        uses: actions/checkout@v4
+        with:
+          repository: JetBrains/kotlin-web-site
+          path: kotlin-repo
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install @google/genai
+
+      - name: Check last run timestamp for Kotlin
+        id: last-run-kotlin
+        run: |
+          if [ -f ".github/last_check_kotlin.txt" ]; then
+            echo "first_run=false" >> $GITHUB_OUTPUT
+            echo "last_commit=$(cat .github/last_check_kotlin.txt)" >> $GITHUB_OUTPUT
+          else
+            echo "first_run=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get current commit for Kotlin
+        id: current-commit-kotlin
+        run: |
+          cd kotlin-repo
+          echo "current_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Get changed markdown files for Kotlin
+        id: changed-files-kotlin
+        if: steps.last-run-kotlin.outputs.last_commit != steps.current-commit-kotlin.outputs.current_commit
+        uses: tj-actions/changed-files@v46.0.3
+        with:
+          path: kotlin-repo
+          base_sha: ${{ steps.last-run-kotlin.outputs.last_commit }}
+          files: |
+            docs/topics/**/*.md
+
+      - name: Get all markdown files for Kotlin (first run)
+        id: all-files-kotlin
+        if: steps.last-run-kotlin.outputs.first_run == 'true'
+        run: |
+          cd kotlin-repo
+          ALL_FILES=$(find docs -name "*.md" | tr '\n' ' ' | sed 's/ $//')
+          echo "all_changed_files=$ALL_FILES" >>  $GITHUB_OUTPUT
+
+      - name: Prepare files for translation
+        id: prepare-translation
+        run: |
+          # 处理 Kotlin 仓库文件
+          if [ "${{ steps.last-run-kotlin.outputs.first_run }}" == "true" ]; then
+            # 首次运行 - 使用所有文件
+            echo "KOTLIN_CHANGED_FILES=${{ steps.all-files-kotlin.outputs.all_changed_files }}" >> $GITHUB_ENV
+            echo "kotlin_any_changed=true" >> $GITHUB_OUTPUT
+          else
+            # 后续运行 - 使用变更的文件
+            echo "KOTLIN_CHANGED_FILES=${{ steps.changed-files-kotlin.outputs.all_changed_files }}" >> $GITHUB_ENV
+          
+            if [ -n "${{ steps.changed-files-kotlin.outputs.all_changed_files }}" ]; then
+              echo "kotlin_any_changed=true" >> $GITHUB_OUTPUT
+            else
+              echo "kotlin_any_changed=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+          
+          # 保存当前提交的SHA以便后续更新
+          echo "last_commit_sha=${{ github.sha }}" >> $GITHUB_OUTPUT
+
+      - name: Process documents to Docusaurus format
+        if: steps.prepare-translation.outputs.kotlin_any_changed == 'true'
+        env:
+          START_PAGE: getting-started.md
+        run: |
+          # 检查v.list文件是否存在
+          if [ -f "kotlin-repo/docs/v.list" ]; then
+            echo "找到v.list文件，将用于变量替换"
+          else
+            echo "未找到v.list文件，将跳过变量替换"
+          fi
+          
+          # 处理文档并修改文件
+          node .github/workflows/process-docs.js
+
+      - name: Translate Kotlin docs
+        if: steps.prepare-translation.outputs.kotlin_any_changed == 'true'
+        env:
+          BASE_DIR: ./kotlin
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          CHANGED_FILES: ${{ env.KOTLIN_CHANGED_FILES }}
+          REPO_PATH: kotlin-repo
+        run: node .github/workflows/translate-kotlin.js
+
+      - name: Reorganize files
+        if: steps.prepare-translation.outputs.kotlin_any_changed == 'true'
+        run: |
+          # 将所有topics下的Markdown文件移动到docs目录，打平目录结构
+          echo "正在移动Markdown文件..."
+          find kotlin/docs/topics -name "*.md" | while read file; do
+            # 提取文件名（不包括路径）
+            filename=$(basename "$file")
+            # 移动文件到目标位置，如果文件已存在则覆盖
+            echo "移动: $file -> kotlin/docs/$filename"
+            mv -f "$file" "kotlin/docs/$filename"
+          done
+          
+          # 复制images目录下的所有文件到static/img目录，打平目录结构
+          echo "正在复制图片文件..."
+          if [ -d "kotlin-repo/docs/images" ]; then
+            # 查找所有图片文件并复制到目标目录，打平目录结构
+            find kotlin-repo/docs/images -type f | while read img_file; do
+              # 提取文件名（不包括路径）
+              img_filename=$(basename "$img_file")
+              # 复制文件到目标位置，如果文件已存在则覆盖
+              echo "复制: $img_file -> kotlin/static/img/$img_filename"
+              cp -f "$img_file" "kotlin/static/img/$img_filename"
+            done
+            echo "已复制图片文件到kotlin/static/img/"
+          else
+            echo "警告: kotlin-repo/docs/images目录不存在"
+          fi
+          
+          # 删除空的topics目录（如果需要）
+          rm -rf kotlin/docs/topics
+          
+          echo "文件重组完成"
+
+      - name: Update last check timestamps
+        if: success() && steps.prepare-translation.outputs.any_changed == 'true'
+        run: |
+          # 只有在前面所有步骤都成功时才更新最后检查的提交
+          echo "${{ steps.current-commit-kotlin.outputs.current_commit }}" > .github/last_check_kotlin.txt
+          echo "已更新检查记录时间戳"
+
+      - name: Commit and push changes
+        if: steps.prepare-translation.outputs.any_changed == 'true'
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          # 排除不需要提交的文件和目录
+          git add . ':!package.json' ':!package-lock.json' ':!kotlin-repo' ':!kotlin-repo/**'
+          git commit -m '添加翻译文件并更新检查记录'
+          git push origin main
+
+      - name: Create summary
+        if: always()
+        run: |
+          echo "## 文档更新检测" >> $GITHUB_STEP_SUMMARY
+          
+          # 检查 commit 是否变化
+          echo "### Commit 变化检测" >> $GITHUB_STEP_SUMMARY
+          echo "- Kotlin 仓库: ${{ steps.prepare-translation.outputs.kotlin_any_changed }}" >> $GITHUB_STEP_SUMMARY
+          
+          # Kotlin 仓库摘要
+          echo "### Kotlin 仓库" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.last-run-kotlin.outputs.first_run }}" == "true" ]; then
+            echo "首次运行 - 已处理所有文档文件" >> $GITHUB_STEP_SUMMARY
+            FILES="${{ steps.all-files-kotlin.outputs.all_changed_files }}"
+            COUNT=$(echo "$FILES" | wc -w)
+            echo "共处理 $COUNT 个文件" >> $GITHUB_STEP_SUMMARY
+          else
+            if [ -z "${{ steps.changed-files-kotlin.outputs.all_changed_files }}" ]; then
+              echo "没有检测到文档变更" >> $GITHUB_STEP_SUMMARY
+            else
+              CHANGED_FILES="${{ steps.changed-files-kotlin.outputs.all_changed_files }}"
+              COUNT=$(echo "$CHANGED_FILES" | wc -w)
+              echo "检测到 $COUNT 个文件变更:" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              echo "$CHANGED_FILES" | tr ' ' '\n' >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+            fi
+          fi

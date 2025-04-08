@@ -722,3 +722,11 @@ h1.docTitle_node_modules-\@docusaurus-theme-classic-lib-theme-DocItem-Layout-sty
 [data-theme='dark'] .navbar-sidebar__back:hover {
   background-color: rgba(77, 108, 250, 0.2);
 }
+
+.markdown li {
+  margin: 0 1rem;
+}
+
+.tabs__item {
+  margin: 0 !important;
+}
