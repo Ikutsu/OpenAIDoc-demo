@@ -527,14 +527,20 @@ function convertTabs(content) {
 
 // 步骤8: 移除kotlin-runnable相关标记
 function removeKotlinRunnable(content) {
-    // 移除独立一行的{kotlin-runnable...}标记 - 处理多种变体
     let result = content;
+
+    // 处理带有属性的kotlin-runnable标记
+    // 匹配形如 {kotlin-runnable="true" kotlin-min-compiler-version="1.5" validate="false"} 的标记
+    result = result.replace(/\{kotlin-runnable(?:="[^"]*")?(?:\s+[a-zA-Z-]+="[^"]*")*\}/g, '');
 
     // 移除单独一行上的{kotlin-runnable...}标记
     result = result.replace(/^\{kotlin-runnable.*?\}\s*$/gm, '');
 
     // 移除单独一行上的{kotlin-...}类似标记（更通用的处理）
     result = result.replace(/^\{kotlin-.*?\}\s*$/gm, '');
+
+    // 移除行内的kotlin标记
+    result = result.replace(/\{kotlin-[^{}]*\}/g, '');
 
     // 移除Kotlin代码示例中的//sampleStart和//sampleEnd注释
     result = result.replace(/^\s*\/\/sampleStart\s*$/gm, '');
