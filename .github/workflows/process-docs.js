@@ -494,13 +494,13 @@ function convertTabs(content) {
         // 转换<tab>标签（小写）- 带id, title和group-key三个属性
         content = content.replace(
             /<tab\s+id\s*=\s*["']([^"']*)["']\s+title\s*=\s*["']([^"']*)["']\s+group-key\s*=\s*["']([^"']*)["']\s*>/g,
-            '<TabItem value="$1" label="$2" default={$3 === "kotlin"}>'
+            '<TabItem value="$1" label="$2" default>'
         );
 
         // 转换<tab>标签（小写）- 带title和group-key属性
         content = content.replace(
             /<tab\s+title\s*=\s*["']([^"']*)["']\s+group-key\s*=\s*["']([^"']*)["']\s*>/g,
-            '<TabItem value="$2" label="$1" default={$2 === "kotlin"}>'
+            '<TabItem value="$2" label="$1" default>'
         );
 
         // 转换<tab>标签（小写）- 带id和title
@@ -662,6 +662,9 @@ function convertIncludes(content) {
 function sanitizeMdxContent(content) {
     let result = content;
 
+    // 首先保护React组件不被其他规则修改
+    result = protectReactComponents(result);
+
     // 修复可能错误的Tab闭合标签
     result = result.replace(/<\/TabItem>\s*<\/tab>/g, '</TabItem>');
     result = result.replace(/<\/tab>\s*<\/Tabs>/g, '</TabItem></Tabs>');
@@ -695,7 +698,8 @@ function sanitizeMdxContent(content) {
         /([^\w`]|^)(->|--&gt;)([^\w`]|$)/g,
         (match, before, arrow, after) => {
             // 如果是在占位符内部（HTML注释占位符），则不处理
-            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_')) {
+            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_') || 
+                before.includes('__REACT_') || after.includes('__REACT_')) {
                 return match;
             }
             return `${before}\`→\`${after}`;
@@ -707,7 +711,8 @@ function sanitizeMdxContent(content) {
         /([^\w`]|^)(<-|&lt;-)([^\w`]|$)/g,
         (match, before, arrow, after) => {
             // 如果是在占位符内部（HTML注释占位符），则不处理
-            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_')) {
+            if (before.includes('__HTML_COMMENT_') || after.includes('__HTML_COMMENT_') || 
+                before.includes('__REACT_') || after.includes('__REACT_')) {
                 return match;
             }
             return `${before}\`←\`${after}`;
@@ -732,6 +737,10 @@ function sanitizeMdxContent(content) {
     result = result.replace(
         /([^\w`]|^)(<=)(\d+(?:\.\d+)*)/g,
         (match, before, operator, version) => {
+            // 跳过React组件占位符
+            if (before.includes('__REACT_') || before.includes('__HTML_COMMENT_')) {
+                return match;
+            }
             return `${before}&lt;=${version}`;
         }
     );
@@ -748,6 +757,10 @@ function sanitizeMdxContent(content) {
     result = result.replace(
         /([^\w`<]|^)(<)(?!TabItem|\/TabItem|Tabs|\/Tabs)(\d+[^\s>]*)/g,
         (match, before, openBracket, number) => {
+            // 跳过React组件占位符
+            if (before.includes('__REACT_') || before.includes('__HTML_COMMENT_')) {
+                return match;
+            }
             return `${before}&lt;${number}`;
         }
     );
@@ -781,9 +794,24 @@ function sanitizeMdxContent(content) {
         }
     );
 
-    // 将错误编码的React组件转换回正常格式
+    // 恢复被保护的React组件
+    result = restoreReactComponents(result);
+
+    // 修复所有错误编码的Tabs和TabItem组件标签
     result = result.replace(/&lt;(\/?)Tabs(\s+[^>]*)?&gt;/g, '<$1Tabs$2>');
     result = result.replace(/&lt;(\/?)TabItem(\s+[^>]*)?&gt;/g, '<$1TabItem$2>');
+    
+    // 修复半转换的标签（前尖括号正常，后尖括号被转义）
+    result = result.replace(/<(Tabs|TabItem)([^>]*?)&gt;/g, '<$1$2>');
+    result = result.replace(/<\/(Tabs|TabItem)&gt;/g, '</$1>');
+    
+    // 修复JSX属性中的表达式
+    result = result.replace(/default=\{([^}]*?)&quot;([^}]*?)&quot;\}/g, 'default={$1"$2"}');
+    result = result.replace(/default=\{([^}]*?)&#39;([^}]*?)&#39;\}/g, 'default={$1\'$2\'}');
+    
+    // 特别处理 default={kotlin === "kotlin"} 这类表达式
+    result = result.replace(/default=\{([^}]*?) === &quot;([^}]*?)&quot;\}/g, 'default={$1 === "$2"}');
+    result = result.replace(/default=\{([^}]*?) === &#39;([^}]*?)&#39;\}/g, 'default={$1 === \'$2\'}');
 
     return result;
 }
@@ -824,6 +852,51 @@ function restoreHtmlComments(content) {
     
     // 将MDX注释转换为HTML注释（如果还需要这一步）
     result = result.replace(/\{\/\*\s*Commented out include tag\s*\*\/\}/g, '<!-- Commented out include tag -->');
+    
+    return result;
+}
+
+// 新增函数：保护React组件不被其他规则修改
+function protectReactComponents(content) {
+    const componentPlaceholders = {};
+    let placeholderIndex = 0;
+    
+    // 保护Tabs和TabItem组件
+    const result = content.replace(/<(Tabs|TabItem)([^>]*?)>|<\/(Tabs|TabItem)>/g, (match) => {
+        const placeholder = `__REACT_COMPONENT_${placeholderIndex}__`;
+        componentPlaceholders[placeholder] = match;
+        placeholderIndex++;
+        return placeholder;
+    });
+    
+    // 保护JSX表达式 {...}
+    const withJsxProtected = result.replace(/default=\{([^}]*?)\}/g, (match) => {
+        const placeholder = `__REACT_JSX_${placeholderIndex}__`;
+        componentPlaceholders[placeholder] = match;
+        placeholderIndex++;
+        return placeholder;
+    });
+    
+    // 存储占位符映射到全局变量
+    global.reactComponentPlaceholders = componentPlaceholders;
+    
+    return withJsxProtected;
+}
+
+// 新增函数：恢复被保护的React组件
+function restoreReactComponents(content) {
+    let result = content;
+    
+    // 获取之前存储的占位符映射
+    const componentPlaceholders = global.reactComponentPlaceholders || {};
+    
+    // 恢复所有React组件
+    Object.keys(componentPlaceholders).forEach(placeholder => {
+        const component = componentPlaceholders[placeholder];
+        // 使用全局替换，确保所有占位符都被替换
+        const regex = new RegExp(placeholder, 'g');
+        result = result.replace(regex, component);
+    });
     
     return result;
 }
