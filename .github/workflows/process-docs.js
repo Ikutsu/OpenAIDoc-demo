@@ -15,37 +15,7 @@ const changedFiles = process.env.KOTLIN_CHANGED_FILES ? process.env.KOTLIN_CHANG
 const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
-const text = `
-> On the JVM, if the object is an instance of a functional Java interface (that means a Java interface with a single 
-> abstract method), you can create it using a lambda expression prefixed with the type of the interface:
->
->\`\`\`kotlin
-> val listener = ActionListener { println("clicked") }
-> \`\`\`
->
-{style="note"}
-`;
-// 首先处理HTML注释，保护它们不被其他转换修改
-let a = protectHtmlComments(text);
 
-// 应用所有转换
-a = convertFrontmatter(a, 'a.md'); // 步骤1
-a = convertAdmonitions(a); // 步骤2
-a = convertDeflistToList(a); // 步骤5
-a = convertIncludes(a); // 步骤6 - 处理include和snippet标签
-a = convertTabs(a); // 步骤7
-a = removeKotlinRunnable(a); // 步骤8
-a = formatHtmlTags(a); // 步骤9
-a = convertImages(a); // 步骤3 - 图片处理
-a = convertVideos(a); // 步骤4 - 视频处理
-
-// 最后，清理可能导致MDX编译错误的内容
-a = sanitizeMdxContent(a);
-
-// 恢复被保护的HTML注释
-a = restoreHtmlComments(a);
-
-console.log(a);
 
 // 处理文件
 if (files.length > 0) {
