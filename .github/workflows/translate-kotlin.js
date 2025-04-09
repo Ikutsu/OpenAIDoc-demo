@@ -283,9 +283,6 @@ async function translateFile(filePath) {
   
   try {
       let content = fs.readFileSync(absoluteFilePath, 'utf8');
-      
-      // 在翻译前修复损坏链接
-      content = fixBrokenLinks(content, filePath);
 
       const { frontmatter, mainContent } = extractFrontmatterAndContent(content);
 
