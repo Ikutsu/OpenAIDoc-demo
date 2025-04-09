@@ -15,7 +15,45 @@ const changedFiles = process.env.KOTLIN_CHANGED_FILES ? process.env.KOTLIN_CHANG
 const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
+const text = `
+>
+> <Tabs>
+>
+> kotlin
+> tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile> {
+>   kotlinOptions.useOldBackend = true
+> }
+> 
+>
+> groovy
+> tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile) {
+>   kotlinOptions.useOldBackend = true
+> }
+> 
+>
+> </Tabs>
+`;
+// 首先处理HTML注释，保护它们不被其他转换修改
+let a = protectHtmlComments(text);
 
+// 应用所有转换
+a = convertFrontmatter(a, 'a.md'); // 步骤1
+a = convertAdmonitions(a); // 步骤2
+a = convertDeflistToList(a); // 步骤5
+a = convertIncludes(a); // 步骤6 - 处理include和snippet标签
+a = convertTabs(a); // 步骤7
+a = removeKotlinRunnable(a); // 步骤8
+a = formatHtmlTags(a); // 步骤9
+a = convertImages(a); // 步骤3 - 图片处理
+a = convertVideos(a); // 步骤4 - 视频处理
+
+// 最后，清理可能导致MDX编译错误的内容
+a = sanitizeMdxContent(a);
+
+// 恢复被保护的HTML注释
+a = restoreHtmlComments(a);
+
+console.log(a);
 
 // 处理文件
 if (files.length > 0) {
@@ -211,7 +249,20 @@ function convertAdmonitions(content) {
         }
     );
 
+    // 修复错误识别的提示框标记
+    newContent = fixIncorrectAdmonitionTags(newContent);
+
     return newContent;
+}
+
+// 修复错误识别的提示框标记
+function fixIncorrectAdmonitionTags(content) {
+    // 修复像 "/:::note", "-:::tip", "</:::caution" 这样的误匹配
+    // 寻找形如 字母或符号+::: 的错误模式，在中间加入空格防止误识别
+    return content.replace(
+        /([^\s:])(:::(tip|caution|note|info|warning))/g,
+        '$1 $2'
+    );
 }
 
 // 更全面的提示框转换函数 - 高效处理不同类型提示框
@@ -337,6 +388,15 @@ function formatHtmlTags(content) {
     // 处理行首的</td>标签，去除缩进空格
     result = result.replace(/^(\s+)<\/p>/gm, '</p>');
 
+    // 处理行首的<td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<list>/gm, '<list>');
+
+    // 处理行首的</td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<\/list>/gm, '</list>');
+
+    // 处理行首的<td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<li>/gm, '<li>');
+
     return result;
 }
 
@@ -434,6 +494,12 @@ function convertVideos(content) {
         '<video$1src="$2"$3/>'
     );
 
+    // 特殊处理视频标签后面的:::标记，在标签和:::之间添加空格
+    newContent = newContent.replace(
+        /(<\/video>|<video[^>]*?\/>)(:::(tip|caution|note|info|warning))/g,
+        '$1 $2'
+    );
+
     return newContent;
 }
 
@@ -496,6 +562,10 @@ function convertTabs(content) {
 
         // 转换所有</tab>结束标签
         content = content.replace(/<\/tab>/g, '</TabItem>');
+
+        // 移除引用块中的Tabs标签
+        content = content.replace(/\n>\s*<Tabs>/gm, '');
+        content = content.replace(/\n>\s*<\/Tabs>/gm, '');
     }
 
     return content;
@@ -637,7 +707,7 @@ function convertIncludes(content) {
     return result;
 }
 
-// 新函数: 清理可能导致MDX编译错误的内容
+// 新增一个在所有转换完成后的后处理函数，集中处理各种错误情况
 function sanitizeMdxContent(content) {
     let result = content;
 
@@ -647,9 +717,62 @@ function sanitizeMdxContent(content) {
     // 移除文档ID标记，如 {id="get-length-of-null-java"}
     result = result.replace(/\{id="[^"]*"\}/g, '');
 
+    // 替换<code>标签为反引号
+    result = result.replace(/<code>(.*?)<\/code>/g, '`$1`');
+    
+    // 处理Markdown链接，为相对路径添加./前缀
+    result = result.replace(
+        /\[([^\]]+)\]\(([^)\/]+\.md[^)]*)\)/g,
+        (match, text, link) => {
+            // 如果链接已经有./或../前缀，或是以#开头(锚点链接)，则不修改
+            if (link.startsWith('./') || link.startsWith('../') || link.startsWith('#')) {
+                return match;
+            }
+            // 否则添加./前缀
+            return `[${text}](\./${link})`;
+        }
+    );
     
     // 移除文档nullable标记，如 {nullable="true"}
     result = result.replace(/\{nullable="[^"]*"\}/g, '');
+
+    // 处理"<"符号后跟数字的情况，如 <1.3: 将其替换为 &lt;1.3:
+    result = result.replace(
+        /([^\w`]|^)<(\d+(?:\.\d+)*)/g,
+        (match, prefix, version) => {
+            // 跳过已经在代码块中的内容
+            if (prefix.includes('`') || prefix.includes('code')) {
+                return match;
+            }
+            return `${prefix}&lt;${version}`;
+        }
+    );
+    
+    // 处理箭头符号 -> 和 <-，为它们添加反引号
+    result = result.replace(
+        /([^\w`]|^)(->|<-)([^\w`]|$)/g,
+        (match, before, arrow, after) => {
+            // 跳过已经在代码块或已有反引号中的内容
+            if (before.includes('`') || after.includes('`')) {
+                return match;
+            }
+            
+            // 检查是否是HTML注释的一部分
+            if (
+                // 排除 <!-- 情况
+                (arrow === '<-' && before.trim().endsWith('<')) || 
+                // 排除 --> 情况
+                (arrow === '->' && after.trim().startsWith('>')) ||
+                // 匹配更完整的HTML注释模式
+                before.includes('<!--') || 
+                after.includes('-->')
+            ) {
+                return match;
+            }
+            
+            return `${before}\`${arrow}\`${after}`;
+        }
+    );
 
     // 移除各种类型标记，支持多种格式
     // 格式1: {type="note"}, {type = "note"}, { type="note" }, { type = "note" }
@@ -716,9 +839,58 @@ function sanitizeMdxContent(content) {
         }
     );
 
+    // 修复代码中可能出现的错误:::标记识别
+    result = fixAdmonitionsInCode(result);
+
+    // 修复各种HTML和特殊标签后的:::问题
+    result = fixTagsFollowedByAdmonitions(result);
+
     // 恢复被保护的React组件
     result = restoreReactComponents(result);
 
+    return result;
+}
+
+// 修复代码块中的:::标记问题
+function fixAdmonitionsInCode(content) {
+    const codeBlockRegex = /```[\s\S]*?```/g;
+    return content.replace(codeBlockRegex, (codeBlock) => {
+        // 在代码块中的:::前添加空格或转义，防止被识别为admonition
+        return codeBlock.replace(
+            /(^|\s):::(tip|caution|note|info|warning)/gm,
+            '$1 :::$2'
+        );
+    });
+}
+
+// 修复各种HTML标签和特殊字符后跟:::的问题
+function fixTagsFollowedByAdmonitions(content) {
+    let result = content;
+    
+    // 修复自闭合标签后的:::
+    result = result.replace(
+        /(<[a-zA-Z][^>]*?\/?>)(:::(tip|caution|note|info|warning))/g,
+        '$1 $2'
+    );
+    
+    // 修复闭合标签后的:::
+    result = result.replace(
+        /(<\/[a-zA-Z][^>]*?>)(:::(tip|caution|note|info|warning))/g,
+        '$1 $2'
+    );
+    
+    // 修复条件判断语句中的::: (如 hostOs == "Mac OS X" && isArm64 -:::tip)
+    result = result.replace(
+        /([=!<>&|+-])(:::(tip|caution|note|info|warning))/g,
+        '$1 $2'
+    );
+    
+    // 修复其他符号后的:::
+    result = result.replace(
+        /([/\\])(:::(tip|caution|note|info|warning))/g,
+        '$1 $2'
+    );
+    
     return result;
 }
 
@@ -805,31 +977,4 @@ function restoreReactComponents(content) {
     });
     
     return result;
-}
-
-// 添加一个函数处理HTML表格中的实体编码
-function decodeHtmlEntitiesInTables(content) {
-  // 先处理整个文档中以&lt;table&gt;开头的表格（完全是实体形式的表格）
-  let result = content.replace(
-    /&lt;table&gt;[\s\S]*?&lt;\/table&gt;/g,
-    function(match) {
-      return match
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&');
-    }
-  );
-  
-  // 再处理已经是HTML形式的表格
-  result = result.replace(
-    /(<table>[\s\S]*?<\/table>)/g, 
-    function(match) {
-      return match
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&');
-    }
-  );
-  
-  return result;
 }
