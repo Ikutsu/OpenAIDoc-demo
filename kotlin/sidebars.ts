@@ -40,7 +40,6 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Kotlin 概述',
       items: [
-        'multiplatform-intro',
         'server-overview',
         'android-overview',
         'wasm-overview',

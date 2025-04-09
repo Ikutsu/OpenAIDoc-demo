@@ -924,3 +924,6 @@ kotlin {
         compilations.named(KotlinCompilation.MAIN_COMPILATION_NAME) {
             compileTaskProvider.configure {
                 // 'main' 컴파일을 구성합니다
+```
+</TabItem>
+</Tabs>

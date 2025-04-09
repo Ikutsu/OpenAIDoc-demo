@@ -3,6 +3,9 @@ title: "Kotlin 2.0.20의 새로운 기능"
 ---
 _[릴리스 날짜: 2024년 8월 22일](releases#release-details)_
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Kotlin 2.0.20 릴리스가 출시되었습니다! 이 버전에는 Kotlin K2 컴파일러를 Stable로 발표한 Kotlin 2.0.0의 성능 개선 및 버그 수정 사항이 포함되어 있습니다. 이번 릴리스의 주요 내용은 다음과 같습니다.
 
 * [데이터 클래스 copy 함수가 생성자와 동일한 가시성을 갖게 됩니다](#data-class-copy-function-to-have-the-same-visibility-as-constructor)

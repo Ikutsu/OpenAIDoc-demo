@@ -122,6 +122,36 @@ jobs:
             mv -f "$file" "kotlin/docs/$filename"
           done
           
+          # Move all Markdown files under zh-Hant/topics to the docs directory, flattening the directory structure
+          echo "Moving Markdown files..."
+          find kotlin/i18n/zh-Hant/docusaurus-plugin-content-docs/current/topics -name "*.md" | while read file; do
+            # Extract filename (without path)
+            filename=$(basename "$file")
+            # Move file to target location, overwrite if exists
+            echo "Moving: $file -> kotlin/i18n/zh-Hant/docusaurus-plugin-content-docs/current/$filename"
+            mv -f "$file" "kotlin/i18n/zh-Hant/docusaurus-plugin-content-docs/current/$filename"
+          done
+          
+          # Move all Markdown files under ko/topics to the docs directory, flattening the directory structure
+          echo "Moving Markdown files..."
+          find kotlin/i18n/ko/docusaurus-plugin-content-docs/current/topics -name "*.md" | while read file; do
+            # Extract filename (without path)
+            filename=$(basename "$file")
+            # Move file to target location, overwrite if exists
+            echo "Moving: $file -> kotlin/i18n/ko/docusaurus-plugin-content-docs/current/$filename"
+            mv -f "$file" "kotlin/i18n/ko/docusaurus-plugin-content-docs/current/$filename"
+          done
+          
+          # Move all Markdown files under ja/topics to the docs directory, flattening the directory structure
+          echo "Moving Markdown files..."
+          find kotlin/i18n/ja/docusaurus-plugin-content-docs/current/topics -name "*.md" | while read file; do
+            # Extract filename (without path)
+            filename=$(basename "$file")
+            # Move file to target location, overwrite if exists
+            echo "Moving: $file -> kotlin/i18n/ja/docusaurus-plugin-content-docs/current/$filename"
+            mv -f "$file" "kotlin/i18n/ja/docusaurus-plugin-content-docs/current/$filename"
+          done
+          
           # Copy all files under images directory to static/img, flattening the directory structure
           echo "Copying image files..."
           if [ -d "kotlin-repo/docs/images" ]; then

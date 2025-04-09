@@ -817,5 +817,3 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
 
 プロジェクト配布ファイルの別の場所を設定するには、ビルドスクリプトの `browser {}` ブロック内に `distribution {}` ブロックを追加し、`set()` メソッドを使用して `outputDirectory` プロパティに値を割り当てます。
 プロジェクトビルドタスクを実行すると、Gradleはこの場所にプロジェクトリソースとともに出力バンドルを保存します。
-
-<Tabs

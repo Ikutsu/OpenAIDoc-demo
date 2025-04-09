@@ -882,5 +882,6 @@ K2 modeを有効にすると、コンパイラーの動作の変更により、I
 <p>
    リリース日: <strong>2021年3月22日</strong>
 </p>
-<p>
-   <a href="https://github.com/
+</td>
+</tr>
+</table>

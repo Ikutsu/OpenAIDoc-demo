@@ -594,6 +594,5 @@ kotlin {
 }
 ```
 </td>
-<td>
-
-```kotlin
+</tr>
+</table>

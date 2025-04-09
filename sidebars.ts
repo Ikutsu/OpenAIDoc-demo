@@ -28,63 +28,6 @@ const sidebars: SidebarsConfig = {
     },
   ],
    */
-  {
-    type: 'category',
-    label: '协程 (kotlinx.coroutines)',
-    items: [
-      // include from="kc.tree" origin="coroutines" element-id="coroutines"
-      'coroutines-basics',
-      'coroutines-guide',
-      'coroutines-and-channels',
-      'flow',
-      'coroutine-context-and-dispatchers',
-      'composing-suspending-functions',
-      'coroutine-exceptions',
-      'shared-mutable-state-and-concurrency',
-      'select-expression',
-      'debug-coroutines-with-idea',
-      'debug-flow-with-idea',
-    ],
-  },
-  'serialization',
-  'metadata-jvm',
-  {
-    type: 'category',
-    label: 'Lincheck (kotlinx.lincheck)',
-    items: [
-      // include from="kl.tree" origin="lincheck" element-id="lincheck"
-      'lincheck-overview',
-      'lincheck-usage',
-      'lincheck-testing-modes',
-      'lincheck-custom-operations',
-      'lincheck-configuration',
-    ],
-  },
-  {
-    type: 'category',
-    label: 'Dokka',
-    items: [
-      // include from="dokka.tree" origin="dokka" element-id="dokka"
-      'dokka-introduction',
-      'dokka-get-started',
-      'dokka-gradle',
-      'dokka-maven',
-      'dokka-cli',
-      'dokka-versioning',
-      'dokka-plugins',
-    ],
-  },
-  {
-    type: 'category',
-    label: '库作者指南',
-    items: [
-      // include from="api-guidelines.tree" origin="api-guidelines" element-id="api-guidelines"
-      'api-design-principles',
-      'api-guidelines-for-library-evolution',
-      'api-versioning',
-      'api-binary-compatibility',
-    ],
-  },
 };
 
 export default sidebars;

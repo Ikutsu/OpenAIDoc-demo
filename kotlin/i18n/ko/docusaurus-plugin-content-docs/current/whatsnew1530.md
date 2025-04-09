@@ -3,6 +3,9 @@ title: "Kotlin 1.5.30의 새로운 기능"
 ---
 _[릴리스 날짜: 2021년 8월 24일](releases#release-details)_
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Kotlin 1.5.30은 향후 변경 사항의 미리 보기, 플랫폼 지원 및 툴링의 다양한 개선 사항, 새로운 표준 라이브러리 함수를 포함한 언어 업데이트를 제공합니다.
 
 주요 개선 사항은 다음과 같습니다.

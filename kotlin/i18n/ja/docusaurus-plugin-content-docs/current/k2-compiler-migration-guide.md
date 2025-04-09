@@ -682,3 +682,7 @@ class Container<C>(vararg val content: C)
 
 // ジェネリッククラス型を持ち、
 // ジェネリッククラス
+```
+</td>
+</tr>
+</table>

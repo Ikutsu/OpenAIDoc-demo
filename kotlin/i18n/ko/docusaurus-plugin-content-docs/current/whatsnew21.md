@@ -3,6 +3,9 @@ title: "Kotlin 2.1.0의 새로운 기능"
 ---
 _[배포일: 2024년 11월 27일](releases#release-details)_
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Kotlin 2.1.0 릴리스가 출시되었습니다! 주요 특징은 다음과 같습니다.
 
 * **미리 보기의 새로운 언어 기능**: [주어가 있는 `when`의 가드 조건](#guard-conditions-in-when-with-a-subject),

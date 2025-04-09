@@ -823,4 +823,8 @@ K2 모드를 활성화한 후 컴파일러 동작의 변경으로 인해 IDE 분
 <list>
 <li>기본적으로 JVM에서 `invokedynamic`을 통한 문자열 연결</li>
 <li>Lombok에 대한 개선된 지원 및 JSpecify 지원</li>
-<li>Kotlin/Native
+<li>Kotlin/Native</li>
+</list>
+</td>
+</tr>
+</table>

@@ -550,3 +550,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("test")) // これにより、依存関係がもたらされます
                                                // JUnit 4へのトラン
+```
+</TabItem>
+</Tabs>
