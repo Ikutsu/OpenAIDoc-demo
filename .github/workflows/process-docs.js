@@ -16,22 +16,25 @@ const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
 const text = `
->
-> <Tabs>
->
-> kotlin
-> tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile> {
->   kotlinOptions.useOldBackend = true
-> }
-> 
->
-> groovy
-> tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile) {
->   kotlinOptions.useOldBackend = true
-> }
-> 
->
-> </Tabs>
+   and load the Gradle changes:
+
+   kotlin
+   kotlin {
+       //...
+       nativeTarget.apply {
+           binaries {
+               executable {
+                   entryPoint = "main"
+                   runTask?.standardInput = System
+               }
+           }
+       }
+       //...
+   }
+   
+   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="runTask?.standardInput = System"}
+
+3. Eliminate the whitespaces and count the letters:
 `;
 // 首先处理HTML注释，保护它们不被其他转换修改
 let a = protectHtmlComments(text);
@@ -119,9 +122,6 @@ function processFile(filePath, varsFilePath) {
     if (varsFilePath && fs.existsSync(varsFilePath)) {
         transformedContent = replaceVariables(transformedContent, varsFilePath); // 步骤10
     }
-
-    // 在处理文件后添加这一步
-    transformedContent = decodeHtmlEntitiesInTables(transformedContent);
 
     // 直接写回原文件
     fs.writeFileSync(filePath, transformedContent, 'utf8');
