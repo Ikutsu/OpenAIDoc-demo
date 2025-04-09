@@ -12,7 +12,6 @@ const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 // 从环境变量获取配置
 const baseDir = process.env.BASE_DIR || './kotlin';
 const repoPath = process.env.REPO_PATH || 'kotlin-repo';
-const files = changedFiles.map(file => path.join(repoPath, file));
 
 console.log(`基础目录: ${baseDir}`);
 console.log(`仓库路径: ${repoPath}`);
