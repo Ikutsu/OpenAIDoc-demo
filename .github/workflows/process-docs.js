@@ -16,15 +16,11 @@ const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
 const text = `
-[//]: # (title: Create your first Kotlin Notebook)
-
-<tldr>
-   <p>This is the second part of the <strong>Getting started with Kotlin Notebook</strong> tutorial. Before proceeding, make sure you've completed the previous step.</p>
-   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="kotlin-notebook-set-up-env.md">Set up an environment</a><br/>
-      <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Create a Kotlin Notebook</strong><br/>
-      <img src="icon-3-todo.svg" width="20" alt="Third step"/> Add dependencies to a Kotlin Notebook<br/>
-  </p>
-</tldr>
+<p>
+   &nbsp;
+</p>:::note
+Learn more about setting up projects, using dependencies, and other tasks with our
+[Kotlin/Wasm examples](https://github.com/Kotlin/kotlin-wasm-examples#readme).
 `;
 // 首先处理HTML注释，保护它们不被其他转换修改
 let a = protectHtmlComments(text);
@@ -852,6 +848,8 @@ function sanitizeMdxContent(content) {
 
     // 恢复被保护的React组件
     result = restoreReactComponents(result);
+
+    result = result.replace(/\:\:\:/g, '\n:::')
 
     return result;
 }
