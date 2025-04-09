@@ -70,6 +70,9 @@ export default function Home(): ReactNode {
           
           <Link to="https://ktor.openaidoc.org" className={clsx(styles.card, styles.ktorCard)} data-aos="fade-up" data-aos-delay="300">
             <div className={styles.cardContent}>
+              <div className={styles.comingSoonBadge}>
+                <Translate id="homepage.badge.comingSoon">敬请期待</Translate>
+              </div>
               <div>
                 <h2 className={styles.cardTitle}>Ktor</h2>
                 <p className={styles.cardDescription}>
@@ -90,6 +93,9 @@ export default function Home(): ReactNode {
           
           <Link to="https://sqldelight.openaidoc.org" className={clsx(styles.card, styles.sqldelightCard)} data-aos="fade-up" data-aos-delay="400">
             <div className={styles.cardContent}>
+              <div className={styles.comingSoonBadge}>
+                <Translate id="homepage.badge.comingSoon">敬请期待</Translate>
+              </div>
               <div>
                 <h2 className={styles.cardTitle}>SQLDelight</h2>
                 <p className={styles.cardDescription}>
@@ -121,6 +127,38 @@ export default function Home(): ReactNode {
                 选择上方任一技术栈，开始探索详尽的文档和示例
               </Translate>
             </p>
+          </div>
+        </div>
+        
+        <div className={styles.adBanner}>
+          <div className={styles.adContentVertical}>
+            <img src="https://2bab-images.lastmayday.com/binarytape-logo.webp?imageslim" alt="BinaryTape Logo" className={styles.adLogo} />
+            <div className={styles.adInfo}>
+              <h3 className={styles.adTitle}>
+                <Link to="https://binarytape.com">BinaryTape</Link>
+              </h3>
+              <p className={styles.adDescription}>
+                <Link to="https://binarytape.com">BinaryTape</Link> <Translate
+                  id="homepage.ad.description"
+                  description="Description of BinaryTape company">
+                  通过创新咨询和解决方案连接全球与亚洲技术社区，利用我们在移动基础设施和新兴人工智能领域的专业知识，促进全球范围内的开源协作。
+                </Translate>
+              </p>
+              <p className={styles.adContact}>
+                <Translate
+                  id="homepage.ad.contact"
+                  description="Contact information for BinaryTape">
+                  联系：hi@binarytape.com
+                </Translate>
+              </p>
+              <p className={styles.adSponsor}>
+                <Translate
+                  id="homepage.ad.sponsor"
+                  description="Sponsorship information">
+                  OpenDocs 由 BinaryTape 赞助支持
+                </Translate>
+              </p>
+            </div>
           </div>
         </div>
       </main>
