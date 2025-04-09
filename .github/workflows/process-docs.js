@@ -16,25 +16,15 @@ const files = changedFiles.map(file => path.join(repoPath, file));
 const varsFilePath = 'kotlin-repo/docs/v.list';
 
 const text = `
-   and load the Gradle changes:
+[//]: # (title: Create your first Kotlin Notebook)
 
-   kotlin
-   kotlin {
-       //...
-       nativeTarget.apply {
-           binaries {
-               executable {
-                   entryPoint = "main"
-                   runTask?.standardInput = System
-               }
-           }
-       }
-       //...
-   }
-   
-   {initial-collapse-state="collapsed" collapsible="true" collapsed-title="runTask?.standardInput = System"}
-
-3. Eliminate the whitespaces and count the letters:
+<tldr>
+   <p>This is the second part of the <strong>Getting started with Kotlin Notebook</strong> tutorial. Before proceeding, make sure you've completed the previous step.</p>
+   <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="kotlin-notebook-set-up-env.md">Set up an environment</a><br/>
+      <img src="icon-2.svg" width="20" alt="Second step"/> <strong>Create a Kotlin Notebook</strong><br/>
+      <img src="icon-3-todo.svg" width="20" alt="Third step"/> Add dependencies to a Kotlin Notebook<br/>
+  </p>
+</tldr>
 `;
 // 首先处理HTML注释，保护它们不被其他转换修改
 let a = protectHtmlComments(text);
@@ -391,6 +381,9 @@ function formatHtmlTags(content) {
     // 处理行首的<td>标签，去除缩进空格
     result = result.replace(/^(\s+)<list>/gm, '<list>');
 
+    // 处理行首的<td>标签，去除缩进空格
+    result = result.replace(/^(\s+)<list type/gm, '<list type');
+
     // 处理行首的</td>标签，去除缩进空格
     result = result.replace(/^(\s+)<\/list>/gm, '</list>');
 
@@ -475,6 +468,31 @@ function convertImages(content) {
         '<img$1/>'
     );
     
+    // 处理已有的HTML图片标签但缺少/img/前缀的情况
+    newContent = newContent.replace(
+        /<img([^>]*?)src=["']([^"'\/][^"':]*?\.(svg|png|jpg|jpeg|gif))["']([^>]*?)(?:\/>|>)/g,
+        (match, beforeSrc, src, ext, afterSrc, closing) => {
+            // 如果图片是http或https链接，或已经有/img/前缀，则不修改
+            if (src.startsWith('http') || src.startsWith('/img/')) {
+                return match;
+            }
+            // 否则添加/img/前缀，保留原始关闭格式
+            return match.replace(`src="${src}"`, `src="/img/${src}"`);
+        }
+    );
+
+    // 检查并修复损坏的图片标签
+    newContent = newContent.replace(
+        /<img([^>]*?)src=["']([^"']*)["']([^>]*?)(\d+\s*<)/g,
+        (match, beforeSrc, src, afterSrc, corrupted) => {
+            // 提取错误插入的数字
+            const fixedTag = `<img${beforeSrc}src="${src}"${afterSrc}/>`;
+            // 分离出被错误合并的标签
+            const nextTag = `<${corrupted.substring(corrupted.indexOf('<')+1)}`;
+            return fixedTag + ' ' + nextTag;
+        }
+    );
+
     return newContent;
 }
 
@@ -720,19 +738,6 @@ function sanitizeMdxContent(content) {
     // 替换<code>标签为反引号
     result = result.replace(/<code>(.*?)<\/code>/g, '`$1`');
     
-    // 处理Markdown链接，为相对路径添加./前缀
-    result = result.replace(
-        /\[([^\]]+)\]\(([^)\/]+\.md[^)]*)\)/g,
-        (match, text, link) => {
-            // 如果链接已经有./或../前缀，或是以#开头(锚点链接)，则不修改
-            if (link.startsWith('./') || link.startsWith('../') || link.startsWith('#')) {
-                return match;
-            }
-            // 否则添加./前缀
-            return `[${text}](\./${link})`;
-        }
-    );
-    
     // 移除文档nullable标记，如 {nullable="true"}
     result = result.replace(/\{nullable="[^"]*"\}/g, '');
 
@@ -867,28 +872,16 @@ function fixAdmonitionsInCode(content) {
 function fixTagsFollowedByAdmonitions(content) {
     let result = content;
     
-    // 修复自闭合标签后的:::
-    result = result.replace(
-        /(<[a-zA-Z][^>]*?\/?>)(:::(tip|caution|note|info|warning))/g,
-        '$1 $2'
-    );
-    
-    // 修复闭合标签后的:::
-    result = result.replace(
-        /(<\/[a-zA-Z][^>]*?>)(:::(tip|caution|note|info|warning))/g,
-        '$1 $2'
-    );
-    
     // 修复条件判断语句中的::: (如 hostOs == "Mac OS X" && isArm64 -:::tip)
     result = result.replace(
-        /([=!<>&|+-])(:::(tip|caution|note|info|warning))/g,
-        '$1 $2'
+        /([=!<>&|+-])\s*(:::(tip|caution|note|info|warning))/g,
+        '$1$2'
     );
     
     // 修复其他符号后的:::
     result = result.replace(
-        /([/\\])(:::(tip|caution|note|info|warning))/g,
-        '$1 $2'
+        /([/\\])\s*(:::(tip|caution|note|info|warning))/g,
+        '$1>'
     );
     
     return result;
