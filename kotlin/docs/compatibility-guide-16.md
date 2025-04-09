@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.6 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构；后者指出，应提前充分沟通移除行为，以尽可能平滑地进行代码迁移。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构；后者指出，应提前充分沟通移除行为，以尽可能平滑地进行代码迁移。
 
 虽然大多数语言变更已经通过其他渠道（如更新日志或编译器警告）发布，但本文档将它们全部汇总，为从 Kotlin 1.5 迁移到 Kotlin 1.6 提供完整的参考。
 

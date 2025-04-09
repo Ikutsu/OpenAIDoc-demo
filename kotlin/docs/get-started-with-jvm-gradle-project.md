@@ -84,7 +84,7 @@ tasks.test { // See 4️⃣
 1. 在 `plugins {}` 块中，有 `kotlin("jvm")` 工件。 此插件定义了要在项目中使用的 Kotlin 版本。
 
 2. 在 `dependencies {}` 块中，有 `testImplementation(kotlin("test"))`。
-   详细了解 [setting dependencies on test libraries（设置测试库的依赖项）](gradle-configure-project.md#set-dependencies-on-test-libraries)。
+   详细了解 [setting dependencies on test libraries（设置测试库的依赖项）](gradle-configure-project#set-dependencies-on-test-libraries)。
 
 ## 运行应用程序
 
@@ -113,6 +113,6 @@ tasks.test { // See 4️⃣
 
 了解更多关于：
 * [Gradle build file properties（Gradle 构建文件属性）](https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#N14E9A)。
-* [Targeting different platforms and setting library dependencies（面向不同的平台和设置库依赖项）](gradle-configure-project.md)。
-* [Compiler options and how to pass them（编译器选项以及如何传递它们）](gradle-compiler-options.md)。
-* [Incremental compilation, caches support, build reports, and the Kotlin daemon（增量编译、缓存支持、构建报告和 Kotlin 守护程序）](gradle-compilation-and-caches.md)。
+* [Targeting different platforms and setting library dependencies（面向不同的平台和设置库依赖项）](gradle-configure-project)。
+* [Compiler options and how to pass them（编译器选项以及如何传递它们）](gradle-compiler-options)。
+* [Incremental compilation, caches support, build reports, and the Kotlin daemon（增量编译、缓存支持、构建报告和 Kotlin 守护程序）](gradle-compilation-and-caches)。

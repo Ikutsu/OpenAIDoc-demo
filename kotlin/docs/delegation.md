@@ -26,7 +26,7 @@ fun main() {
 
 ## 重写通过委托实现的接口的成员
 
-[重写 (Overrides)](inheritance.md#overriding-methods) 的工作方式符合您的预期：编译器将使用您的 `override` 实现，而不是委托对象中的实现。 如果您想将 `override fun printMessage() { print("abc") }` 添加到 `Derived`，则当调用 `printMessage` 时，程序将打印 *abc* 而不是 *10*：
+[重写 (Overrides)](inheritance#overriding-methods) 的工作方式符合您的预期：编译器将使用您的 `override` 实现，而不是委托对象中的实现。 如果您想将 `override fun printMessage() { print("abc") }` 添加到 `Derived`，则当调用 `printMessage` 时，程序将打印 *abc* 而不是 *10*：
 
 ```kotlin
 interface Base {
@@ -76,4 +76,4 @@ fun main() {
 }
 ```
 
-了解更多关于[委托属性 (delegated properties)](delegated-properties.md)的信息。
+了解更多关于[委托属性 (delegated properties)](delegated-properties)的信息。

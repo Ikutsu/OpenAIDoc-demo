@@ -32,4 +32,4 @@ email.value = "hadi@jetbrains.com"
 
 就像你引用这个 `input` 元素一样，你可以访问页面上的其他元素，并将它们强制转换为适当的类型。
 
-要了解如何以简洁的方式在 DOM 中创建和构建元素，请查看 [Typesafe HTML DSL](typesafe-html-dsl.md)。
+要了解如何以简洁的方式在 DOM 中创建和构建元素，请查看 [Typesafe HTML DSL](typesafe-html-dsl)。

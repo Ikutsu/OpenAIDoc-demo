@@ -95,4 +95,4 @@ kotlin {
 
 我们建议升级到 Kotlin 1.9.20 或更高版本。 如果无法升级，请更改内存分配器。 为此，请在 Gradle 构建脚本中为当前的 Kotlin 分配器设置 `-Xallocator=custom` 编译选项，或者为系统分配器设置 `-Xallocator=std`。
 
-有关更多信息，请参见 [Kotlin/Native 内存管理](native-memory-manager.md)。
+有关更多信息，请参见 [Kotlin/Native 内存管理](native-memory-manager)。

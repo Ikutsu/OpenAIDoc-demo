@@ -6,14 +6,14 @@ title: "向你的 Kotlin Notebook 添加依赖"
    这是 <strong>Kotlin Notebook 入门</strong>教程的第三部分。在继续之前，请确保您已完成之前的步骤。
 </p>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="kotlin-notebook-set-up-env.md">搭建环境</a><br/>
-      <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="kotlin-notebook-create.md">创建 Kotlin Notebook</a><br/>
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="kotlin-notebook-set-up-env">搭建环境</a><br/>
+      <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="kotlin-notebook-create">创建 Kotlin Notebook</a><br/>
       <img src="/img/icon-3.svg" width="20" alt="Third step"/> <strong>向 Kotlin Notebook 添加依赖</strong><br/>
 </p>
 
 :::
 
-您已经创建了您的第一个 [Kotlin Notebook](kotlin-notebook-overview.md)！现在让我们学习如何向库添加依赖，这对于解锁高级功能是必要的。
+您已经创建了您的第一个 [Kotlin Notebook](kotlin-notebook-overview)！现在让我们学习如何向库添加依赖，这对于解锁高级功能是必要的。
 
 :::note
 Kotlin 标准库可以直接使用，因此您无需导入它。
@@ -36,8 +36,8 @@ Kotlin 标准库可以直接使用，因此您无需导入它。
 
 让我们向您的 Kotlin Notebook 添加两个流行的 Kotlin 库依赖项：
 * [Kotlin DataFrame 库](https://kotlin.github.io/dataframe/gettingstarted.html) 使您能够在 Kotlin 项目中操作数据。
-您可以使用它来从 [API](data-analysis-work-with-api.md)、[SQL 数据库](data-analysis-connect-to-db.md) 和 [各种文件格式](data-analysis-work-with-data-sources.md)（例如 CSV 或 JSON）检索数据。
-* [Kandy 库](https://kotlin.github.io/kandy/welcome.html) 提供了一个强大而灵活的 DSL，用于[创建图表](data-analysis-visualization.md)。
+您可以使用它来从 [API](data-analysis-work-with-api)、[SQL 数据库](data-analysis-connect-to-db) 和 [各种文件格式](data-analysis-work-with-data-sources)（例如 CSV 或 JSON）检索数据。
+* [Kandy 库](https://kotlin.github.io/kandy/welcome.html) 提供了一个强大而灵活的 DSL，用于[创建图表](data-analysis-visualization)。
 
 要添加这些库：
 
@@ -109,11 +109,11 @@ Kotlin 标准库可以直接使用，因此您无需导入它。
 <img src="/img/kandy-library.png" alt="使用 Kandy 库进行可视化" width="700" style={{verticalAlign: 'middle'}}/>
 
 恭喜您在 Kotlin Notebook 中添加和使用这些库！
-这只是 Kotlin Notebook 及其[支持的库](data-analysis-libraries.md) 可以实现的功能的一瞥。
+这只是 Kotlin Notebook 及其[支持的库](data-analysis-libraries) 可以实现的功能的一瞥。
 
 ## 接下来做什么
 
-* 学习如何[分享您的 Kotlin Notebook](kotlin-notebook-share.md)
+* 学习如何[分享您的 Kotlin Notebook](kotlin-notebook-share)
 * 查看有关[向 Kotlin Notebook 添加依赖](https://www.jetbrains.com/help/idea/kotlin-notebook.html#add-dependencies)的更多详细信息
-* 有关使用 Kotlin DataFrame 库的更全面的指南，请参阅[从文件检索数据](data-analysis-work-with-data-sources.md)
-* 有关 Kotlin 中可用于数据科学和分析的工具和资源的广泛概述，请参阅[用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries.md)
+* 有关使用 Kotlin DataFrame 库的更全面的指南，请参阅[从文件检索数据](data-analysis-work-with-data-sources)
+* 有关 Kotlin 中可用于数据科学和分析的工具和资源的广泛概述，请参阅[用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries)

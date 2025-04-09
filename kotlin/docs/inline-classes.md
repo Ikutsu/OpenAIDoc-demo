@@ -3,7 +3,7 @@ title: "内联值类 (Inline value classes)"
 ---
 有时，将一个值包装在一个类中以创建一个更具领域特定性的类型是很有用的。然而，由于额外的堆分配，这会引入运行时开销。此外，如果被包装的类型是原始类型，性能损失会很显著，因为原始类型通常会被运行时大量优化，而它们的包装器则不会得到任何特殊处理。
 
-为了解决这些问题，Kotlin 引入了一种特殊的类，称为 _内联类_ (inline class)。内联类是 [基于值的类](https://github.com/Kotlin/KEEP/blob/master/notes/value-classes.md) 的一个子集。它们没有标识，只能保存值。
+为了解决这些问题，Kotlin 引入了一种特殊的类，称为 _内联类_ (inline class)。内联类是 [基于值的类](https://github.com/Kotlin/KEEP/blob/master/notes/value-classes) 的一个子集。它们没有标识，只能保存值。
 
 要声明一个内联类，请在类名之前使用 `value` 修饰符：
 
@@ -27,11 +27,11 @@ value class Password(private val s: String)
 val securePassword = Password("Don't try this in production") 
 ```
 
-这是内联类的主要特性，这也启发了 *inline* 这个名字：类的数据被 *内联* 到它的用法中（类似于 [内联函数](inline-functions.md) 的内容如何内联到调用站点）。
+这是内联类的主要特性，这也启发了 *inline* 这个名字：类的数据被 *内联* 到它的用法中（类似于 [内联函数](inline-functions) 的内容如何内联到调用站点）。
 
 ## 成员
 
-内联类支持常规类的某些功能。特别是，它们允许声明属性和函数，拥有一个 `init` 块和[二级构造函数](classes.md#secondary-constructors)：
+内联类支持常规类的某些功能。特别是，它们允许声明属性和函数，拥有一个 `init` 块和[二级构造函数](classes#secondary-constructors)：
 
 ```kotlin
 @JvmInline
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-内联类属性不能有 [backing fields](properties.md#backing-fields)（幕后字段）。它们只能有简单的可计算属性（没有 `lateinit`/委托属性）。
+内联类属性不能有 [backing fields](properties#backing-fields)（幕后字段）。它们只能有简单的可计算属性（没有 `lateinit`/委托属性）。
 
 ## 继承
 
@@ -90,7 +90,7 @@ fun main() {
 
 ## 表示
 
-在生成的代码中，Kotlin 编译器为每个内联类保留一个 *包装器* (wrapper)。内联类实例可以在运行时表示为包装器或底层类型。这类似于 `Int` 如何 [表示](numbers.md#boxing-and-caching-numbers-on-the-java-virtual-machine) 为原始类型 `int` 或包装器 `Integer`。
+在生成的代码中，Kotlin 编译器为每个内联类保留一个 *包装器* (wrapper)。内联类实例可以在运行时表示为包装器或底层类型。这类似于 `Int` 如何 [表示](numbers#boxing-and-caching-numbers-on-the-java-virtual-machine) 为原始类型 `int` 或包装器 `Integer`。
 
 Kotlin 编译器将优先使用底层类型而不是包装器，以生成性能最高和优化过的代码。但是，有时有必要保留包装器。根据经验，每当内联类用作另一种类型时，它们都会被装箱 (boxed)。
 
@@ -121,7 +121,7 @@ fun main() {
 }
 ```
 
-因为内联类可以表示为底层值和包装器，所以 [引用相等](equality.md#referential-equality) 对它们来说是毫无意义的，因此是被禁止的。
+因为内联类可以表示为底层值和包装器，所以 [引用相等](equality#referential-equality) 对它们来说是毫无意义的，因此是被禁止的。
 
 内联类还可以有一个泛型类型参数作为底层类型。在这种情况下，编译器将其映射到 `Any?`，或者通常映射到类型参数的上界。
 
@@ -165,7 +165,7 @@ fun compute(x: UInt) { }
 
 ## 内联类 vs 类型别名
 
-乍一看，内联类似乎与[类型别名](type-aliases.md)非常相似。 事实上，两者似乎都引入了一个新类型，并且在运行时都将表示为底层类型。
+乍一看，内联类似乎与[类型别名](type-aliases)非常相似。 事实上，两者似乎都引入了一个新类型，并且在运行时都将表示为底层类型。
 
 然而，关键的区别在于类型别名与其底层类型（以及具有相同底层类型的其他类型别名）是 *赋值兼容的* (assignment-compatible)，而内联类则不是。
 

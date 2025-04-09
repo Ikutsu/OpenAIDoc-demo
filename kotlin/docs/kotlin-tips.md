@@ -31,13 +31,13 @@ Kotlin Tips 是一系列短视频，Kotlin 团队的成员将在其中展示如�
 
 ## 使用 Elvis 运算符返回和抛出
 
-[Elvis 运算符](null-safety.md#elvis-operator)再次登场！ Sebastian Aigner 解释了为什么该运算符以这位著名歌手的名字命名，以及如何在 Kotlin 中使用 `?:` 来返回或抛出。 背后的魔法是什么？ [Nothing 类型](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing.html)。
+[Elvis 运算符](null-safety#elvis-operator)再次登场！ Sebastian Aigner 解释了为什么该运算符以这位著名歌手的名字命名，以及如何在 Kotlin 中使用 `?:` 来返回或抛出。 背后的魔法是什么？ [Nothing 类型](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing.html)。
 
 <video width="560" height="315" src="https://www.youtube.com/v/L8aFK7QrbA8" title="Kotlin Tips: Return and Throw with the Elvis Operator"/>
 
 ## 解构声明
 
-使用 Kotlin 中的[解构声明](destructuring-declarations.md)，您可以一次性从单个对象创建多个变量。 在此视频中，Sebastian Aigner 向您展示了一系列可以解构的内容——pairs（对）, lists（列表）, maps（映射）等等。 那么你自己的对象呢？ Kotlin 的 component functions（组件函数）也为此提供了一个答案：
+使用 Kotlin 中的[解构声明](destructuring-declarations)，您可以一次性从单个对象创建多个变量。 在此视频中，Sebastian Aigner 向您展示了一系列可以解构的内容——pairs（对）, lists（列表）, maps（映射）等等。 那么你自己的对象呢？ Kotlin 的 component functions（组件函数）也为此提供了一个答案：
 
 <video width="560" height="315" src="https://www.youtube.com/v/zu1PUAvk_Lw" title="Kotlin Tips: Destructuring Declarations"/>
 
@@ -55,29 +55,29 @@ Kotlin Tips 是一系列短视频，Kotlin 团队的成员将在其中展示如�
 
 ## 改进循环
 
-在本视频中，Sebastian Aigner 将演示如何改进[循环](control-flow.md#for-loops)，以使您的代码更具可读性、可理解性和简洁性：
+在本视频中，Sebastian Aigner 将演示如何改进[循环](control-flow#for-loops)，以使您的代码更具可读性、可理解性和简洁性：
 
 <video width="560" height="315" src="https://www.youtube.com/v/i-kyPp1qFBA" title="Kotlin Tips: Improving Loops"/>
 
 ## 字符串
 
-在本集中，Kate Petrova 展示了三个技巧来帮助您在 Kotlin 中使用 [Strings（字符串）](strings.md)：
+在本集中，Kate Petrova 展示了三个技巧来帮助您在 Kotlin 中使用 [Strings（字符串）](strings)：
 
 <video width="560" height="315" src="https://www.youtube.com/v/IL3RLKvWJF4" title="Kotlin Tips: Strings"/>
 
 ## 使用 Elvis 运算符做更多事情
 
-在本视频中，Sebastian Aigner 将展示如何在 [Elvis 运算符](null-safety.md#elvis-operator) 中添加更多逻辑，例如在运算符的右侧进行日志记录：
+在本视频中，Sebastian Aigner 将展示如何在 [Elvis 运算符](null-safety#elvis-operator) 中添加更多逻辑，例如在运算符的右侧进行日志记录：
 
 <video width="560" height="315" src="https://www.youtube.com/v/L9wqYQ-fXaM" title="Kotlin Tips: The Elvis Operator"/>
 
 ## Kotlin 集合
 
-在本集中，Kate Petrova 展示了三个技巧来帮助您使用 [Kotlin Collections（集合）](collections-overview.md)：
+在本集中，Kate Petrova 展示了三个技巧来帮助您使用 [Kotlin Collections（集合）](collections-overview)：
 
 <video width="560" height="315" src="https://www.youtube.com/v/ApXbm1T_eI4" title="Kotlin Tips: Kotlin Collections"/>
 
 ## 接下来是什么？
 
 * 在我们的 [YouTube 播放列表](https://youtube.com/playlist?list=PLlFc5cFwUnmyDrc-mwwAL9cYFkSHoHHz7) 中查看完整的 Kotlin Tips 列表
-* 了解如何为[流行的案例](idioms.md)编写符合 Kotlin 语言习惯的代码
+* 了解如何为[流行的案例](idioms)编写符合 Kotlin 语言习惯的代码

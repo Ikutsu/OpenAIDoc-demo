@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 
 <show-structure depth="1"/>
 
-本指南总结了在使用 Kotlin Multiplatform 开发项目时可能遇到的[不兼容变更](kotlin-evolution-principles.md#incompatible-changes)。
+本指南总结了在使用 Kotlin Multiplatform 开发项目时可能遇到的[不兼容变更](kotlin-evolution-principles#incompatible-changes)。
 
 当前 Kotlin 的稳定版本是 2.1.20。请注意特定变更的弃用周期与你项目中 Kotlin 版本之间的关系，例如：
 
@@ -61,18 +61,18 @@ kotlin {
 此外，Gradle 现在仅在存在 Java 源代码时才运行 Java 编译任务，从而触发以前未运行的 JVM 验证
 诊断。如果你为 `KotlinJvmCompile` 任务或在 `compilerOptions` 中显式配置不兼容的 JVM 目标，此诊断会失败。
 有关确保 JVM 目标兼容性的指南，请参阅
-[检查相关编译任务的 JVM 目标兼容性](gradle-configure-project.md#check-for-jvm-target-compatibility-of-related-compile-tasks)。
+[检查相关编译任务的 JVM 目标兼容性](gradle-configure-project#check-for-jvm-target-compatibility-of-related-compile-tasks)。
 
 如果你的项目使用的 Gradle 版本高于 8.7，并且不依赖 Gradle Java 插件，如 [Java](https://docs.gradle.org/current/userguide/java_plugin.html)、
 [Java Library](https://docs.gradle.org/current/userguide/java_library_plugin.html) 或 [Application](https://docs.gradle.org/current/userguide/application_plugin.html)，
 或者依赖于 Gradle Java 插件的第三方 Gradle 插件，则可以删除 `withJava()` 函数。
 
 如果你的项目使用 [Application](https://docs.gradle.org/current/userguide/application_plugin.html) Gradle Java 插件，
-我们建议迁移到 [新的实验性 DSL](whatsnew2120.md#kotlin-multiplatform-new-dsl-to-replace-gradle-s-application-plugin)。
+我们建议迁移到 [新的实验性 DSL](whatsnew2120#kotlin-multiplatform-new-dsl-to-replace-gradle-s-application-plugin)。
 从 Gradle 8.7 开始，Application 插件将不再与 Kotlin Multiplatform Gradle 插件一起使用。
 
 如果你想在多平台项目中同时使用 Kotlin Multiplatform Gradle 插件和其他 Gradle Java 插件，请参阅
-[与 Kotlin Multiplatform Gradle 插件和 Java 插件的已弃用兼容性](multiplatform-compatibility-guide.md#deprecated-compatibility-with-kotlin-multiplatform-gradle-plugin-and-gradle-java-plugins)。
+[与 Kotlin Multiplatform Gradle 插件和 Java 插件的已弃用兼容性](multiplatform-compatibility-guide#deprecated-compatibility-with-kotlin-multiplatform-gradle-plugin-and-gradle-java-plugins)。
 
 如果你遇到任何问题，请在我们的 [issue tracker](https://kotl.in/issue) 中报告，或在我们的 [公共 Slack 频道](https://kotlinlang.slack.com/archives/C19FD9681) 中寻求帮助。
 
@@ -240,7 +240,7 @@ Kotlin Gradle 插件，从而使其更易于使用和维护生成的构建。
 **发生了什么变化？**
 
 之前，我们[已弃用旧模式](deprecated-gradle-properties-for-hierarchical-structure-support)
-在 Kotlin Multiplatform 项目中，阻止发布“旧版”二进制文件，并鼓励你将项目迁移到 [分层结构](multiplatform-hierarchy.md)。
+在 Kotlin Multiplatform 项目中，阻止发布“旧版”二进制文件，并鼓励你将项目迁移到 [分层结构](multiplatform-hierarchy)。
 
 为了继续从生态系统中逐步淘汰“旧版”二进制文件，从 Kotlin 1.9.0 开始，也不鼓励使用旧版库。
 如果你的项目使用对旧版库的依赖项，你将看到以下警告：
@@ -273,7 +273,7 @@ Kotlin 团队渴望帮助生态系统迁移，因此如果你遇到任何问题�
 
 **发生了什么变化？**
 
-在其发展过程中，Kotlin 逐渐引入了对 [分层结构](multiplatform-hierarchy.md) 的支持，
+在其发展过程中，Kotlin 逐渐引入了对 [分层结构](multiplatform-hierarchy) 的支持，
 在 multiplatform 项目中，能够在公共 source set `commonMain` 和
 任何特定于平台的 source set 之间拥有中间 source set，例如 `jvmMain`。
 
@@ -333,7 +333,7 @@ Kotlin Gradle 插件的公共 API 中删除。这包括：
 
 **现在最佳实践是什么？**
 
-请改用相应的 [Kotlin 目标](multiplatform-dsl-reference.md#targets)，例如：
+请改用相应的 [Kotlin 目标](multiplatform-dsl-reference#targets)，例如：
 <table>
 <tr>
 <td>
@@ -399,7 +399,7 @@ source set。
 `iosMain` 和 `iosTest` 中间 source set。如果你有 `iosArm64` 和 `macosArm64` 目标，则会创建 `appleMain` 和
 `appleTest` source set。
 
-有关更多信息，请参阅 [分层项目结构](multiplatform-hierarchy.md)
+有关更多信息，请参阅 [分层项目结构](multiplatform-hierarchy)
 
 **变更何时生效？**
 
@@ -432,7 +432,7 @@ source set。
 
 **问题何时修复？**
 
-我们计划在 Kotlin 2.0.10 中修复此问题。你可以在 [参与 Kotlin 抢先体验预览](eap.md) 部分中查看是否有任何 Kotlin 2.0.10 的预览版本可用。
+我们计划在 Kotlin 2.0.10 中修复此问题。你可以在 [参与 Kotlin 抢先体验预览](eap) 部分中查看是否有任何 Kotlin 2.0.10 的预览版本可用。
 
 有关更多信息，请参见 [YouTrack 中的相应问题](https://youtrack.jetbrains.com/issue/KT-68257)。
 
@@ -570,7 +570,7 @@ kotlin {
 
    * 我们建议使用 `sourceSets {}` 代码块并配置各个 source set 的依赖项，
      `jsMain {}` 用于生产依赖项，`jsTest {}` 用于测试依赖项。
-     有关更多详细信息，请参阅 [添加依赖项](multiplatform-add-dependencies.md)。
+     有关更多详细信息，请参阅 [添加依赖项](multiplatform-add-dependencies)。
    * 但是，如果你想在顶级代码块中声明你的依赖项，
      请将声明从 `api("group:artifact:1.0")` 更改为 `add("jsMainApi", "group:artifact:1.0")`，依此类推。
 
@@ -679,7 +679,7 @@ kotlin {
 
 **发生了什么变化？**
 
-自 Kotlin 1.9.0 以来，默认使用[新的 Android source set 布局](multiplatform-android-layout.md)。
+自 Kotlin 1.9.0 以来，默认使用[新的 Android source set 布局](multiplatform-android-layout)。
 对旧版布局的支持已弃用，并且使用 `kotlin.mpp.androidSourceSetLayoutVersion` Gradle 属性
 现在会触发弃用诊断。
 

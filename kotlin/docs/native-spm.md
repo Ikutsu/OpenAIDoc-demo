@@ -9,7 +9,7 @@ title: "Swift 包导出设置"
    * 你已经在本地机器上设置了一个以 iOS 为目标的 Kotlin Multiplatform 项目。
    * 你使用 Swift 包管理器 (SPM, Swift Package Manager) 来处理 iOS 项目中的依赖项。<br/>
 
-   [选择最适合你的集成方法](multiplatform-ios-integration-overview.md)
+   [选择最适合你的集成方法](multiplatform-ios-integration-overview)
 
 :::
 
@@ -17,7 +17,7 @@ title: "Swift 包导出设置"
 
 考虑一个具有 iOS 目标的 Kotlin Multiplatform 项目。 你可能希望将此 iOS 二进制文件作为依赖项提供给从事原生 Swift 项目的 iOS 开发人员。 使用 Kotlin Multiplatform 工具，你可以提供一个可以与他们的 Xcode 项目无缝集成的工件 (artifact)。
 
-本教程展示了如何通过使用 Kotlin Gradle 插件构建 [XCFrameworks](multiplatform-build-native-binaries.md#build-xcframeworks) 来实现这一点。
+本教程展示了如何通过使用 Kotlin Gradle 插件构建 [XCFrameworks](multiplatform-build-native-binaries#build-xcframeworks) 来实现这一点。
 
 ## 设置远程集成
 

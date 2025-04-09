@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.8.0 新特性"
 ---
-_[发布时间：2022 年 12 月 28 日](releases.md#release-details)_
+_[发布时间：2022 年 12 月 28 日](releases#release-details)_
 
 Kotlin 1.8.0 版本已发布，以下是其一些最主要亮点：
 
@@ -57,7 +57,7 @@ Kotlin 1.8.0 添加了一个新的 `-Xdebug` 编译器选项，该选项禁用�
 
 ### 旧后端的移除
 
-在 Kotlin 1.5.0 中，我们[宣布](whatsnew15.md#stable-jvm-ir-backend)基于 IR 的后端已变为[稳定版](components-stability.md)。
+在 Kotlin 1.5.0 中，我们[宣布](whatsnew15#stable-jvm-ir-backend)基于 IR 的后端已变为[稳定版](components-stability)。
 这意味着来自 Kotlin 1.4.* 的旧后端已弃用。在 Kotlin 1.8.0 中，我们已完全删除旧后端。
 通过扩展，我们删除了编译器选项 `-Xuse-old-backend` 和 Gradle `useOldBackend` 选项。
 
@@ -67,7 +67,7 @@ Kotlin 1.8.0 添加了一个新的 `-Xdebug` 编译器选项，该选项禁用�
 
 我们还没有支持 `@SuperBuilder` 或 `@Tolerate` 注解的计划，但如果足够多的人为 [@SuperBuilder](https://youtrack.jetbrains.com/issue/KT-53563/Kotlin-Lombok-Support-SuperBuilder) 和 [@Tolerate](https://youtrack.jetbrains.com/issue/KT-53564/Kotlin-Lombok-Support-Tolerate) 问题投票，我们将重新考虑。
 
-[了解如何配置 Lombok 编译器插件](lombok.md#gradle)。
+[了解如何配置 Lombok 编译器插件](lombok#gradle)。
 
 ## Kotlin/Native
 
@@ -118,7 +118,7 @@ Kotlin/Native 编译器现在支持最新的稳定 Xcode 版本 14.1。兼容性
 
   有关在 Swift 中改进 Objective-C 声明的更多信息，请参阅 [Apple 官方文档](https://developer.apple.com/documentation/swift/improving-objective-c-api-declarations-for-swift)。
 
-新的注解需要 [选择加入](opt-in-requirements.md)。
+新的注解需要 [选择加入](opt-in-requirements)。
 
 :::
 
@@ -143,7 +143,7 @@ kotlin {
 如果你有一个具有静态链接类型的现有项目，并且你升级到 Kotlin 1.8.0（或显式更改链接类型），你可能会遇到项目执行错误。
 要解决此问题，请关闭你的 Xcode 项目并在 Podfile 目录中运行 `pod install`。
 
-有关更多信息，请参阅 [CocoaPods Gradle 插件 DSL 参考](native-cocoapods-dsl-reference.md)。
+有关更多信息，请参阅 [CocoaPods Gradle 插件 DSL 参考](native-cocoapods-dsl-reference)。
 
 ## Kotlin Multiplatform：新的 Android 源码集布局
 
@@ -270,13 +270,13 @@ Kotlin 1.8.0 稳定了 JS IR 编译器后端，并为与 JavaScript 相关的 Gr
 
 ### 稳定的 JS IR 编译器后端
 
-从该版本开始，[Kotlin/JS 中间表示 (IR-based) 编译器](js-ir-compiler.md) 后端是稳定的。统一所有三个后端的基础架构花费了一段时间，但它们现在使用相同的 IR 来处理 Kotlin 代码。
+从该版本开始，[Kotlin/JS 中间表示 (IR-based) 编译器](js-ir-compiler) 后端是稳定的。统一所有三个后端的基础架构花费了一段时间，但它们现在使用相同的 IR 来处理 Kotlin 代码。
 
 作为稳定 JS IR 编译器后端的后果，旧的后端从现在开始被弃用。
 
 增量编译与稳定的 JS IR 编译器一起默认启用。
 
-如果你仍然使用旧的编译器，请借助我们的 [迁移指南](js-ir-migration.md) 将你的项目切换到新的后端。
+如果你仍然使用旧的编译器，请借助我们的 [迁移指南](js-ir-migration) 将你的项目切换到新的后端。
 
 ### 用于报告 yarn.lock 已更新的新设置
 
@@ -426,13 +426,13 @@ Gradle 将为 [`kotlin-dsl` plugin](https://github.com/gradle/gradle/issues/2209
 
 从 Kotlin 1.8.0 开始，最低支持的 Gradle 版本是 6.8.3，最低支持的 Android Gradle 插件版本是 4.1.3。
 
-请参阅我们的文档中 [Kotlin Gradle 插件与可用 Gradle 版本的兼容性](gradle-configure-project.md#apply-the-plugin)
+请参阅我们的文档中 [Kotlin Gradle 插件与可用 Gradle 版本的兼容性](gradle-configure-project#apply-the-plugin)
 
 ### 禁用 Kotlin 守护程序回退策略的能力
 
 有一个新的 Gradle 属性 `kotlin.daemon.useFallbackStrategy`，其默认值为 `true`。当值为 `false` 时，构建会在守护程序启动或通信出现问题时失败。Kotlin 编译任务中还有一个新的 `useDaemonFallbackStrategy` 属性，如果你同时使用两者，则该属性优先于 Gradle 属性。如果内存不足以运行编译，你可以在日志中看到有关它的消息。
 
-Kotlin 编译器的回退策略是在守护程序以某种方式失败时在 Kotlin 守护程序之外运行编译。如果 Gradle 守护程序已打开，则编译器使用“进程内（In process）”策略。如果 Gradle 守护程序已关闭，则编译器使用“进程外（Out of process）”策略。在文档中了解有关这些 [执行策略的更多信息](gradle-compilation-and-caches.md#defining-kotlin-compiler-execution-strategy)。请注意，静默回退到另一个策略可能会消耗大量系统资源或导致不确定的构建；有关更多详细信息，请参阅此 [YouTrack 问题](https://youtrack.jetbrains.com/issue/KT-48843/Add-ability-to-disable-Kotlin-daemon-fallback-strategy)。
+Kotlin 编译器的回退策略是在守护程序以某种方式失败时在 Kotlin 守护程序之外运行编译。如果 Gradle 守护程序已打开，则编译器使用“进程内（In process）”策略。如果 Gradle 守护程序已关闭，则编译器使用“进程外（Out of process）”策略。在文档中了解有关这些 [执行策略的更多信息](gradle-compilation-and-caches#defining-kotlin-compiler-execution-strategy)。请注意，静默回退到另一个策略可能会消耗大量系统资源或导致不确定的构建；有关更多详细信息，请参阅此 [YouTrack 问题](https://youtrack.jetbrains.com/issue/KT-48843/Add-ability-to-disable-Kotlin-daemon-fallback-strategy)。
 
 ### 在传递依赖项中使用最新的 kotlin-stdlib 版本
 
@@ -448,7 +448,7 @@ kotlin.stdlib.jdk.variants.version.alignment=false
 implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 ```
 
-在 [文档](gradle-configure-project.md#other-ways-to-align-versions) 中了解有关其他情况以及我们建议的解决方案。
+在 [文档](gradle-configure-project#other-ways-to-align-versions) 中了解有关其他情况以及我们建议的解决方案。
 
 ### 必须检查相关 Kotlin 和 Java 编译任务的 JVM 目标
 
@@ -456,15 +456,15 @@ implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
 :::
 
-[从该版本开始](https://youtrack.jetbrains.com/issue/KT-54993/Raise-kotlin.jvm.target.validation.mode-check-default-level-to-error-when-build-is-running-on-Gradle-8)，[`kotlin.jvm.target.validation.mode` 属性](gradle-configure-project.md#check-for-jvm-target-compatibility-of-related-compile-tasks) 的默认值对于 Gradle 8.0+ 上的项目是 `error`（此版本的 Gradle 尚未发布），并且插件将在 JVM 目标不兼容的情况下使构建失败。
+[从该版本开始](https://youtrack.jetbrains.com/issue/KT-54993/Raise-kotlin.jvm.target.validation.mode-check-default-level-to-error-when-build-is-running-on-Gradle-8)，[`kotlin.jvm.target.validation.mode` 属性](gradle-configure-project#check-for-jvm-target-compatibility-of-related-compile-tasks) 的默认值对于 Gradle 8.0+ 上的项目是 `error`（此版本的 Gradle 尚未发布），并且插件将在 JVM 目标不兼容的情况下使构建失败。
 
-将默认值从 `warning` 更改为 `error` 是为平稳迁移到 Gradle 8.0 做的准备步骤。**我们鼓励你将此属性设置为 `error`** 并 [配置工具链](gradle-configure-project.md#gradle-java-toolchains-support) 或手动对齐 JVM 版本。
+将默认值从 `warning` 更改为 `error` 是为平稳迁移到 Gradle 8.0 做的准备步骤。**我们鼓励你将此属性设置为 `error`** 并 [配置工具链](gradle-configure-project#gradle-java-toolchains-support) 或手动对齐 JVM 版本。
 
-了解有关 [如果不检查目标的兼容性会发生什么情况的更多信息](gradle-configure-project.md#what-can-go-wrong-if-targets-are-incompatible)。
+了解有关 [如果不检查目标的兼容性会发生什么情况的更多信息](gradle-configure-project#what-can-go-wrong-if-targets-are-incompatible)。
 
 ### Kotlin Gradle 插件的传递依赖项的解析
 
-在 Kotlin 1.7.0 中，我们引入了 [对 Gradle 插件变体的支持](whatsnew17.md#support-for-gradle-plugin-variants)。由于这些插件变体，构建类路径可能具有不同版本的 [Kotlin Gradle 插件](https://plugins.gradle.org/u/kotlin)，这些插件依赖于某些依赖项（通常为 `kotlin-gradle-plugin-api`）的不同版本。这可能导致解析问题，我们想提出以下解决方法，以 `kotlin-dsl` 插件为例。
+在 Kotlin 1.7.0 中，我们引入了 [对 Gradle 插件变体的支持](whatsnew17#support-for-gradle-plugin-variants)。由于这些插件变体，构建类路径可能具有不同版本的 [Kotlin Gradle 插件](https://plugins.gradle.org/u/kotlin)，这些插件依赖于某些依赖项（通常为 `kotlin-gradle-plugin-api`）的不同版本。这可能导致解析问题，我们想提出以下解决方法，以 `kotlin-dsl` 插件为例。
 
 Gradle 7.6 中的 `kotlin-dsl` 插件依赖于 `org.jetbrains.kotlin.plugin.sam.with.receiver:1.7.10` 插件，该插件依赖于 `kotlin-gradle-plugin-api:1.7.10`。如果你添加 `org.jetbrains.kotlin.gradle.jvm:1.8.0` 插件，由于版本（`1.8.0` 和 `1.7.10`）和变体属性的 [`org.gradle.plugin.api-version`](https://docs.gradle.org/current/javadoc/org/gradle/api/attributes/plugin/GradlePluginApiVersion.html) 值不匹配，此 `kotlin-gradle-plugin-api:1.7.10` 传递依赖项可能会导致依赖项解析错误。作为解决方法，添加此 [约束](https://docs.gradle.org/current/userguide/dependency_constraints.html#sec:adding-constraints-transitive-deps) 以对齐版本。在我们实现 [Kotlin Gradle 插件库对齐平台](https://youtrack.jetbrains.com/issue/KT-54691/Kotlin-Gradle-Plugin-libraries-alignment-platform) 之前，可能需要此解决方法，该平台正在计划中：
 
@@ -482,9 +482,9 @@ dependencies {
 
 在 Kotlin 1.8.0 中，以下属性和方法的弃用周期继续：
 
-* [在 Kotlin 1.7.0 的说明中](whatsnew17.md#changes-in-compile-tasks) 指出 `KotlinCompile` 任务仍然具有已弃用的 Kotlin 属性 `classpath`，该属性将在未来的版本中删除。现在，我们已将 `KotlinCompile` 任务的 `classpath` 属性的弃用级别更改为 `error`。所有编译任务都使用 `libraries` 输入来获取编译所需的库列表。
-* 我们删除了 `kapt.use.worker.api` 属性，该属性允许通过 Gradle Workers API 运行 [kapt](kapt.md)。默认情况下，自 Kotlin 1.3.70 以来，[kapt 一直在使用 Gradle workers](kapt.md#run-kapt-tasks-in-parallel)，我们建议坚持使用此方法。
-* 在 Kotlin 1.7.0 中，我们 [宣布了 `kotlin.compiler.execution.strategy` 属性的弃用周期的开始](whatsnew17.md#deprecation-of-the-kotlin-compiler-execution-strategy-system-property)。在此版本中，我们删除了此属性。了解如何在其他方式中 [定义 Kotlin 编译器执行策略](gradle-compilation-and-caches.md#defining-kotlin-compiler-execution-strategy)。
+* [在 Kotlin 1.7.0 的说明中](whatsnew17#changes-in-compile-tasks) 指出 `KotlinCompile` 任务仍然具有已弃用的 Kotlin 属性 `classpath`，该属性将在未来的版本中删除。现在，我们已将 `KotlinCompile` 任务的 `classpath` 属性的弃用级别更改为 `error`。所有编译任务都使用 `libraries` 输入来获取编译所需的库列表。
+* 我们删除了 `kapt.use.worker.api` 属性，该属性允许通过 Gradle Workers API 运行 [kapt](kapt)。默认情况下，自 Kotlin 1.3.70 以来，[kapt 一直在使用 Gradle workers](kapt#run-kapt-tasks-in-parallel)，我们建议坚持使用此方法。
+* 在 Kotlin 1.7.0 中，我们 [宣布了 `kotlin.compiler.execution.strategy` 属性的弃用周期的开始](whatsnew17#deprecation-of-the-kotlin-compiler-execution-strategy-system-property)。在此版本中，我们删除了此属性。了解如何在其他方式中 [定义 Kotlin 编译器执行策略](gradle-compilation-and-caches#defining-kotlin-compiler-execution-strategy)。
 
 ## 标准库
 

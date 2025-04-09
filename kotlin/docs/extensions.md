@@ -37,7 +37,7 @@ fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
 ```
 
 你需要在函数名称之前声明泛型类型参数，使其在接收者类型表达式中可用。
-有关泛型的更多信息，请参见 [泛型函数](generics.md)。
+有关泛型的更多信息，请参见 [泛型函数](generics)。
 
 ## 扩展是 _静态_ 解析的
 
@@ -124,7 +124,7 @@ val <T> List<T>.lastIndex: Int
 ```
 
 :::note
-由于扩展实际上并没有将成员插入到类中，因此扩展属性没有有效的方法来拥有一个 [幕后字段](properties.md#backing-fields)。 这就是为什么 _扩展属性不允许初始化器_。 它们的行为只能通过显式提供 getters/setters 来定义。
+由于扩展实际上并没有将成员插入到类中，因此扩展属性没有有效的方法来拥有一个 [幕后字段](properties#backing-fields)。 这就是为什么 _扩展属性不允许初始化器_。 它们的行为只能通过显式提供 getters/setters 来定义。
 
 :::
 
@@ -136,7 +136,7 @@ val House.number = 1 // 错误：扩展属性不允许初始化器
 
 ## 伴生对象扩展
 
-如果一个类定义了一个 [伴生对象](object-declarations.md#companion-objects)，你也可以为伴生对象定义扩展函数和属性。 与伴生对象的常规成员一样，它们只能使用类名作为限定符来调用：
+如果一个类定义了一个 [伴生对象](object-declarations#companion-objects)，你也可以为伴生对象定义扩展函数和属性。 与伴生对象的常规成员一样，它们只能使用类名作为限定符来调用：
 
 ```kotlin
 class MyClass {
@@ -173,7 +173,7 @@ fun main() {
 }
 ```
 
-有关更多信息，请参见 [导入](packages.md#imports)。
+有关更多信息，请参见 [导入](packages#imports)。
 
 ## 将扩展声明为成员
 
@@ -205,7 +205,7 @@ fun main() {
 }
 ```
 
-如果在分发接收者和扩展接收者的成员之间存在名称冲突，则扩展接收者优先。 要引用分发接收者的成员，可以使用 [限定的 `this` 语法](this-expressions.md#qualified-this)。
+如果在分发接收者和扩展接收者的成员之间存在名称冲突，则扩展接收者优先。 要引用分发接收者的成员，可以使用 [限定的 `this` 语法](this-expressions#qualified-this)。
 
 ```kotlin
 class Connection {
@@ -256,7 +256,7 @@ fun main() {
 
 ## 关于可见性的说明
 
-扩展使用与在相同作用域中声明的常规函数相同的 [可见性修饰符](visibility-modifiers.md)。
+扩展使用与在相同作用域中声明的常规函数相同的 [可见性修饰符](visibility-modifiers)。
 例如：
 
 * 在文件的顶层声明的扩展可以访问同一文件中其他 `private` 顶层声明。

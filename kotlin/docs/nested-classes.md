@@ -43,11 +43,11 @@ class Outer {
 val demo = Outer().Inner().foo() // == 1
 ```
 
-请参阅[限定的 `this` 表达式](this-expressions.md) 以了解内部类中 `this` 的消除歧义。
+请参阅[限定的 `this` 表达式](this-expressions) 以了解内部类中 `this` 的消除歧义。
 
 ## 匿名内部类 (Anonymous inner classes)
 
-匿名内部类实例是使用[对象表达式](object-declarations.md#object-expressions)创建的：
+匿名内部类实例是使用[对象表达式](object-declarations#object-expressions)创建的：
 
 ```kotlin
 window.addMouseListener(object : MouseAdapter() {

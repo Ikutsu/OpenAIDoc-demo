@@ -2,7 +2,7 @@
 title: "与 C 的互操作性"
 ---
 :::note
-C 库的导入是 [实验性的](components-stability.md#stability-levels-explained)。
+C 库的导入是 [实验性的](components-stability#stability-levels-explained)。
 所有由 cinterop 工具从 C 库生成的 Kotlin 声明都应具有 `@ExperimentalForeignApi` 注解。
 
 Kotlin/Native 附带的 Native 平台库（例如 Foundation、UIKit 和 POSIX）
@@ -15,7 +15,7 @@ Kotlin/Native 附带的 Native 平台库（例如 Foundation、UIKit 和 POSIX�
 然后，生成的桩可以导入到 IDE 中，以启用代码完成和导航。
 
 Kotlin 还提供与 Objective-C 的互操作性。Objective-C 库也通过 cinterop 工具导入。
-有关更多详细信息，请参阅 [Swift/Objective-C 互操作](native-objc-interop.md)。
+有关更多详细信息，请参阅 [Swift/Objective-C 互操作](native-objc-interop)。
 
 :::
 
@@ -23,17 +23,17 @@ Kotlin 还提供与 Objective-C 的互操作性。Objective-C 库也通过 cinte
 
 以下是使用需要使用 C 库的项目的通用工作流程：
 
-1. 创建并配置一个 [定义文件](native-definition-file.md)。它描述了 cinterop 工具应将什么
+1. 创建并配置一个 [定义文件](native-definition-file)。它描述了 cinterop 工具应将什么
    包含到 Kotlin [绑定](#bindings)中。
 2. 配置你的 Gradle 构建文件，以将 cinterop 包含在构建过程中。
 3. 编译并运行项目以生成最终的可执行文件。
 
-为了获得实践经验，请完成 [使用 C 互操作创建应用程序](native-app-with-c-and-libcurl.md) 教程。
+为了获得实践经验，请完成 [使用 C 互操作创建应用程序](native-app-with-c-and-libcurl) 教程。
 
 :::
 
 在许多情况下，无需配置与 C 库的自定义互操作性。相反，你可以使用平台上可用的 API，
-这些 API 是称为 [平台库](native-platform-libs.md) 的标准化绑定。例如，
+这些 API 是称为 [平台库](native-platform-libs) 的标准化绑定。例如，
 Linux/macOS 平台上的 POSIX、Windows 平台上的 Win32 或 macOS/iOS 上的 Apple 框架都可以通过这种方式获得。
 
 ## 绑定 (Bindings)
@@ -45,7 +45,7 @@ Linux/macOS 平台上的 POSIX、Windows 平台上的 Win32 或 macOS/iOS 上的
 * 有符号、无符号整型和浮点类型映射到 Kotlin 中具有相同宽度的对应类型。
 * 指针和数组映射到 `CPointer<T>?`。
 * 枚举可以映射到 Kotlin 枚举或整型值，具体取决于启发式方法和
-  [定义文件设置](native-definition-file.md#configure-enums-generation)。
+  [定义文件设置](native-definition-file#configure-enums-generation)。
 * 结构体和联合体映射到通过点表示法访问字段的类型，例如 `someStructInstance.field1`。
 * `typedef` 表示为 `typealias`。
 
@@ -226,7 +226,7 @@ val cString = kotlinString.cstr.getPointer(nativeHeap)
 在所有情况下，C 字符串都应编码为 UTF-8。
 
 要跳过自动转换并确保在绑定中使用原始指针，请将
-[`noStringConversion` 属性](native-definition-file.md#set-up-string-conversion) 添加到 `.def` 文件：
+[`noStringConversion` 属性](native-definition-file#set-up-string-conversion) 添加到 `.def` 文件：
 
 ```c
 noStringConversion = LoadCursorA LoadCursorW
@@ -353,7 +353,7 @@ int foo(int);
 
 为了支持其他宏，你可以通过使用支持的声明包装它们来手动公开它们。例如，
 函数式宏 `FOO` 可以通过
-[向库添加自定义声明](native-definition-file.md#add-custom-declarations) 作为函数 `foo()` 公开：
+[向库添加自定义声明](native-definition-file#add-custom-declarations) 作为函数 `foo()` 公开：
 
 ```c
 headers = library/base.h
@@ -501,8 +501,8 @@ fun test() {
 
 通过完成以下教程，了解类型、函数和常量如何在 Kotlin 和 C 之间映射：
 
-* [从 C 映射原始数据类型](mapping-primitive-data-types-from-c.md)
-* [从 C 映射结构体和联合体类型](mapping-function-pointers-from-c.md)
-* [从 C 映射函数指针](mapping-function-pointers-from-c.md)
-* [从 C 映射字符串](mapping-strings-from-c.md)
+* [从 C 映射原始数据类型](mapping-primitive-data-types-from-c)
+* [从 C 映射结构体和联合体类型](mapping-function-pointers-from-c)
+* [从 C 映射函数指针](mapping-function-pointers-from-c)
+* [从 C 映射字符串](mapping-strings-from-c)
   ```

@@ -6,12 +6,12 @@ title: 你好，世界
 :::info
 <p>
    <img src="/img/icon-1.svg" width="20" alt="First step" /> <strong>Hello world（你好，世界）</strong><br />
-        <img src="/img/icon-2-todo.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型 (Basic types)</a><br />
-        <img src="/img/icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合 (Collections)</a><br />
-        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流 (Control flow)</a><br />
-        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数 (Functions)</a><br />
-        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类 (Classes)</a><br />
-        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null 安全 (Null safety)</a>
+        <img src="/img/icon-2-todo.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types">基本类型 (Basic types)</a><br />
+        <img src="/img/icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections">集合 (Collections)</a><br />
+        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow">控制流 (Control flow)</a><br />
+        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions">函数 (Functions)</a><br />
+        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes">类 (Classes)</a><br />
+        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety">Null 安全 (Null safety)</a>
 </p>
 
 :::
@@ -94,9 +94,9 @@ fun main() {
 }
 ```
 
-更多信息，请参阅 [字符串模板 (String templates)](strings.md#string-templates)。
+更多信息，请参阅 [字符串模板 (String templates)](strings#string-templates)。
 
-你会注意到没有为变量声明任何类型。 Kotlin 已经推断出了类型：`Int`。 本教程将在[下一章](kotlin-tour-basic-types.md)中解释不同的 Kotlin 基本类型以及如何声明它们。
+你会注意到没有为变量声明任何类型。 Kotlin 已经推断出了类型：`Int`。 本教程将在[下一章](kotlin-tour-basic-types)中解释不同的 Kotlin 基本类型以及如何声明它们。
 
 ## 练习 (Practice)
 
@@ -124,4 +124,4 @@ fun main() {
 
 ## 下一步 (Next step)
 
-[基本类型 (Basic types)](kotlin-tour-basic-types.md)
+[基本类型 (Basic types)](kotlin-tour-basic-types)

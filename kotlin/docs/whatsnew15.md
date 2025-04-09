@@ -4,7 +4,7 @@ title: "Kotlin 1.5.0 新特性"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[发布时间：2021 年 5 月 5 日](releases.md#release-details)_
+_[发布时间：2021 年 5 月 5 日](releases#release-details)_
 
 Kotlin 1.5.0 引入了新的语言特性、稳定的基于 IR 的 JVM 编译器后端、性能改进以及演进式变更，例如稳定实验性特性和弃用过时的特性。
 
@@ -12,7 +12,7 @@ Kotlin 1.5.0 引入了新的语言特性、稳定的基于 IR 的 JVM 编译器�
 
 ## 语言特性
 
-Kotlin 1.5.0 带来了新的语言特性的稳定版本，这些特性已在 [1.4.30 中预览](whatsnew1430.md#language-features)过：
+Kotlin 1.5.0 带来了新的语言特性的稳定版本，这些特性已在 [1.4.30 中预览](whatsnew1430#language-features)过：
 * [JVM 记录类支持](#jvm-records-support)
 * [密封接口](#sealed-interfaces) 和 [密封类改进](#package-wide-sealed-class-hierarchies)
 * [内联类](#inline-classes)
@@ -32,7 +32,7 @@ Kotlin 对 JVM 记录类的支持包括双向互操作性：
 data class User(val name: String, val age: Int)
 ```
 
-[了解更多关于在 Kotlin 中使用 JVM 记录的信息](jvm-records.md)。
+[了解更多关于在 Kotlin 中使用 JVM 记录的信息](jvm-records)。
 
 <video src="https://www.youtube.com/v/iyEWXyuuseU" title="Support for JVM Records in Kotlin 1.5.0"/>
 
@@ -61,7 +61,7 @@ fun draw(polygon: Polygon) = when (polygon) {
 class FilledRectangle: Polygon, Fillable
 ```
 
-[了解更多关于密封接口的信息](sealed-classes.md)。
+[了解更多关于密封接口的信息](sealed-classes)。
 
 <video src="https://www.youtube.com/v/d_Mor21W_60" title="Sealed Interfaces and Sealed Classes Improvements"/>
 
@@ -73,11 +73,11 @@ class FilledRectangle: Polygon, Fillable
 
 密封类的子类必须具有正确限定的名称——它们不能是局部或匿名对象。
 
-[了解更多关于密封类层级的信息](sealed-classes.md#inheritance)。
+[了解更多关于密封类层级的信息](sealed-classes#inheritance)。
 
 ### 内联类
 
-内联类是仅保存值的[基于值](https://github.com/Kotlin/KEEP/blob/master/notes/value-classes.md)的类的子集。 您可以使用它们作为某种类型的值的包装器，而无需使用内存分配带来的额外开销。
+内联类是仅保存值的[基于值](https://github.com/Kotlin/KEEP/blob/master/notes/value-classes)的类的子集。 您可以使用它们作为某种类型的值的包装器，而无需使用内存分配带来的额外开销。
 
 可以使用类名之前的 `value` 修饰符声明内联类：
 
@@ -94,7 +94,7 @@ value class Password(val s: String)
 
 `inline` 修饰符现在已弃用，并带有警告。
 
-[了解更多关于内联类的信息](inline-classes.md)。
+[了解更多关于内联类的信息](inline-classes)。
 
 <video src="https://www.youtube.com/v/LpqvtgibbsQ" title="From Inline to Value Classes"/>
 
@@ -111,9 +111,9 @@ Kotlin/JVM 收到了一些改进，包括内部改进和面向用户的改进。
 
 ### 稳定的 JVM IR 后端
 
-用于 Kotlin/JVM 编译器的 [基于 IR 的后端](whatsnew14.md#new-jvm-ir-backend) 现在是[稳定的](components-stability.md) 并且默认启用。
+用于 Kotlin/JVM 编译器的 [基于 IR 的后端](whatsnew14#new-jvm-ir-backend) 现在是[稳定的](components-stability) 并且默认启用。
 
-从 [Kotlin 1.4.0](whatsnew14.md) 开始，基于 IR 的后端的早期版本可用于预览，现在它已成为语言版本 `1.5` 的默认设置。旧后端仍然是早期语言版本的默认设置。
+从 [Kotlin 1.4.0](whatsnew14) 开始，基于 IR 的后端的早期版本可用于预览，现在它已成为语言版本 `1.5` 的默认设置。旧后端仍然是早期语言版本的默认设置。
 
 您可以在[这篇博客文章](https://blog.jetbrains.com/kotlin/2021/02/the-jvm-backend-is-in-beta-let-s-make-it-stable-together/)中找到有关 IR 后端的优势及其未来发展的更多详细信息。
 
@@ -158,27 +158,27 @@ Kotlin/JVM 编译的默认目标版本现在是 `1.8`。 `1.6` 目标已弃用�
 
 如果您需要构建 JVM 1.6，您仍然可以切换到此目标。 了解方法：
 
-* [在 Gradle 中](gradle-compiler-options.md#attributes-specific-to-jvm)
-* [在 Maven 中](maven.md#attributes-specific-to-jvm)
-* [在命令行编译器中](compiler-reference.md#jvm-target-version)
+* [在 Gradle 中](gradle-compiler-options#attributes-specific-to-jvm)
+* [在 Maven 中](maven#attributes-specific-to-jvm)
+* [在命令行编译器中](compiler-reference#jvm-target-version)
 
 ### 通过 invokedynamic 实现 SAM 适配器
 
 Kotlin 1.5.0 现在使用动态调用 (`invokedynamic`) 来编译 SAM (Single Abstract Method) 转换：
-* 如果 SAM 类型是 [Java 接口](java-interop.md#sam-conversions)，则可以应用于任何表达式
-* 如果 SAM 类型是 [Kotlin 函数式接口](fun-interfaces.md#sam-conversions)，则可以应用于 lambda 表达式
+* 如果 SAM 类型是 [Java 接口](java-interop#sam-conversions)，则可以应用于任何表达式
+* 如果 SAM 类型是 [Kotlin 函数式接口](fun-interfaces#sam-conversions)，则可以应用于 lambda 表达式
 
 新的实现使用 [`LambdaMetafactory.metafactory()`](https://docs.oracle.com/javase/8/docs/api/java/lang/invoke/LambdaMetafactory.html#metafactory-java.lang.invoke.MethodHandles.Lookup-java.lang.String-java.lang.invoke.MethodType-java.lang.invoke.MethodType-java.lang.invoke.MethodHandle-java.lang.invoke.MethodType-)
 并且在编译期间不再生成辅助包装器类。 这减少了应用程序 JAR 的大小，从而提高了 JVM 启动性能。
 
 要回滚到基于匿名类生成的旧实现方案，请添加编译器选项 `-Xsam-conversions=class`。
 
-了解如何在 [Gradle](gradle-compiler-options.md)、[Maven](maven.md#specify-compiler-options) 和 [命令行编译器](compiler-reference.md#compiler-options) 中添加编译器选项。
+了解如何在 [Gradle](gradle-compiler-options)、[Maven](maven#specify-compiler-options) 和 [命令行编译器](compiler-reference#compiler-options) 中添加编译器选项。
 
 ### 通过 invokedynamic 实现 Lambdas
 
 :::note
-将纯 Kotlin lambda 编译为 invokedynamic 是 [Experimental](components-stability.md) 的。 它可能随时被删除或更改。
+将纯 Kotlin lambda 编译为 invokedynamic 是 [Experimental](components-stability) 的。 它可能随时被删除或更改。
 需要选择加入（请参阅下面的详细信息），您应该仅将其用于评估目的。 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-45375) 上分享您的反馈。
 
 Kotlin 1.5.0 引入了对将纯 Kotlin lambda（未转换为函数式接口实例）编译为动态调用 (`invokedynamic`) 的实验性支持。 该实现通过使用
@@ -191,7 +191,7 @@ Kotlin 1.5.0 引入了对将纯 Kotlin lambda（未转换为函数式接口实�
 
 要尝试此功能，请添加 `-Xlambdas=indy` 编译器选项。 如果您能使用此 [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-45375) 分享您的反馈，我们将不胜感激。
 
-了解如何在 [Gradle](gradle-compiler-options.md)、[Maven](maven.md#specify-compiler-options) 和 [命令行编译器](compiler-reference.md#compiler-options) 中添加编译器选项。
+了解如何在 [Gradle](gradle-compiler-options)、[Maven](maven#specify-compiler-options) 和 [命令行编译器](compiler-reference#compiler-options) 中添加编译器选项。
 
 ### 弃用 @JvmDefault 和旧的 Xjvm-default 模式
 
@@ -202,11 +202,11 @@ Kotlin 1.5.0 引入了对将纯 Kotlin lambda（未转换为函数式接口实�
 
 在 Kotlin 1.5.0 中，我们弃用了 `@JvmDefault` 和旧的 Xjvm-default 模式：`-Xjvm-default=enable` 和 `-Xjvm-default=compatibility`。
 
-[了解更多关于 Java 互操作中的默认方法的信息](java-to-kotlin-interop.md#default-methods-in-interfaces)。
+[了解更多关于 Java 互操作中的默认方法的信息](java-to-kotlin-interop#default-methods-in-interfaces)。
 
 ### 改进了对可空性注解的处理
 
-Kotlin 支持使用[可空性注解](java-interop.md#nullability-annotations)处理来自 Java 的类型可空性信息。
+Kotlin 支持使用[可空性注解](java-interop#nullability-annotations)处理来自 Java 的类型可空性信息。
 Kotlin 1.5.0 引入了该功能的许多改进：
 
 * 它读取用作依赖项的已编译 Java 库中类型参数的可空性注解。
@@ -222,7 +222,7 @@ Kotlin 1.5.0 引入了该功能的许多改进：
 对于这些新支持的情况，从 Kotlin 调用 Java 时使用错误的类型可空性会产生警告。
 使用 `-Xtype-enhancement-improvements-strict-mode` 编译器选项可为此类情况启用严格模式（带有错误报告）。
 
-[了解更多关于 null-safety 和平台类型的信息](java-interop.md#null-safety-and-platform-types)。
+[了解更多关于 null-safety 和平台类型的信息](java-interop#null-safety-and-platform-types)。
 
 ## Kotlin/Native
 
@@ -264,7 +264,7 @@ Platform.isMemoryLeakCheckerActive = true
 
 ## Kotlin/JS
 
-Kotlin/JS 在 1.5.0 中收到了一些演进式更改。 我们正在继续努力将 [JS IR 编译器后端](js-ir-compiler.md)
+Kotlin/JS 在 1.5.0 中收到了一些演进式更改。 我们正在继续努力将 [JS IR 编译器后端](js-ir-compiler)
 朝着稳定方向发展并发布其他更新：
 
 * [将 webpack 升级到版本 5](#upgrade-to-webpack-5)
@@ -275,11 +275,11 @@ Kotlin/JS 在 1.5.0 中收到了一些演进式更改。 我们正在继续努�
 Kotlin/JS Gradle 插件现在为浏览器目标使用 webpack 5 而不是 webpack 4。这是一个主要的 webpack 升级
 带来了不兼容的更改。 如果您使用的是自定义 webpack 配置，请务必查看 [webpack 5 发行说明](https://webpack.js.org/blog/2020-10-10-webpack-5-release/)。
 
-[了解更多关于使用 webpack 打包 Kotlin/JS 项目的信息](js-project-setup.md#webpack-bundling)。
+[了解更多关于使用 webpack 打包 Kotlin/JS 项目的信息](js-project-setup#webpack-bundling)。
 
 ### IR 编译器的框架和库
 
-Kotlin/JS IR 编译器是 [Alpha](components-stability.md) 版本的。 它可能会发生不兼容的更改，并且将来可能需要手动迁移。
+Kotlin/JS IR 编译器是 [Alpha](components-stability) 版本的。 它可能会发生不兼容的更改，并且将来可能需要手动迁移。
 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issues/KT) 上分享您的反馈。
 
 在开发 Kotlin/JS 编译器的基于 IR 的后端的同时，我们鼓励并帮助库作者以 `both` 模式构建他们的
@@ -289,7 +289,7 @@ Kotlin/JS IR 编译器是 [Alpha](components-stability.md) 版本的。 它可�
 [doodle](https://github.com/nacular/doodle) 等。 如果您在项目中使用它们，则可以使用 IR 后端构建它
 并查看它带来的好处。
 
-如果您正在编写自己的库，请[以“both”模式编译它](js-ir-compiler.md#authoring-libraries-for-the-ir-compiler-with-backwards-compatibility)
+如果您正在编写自己的库，请[以“both”模式编译它](js-ir-compiler#authoring-libraries-for-the-ir-compiler-with-backwards-compatibility)
 以便您的客户端也可以将它与新编译器一起使用。
 
 ## Kotlin Multiplatform
@@ -319,10 +319,10 @@ Kotlin/JS IR 编译器是 [Alpha](components-stability.md) 版本的。 它可�
 
 ### 稳定的无符号整数类型
 
-`UInt`、`ULong`、`UByte`、`UShort` 无符号整数类型现在是 [Stable](components-stability.md) 的。 同样的还有
+`UInt`、`ULong`、`UByte`、`UShort` 无符号整数类型现在是 [Stable](components-stability) 的。 同样的还有
 对这些类型的操作、范围和级数。 无符号数组及其上的操作仍处于 Beta 阶段。
 
-[了解更多关于无符号整数类型的信息](unsigned-integer-types.md)。
+[了解更多关于无符号整数类型的信息](unsigned-integer-types)。
 
 ### 稳定的与区域设置无关的用于大写/小写文本的 API
 
@@ -330,7 +330,7 @@ Kotlin/JS IR 编译器是 [Alpha](components-stability.md) 版本的。 它可�
 `toLowerCase()`、`toUpperCase()`、`capitalize()` 和 `decapitalize()` API 函数的替代方案，这些函数对区域设置敏感。
 新的 API 可帮助您避免因不同的区域设置而导致的错误。
 
-Kotlin 1.5.0 提供了以下完全 [Stable](components-stability.md) 的替代方案：
+Kotlin 1.5.0 提供了以下完全 [Stable](components-stability) 的替代方案：
 
 * 对于 `String` 函数：
 
@@ -353,11 +353,11 @@ Kotlin 1.5.0 提供了以下完全 [Stable](components-stability.md) 的替代�
 
 旧的 API 函数标记为已弃用，将在未来的版本中删除。
 
-请参阅 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/locale-agnostic-case-conversions.md) 中文本处理函数的完整更改列表。
+请参阅 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/locale-agnostic-case-conversions) 中文本处理函数的完整更改列表。
 
 ### 稳定的 char 到整数转换 API
 
-从 Kotlin 1.5.0 开始，新的 char 到代码和 char 到数字转换函数是 [Stable](components-stability.md) 的。
+从 Kotlin 1.5.0 开始，新的 char 到代码和 char 到数字转换函数是 [Stable](components-stability) 的。
 这些函数替换了当前的 API 函数，这些函数经常与类似的 string-to-Int 转换混淆。
 
 新的 API 消除了这种命名混乱，使代码行为更加透明和明确。
@@ -388,12 +388,12 @@ Kotlin 1.5.0 提供了以下完全 [Stable](components-stability.md) 的替代�
 旧的转换 API，包括 `Number.toChar()` 及其实现（除了 `Int.toChar()`）和用于转换为
 数字类型的 `Char` 扩展，例如 `Char.toInt()`，现在已弃用。
 
-[了解更多关于 KEEP 中的 char 到整数转换 API 的信息](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/char-int-conversions.md)。
+[了解更多关于 KEEP 中的 char 到整数转换 API 的信息](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/char-int-conversions)。
 
 ### 稳定的 Path API
 
 具有 `java.nio.file.Path` 扩展的 [实验性 Path API](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io.path/java.nio.file.-path/)
-现在是 [Stable](components-stability.md) 的。
+现在是 [Stable](components-stability) 的。
 
 ```kotlin
 // construct path with the div (/) operator
@@ -404,7 +404,7 @@ val subDir = baseDir / "subdirectory"
 val kotlinFiles: List<Path> = Path("/home/user").listDirectoryEntries("*.kt")
 ```
 
-[了解更多关于 Path API 的信息](whatsnew1420.md#extensions-for-java-nio-file-path)。
+[了解更多关于 Path API 的信息](whatsnew1420#extensions-for-java-nio-file-path)。
 
 ### 向下取整除法和 mod 运算符
 
@@ -412,7 +412,7 @@ val kotlinFiles: List<Path> = Path("/home/user").listDirectoryEntries("*.kt")
 * `floorDiv()` 返回[向下取整除法](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions)的结果。 它适用于整数类型。
 * `mod()` 返回向下取整除法的余数（_模数_）。 它适用于所有数字类型。
 
-这些操作看起来与现有的[整数除法](numbers.md#operations-on-numbers)和 [rem()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/rem.html)
+这些操作看起来与现有的[整数除法](numbers#operations-on-numbers)和 [rem()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/rem.html)
 函数（或 `%` 运算符）非常相似，但它们对负数的处理方式不同：
 * `a.floorDiv(b)` 与常规 `/` 的不同之处在于 `floorDiv` 将结果向下舍入（朝向较小的整数），
   而 `/` 将结果截断为更接近 0 的整数。
@@ -434,7 +434,7 @@ fun main() {
 ### Duration API 更改
 
 :::caution
-Duration API 是 [Experimental](components-stability.md) 的。 它可能随时被删除或更改。
+Duration API 是 [Experimental](components-stability) 的。 它可能随时被删除或更改。
 仅将其用于评估目的。 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issues/KT) 上分享您的反馈。
 
 :::
@@ -507,7 +507,7 @@ fun main() {
 枚举类 [`CharCategory`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-char-category/)，它指示
 根据 Unicode 字符的一般类别，现在也可在多平台项目中使用。
 
-[了解更多关于字符的信息](characters.md)。
+[了解更多关于字符的信息](characters)。
 
 ### 新的集合函数 firstNotNullOf()
 
@@ -562,7 +562,7 @@ Gradle 插件将推断每个测试源集的相应平台依赖项：
 
 具有显式依赖项的现有 kotlin-test 设置将在 Gradle 和 Maven 中继续工作。
 
-了解更多关于 [设置测试库的依赖项](gradle-configure-project.md#set-dependencies-on-test-libraries) 的信息。
+了解更多关于 [设置测试库的依赖项](gradle-configure-project#set-dependencies-on-test-libraries) 的信息。
 
 ### 自动选择 Kotlin/JVM 源集的测试框架
 
@@ -625,7 +625,7 @@ tasks {
 您可以通过将 `kotlin.test.infer.jvm.variant=false` 行添加到
 项目的 `gradle.properties` 中来禁用自动测试框架选择。
 
-了解更多关于 [设置测试库的依赖项](gradle-configure-project.md#set-dependencies-on-test-libraries) 的信息。
+了解更多关于 [设置测试库的依赖项](gradle-configure-project#set-dependencies-on-test-libraries) 的信息。
 
 ### 断言函数更新
 

@@ -3,15 +3,15 @@ title: 检索单个元素
 ---
 Kotlin 集合提供了一系列函数，用于从集合中检索单个元素。本页介绍的函数适用于列表（lists）和集（sets）。
 
-正如[列表的定义](collections-overview.md)所说，列表是一个有序的集合。因此，列表中的每个元素都有其位置，你可以使用该位置进行引用。除了本页描述的函数之外，列表还提供了更广泛的方法，可以通过索引来检索和搜索元素。更多详情，请参见[列表特定操作](list-operations.md)。
+正如[列表的定义](collections-overview)所说，列表是一个有序的集合。因此，列表中的每个元素都有其位置，你可以使用该位置进行引用。除了本页描述的函数之外，列表还提供了更广泛的方法，可以通过索引来检索和搜索元素。更多详情，请参见[列表特定操作](list-operations)。
 
-反过来，按照[定义](collections-overview.md)，集不是一个有序的集合。但是，Kotlin 的 `Set` 以特定的顺序存储元素。这些顺序可以是插入顺序 (在 `LinkedHashSet` 中)、自然排序顺序 (在 `SortedSet` 中) 或其他顺序。一个集元素的顺序也可能是未知的。在这种情况下，元素仍然以某种方式排序，因此依赖于元素位置的函数仍然会返回它们的结果。但是，除非调用者知道所使用的 `Set` 的具体实现，否则这些结果是不可预测的。
+反过来，按照[定义](collections-overview)，集不是一个有序的集合。但是，Kotlin 的 `Set` 以特定的顺序存储元素。这些顺序可以是插入顺序 (在 `LinkedHashSet` 中)、自然排序顺序 (在 `SortedSet` 中) 或其他顺序。一个集元素的顺序也可能是未知的。在这种情况下，元素仍然以某种方式排序，因此依赖于元素位置的函数仍然会返回它们的结果。但是，除非调用者知道所使用的 `Set` 的具体实现，否则这些结果是不可预测的。
 
 ## 按位置检索
 
 要检索特定位置的元素，可以使用函数 [`elementAt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/element-at.html)。使用整数作为参数调用它，你将收到集合中给定位置的元素。第一个元素的位置是 `0`，最后一个元素的位置是 `(size - 1)`。
 
-`elementAt()` 对于不提供索引访问或静态未知提供索引访问的集合很有用。对于 `List`，更习惯使用[索引访问操作符](list-operations.md#retrieve-elements-by-index) (`get()` 或 `[]`)。
+`elementAt()` 对于不提供索引访问或静态未知提供索引访问的集合很有用。对于 `List`，更习惯使用[索引访问操作符](list-operations#retrieve-elements-by-index) (`get()` 或 `[]`)。
 
 ```kotlin
 

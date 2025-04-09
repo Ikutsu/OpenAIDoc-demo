@@ -37,7 +37,7 @@ title: 设置多平台库发布
 ## Publication (发布配置) 的结构
 
 多平台库的 publication (发布配置) 包括一个额外的 _root_ (根) publication (发布配置) `kotlinMultiplatform`，它代表整个库，并在作为依赖项添加到 common source set (通用源码集) 时自动解析为相应的平台特定 artifacts (产物)。 
-了解更多关于[添加依赖](multiplatform-add-dependencies.md)的信息。
+了解更多关于[添加依赖](multiplatform-add-dependencies)的信息。
 
 这个 `kotlinMultiplatform` publication (发布配置) 包含 metadata artifacts (元数据产物)，并将其他 publication (发布配置) 作为其 variants (变体) 引用。
 
@@ -67,9 +67,9 @@ kotlin.native.enableKlibsCrossCompilation=true
 
 Cross-compilation (交叉编译) 目前是 Experimental (实验性) 的，并且有一些限制。在以下情况下，你仍然需要使用 Mac 机器：
 
-*   你的库具有 [cinterop dependency (C 互操作依赖)](native-c-interop.md)。
-*   你在你的项目中设置了 [CocoaPods integration (CocoaPods 集成)](native-cocoapods.md)。
-*   你需要为 Apple targets (Apple 目标平台) 构建或测试 [final binaries (最终二进制文件)](multiplatform-build-native-binaries.md)。
+*   你的库具有 [cinterop dependency (C 互操作依赖)](native-c-interop)。
+*   你在你的项目中设置了 [CocoaPods integration (CocoaPods 集成)](native-cocoapods)。
+*   你需要为 Apple targets (Apple 目标平台) 构建或测试 [final binaries (最终二进制文件)](multiplatform-build-native-binaries)。
 
 ### Duplicating publications (重复发布)
 
@@ -189,4 +189,4 @@ kotlin.publishJvmEnvironmentAttribute=false
 ## 下一步
 
 *   [了解如何将你的 Kotlin Multiplatform 库发布到 Maven Central 仓库](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html)
-*   [查看 Library authors' guidelines (库作者指南)，了解有关为 Kotlin Multiplatform 设计库的最佳实践和技巧](api-guidelines-build-for-multiplatform.md)
+*   [查看 Library authors' guidelines (库作者指南)，了解有关为 Kotlin Multiplatform 设计库的最佳实践和技巧](api-guidelines-build-for-multiplatform)

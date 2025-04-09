@@ -1,7 +1,7 @@
 ---
 title: 连接数据库并从中检索数据
 ---
-[Kotlin Notebook](kotlin-notebook-overview.md) 提供了连接和检索来自各种 SQL 数据库（例如 MariaDB、PostgreSQL、MySQL 和 SQLite）的数据的功能。通过使用 [Kotlin DataFrame 库](https://kotlin.github.io/dataframe/gettingstarted.html)，Kotlin Notebook 可以建立与数据库的连接，执行 SQL 查询，并导入结果以进行进一步操作。
+[Kotlin Notebook](kotlin-notebook-overview) 提供了连接和检索来自各种 SQL 数据库（例如 MariaDB、PostgreSQL、MySQL 和 SQLite）的数据的功能。通过使用 [Kotlin DataFrame 库](https://kotlin.github.io/dataframe/gettingstarted.html)，Kotlin Notebook 可以建立与数据库的连接，执行 SQL 查询，并导入结果以进行进一步操作。
 
 有关详细示例，请参见 [KotlinDataFrame SQL Examples GitHub 仓库中的 Notebook](https://github.com/zaleslaw/KotlinDataFrame-SQL-Examples/blob/master/notebooks/imdb.ipynb)。
 
@@ -162,5 +162,5 @@ title: 连接数据库并从中检索数据
 ## 接下来做什么
 
 * 使用 [Kandy 库](https://kotlin.github.io/kandy/examples.html) 探索数据可视化
-* 在 [使用 Kandy 在 Kotlin Notebook 中进行数据可视化](data-analysis-visualization.md) 中查找有关数据可视化的更多信息
-* 有关 Kotlin 中可用于数据科学和分析的工具和资源的全面概述，请参见 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries.md)
+* 在 [使用 Kandy 在 Kotlin Notebook 中进行数据可视化](data-analysis-visualization) 中查找有关数据可视化的更多信息
+* 有关 Kotlin 中可用于数据科学和分析的工具和资源的全面概述，请参见 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries)

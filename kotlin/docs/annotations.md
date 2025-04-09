@@ -113,7 +113,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/annotation-instantiation.md) 中了解有关注解类实例化的更多信息。
+在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/annotation-instantiation) 中了解有关注解类实例化的更多信息。
 
 ## Lambda 表达式
 
@@ -318,4 +318,4 @@ annotation class Tags(val value: Array<Tag>)
 要通过反射提取 Kotlin 或 Java 可重复注解，请使用 [`KAnnotatedElement.findAnnotations()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect.full/find-annotations.html)
 函数。
 
-在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/repeatable-annotations.md) 中了解有关 Kotlin 可重复注解的更多信息。
+在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/repeatable-annotations) 中了解有关 Kotlin 可重复注解的更多信息。

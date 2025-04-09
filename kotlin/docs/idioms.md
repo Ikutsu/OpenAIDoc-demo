@@ -16,7 +16,7 @@ data class Customer(val name: String, val email: String)
 * `hashCode()`
 * `toString()`
 * `copy()`
-* 所有属性的 `component1()`、`component2()`、...（参见 [Data classes](data-classes.md)）
+* 所有属性的 `component1()`、`component2()`、...（参见 [Data classes](data-classes)）
 
 ## 函数参数的默认值
 
@@ -36,7 +36,7 @@ val positives = list.filter { x `->` x > 0 }
 val positives = list.filter { it > 0 }
 ```
 
-了解 [Java 和 Kotlin 过滤](java-to-kotlin-collections-guide.md#filter-elements) 之间的区别。
+了解 [Java 和 Kotlin 过滤](java-to-kotlin-collections-guide#filter-elements) 之间的区别。
 
 ## 检查集合中是否存在元素
 
@@ -52,7 +52,7 @@ if ("jane@example.com" !in emailsList) { ... }
 println("Name $name")
 ```
 
-了解 [Java 和 Kotlin 字符串连接](java-to-kotlin-idioms-strings.md#concatenate-strings) 之间的区别。
+了解 [Java 和 Kotlin 字符串连接](java-to-kotlin-idioms-strings#concatenate-strings) 之间的区别。
 
 ## 安全地读取标准输入
 
@@ -68,7 +68,7 @@ println(correctInt)
 // 13
 ```
 
-有关更多信息，请参阅 [读取标准输入](read-standard-input.md)。
+有关更多信息，请参阅 [读取标准输入](read-standard-input)。
 
 ## 实例检查
 
@@ -218,7 +218,7 @@ val emails = ... // 可能为空
 val mainEmail = emails.firstOrNull() ?: ""
 ```
 
-了解 [Java 和 Kotlin 获取第一个条目](java-to-kotlin-collections-guide.md#get-the-first-and-the-last-items-of-a-possibly-empty-collection) 之间的区别。
+了解 [Java 和 Kotlin 获取第一个条目](java-to-kotlin-collections-guide#get-the-first-and-the-last-items-of-a-possibly-empty-collection) 之间的区别。
 
 ## 如果不为 null 则执行
 
@@ -386,7 +386,7 @@ IntelliJ IDEA 的 kotlin 插件理解 `TODO()` 的语义，并自动在 TODO 工
 
 ## 接下来做什么？
 
-* 使用惯用的 Kotlin 风格解决 [Advent of Code 谜题](advent-of-code.md)。
-* 学习如何在 [Java 和 Kotlin 中执行字符串的典型任务](java-to-kotlin-idioms-strings.md)。
-* 学习如何在 [Java 和 Kotlin 中执行集合的典型任务](java-to-kotlin-collections-guide.md)。
-* 学习如何在 [Java 和 Kotlin 中处理可空性](java-to-kotlin-nullability-guide.md)。
+* 使用惯用的 Kotlin 风格解决 [Advent of Code 谜题](advent-of-code)。
+* 学习如何在 [Java 和 Kotlin 中执行字符串的典型任务](java-to-kotlin-idioms-strings)。
+* 学习如何在 [Java 和 Kotlin 中执行集合的典型任务](java-to-kotlin-collections-guide)。
+* 学习如何在 [Java 和 Kotlin 中处理可空性](java-to-kotlin-nullability-guide)。

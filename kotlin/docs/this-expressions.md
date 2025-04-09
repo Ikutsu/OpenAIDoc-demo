@@ -3,14 +3,14 @@ title: "This 表达式"
 ---
 要表示当前的 _接收者_ (receiver)，可以使用 `this` 表达式：
 
-* 在 [类](classes.md#inheritance) 的成员中，`this` 指的是该类的当前对象。
-* 在 [扩展函数](extensions.md) 或带有 [接收者的函数字面量](lambdas.md#function-literals-with-receiver) 中，`this` 表示点号左侧传递的 _接收者_ 参数。
+* 在 [类](classes#inheritance) 的成员中，`this` 指的是该类的当前对象。
+* 在 [扩展函数](extensions) 或带有 [接收者的函数字面量](lambdas#function-literals-with-receiver) 中，`this` 表示点号左侧传递的 _接收者_ 参数。
 
 如果 `this` 没有限定符，则它指的是 _最内层的封闭作用域_。 要引用其他作用域中的 `this`，可以使用 _标签限定符_：
 
 ## 限定的 this
 
-要从外部作用域（[类](classes.md)、[扩展函数](extensions.md) 或带标签的 [带接收者的函数字面量](lambdas.md#function-literals-with-receiver)）访问 `this`，可以编写 `this@label`，其中 `@label` 是作用域 [标签](returns.md)，表示 `this` 应该来自哪里：
+要从外部作用域（[类](classes)、[扩展函数](extensions) 或带标签的 [带接收者的函数字面量](lambdas#function-literals-with-receiver)）访问 `this`，可以编写 `this@label`，其中 `@label` 是作用域 [标签](returns)，表示 `this` 应该来自哪里：
 
 ```kotlin
 class A { // 隐式标签 @A

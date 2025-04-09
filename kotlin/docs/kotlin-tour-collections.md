@@ -4,13 +4,13 @@ title: 集合
 <no-index/>
 :::info
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型 (Basic types)</a><br />
+   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world">Hello world</a><br />
+        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types">基本类型 (Basic types)</a><br />
         <img src="/img/icon-3.svg" width="20" alt="Third step" /> <strong>集合 (Collections)</strong><br />
-        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流 (Control flow)</a><br />
-        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数 (Functions)</a><br />
-        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类 (Classes)</a><br />
-        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空安全 (Null safety)</a>
+        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow">控制流 (Control flow)</a><br />
+        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions">函数 (Functions)</a><br />
+        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes">类 (Classes)</a><br />
+        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety">空安全 (Null safety)</a>
 </p>
 
 :::
@@ -62,7 +62,7 @@ fun main() {
 ```
 这也称为**类型转换 (casting)**。
 
-列表 (Lists) 是有序的，因此要访问列表中的条目，请使用[索引访问操作符 (indexed access operator)](operator-overloading.md#indexed-access-operator) `[]`：
+列表 (Lists) 是有序的，因此要访问列表中的条目，请使用[索引访问操作符 (indexed access operator)](operator-overloading#indexed-access-operator) `[]`：
 
 ```kotlin
 fun main() { 
@@ -88,7 +88,7 @@ fun main() {
 
 [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和 [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html) 函数是**扩展 (extension)** 函数的示例。要在对象上调用扩展 (extension) 函数，请在对象后加上句点 `.` 后写入函数名称。
 
-有关扩展 (extension) 函数的更多信息，请参见[扩展函数 (Extension functions)](extensions.md#extension-functions)。就本教程而言，你只需要知道如何调用它们。
+有关扩展 (extension) 函数的更多信息，请参见[扩展函数 (Extension functions)](extensions#extension-functions)。就本教程而言，你只需要知道如何调用它们。
 
 :::
 
@@ -104,7 +104,7 @@ fun main() {
 }
 ```
 
-要检查某个条目是否在列表中，请使用 [`in` 运算符](operator-overloading.md#in-operator)：
+要检查某个条目是否在列表中，请使用 [`in` 运算符](operator-overloading#in-operator)：
 
 ```kotlin
 fun main() {
@@ -185,7 +185,7 @@ fun main() {
 }
 ```
 
-要检查集合 (set) 中是否存在某个条目，请使用 [`in` 运算符](operator-overloading.md#in-operator)：
+要检查集合 (set) 中是否存在某个条目，请使用 [`in` 运算符](operator-overloading#in-operator)：
 
 ```kotlin
 fun main() {
@@ -254,7 +254,7 @@ fun main() {
     val juiceMenuLocked: Map<String, Int> = juiceMenu
 ```
 
-要访问映射 (map) 中的值 (value)，请使用带有其键 (key) 的[索引访问操作符 (indexed access operator)](operator-overloading.md#indexed-access-operator) `[]`：
+要访问映射 (map) 中的值 (value)，请使用带有其键 (key) 的[索引访问操作符 (indexed access operator)](operator-overloading#indexed-access-operator) `[]`：
 
 ```kotlin
 fun main() {
@@ -280,11 +280,11 @@ fun main() {
 }
 ```
 
-本教程将在[空安全 (Null safety)](kotlin-tour-null-safety.md) 章节中稍后解释空值 (null values)。
+本教程将在[空安全 (Null safety)](kotlin-tour-null-safety) 章节中稍后解释空值 (null values)。
 
 :::
 
-你还可以使用[索引访问操作符 (indexed access operator)](operator-overloading.md#indexed-access-operator) `[]` 将条目添加到可变映射 (mutable map)：
+你还可以使用[索引访问操作符 (indexed access operator)](operator-overloading#indexed-access-operator) `[]` 将条目添加到可变映射 (mutable map)：
 
 ```kotlin
 fun main() {
@@ -352,11 +352,11 @@ fun main() {
 :::note
 [`keys`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/keys.html) 和 [`values`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/values.html) 是对象的**属性 (properties)** 的示例。要访问对象的属性 (property)，请在对象后附加一个句点 `.` 后写入属性 (property) 名称。
 
-属性 (properties) 将在[类 (Classes)](kotlin-tour-classes.md) 章节中进行更详细的讨论。在本教程的这一点上，你只需要知道如何访问它们。
+属性 (properties) 将在[类 (Classes)](kotlin-tour-classes) 章节中进行更详细的讨论。在本教程的这一点上，你只需要知道如何访问它们。
 
 :::
 
-要检查映射 (map) 中是否存在键 (key) 或值 (value)，请使用 [`in` 运算符](operator-overloading.md#in-operator)：
+要检查映射 (map) 中是否存在键 (key) 或值 (value)，请使用 [`in` 运算符](operator-overloading#in-operator)：
 
 ```kotlin
 fun main() {
@@ -375,9 +375,9 @@ fun main() {
 }
 ```
 
-有关你可以使用集合 (collections) 执行的更多操作的信息，请参见 [集合 (Collections)](collections-overview.md)。
+有关你可以使用集合 (collections) 执行的更多操作的信息，请参见 [集合 (Collections)](collections-overview)。
 
-现在你已经了解了基本类型 (basic types) 以及如何管理集合 (collections)，现在是时候探索你可以在程序中使用的[控制流 (control flow)](kotlin-tour-control-flow.md)了。
+现在你已经了解了基本类型 (basic types) 以及如何管理集合 (collections)，现在是时候探索你可以在程序中使用的[控制流 (control flow)](kotlin-tour-control-flow)了。
 
 ## 练习 (Practice)
 
@@ -456,4 +456,4 @@ fun main() {
 
 ## 下一步 (Next step)
 
-[控制流 (Control flow)](kotlin-tour-control-flow.md)
+[控制流 (Control flow)](kotlin-tour-control-flow)

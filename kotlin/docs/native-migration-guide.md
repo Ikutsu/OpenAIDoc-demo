@@ -6,7 +6,7 @@ Kotlin 1.9.20 中已完全移除对旧版内存管理器的支持。请将你的
 
 :::
 
-本指南将新的 [Kotlin/Native 内存管理器](native-memory-manager.md)与旧版内存管理器进行比较，并描述如何迁移你的项目。
+本指南将新的 [Kotlin/Native 内存管理器](native-memory-manager)与旧版内存管理器进行比较，并描述如何迁移你的项目。
 
 新内存管理器最显著的变化是解除了对对象共享的限制。你不需要冻结对象以在线程之间共享它们，具体来说：
 
@@ -27,7 +27,7 @@ Kotlin 1.9.20 中已完全移除对旧版内存管理器的支持。请将你的
 
 ## 更新 Kotlin
 
-自 Kotlin 1.7.20 起，新的 Kotlin/Native 内存管理器已默认启用。检查 Kotlin 版本，如有必要，[更新到最新版本](releases.md#update-to-a-new-kotlin-version)。
+自 Kotlin 1.7.20 起，新的 Kotlin/Native 内存管理器已默认启用。检查 Kotlin 版本，如有必要，[更新到最新版本](releases#update-to-a-new-kotlin-version)。
 
 ## 更新依赖项
 ### kotlinx.coroutines
@@ -76,5 +76,5 @@ Kotlin 1.9.20 中已完全移除对旧版内存管理器的支持。请将你的
 
 ## 接下来做什么
 
-* [了解有关新内存管理器的更多信息](native-memory-manager.md)
-* [检查与 Swift/Objective-C ARC 集成的细节](native-arc-integration.md)
+* [了解有关新内存管理器的更多信息](native-memory-manager)
+* [检查与 Swift/Objective-C ARC 集成的细节](native-arc-integration)

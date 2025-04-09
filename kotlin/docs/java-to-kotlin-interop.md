@@ -122,7 +122,7 @@ class JavaClient {
 }
 ```
 
-[延迟初始化（Late-Initialized）](properties.md#late-initialized-properties-and-variables) 的属性也会作为字段公开。
+[延迟初始化（Late-Initialized）](properties#late-initialized-properties-and-variables) 的属性也会作为字段公开。
 该字段的可见性将与 `lateinit` 属性 setter 的可见性相同。
 
 ## 静态字段
@@ -153,7 +153,7 @@ Key.COMPARATOR.compare(key1, key2);
 // Key 类中的 public static final 字段
 ```
 
-object 或 companion object 中的 [延迟初始化（late-initialized）](properties.md#late-initialized-properties-and-variables) 属性
+object 或 companion object 中的 [延迟初始化（late-initialized）](properties#late-initialized-properties-and-variables) 属性
 具有静态 backing field，其可见性与属性 setter 相同。
 
 ```kotlin
@@ -469,7 +469,7 @@ void draw(String label, int lineWidth) { }
 void draw(String label) { }
 ```
 
-请注意，如[辅助构造函数（Secondary constructors）](classes.md#secondary-constructors)中所述，如果一个类具有所有构造函数参数的默认
+请注意，如[辅助构造函数（Secondary constructors）](classes#secondary-constructors)中所述，如果一个类具有所有构造函数参数的默认
 值，则将为其生成一个没有参数的公共构造函数。即使未指定 `@JvmOverloads` 注解，这也可以工作。
 
 ## 受检异常
@@ -521,7 +521,7 @@ fun writeToFile() {
 
 ## 变型泛型（Variant generics）
 
-当 Kotlin 类使用[声明点变型（declaration-site variance）](generics.md#declaration-site-variance)时，从 Java 代码中看到它们的用法有两种
+当 Kotlin 类使用[声明点变型（declaration-site variance）](generics#declaration-site-variance)时，从 Java 代码中看到它们的用法有两种
 选择。例如，假设您有以下类和两个使用它的函数：
 
 ```kotlin
@@ -596,7 +596,7 @@ fun unboxBase(box: Box<@JvmSuppressWildcards Base>): Base = box.value
 
 ### Nothing 类型的翻译
  
-类型 [`Nothing`](exceptions.md#the-nothing-type) 是特殊的，因为它在 Java 中没有对应的自然类型。实际上，每个 Java 引用类型，包括
+类型 [`Nothing`](exceptions#the-nothing-type) 是特殊的，因为它在 Java 中没有对应的自然类型。实际上，每个 Java 引用类型，包括
 `java.lang.Void`，都接受 `null` 作为值，而 `Nothing` 甚至不接受它。因此，此类型无法在 Java 世界中准确
 表示。这就是为什么 Kotlin 在使用 `Nothing` 类型的参数时生成原始类型的原因：
 

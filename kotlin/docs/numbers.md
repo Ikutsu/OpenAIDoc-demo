@@ -12,7 +12,7 @@ Kotlin 提供了一组内置类型来表示数字。对于整数，有四种类�
 | `Int`    | 32          | -2,147,483,648 (-2<sup>31</sup>)             | 2,147,483,647 (2<sup>31</sup> - 1)             |
 | `Long`   | 64          | -9,223,372,036,854,775,808 (-2<sup>63</sup>) | 9,223,372,036,854,775,807 (2<sup>63</sup> - 1) |
 :::note
-除了有符号整型，Kotlin 还提供无符号整型。由于无符号整型针对不同的用例，因此将单独介绍。请参阅 [](unsigned-integer-types.md)。
+除了有符号整型，Kotlin 还提供无符号整型。由于无符号整型针对不同的用例，因此将单独介绍。请参阅 [](unsigned-integer-types)。
 
 当初始化一个没有显式类型说明的变量时，编译器会自动推断类型，从 `Int` 开始，选择能够表示该值的最小范围的类型。如果该值未超出 `Int` 的范围，则类型为 `Int`。如果超出该范围，则类型为 `Long`。要显式指定 `Long` 值，请在值后附加后缀 `L`。要使用 `Byte` 或 `Short` 类型，请在声明中显式指定它。显式类型说明会触发编译器检查该值是否超出指定类型的范围。
 
@@ -108,7 +108,7 @@ val bigFractional = 1_234_567.7182818284
 ```
 
 :::tip
-无符号整型字面量也有特殊的后缀。阅读更多关于 [无符号整型字面量](unsigned-integer-types.md) 的信息。
+无符号整型字面量也有特殊的后缀。阅读更多关于 [无符号整型字面量](unsigned-integer-types) 的信息。
 
 :::
 
@@ -116,9 +116,9 @@ val bigFractional = 1_234_567.7182818284
 
 JVM 存储数字的方式可能会使您的代码表现得与直觉相反，因为默认情况下小（字节大小）数字使用缓存。
 
-JVM 将数字存储为原始类型：`int`、`double` 等。当使用 [泛型类型](generics.md) 或创建可空数字引用（例如 `Int?`）时，数字会被装箱到 Java 类中，例如 `Integer` 或 `Double`。
+JVM 将数字存储为原始类型：`int`、`double` 等。当使用 [泛型类型](generics) 或创建可空数字引用（例如 `Int?`）时，数字会被装箱到 Java 类中，例如 `Integer` 或 `Double`。
 
-JVM 应用了一种 [内存优化技术](https://docs.oracle.com/javase/specs/jls/se22/html/jls-5.html#jls-5.1.7) 用于 `Integer` 和其他表示介于 `−128` 和 `127` 之间的数字的对象。对此类对象的所有可空引用都指向同一个缓存对象。例如，以下代码中的可空对象是 [引用相等](equality.md#referential-equality) 的：
+JVM 应用了一种 [内存优化技术](https://docs.oracle.com/javase/specs/jls/se22/html/jls-5.html#jls-5.1.7) 用于 `Integer` 和其他表示介于 `−128` 和 `127` 之间的数字的对象。对此类对象的所有可空引用都指向同一个缓存对象。例如，以下代码中的可空对象是 [引用相等](equality#referential-equality) 的：
 
 ```kotlin
 fun main() {
@@ -132,7 +132,7 @@ fun main() {
 }
 ```
 
-对于此范围之外的数字，可空对象是不同的，但 [结构相等](equality.md#structural-equality)：
+对于此范围之外的数字，可空对象是不同的，但 [结构相等](equality#structural-equality)：
 
 ```kotlin
 fun main() {
@@ -217,7 +217,7 @@ fun main() {
 }
 ```
 
-可以在自定义数字类中重写这些运算符。有关详细信息，请参阅 [运算符重载](operator-overloading.md)。
+可以在自定义数字类中重写这些运算符。有关详细信息，请参阅 [运算符重载](operator-overloading)。
 
 ### 整数除法
 
@@ -299,7 +299,7 @@ fun main() {
 * 比较运算符：`a < b`、`a > b`、`a <= b`、`a >= b`
 * 范围实例化和范围检查：`a..b`、`x in a..b`、`x !in a..b`
 
-当操作数 `a` 和 `b` 静态地已知为 `Float` 或 `Double` 或它们的可空对应项（类型已声明或推断出，或者是 [智能转换](typecasts.md#smart-casts) 的结果）时，对数字及其形成的范围的运算遵循 [IEEE 754 浮点运算标准](https://en.wikipedia.org/wiki/IEEE_754)。
+当操作数 `a` 和 `b` 静态地已知为 `Float` 或 `Double` 或它们的可空对应项（类型已声明或推断出，或者是 [智能转换](typecasts#smart-casts) 的结果）时，对数字及其形成的范围的运算遵循 [IEEE 754 浮点运算标准](https://en.wikipedia.org/wiki/IEEE_754)。
 
 但是，为了支持通用用例并提供完全排序，对于**未**静态类型化为浮点数的操作数，行为是不同的。例如，`Any`、`Comparable<...>` 或 `Collection<T>` 类型。在这种情况下，这些操作使用 `Float` 和 `Double` 的 `equals` 和 `compareTo` 实现。因此：
 

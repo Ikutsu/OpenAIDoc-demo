@@ -4,20 +4,20 @@ title: "Kotlin Gradle 插件中的编译器选项"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Kotlin 的每个版本都包含针对支持目标的编译器：JVM、JavaScript 以及适用于[支持平台](native-overview.md#target-platforms)的原生二进制文件。
+Kotlin 的每个版本都包含针对支持目标的编译器：JVM、JavaScript 以及适用于[支持平台](native-overview#target-platforms)的原生二进制文件。
 
 这些编译器被以下对象使用：
 * IDE，当你点击 Kotlin 项目的“__编译__”或“__运行__”按钮时。
 * Gradle，当你控制台中或 IDE 中调用 `gradle build` 时。
 * Maven，当你控制台中或 IDE 中调用 `mvn compile` 或 `mvn test-compile` 时。
 
-你还可以从命令行手动运行 Kotlin 编译器，如[使用命令行编译器](command-line.md)教程中所述。
+你还可以从命令行手动运行 Kotlin 编译器，如[使用命令行编译器](command-line)教程中所述。
 
 ## 如何定义选项
 
 Kotlin 编译器有许多选项可用于定制编译过程。
 
-Gradle DSL 允许对编译器选项进行全面的配置。它适用于 [Kotlin Multiplatform](multiplatform-dsl-reference.md) 和 [JVM/Android](#target-the-jvm) 项目。
+Gradle DSL 允许对编译器选项进行全面的配置。它适用于 [Kotlin Multiplatform](multiplatform-dsl-reference) 和 [JVM/Android](#target-the-jvm) 项目。
 
 使用 Gradle DSL，你可以在构建脚本中的三个级别配置编译器选项：
 * **[扩展级别](#extension-level)**，在 `kotlin {}` 块中，用于所有目标和共享源码集。
@@ -39,7 +39,7 @@ Gradle DSL 允许对编译器选项进行全面的配置。它适用于 [Kotlin 
 要了解哪个级别的编译器参数应用于编译，请使用 Gradle [logging](https://docs.gradle.org/current/userguide/logging.html) 的 `DEBUG` 级别。对于 JVM 和 JS/WASM 任务，请在日志中搜索 `“Kotlin compiler args:”` 字符串；对于 Native 任务，搜索 `“Arguments =”` 字符串。
 
 :::tip
-如果你是第三方插件作者，最好在项目级别应用你的配置，以避免覆盖问题。你可以使用新的 [Kotlin 插件 DSL 扩展类型](whatsnew21.md#new-api-for-kotlin-gradle-plugin-extensions) 来实现这一点。建议你在你的文档中明确说明此配置。
+如果你是第三方插件作者，最好在项目级别应用你的配置，以避免覆盖问题。你可以使用新的 [Kotlin 插件 DSL 扩展类型](whatsnew21#new-api-for-kotlin-gradle-plugin-extensions) 来实现这一点。建议你在你的文档中明确说明此配置。
 
 :::
 
@@ -69,7 +69,7 @@ kotlin {
 }
 ```
 
-在 Kotlin Multiplatform 项目中，你可以在特定的目标内配置编译器选项。例如，`jvm { compilerOptions {}}`。有关更多信息，请参见 [Multiplatform Gradle DSL reference](multiplatform-dsl-reference.md)。
+在 Kotlin Multiplatform 项目中，你可以在特定的目标内配置编译器选项。例如，`jvm { compilerOptions {}}`。有关更多信息，请参见 [Multiplatform Gradle DSL reference](multiplatform-dsl-reference)。
 
 ### 编译单元级别
 
@@ -99,7 +99,7 @@ kotlin {
 }
 ```
 
-如果要配置与 JVM/Android 和 [Kotlin Multiplatform](multiplatform-dsl-reference.md) 不同的目标的插件，请使用相应 Kotlin 编译任务的 `compilerOptions {}` 属性。以下示例展示了如何在 Kotlin 和 Groovy DSL 中设置此配置：
+如果要配置与 JVM/Android 和 [Kotlin Multiplatform](multiplatform-dsl-reference) 不同的目标的插件，请使用相应 Kotlin 编译任务的 `compilerOptions {}` 属性。以下示例展示了如何在 Kotlin 和 Groovy DSL 中设置此配置：
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>
@@ -220,9 +220,9 @@ tasks.named('compileKotlin', KotlinCompilationTask) {
 
 | Name              | Description                                                                                                                              | Possible values           | Default value |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|---------------|
-| `optIn`           | 用于配置 [选择性加入编译器参数](opt-in-requirements.md) 列表的属性                                                                     | `listOf( /* opt-ins */ )` | `emptyList()` |
-| `progressiveMode` | 启用 [渐进式编译器模式](whatsnew13.md#progressive-mode)                                                                               | `true`, `false`           | `false`       |
-| `extraWarnings`   | 如果为 true，则启用 [额外的声明、表达式和类型编译器检查](whatsnew21.md#extra-compiler-checks)，这些检查会发出警告 | `true`, `false`           | `false`       |
+| `optIn`           | 用于配置 [选择性加入编译器参数](opt-in-requirements) 列表的属性                                                                     | `listOf( /* opt-ins */ )` | `emptyList()` |
+| `progressiveMode` | 启用 [渐进式编译器模式](whatsnew13#progressive-mode)                                                                               | `true`, `false`           | `false`       |
+| `extraWarnings`   | 如果为 true，则启用 [额外的声明、表达式和类型编译器检查](whatsnew21#extra-compiler-checks)，这些检查会发出警告 | `true`, `false`           | `false`       |
 
 ### JVM 特有属性
 
@@ -231,7 +231,7 @@ tasks.named('compileKotlin', KotlinCompilationTask) {
 | `javaParameters`          | 为 Java 1.8 反射生成方法参数的元数据                                                                                                                                                                                |                                                                                                         | false                       |
 | `jvmTarget`               | 生成的 JVM 字节码的目标版本                                                                                                                                                                                                  | "1.8", "9", "10", ...,  "22", "23". 另请参见 [编译器选项的类型](#types-for-compiler-options) | "1.8" |
 | `noJdk`                   | 不要自动将 Java 运行时包含到类路径中                                                                                                                                                                               |                                                                                                         | false                       |
-| `jvmTargetValidationMode` | <list><li>验证 Kotlin 和 Java 之间的 [JVM 目标兼容性](gradle-configure-project.md#check-for-jvm-target-compatibility-of-related-compile-tasks)</li><li>`KotlinCompile` 类型的任务的属性。</li></list> | `WARNING`, `ERROR`, `IGNORE`                                                                              | `ERROR`                     |
+| `jvmTargetValidationMode` | <list><li>验证 Kotlin 和 Java 之间的 [JVM 目标兼容性](gradle-configure-project#check-for-jvm-target-compatibility-of-related-compile-tasks)</li><li>`KotlinCompile` 类型的任务的属性。</li></list> | `WARNING`, `ERROR`, `IGNORE`                                                                              | `ERROR`                     |
 
 ### JVM 和 JavaScript 通用属性
 
@@ -355,7 +355,7 @@ tasks
 | `moduleKind` | 编译器生成的 JS 模块的种类                                                                                                                                                                                          | `JsModuleKind.MODULE_AMD`, `JsModuleKind.MODULE_PLAIN`, `JsModuleKind.MODULE_ES`, `JsModuleKind.MODULE_COMMONJS`, `JsModuleKind.MODULE_UMD`                                | `null`                               |
 | `sourceMap` | 生成源码映射（source map）                                                                                                                                                                                                                      |                                                                                                                                                                            | `false`                              |
 | `sourceMapEmbedSources` | 将源文件嵌入到源码映射中                                                                                                                                                                                                   | `JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_INLINING`, `JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_NEVER`, `JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS` | `null`                               |
-| `sourceMapNamesPolicy` | 将你在 Kotlin 代码中声明的变量和函数名称添加到源码映射中。有关行为的更多信息，请参见我们的 [编译器参考](compiler-reference.md#source-map-names-policy-simple-names-fully-qualified-names-no) | `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES`, `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_SIMPLE_NAMES`, `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_NO` | `null`                               |
+| `sourceMapNamesPolicy` | 将你在 Kotlin 代码中声明的变量和函数名称添加到源码映射中。有关行为的更多信息，请参见我们的 [编译器参考](compiler-reference#source-map-names-policy-simple-names-fully-qualified-names-no) | `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES`, `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_SIMPLE_NAMES`, `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_NO` | `null`                               |
 | `sourceMapPrefix` | 将指定的前缀添加到源码映射中的路径                                                                                                                                                                                      |                                                                                                                                                                            | `null`                               |
 | `target` | 为特定的 ECMA 版本生成 JS 文件                                                                                                                                                                                              | `"es5"`, `"es2015"`                                                                                                                                                            | `"es5"`                              |
 | `useEsClasses` | 让生成的 JavaScript 代码使用 ES2015 类。在使用 ES2015 目标时默认启用                                                                                                                                                                                              |                                                                                                                                                                            | `null`                               |
@@ -376,7 +376,7 @@ tasks
 ## 接下来做什么？
 
 了解更多关于：
-* [Kotlin Multiplatform DSL 参考](multiplatform-dsl-reference.md)。
-* [增量编译、缓存支持、构建报告和 Kotlin 守护进程](gradle-compilation-and-caches.md)。
+* [Kotlin Multiplatform DSL 参考](multiplatform-dsl-reference)。
+* [增量编译、缓存支持、构建报告和 Kotlin 守护进程](gradle-compilation-and-caches)。
 * [Gradle 基础知识和特性](https://docs.gradle.org/current/userguide/userguide.html)。
-* [对 Gradle 插件变体的支持](gradle-plugin-variants.md)。
+* [对 Gradle 插件变体的支持](gradle-plugin-variants)。

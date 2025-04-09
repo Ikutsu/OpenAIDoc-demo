@@ -11,16 +11,16 @@ title: "欢迎来到 Kotlin 之旅！"
 
 在本次旅程中，您将学习到：
 
-* [变量](kotlin-tour-hello-world.md)
-* [基本类型](kotlin-tour-basic-types.md)
-* [集合](kotlin-tour-collections.md)
-* [控制流](kotlin-tour-control-flow.md)
-* [函数](kotlin-tour-functions.md)
-* [类](kotlin-tour-classes.md)
-* [空安全](kotlin-tour-null-safety.md)
+* [变量](kotlin-tour-hello-world)
+* [基本类型](kotlin-tour-basic-types)
+* [集合](kotlin-tour-collections)
+* [控制流](kotlin-tour-control-flow)
+* [函数](kotlin-tour-functions)
+* [类](kotlin-tour-classes)
+* [空安全](kotlin-tour-null-safety)
 
 为了获得最佳体验，我们建议您按顺序阅读这些章节。当然，您也可以选择想阅读的章节。
 
 准备好了吗？
 
-<a href="kotlin-tour-hello-world.md"><img src="/img/start-kotlin-tour.svg" width="700" alt="Start the Kotlin tour" /></a>
+<a href="kotlin-tour-hello-world"><img src="/img/start-kotlin-tour.svg" width="700" alt="Start the Kotlin tour" /></a>

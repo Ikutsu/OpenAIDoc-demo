@@ -4,7 +4,7 @@ title: "带有接收器的 SAM 转换编译器插件"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-*sam-with-receiver* 编译器插件使带注解的 Java “单抽象方法”（SAM）接口方法的第一个参数成为 Kotlin 中的接收者（receiver）。只有当 SAM 接口作为 Kotlin lambda 传递时，此转换才有效，SAM 适配器和 SAM 构造函数均可（有关更多详细信息，请参见 [SAM 转换文档](java-interop.md#sam-conversions)）。
+*sam-with-receiver* 编译器插件使带注解的 Java “单抽象方法”（SAM）接口方法的第一个参数成为 Kotlin 中的接收者（receiver）。只有当 SAM 接口作为 Kotlin lambda 传递时，此转换才有效，SAM 适配器和 SAM 构造函数均可（有关更多详细信息，请参见 [SAM 转换文档](java-interop#sam-conversions)）。
 
 这是一个例子：
 
@@ -31,7 +31,7 @@ fun test(context: TaskContext) {
 
 ## Gradle
 
-用法与 [all-open](all-open-plugin.md) 和 [no-arg](no-arg-plugin.md) 相同，除了 sam-with-receiver 没有任何内置预设，你需要指定自己的特殊处理注解列表。
+用法与 [all-open](all-open-plugin) 和 [no-arg](no-arg-plugin) 相同，除了 sam-with-receiver 没有任何内置预设，你需要指定自己的特殊处理注解列表。
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>

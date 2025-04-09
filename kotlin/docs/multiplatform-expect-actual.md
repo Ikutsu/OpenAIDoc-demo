@@ -211,7 +211,7 @@ actual object IdentityBuilder {
 
 例如，你可能会在测试和生产中注入不同的依赖项，或者在部署到云与本地托管时注入不同的依赖项。只要通过接口表达依赖项，就可以注入任意数量的不同实现，无论是在编译时还是在运行时。
 
-当依赖项是特定于平台的时，相同的原则也适用。在通用代码中，组件可以使用常规的 [Kotlin 接口](interfaces.md) 来表达其依赖项。然后，可以配置 DI 框架以注入特定于平台的实现，例如，来自 JVM 或 iOS 模块。
+当依赖项是特定于平台的时，相同的原则也适用。在通用代码中，组件可以使用常规的 [Kotlin 接口](interfaces) 来表达其依赖项。然后，可以配置 DI 框架以注入特定于平台的实现，例如，来自 JVM 或 iOS 模块。
 
 这意味着预期声明和实际声明仅在 DI 框架的配置中才需要。有关示例，请参阅[使用平台特定 API](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html#dependency-injection-framework)。
 
@@ -220,7 +220,7 @@ actual object IdentityBuilder {
 ### 预期和实际类
 
 :::note
-预期类和实际类处于 [Beta](components-stability.md) 阶段。
+预期类和实际类处于 [Beta](components-stability) 阶段。
 它们几乎是稳定的，但将来可能需要迁移步骤。
 我们将尽最大努力尽量减少你需要进行的任何进一步更改。
 
@@ -357,7 +357,7 @@ class MyCommonIdentity : CommonIdentity() {
 
 <!-- A similar scheme works in any library that provides a common `ViewModel` for Android or iOS development. Such a library
 typically provides an expected `CommonViewModel` class whose actual Android counterpart extends the `ViewModel` class
-from the Android framework. See [Use platform-specific APIs](multiplatform-connect-to-apis.md#adapting-to-an-existing-hierarchy-using-expected-actual-classes)
+from the Android framework. See [Use platform-specific APIs](multiplatform-connect-to-apis#adapting-to-an-existing-hierarchy-using-expected-actual-classes)
 for a detailed description of this example. -->
 
 ## 高级用例
@@ -385,7 +385,7 @@ expect class MyDate {
 
 在 JVM 模块中，`java.time.Month` 枚举可用于实现第一个预期声明，而 `java.time.LocalDate` 类可用于实现第二个预期声明。但是，没有办法直接将 `actual` 关键字添加到这些类型。
 
-相反，你可以使用[类型别名](type-aliases.md)来连接预期声明和平台特定类型：
+相反，你可以使用[类型别名](type-aliases)来连接预期声明和平台特定类型：
 
 ```kotlin
 actual typealias Month = java.time.Month
@@ -398,7 +398,7 @@ actual typealias MyDate = java.time.LocalDate
 
 :::
 
-<!-- See [Using platform-specific APIs](multiplatform-connect-to-apis.md#actualizing-an-interface-or-a-class-with-an-existing-platform-class-using-typealiases)
+<!-- See [Using platform-specific APIs](multiplatform-connect-to-apis#actualizing-an-interface-or-a-class-with-an-existing-platform-class-using-typealiases)
 for an Android-specific example of this pattern. -->
 
 ### 实际声明中扩展的可见性

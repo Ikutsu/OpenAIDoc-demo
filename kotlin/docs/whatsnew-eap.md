@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 2.1.20-RC3 的新增功能"
 ---
-_[发布于：2025 年 3 月 14 日](eap.md#build-details)_
+_[发布于：2025 年 3 月 14 日](eap#build-details)_
 
 :::note
 本文档未涵盖“抢先体验预览版 (EAP)”版本的所有功能，但重点介绍了一些重大改进。
@@ -25,9 +25,9 @@ Kotlin 2.1.20-RC3 版本已发布！
 
 支持 2.1.20-RC3 的 Kotlin 插件已捆绑在最新的 IntelliJ IDEA 和 Android Studio 中。
 你无需更新 IDE 中的 Kotlin 插件。
-你只需在构建脚本中将 [Kotlin 版本更改](configure-build-for-eap.md) 为 2.1.20-RC3 即可。
+你只需在构建脚本中将 [Kotlin 版本更改](configure-build-for-eap) 为 2.1.20-RC3 即可。
 
-有关详细信息，请参阅 [更新到新版本](releases.md#update-to-a-new-kotlin-version)。
+有关详细信息，请参阅 [更新到新版本](releases#update-to-a-new-kotlin-version)。
 
 ## Kotlin K2 编译器：新的默认 kapt 插件
 
@@ -98,7 +98,7 @@ Kotlin 2.1.20-RC3 引入了一个新的内联优化通道，它位于实际代�
 
 Kotlin/Native 编译器中的新内联通道应比标准的 LLVM 内联器执行得更好，并提高生成的代码的运行时性能。
 
-新的内联通道当前处于 [Experimental](components-stability.md#stability-levels-explained) 阶段。要试用它，请使用以下编译器选项：
+新的内联通道当前处于 [Experimental](components-stability#stability-levels-explained) 阶段。要试用它，请使用以下编译器选项：
 
 ```none
 -Xbinary=preCodegenInlineThreshold=40
@@ -112,7 +112,7 @@ Kotlin/Native 编译器中的新内联通道应比标准的 LLVM 内联器执行
 
 ### 默认启用自定义格式化程序
 
-之前，你需要 [手动配置](whatsnew21.md#improved-debugging-experience-for-kotlin-wasm) 自定义格式化程序，以在使用 Kotlin/Wasm 代码时改善 Web 浏览器中的调试体验。
+之前，你需要 [手动配置](whatsnew21#improved-debugging-experience-for-kotlin-wasm) 自定义格式化程序，以在使用 Kotlin/Wasm 代码时改善 Web 浏览器中的调试体验。
 
 在此版本中，自定义格式化程序在开发构建中默认启用，因此无需额外的 Gradle 配置。
 
@@ -187,7 +187,7 @@ Kotlin %kotlinEapVersion% 现在与最新的稳定 Gradle 版本 8.11 兼容，�
 此功能目前在 Gradle 中处于 pre-Alpha 状态。
 仅在 Gradle 8.10 或更高版本中使用，且仅用于评估目的。
 
-自 Kotlin 2.1.0 起，你就可以在项目中 [预览 Gradle 的 Isolated Projects 功能](whatsnew21.md#preview-gradle-s-isolated-projects-in-kotlin-multiplatform)。
+自 Kotlin 2.1.0 起，你就可以在项目中 [预览 Gradle 的 Isolated Projects 功能](whatsnew21#preview-gradle-s-isolated-projects-in-kotlin-multiplatform)。
 
 以前，你必须配置 Kotlin Gradle 插件，以使你的项目与 Isolated Projects 功能兼容，然后才能试用它。在 Kotlin %kotlinEapVersion% 中，不再需要此额外步骤。
 
@@ -213,7 +213,7 @@ Kotlin %kotlinEapVersion% 引入了对添加自定义 [Gradle 发布变体](http
 
 :::
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained) 的。
+此功能是 [Experimental](components-stability#stability-levels-explained) 的。
 要选择加入，请使用 `@OptIn(ExperimentalKotlinGradlePluginApi::class)` 注解。
 
 要添加自定义 Gradle 发布变体，请调用 `adhocSoftwareComponent()` 函数，该函数返回 [`AdhocComponentWithVariants`](https://docs.gradle.org/current/javadoc/org/gradle/api/component/AdhocComponentWithVariants.html) 的一个实例，你可以在 Kotlin DSL 中对其进行配置：
@@ -250,7 +250,7 @@ kotlin {
 
 在 Kotlin %kotlinEapVersion% 中，我们将在标准库的 `kotlin.concurrent.atomics` 包中引入通用原子类型，从而能够为线程安全操作共享独立于平台的代码。这简化了 Kotlin Multiplatform 项目的开发，而无需跨源集复制依赖于原子的逻辑。
 
-`kotlin.concurrent.atomics` 包及其属性是 [Experimental](components-stability.md#stability-levels-explained) 的。要选择加入，请使用 `@OptIn(ExperimentalAtomicApi::class)` 注解或编译器选项 `-opt-in=kotlin.ExperimentalAtomicApi`。
+`kotlin.concurrent.atomics` 包及其属性是 [Experimental](components-stability#stability-levels-explained) 的。要选择加入，请使用 `@OptIn(ExperimentalAtomicApi::class)` 注解或编译器选项 `-opt-in=kotlin.ExperimentalAtomicApi`。
 
 以下示例演示了如何使用 `AtomicInt` 安全地计算跨多个线程处理的项目：
 
@@ -311,7 +311,7 @@ fun main() {
 
 ### UUID 解析、格式化和可比性方面的更改
 
-JetBrains 团队继续改进对 UUID 的支持，该支持 [在 2.0.20 中引入到标准库](whatsnew2020.md#support-for-uuids-in-the-common-kotlin-standard-library)。
+JetBrains 团队继续改进对 UUID 的支持，该支持 [在 2.0.20 中引入到标准库](whatsnew2020#support-for-uuids-in-the-common-kotlin-standard-library)。
 
 以前，`parse()` 函数仅接受十六进制和短划线格式的 UUID。在 Kotlin %kotlinEapVersion% 中，你可以将 `parse()` 用于_十六进制和短划线格式_和纯十六进制（无短划线）格式。
 
@@ -324,7 +324,7 @@ JetBrains 团队继续改进对 UUID 的支持，该支持 [在 2.0.20 中引入
 
 Kotlin 中的 UUID 现在是 `Comparable` 的。从 Kotlin %kotlinEapVersion% 开始，你可以直接比较和排序 `Uuid` 类型的值。这使你可以使用 `<` 和 `>` 运算符，标准库扩展仅适用于 `Comparable` 类型或其集合（例如 `sorted()`），并允许将 UUID 传递给任何需要 `Comparable` 接口的函数或 API。
 
-请记住，标准库中的 UUID 支持仍处于 [Experimental](components-stability.md#stability-levels-explained) 阶段。要选择加入，请使用 `@OptIn(ExperimentalUuidApi::class)` 注解或编译器选项 `-opt-in=kotlin.uuid.ExperimentalUuidApi`：
+请记住，标准库中的 UUID 支持仍处于 [Experimental](components-stability#stability-levels-explained) 阶段。要选择加入，请使用 `@OptIn(ExperimentalUuidApi::class)` 注解或编译器选项 `-opt-in=kotlin.uuid.ExperimentalUuidApi`：
 
 ```kotlin
 import kotlin.uuid.ExperimentalUuidApi
@@ -368,7 +368,7 @@ fun main() {
 * `.toJavaInstant()` 将 `kotlin.time.Instant` 值转换为 `java.time.Instant` 值。
 * `Instant.toJSDate()` 将 `kotlin.time.Instant` 值转换为 JS `Date` 类的实例。此转换并不精确，JS 使用毫秒精度来表示日期，而 Kotlin 允许纳秒分辨率。
 
-标准库的新时间功能仍处于 [Experimental](components-stability.md#stability-levels-explained) 阶段。
+标准库的新时间功能仍处于 [Experimental](components-stability#stability-levels-explained) 阶段。
 要选择加入，请使用 `@OptIn(ExperimentalTime::class)` 注解：
 
 ```kotlin
@@ -400,10 +400,10 @@ Compose 编译器 Gradle 插件默认启用在所有平台上 [包含源信息](
 ## 破坏性更改和弃用
 
 为了使 Kotlin Multiplatform 与 Gradle 中即将发生的更改保持一致，我们正在逐步淘汰 `withJava()` 函数。
-[默认情况下，现在会创建 Java 源集](multiplatform-compatibility-guide.md#java-source-sets-created-by-default)。
+[默认情况下，现在会创建 Java 源集](multiplatform-compatibility-guide#java-source-sets-created-by-default)。
 
 ## 如何更新到 Kotlin %kotlinEapVersion%
 
 从 IntelliJ IDEA 2023.3 和 Android Studio Iguana (2023.2.1) Canary 15 开始，Kotlin 插件作为捆绑插件分发，该插件包含在你的 IDE 中。这意味着你无法再从 JetBrains Marketplace 安装该插件。捆绑插件支持即将发布的 Kotlin EAP 版本。
 
-要更新到新的 Kotlin EAP 版本，请在构建脚本中将 [Kotlin 版本更改](configure-build-for-eap.md#adjust-the-kotlin-version) 为 %kotlinEapVersion%。
+要更新到新的 Kotlin EAP 版本，请在构建脚本中将 [Kotlin 版本更改](configure-build-for-eap#adjust-the-kotlin-version) 为 %kotlinEapVersion%。

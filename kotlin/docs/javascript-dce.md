@@ -39,7 +39,7 @@ DCE 与 IR 编译器的应用如下：
 
 为了防止某些声明被消除，请将 `dceTask` 块添加到你的 Gradle 构建脚本，并将这些声明作为 `keep` 函数的参数列出。参数必须是声明的完全限定名称，模块名称作为前缀：`moduleName.dot.separated.package.name.declarationName`
 
-除非另有说明，否则函数和模块的名称可以在生成的 JavaScript 代码中被 [mangled](js-to-kotlin-interop.md#jsname-annotation) (混淆)。为了防止此类函数被消除，请在 `keep` 参数中使用生成的 JavaScript 代码中显示的混淆名称。
+除非另有说明，否则函数和模块的名称可以在生成的 JavaScript 代码中被 [mangled](js-to-kotlin-interop#jsname-annotation) (混淆)。为了防止此类函数被消除，请在 `keep` 参数中使用生成的 JavaScript 代码中显示的混淆名称。
 
 :::
 

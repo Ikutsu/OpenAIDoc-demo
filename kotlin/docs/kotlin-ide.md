@@ -39,7 +39,7 @@ Kotlin 团队管理 Eclipse 的 Kotlin 插件的开发和贡献过程。 如果�
 
 对于 IntelliJ IDEA 和 Android Studio，Kotlin 插件与每个版本捆绑在一起。
 当新的 Kotlin 版本发布时，这些工具会自动建议将 Kotlin 更新到最新版本。
-请参见 [Kotlin releases](releases.md#ide-support) 中最新支持的语言版本。
+请参见 [Kotlin releases](releases#ide-support) 中最新支持的语言版本。
 
 ## 其他 IDE 支持
 
@@ -47,10 +47,10 @@ JetBrains 不为其他 IDE 提供 Kotlin 插件。
 但是，其他一些 IDE 和源代码编辑器（如 Eclipse、Visual Studio Code 和 Atom）具有由 Kotlin 社区支持的自己的 Kotlin 插件。
 
 你可以使用任何文本编辑器编写 Kotlin 代码，但没有与 IDE 相关的功能：代码格式化、调试工具等。
-要在文本编辑器中使用 Kotlin，你可以从 Kotlin [GitHub Releases](https://github.com/JetBrains/kotlin/releases/tag/v2.1.20) 下载最新的 Kotlin 命令行编译器 (`kotlin-compiler-2.1.20.zip`) 并[手动安装](command-line.md#manual-install) 它。
-此外，你可以使用包管理器，例如 [Homebrew](command-line.md#homebrew)、[SDKMAN!](command-line.md#sdkman) 和 [Snap package](command-line.md#snap-package)。
+要在文本编辑器中使用 Kotlin，你可以从 Kotlin [GitHub Releases](https://github.com/JetBrains/kotlin/releases/tag/v2.1.20) 下载最新的 Kotlin 命令行编译器 (`kotlin-compiler-2.1.20.zip`) 并[手动安装](command-line#manual-install) 它。
+此外，你可以使用包管理器，例如 [Homebrew](command-line#homebrew)、[SDKMAN!](command-line#sdkman) 和 [Snap package](command-line#snap-package)。
 
 ## 接下来做什么？
 
-* [使用 IntelliJ IDEA IDE 启动你的第一个项目](jvm-get-started.md)
+* [使用 IntelliJ IDEA IDE 启动你的第一个项目](jvm-get-started)
 * [使用 Android Studio 创建你的第一个跨平台移动应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)

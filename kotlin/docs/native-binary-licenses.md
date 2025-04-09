@@ -15,7 +15,7 @@ title: "Kotlin/Native 二进制文件的许可文件"
 特别是，Kotlin/Native 编译器生成的可执行文件可能包含第三方代码、数据或衍生作品。
 这意味着 Kotlin/Native 编译的可执行文件受第三方许可证的条款和条件的约束。
 
-在实践中，如果您分发 Kotlin/Native 编译的 [final binary](multiplatform-build-native-binaries.md)（最终二进制文件），您应始终在二进制分发包中包含必要的许可证文件。这些文件应以可读的形式供您的分发包的用户访问。
+在实践中，如果您分发 Kotlin/Native 编译的 [final binary](multiplatform-build-native-binaries)（最终二进制文件），您应始终在二进制分发包中包含必要的许可证文件。这些文件应以可读的形式供您的分发包的用户访问。
 
 始终包含以下相应项目的许可证文件：
 <table>

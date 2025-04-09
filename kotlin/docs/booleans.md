@@ -2,7 +2,7 @@
 title: 布尔值
 ---
 `Boolean` 类型表示可以有两个值的布尔对象：`true` 和 `false`。
-`Boolean` 有一个声明为 `Boolean?` 的 [nullable](null-safety.md)（可空）对应类型。
+`Boolean` 有一个声明为 `Boolean?` 的 [nullable](null-safety)（可空）对应类型。
 
 :::note
 在 JVM 上，存储为原始 `boolean` 类型的布尔值通常使用 8 位。
@@ -42,6 +42,6 @@ fun main() {
 * 如果第一个操作数是 `false`，则 `&&` 操作符不计算第二个操作数。
 
 :::note
-在 JVM 上，对布尔对象的可空引用会被装箱到 Java 类中，就像 [numbers](numbers.md#boxing-and-caching-numbers-on-the-java-virtual-machine)（数字）一样。
+在 JVM 上，对布尔对象的可空引用会被装箱到 Java 类中，就像 [numbers](numbers#boxing-and-caching-numbers-on-the-java-virtual-machine)（数字）一样。
 
 :::

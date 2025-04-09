@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::caution
-Kotlin 自定义脚本是 [实验性功能](components-stability.md)。它可能随时被删除或更改。
+Kotlin 自定义脚本是 [实验性功能](components-stability)。它可能随时被删除或更改。
 仅用于评估目的。欢迎您在 [YouTrack](https://kotl.in/issue) 上提供反馈。
 
 :::
@@ -343,6 +343,6 @@ print(
 ## 接下来是什么？
 
 创建了一个简单的 Kotlin 脚本项目后，请查找有关此主题的更多信息：
-* 阅读 [Kotlin scripting KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/scripting-support.md)
+* 阅读 [Kotlin scripting KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/scripting-support)
 * 浏览更多 [Kotlin 脚本示例](https://github.com/Kotlin/kotlin-script-examples)
 * 观看 Rodrigo Oliveira 的演讲 [Implementing the Gradle Kotlin DSL](https://kotlinconf.com/2019/talks/video/2019/126701/)

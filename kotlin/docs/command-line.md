@@ -9,7 +9,7 @@ title: "Kotlin 命令行编译器"
 例如 [IntelliJ IDEA](https://www.jetbrains.com/idea/) 或 [Android Studio](https://developer.android.com/studio)。
 它们提供了开箱即用的完整 Kotlin 支持。
 
-了解如何在 [IDE 中开始使用 Kotlin](getting-started.md)。
+了解如何在 [IDE 中开始使用 Kotlin](getting-started)。
 
 :::
 
@@ -138,7 +138,7 @@ kotlinc -script list_folders.kts -- -d <path_to_folder_to_inspect>
 Kotlin 提供了对脚本自定义的实验性支持，例如添加外部属性、提供静态或动态依赖项等。
 自定义由所谓的 _脚本定义_ 定义，即带有适当支持代码的带注解的 kotlin 类。
 脚本文件名扩展名用于选择适当的定义。
-了解更多关于 [Kotlin 自定义脚本](custom-script-deps-tutorial.md)。
+了解更多关于 [Kotlin 自定义脚本](custom-script-deps-tutorial)。
 
 当适当的 jar 包含在编译 classpath 中时，将自动检测并应用正确准备的脚本定义。或者，你可以通过将 `-script-templates` 选项传递给编译器来手动指定定义：
 
@@ -146,4 +146,4 @@ Kotlin 提供了对脚本自定义的实验性支持，例如添加外部属性�
 kotlinc -script-templates org.example.CustomScriptDefinition -script custom.script1.kts
 ```
 
-有关更多详细信息，请参阅 [KEEP-75](https://github.com/Kotlin/KEEP/blob/master/proposals/scripting-support.md)。
+有关更多详细信息，请参阅 [KEEP-75](https://github.com/Kotlin/KEEP/blob/master/proposals/scripting-support)。

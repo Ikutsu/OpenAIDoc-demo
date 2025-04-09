@@ -18,7 +18,7 @@ Kotlin 允许您独立于存储在其中的对象的具体类型来操作集合�
 集合接口和相关函数位于 `kotlin.collections` 包中。让我们概览一下它的内容。
 
 :::note
-数组 (Arrays) 不是一种集合类型。有关更多信息，请参见 [数组 (Arrays)](arrays.md)。
+数组 (Arrays) 不是一种集合类型。有关更多信息，请参见 [数组 (Arrays)](arrays)。
 
 :::
 
@@ -30,7 +30,7 @@ Kotlin 标准库为基本集合类型提供了实现：集 (sets)、列表 (list
 * 一个 _只读 (read-only)_ 接口，提供用于访问集合元素的操作。
 * 一个 _可变 (mutable)_ 接口，它扩展了相应的只读 (read-only) 接口，并具有写入操作：添加、删除和更新其元素。
 
-请注意，可变集合不一定要分配给 [`var`](basic-syntax.md#variables)。即使可变集合分配给 `val`，仍然可以进行写入操作。将可变集合分配给 `val` 的好处是，您可以保护对可变集合的引用免受修改。随着时间的推移，随着您的代码增长并变得更加复杂，防止对引用的意外修改变得更加重要。尽可能使用 `val` 来获得更安全、更健壮的代码。如果您尝试重新分配 `val` 集合，您会收到一个编译错误：
+请注意，可变集合不一定要分配给 [`var`](basic-syntax#variables)。即使可变集合分配给 `val`，仍然可以进行写入操作。将可变集合分配给 `val` 的好处是，您可以保护对可变集合的引用免受修改。随着时间的推移，随着您的代码增长并变得更加复杂，防止对引用的意外修改变得更加重要。尽可能使用 `val` 来获得更安全、更健壮的代码。如果您尝试重新分配 `val` 集合，您会收到一个编译错误：
 
 ```kotlin
 fun main() {
@@ -43,7 +43,7 @@ fun main() {
 }
 ```
 
-只读 (read-only) 集合类型是 [协变 (covariant)](generics.md#variance) 的。
+只读 (read-only) 集合类型是 [协变 (covariant)](generics#variance) 的。
 这意味着，如果 `Rectangle` 类继承自 `Shape`，您可以在任何需要 `List<Shape>` 的地方使用 `List<Rectangle>`。
 换句话说，集合类型具有与元素类型相同的子类型关系。映射 (maps) 在值 (value) 类型上是协变 (covariant) 的，但在键 (key) 类型上不是。
 
@@ -113,7 +113,7 @@ fun main() {
 ```
 
 列表元素（包括 null）可以重复：一个列表可以包含任意数量的相等对象或单个对象的出现次数。
-如果两个列表具有相同的大小，并且在相同位置具有 [结构上相等 (structurally equal)](equality.md#structural-equality) 的元素，则认为这两个列表相等。
+如果两个列表具有相同的大小，并且在相同位置具有 [结构上相等 (structurally equal)](equality#structural-equality) 的元素，则认为这两个列表相等。
 
 ```kotlin
 data class Person(var name: String, var age: Int)

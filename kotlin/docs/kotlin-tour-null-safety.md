@@ -4,19 +4,19 @@ title: "Null 安全"
 <no-index/>
 :::info
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型 (Basic types)</a><br />
-        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合 (Collections)</a><br />
-        <img src="/img/icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流 (Control flow)</a><br />
-        <img src="/img/icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数 (Functions)</a><br />
-        <img src="/img/icon-6-done.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类 (Classes)</a><br />
+   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world">Hello world</a><br />
+        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types">基本类型 (Basic types)</a><br />
+        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections">集合 (Collections)</a><br />
+        <img src="/img/icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow">控制流 (Control flow)</a><br />
+        <img src="/img/icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions">函数 (Functions)</a><br />
+        <img src="/img/icon-6-done.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes">类 (Classes)</a><br />
         <img src="/img/icon-7.svg" width="20" alt="Final step" /> <strong>空安全 (Null safety)</strong><br />
 </p>
 
 :::
 
 在 Kotlin 中，可以存在 `null` 值。当某些内容缺失或尚未设置时，Kotlin 使用 `null` 值。
-你已经在 [集合 (Collections)](kotlin-tour-collections.md#kotlin-tour-map-no-key) 章节中看到了 Kotlin 返回 `null` 值的示例，
+你已经在 [集合 (Collections)](kotlin-tour-collections#kotlin-tour-map-no-key) 章节中看到了 Kotlin 返回 `null` 值的示例，
 当你尝试使用 map 中不存在的键访问键值对时。虽然以这种方式使用 `null` 值很有用，但如果你的代码没有准备好处理它们，你可能会遇到问题。
 
 为了帮助防止程序中出现 `null` 值的问题，Kotlin 实现了空安全 (null safety) 机制。空安全 (null safety) 在编译时检测 `null` 值的潜在问题，而不是在运行时检测。
@@ -145,7 +145,7 @@ fun main() {
 }
 ```
 
-有关 Kotlin 中空安全 (null safety) 的更多信息，请参见 [空安全 (Null safety)](null-safety.md)。
+有关 Kotlin 中空安全 (null safety) 的更多信息，请参见 [空安全 (Null safety)](null-safety)。
 
 ## 练习 (Practice)
 
@@ -195,5 +195,5 @@ fun main() {
 
 恭喜！既然你已经完成了 Kotlin 之旅，请查看我们关于流行的 Kotlin 应用程序的教程：
 
-* [创建一个后端应用程序](jvm-create-project-with-spring-boot.md)
+* [创建一个后端应用程序](jvm-create-project-with-spring-boot)
 * [创建一个用于 Android 和 iOS 的跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)

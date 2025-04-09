@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.9 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构，后者指出，应事先充分沟通此移除，以使代码迁移尽可能顺畅。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构，后者指出，应事先充分沟通此移除，以使代码迁移尽可能顺畅。
 
 虽然大多数语言变更已通过其他渠道宣布，如更新日志或编译器警告，但本文档总结了所有这些变更，为从 Kotlin 1.8 迁移到 Kotlin 1.9 提供了完整的参考。
 

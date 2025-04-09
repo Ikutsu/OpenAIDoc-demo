@@ -10,14 +10,14 @@ import TabItem from '@theme/TabItem';
 </p>
     <!-- <p>Latest Kotlin EAP release: <strong>2.1.20-RC3</strong></p> -->
 <p>
-   <a href="eap.md#build-details">查看 Kotlin EAP 版本的详细信息</a>
+   <a href="eap#build-details">查看 Kotlin EAP 版本的详细信息</a>
 </p>
 
 :::
 
 要配置你的构建以使用 Kotlin 的 EAP 版本，你需要：
 
-* 指定 Kotlin 的 EAP 版本。[可用的 EAP 版本在此处列出](eap.md#build-details)。
+* 指定 Kotlin 的 EAP 版本。[可用的 EAP 版本在此处列出](eap#build-details)。
 * 将依赖项的版本更改为 EAP 版本。
 Kotlin 的 EAP 版本可能无法与先前发布的版本的库一起使用。
 
@@ -35,7 +35,7 @@ Kotlin 的 EAP 版本可能无法与先前发布的版本的库一起使用。
 
 ### 调整 Kotlin 版本
 
-在 `build.gradle(.kts)` 中的 `plugins` 块中，将 `KOTLIN-EAP-VERSION` 更改为实际的 EAP 版本，例如 `2.1.20-RC3`。[可用的 EAP 版本在此处列出](eap.md#build-details)。
+在 `build.gradle(.kts)` 中的 `plugins` 块中，将 `KOTLIN-EAP-VERSION` 更改为实际的 EAP 版本，例如 `2.1.20-RC3`。[可用的 EAP 版本在此处列出](eap#build-details)。
 
 或者，你可以在 `settings.gradle(.kts)` 中的 `pluginManagement` 块中指定 EAP 版本 - 有关详细信息，请参阅 [Gradle 文档](https://docs.gradle.org/current/userguide/plugins.html#sec:plugin_version_management)。
 
@@ -76,7 +76,7 @@ repositories {
 
 如果在你的项目中使用 kotlinx 库，则你的库版本可能与 Kotlin 的 EAP 版本不兼容。
 
-要解决此问题，你需要在依赖项中指定兼容库的版本。 有关兼容库的列表，请参阅 [EAP 构建详细信息](eap.md#build-details)。
+要解决此问题，你需要在依赖项中指定兼容库的版本。 有关兼容库的列表，请参阅 [EAP 构建详细信息](eap#build-details)。
 
 :::note
 在大多数情况下，我们仅为特定版本的第一个 EAP 版本创建库，并且这些库适用于此版本的后续 EAP 版本。
@@ -112,7 +112,7 @@ dependencies {
 
 ## 在 Maven 中配置
 
-在示例 Maven 项目定义中，将 `KOTLIN-EAP-VERSION` 替换为实际版本，例如 `2.1.20-RC3`。[可用的 EAP 版本在此处列出](eap.md#build-details)。
+在示例 Maven 项目定义中，将 `KOTLIN-EAP-VERSION` 替换为实际版本，例如 `2.1.20-RC3`。[可用的 EAP 版本在此处列出](eap#build-details)。
 
 ```xml
 <project ...>

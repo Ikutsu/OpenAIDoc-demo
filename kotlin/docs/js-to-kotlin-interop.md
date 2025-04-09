@@ -1,7 +1,7 @@
 ---
 title: "从 JavaScript 中使用 Kotlin 代码"
 ---
-根据选择的 [JavaScript 模块](js-modules.md)系统，Kotlin/JS 编译器会生成不同的输出。但通常情况下，Kotlin 编译器会生成普通的 JavaScript 类、函数和属性，你可以自由地从 JavaScript 代码中使用它们。不过，有一些微妙之处你应该记住。
+根据选择的 [JavaScript 模块](js-modules)系统，Kotlin/JS 编译器会生成不同的输出。但通常情况下，Kotlin 编译器会生成普通的 JavaScript 类、函数和属性，你可以自由地从 JavaScript 代码中使用它们。不过，有一些微妙之处你应该记住。
 
 ## 在普通模式下将声明隔离到单独的 JavaScript 对象中
 
@@ -23,7 +23,7 @@ alert(myModule.foo());
 alert(require('myModule').foo());
 ```
 
-请查看关于 [JavaScript 模块](js-modules.md)的文章，以获取有关 JavaScript 模块系统主题的更多信息。
+请查看关于 [JavaScript 模块](js-modules)的文章，以获取有关 JavaScript 模块系统主题的更多信息。
 
 ## 包结构
 
@@ -90,7 +90,7 @@ external fun newC()
 ### @JsExport 注解
 
 :::caution
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。
+此功能是 [Experimental](components-stability#stability-levels-explained)。
 其设计可能会在未来版本中发生变化。
 
 ::: 
@@ -99,14 +99,14 @@ external fun newC()
 
 为了解决导出中的歧义（例如，具有相同名称的函数的重载），你可以将 `@JsExport` 注解与 `@JsName` 一起使用，以指定生成和导出的函数的名称。
 
-在当前的 [IR compiler backend](js-ir-compiler.md) 中，`@JsExport` 注解是使你的函数从 Kotlin 中可见的唯一方法。
+在当前的 [IR compiler backend](js-ir-compiler) 中，`@JsExport` 注解是使你的函数从 Kotlin 中可见的唯一方法。
 
 对于多平台项目，`@JsExport` 在通用代码中也可用。它仅在为 JavaScript 目标编译时有效，并且允许你导出非平台特定的 Kotlin 声明。
 
 ### @JsStatic
 
 :::caution
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。它可能随时被删除或更改。
+此功能是 [Experimental](components-stability#stability-levels-explained)。它可能随时被删除或更改。
 仅将其用于评估目的。我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-18891/JS-provide-a-way-to-declare-static-members-JsStatic) 上对此提供的反馈。
 
 :::
@@ -165,7 +165,7 @@ C.Companion.callNonStatic(); // The only way it works
 | `Any`                                                                       | `Object`                   |                                                                                                    |
 | `Throwable`                                                                 | `Error`                    |                                                                                                    |
 | Nullable `Type?`                                                            | `Type | null | undefined`  |                                                                                                    |
-| All other Kotlin types (except for those marked with `JsExport` annotation) | Not supported              | 包括 Kotlin 的 [无符号整数类型](unsigned-integer-types.md)。                                                        |
+| All other Kotlin types (except for those marked with `JsExport` annotation) | Not supported              | 包括 Kotlin 的 [无符号整数类型](unsigned-integer-types)。                                                        |
 
 此外，重要的是要知道：
 

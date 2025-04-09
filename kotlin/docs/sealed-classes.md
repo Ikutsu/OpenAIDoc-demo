@@ -50,7 +50,7 @@ object RuntimeError : Error
 
 ### 构造函数 (Constructor)
 
-密封类本身始终是 [抽象类](classes.md#abstract-classes)，因此无法直接实例化。但是，它可以包含或继承构造函数 (Constructor)。这些构造函数 (Constructor) 不用于创建密封类本身的实例，而是用于其子类。考虑以下示例，其中包含一个名为 `Error` 的密封类及其几个子类，我们将对其进行实例化：
+密封类本身始终是 [抽象类](classes#abstract-classes)，因此无法直接实例化。但是，它可以包含或继承构造函数 (Constructor)。这些构造函数 (Constructor) 不用于创建密封类本身的实例，而是用于其子类。考虑以下示例，其中包含一个名为 `Error` 的密封类及其几个子类，我们将对其进行实例化：
 
 ```kotlin
 sealed class Error(val message: String) {
@@ -68,7 +68,7 @@ fun main() {
 // An unknown error has occurred
 ```
 
-您可以在密封类中使用 [`enum`](enum-classes.md) 类，以使用枚举常量来表示状态并提供其他详细信息。每个枚举常量仅作为**单个**实例存在，而密封类的子类可能具有**多个**实例。
+您可以在密封类中使用 [`enum`](enum-classes) 类，以使用枚举常量来表示状态并提供其他详细信息。每个枚举常量仅作为**单个**实例存在，而密封类的子类可能具有**多个**实例。
 在该示例中，`sealed class Error` 及其几个子类使用 `enum` 来表示错误严重性。
 每个子类构造函数 (Constructor) 都初始化 `severity` 并且可以更改其状态：
 
@@ -83,7 +83,7 @@ sealed class Error(val severity: ErrorSeverity) {
 }
 ```
 
-密封类的构造函数 (Constructor) 可以具有以下两种 [可见性](visibility-modifiers.md) 之一：`protected`（默认）或 `private`：
+密封类的构造函数 (Constructor) 可以具有以下两种 [可见性](visibility-modifiers) 之一：`protected`（默认）或 `private`：
 
 ```kotlin
 sealed class IOError {
@@ -101,7 +101,7 @@ sealed class IOError {
 
 ## 继承
 
-密封类和接口的直接子类必须在同一个包中声明。它们可以是顶层或嵌套在任何数量的其他命名类、命名接口或命名对象中。子类可以具有任何 [可见性](visibility-modifiers.md)，只要它们与 Kotlin 中的普通继承规则兼容。
+密封类和接口的直接子类必须在同一个包中声明。它们可以是顶层或嵌套在任何数量的其他命名类、命名接口或命名对象中。子类可以具有任何 [可见性](visibility-modifiers)，只要它们与 Kotlin 中的普通继承规则兼容。
 
 密封类的子类必须具有完全限定的名称。它们不能是本地对象或匿名对象。
 
@@ -134,15 +134,15 @@ open class CustomError(): Error
 
 ### 多平台项目中的继承
 
-在 [多平台项目](multiplatform-intro.md) 中，还有一项继承限制：密封类的直接子类必须位于同一 [源集](multiplatform-discover-project.md#source-sets) 中。它适用于没有 [expected 和 actual 修饰符](multiplatform-expect-actual.md) 的密封类。
+在 [多平台项目](multiplatform-intro) 中，还有一项继承限制：密封类的直接子类必须位于同一 [源集](multiplatform-discover-project#source-sets) 中。它适用于没有 [expected 和 actual 修饰符](multiplatform-expect-actual) 的密封类。
 
 如果密封类在公共源集中声明为 `expect`，并且在平台源集中具有 `actual` 实现，则 `expect` 和 `actual` 版本都可以在其源集中具有子类。此外，如果您使用分层结构，则可以在 `expect` 和 `actual` 声明之间的任何源集中创建子类。
 
-[了解有关多平台项目分层结构的更多信息](multiplatform-hierarchy.md)。
+[了解有关多平台项目分层结构的更多信息](multiplatform-hierarchy)。
 
 ## 将密封类与 when 表达式结合使用
 
-当您在 [`when`](control-flow.md#when-expressions-and-statements) 表达式中使用密封类时，其主要优势就体现出来了。
+当您在 [`when`](control-flow#when-expressions-and-statements) 表达式中使用密封类时，其主要优势就体现出来了。
 与密封类一起使用的 `when` 表达式允许 Kotlin 编译器彻底检查是否涵盖了所有可能的情况。
 在这种情况下，您不需要添加 `else` 子句：
 
@@ -175,10 +175,10 @@ fun main() {
 ```
 
 将密封类与 `when` 表达式一起使用时，您还可以添加守卫条件 (Guard conditions)，以在单个分支中包含其他检查。
-有关更多信息，请参阅 [when 表达式中的守卫条件 (Guard conditions)](control-flow.md#guard-conditions-in-when-expressions)。
+有关更多信息，请参阅 [when 表达式中的守卫条件 (Guard conditions)](control-flow#guard-conditions-in-when-expressions)。
 
 :::note
-在多平台项目中，如果您的密封类在公共代码中具有作为 [expected 声明](multiplatform-expect-actual.md) 的 `when` 表达式，则仍然需要 `else` 分支。
+在多平台项目中，如果您的密封类在公共代码中具有作为 [expected 声明](multiplatform-expect-actual) 的 `when` 表达式，则仍然需要 `else` 分支。
 这是因为 `actual` 平台实现的子类可能会扩展公共代码中未知的密封类。
 
 :::

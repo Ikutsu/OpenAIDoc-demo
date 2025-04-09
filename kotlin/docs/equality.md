@@ -98,7 +98,7 @@ fun main() {
 （例如，`Int`），`===` 相等性检查等同于 `==` 检查。
 
 :::tip
-引用相等的实现在 Kotlin/JS 中有所不同。有关相等性的更多信息，请参见 [Kotlin/JS](js-interop.md#equality) 文档。
+引用相等的实现在 Kotlin/JS 中有所不同。有关相等性的更多信息，请参见 [Kotlin/JS](js-interop#equality) 文档。
 
 :::
 
@@ -115,10 +115,10 @@ IEEE 标准不同。在这种情况下：
 * `NaN` 大于任何其他元素（包括 `POSITIVE_INFINITY`）
 * `-0.0` 不等于 `0.0`
 
-有关更多信息，请参见[浮点数比较](numbers.md#floating-point-numbers-comparison)。
+有关更多信息，请参见[浮点数比较](numbers#floating-point-numbers-comparison)。
 
 ## 数组相等
 
 要比较两个数组是否具有相同顺序的相同元素，请使用 [`contentEquals()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/content-equals.html)。
 
-有关更多信息，请参见[比较数组](arrays.md#compare-arrays)。
+有关更多信息，请参见[比较数组](arrays#compare-arrays)。

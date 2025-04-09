@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 2.1.20 中的新增功能"
 ---
-_[发布时间：2025 年 3 月 20 日](releases.md#release-details)_
+_[发布时间：2025 年 3 月 20 日](releases#release-details)_
 
 Kotlin 2.1.20 版本发布啦！以下是主要亮点：
 
@@ -18,7 +18,7 @@ Kotlin 2.1.20 版本发布啦！以下是主要亮点：
 
 支持 2.1.20 的 Kotlin 插件已捆绑在最新的 IntelliJ IDEA 和 Android Studio 中。您无需在 IDE 中更新 Kotlin 插件。您只需在构建脚本中将 Kotlin 版本更改为 2.1.20 即可。
 
-有关详细信息，请参阅[更新到新版本](releases.md#update-to-a-new-kotlin-version)。
+有关详细信息，请参阅[更新到新版本](releases#update-to-a-new-kotlin-version)。
 
 ### 下载具有 OSGi 支持的项目的 Kotlin 工件的源码
 
@@ -46,7 +46,7 @@ kapt.use.k2=false
 
 ### Lombok 编译器插件：支持 `@SuperBuilder` 以及 `@Builder` 的更新
 
-[Kotlin Lombok 编译器插件](lombok.md) 现在支持 `@SuperBuilder` 注解，从而可以更轻松地为类层次结构创建 builder。以前，在 Kotlin 中使用 Lombok 的开发人员在处理继承时必须手动定义 builder。使用 `@SuperBuilder`，builder 会自动继承超类字段，从而允许您在构造对象时初始化它们。
+[Kotlin Lombok 编译器插件](lombok) 现在支持 `@SuperBuilder` 注解，从而可以更轻松地为类层次结构创建 builder。以前，在 Kotlin 中使用 Lombok 的开发人员在处理继承时必须手动定义 builder。使用 `@SuperBuilder`，builder 会自动继承超类字段，从而允许您在构造对象时初始化它们。
 
 此外，此更新还包括多项改进和错误修复：
 
@@ -107,7 +107,7 @@ Kotlin 2.1.20 引入了一个新的内联优化 pass (过程)，它在实际代�
 
 Kotlin/Native 编译器中的新内联 pass (过程) 应该比标准的 LLVM inliner (内联器) 表现更好，并提高生成的代码的运行时性能。
 
-新的内联 pass (过程) 目前是 [Experimental](components-stability.md#stability-levels-explained)。要试用它，请使用以下编译器选项：
+新的内联 pass (过程) 目前是 [Experimental](components-stability#stability-levels-explained)。要试用它，请使用以下编译器选项：
 
 ```none
 -Xbinary=preCodegenInlineThreshold=40
@@ -123,7 +123,7 @@ Kotlin/Native 编译器中的新内联 pass (过程) 应该比标准的 LLVM inl
 
 ### 默认启用自定义格式化器
 
-之前，您必须[手动配置](whatsnew21.md#improved-debugging-experience-for-kotlin-wasm)自定义格式化器，以在使用 Kotlin/Wasm 代码时改进 Web 浏览器中的调试。
+之前，您必须[手动配置](whatsnew21#improved-debugging-experience-for-kotlin-wasm)自定义格式化器，以在使用 Kotlin/Wasm 代码时改进 Web 浏览器中的调试。
 
 在此版本中，自定义格式化器默认在开发版本中启用，因此您不需要额外的 Gradle 配置。
 
@@ -212,7 +212,7 @@ Kotlin 2.1.20 完全兼容 Gradle 7.6.3 到 8.11。您还可以使用 Gradle 版
 此功能目前在 Gradle 中处于 pre-Alpha 状态。目前不支持 JS 和 Wasm 目标。仅将其与 Gradle 8.10 或更高版本一起使用，并且仅用于评估目的。
 :::
 
-自从 Kotlin 2.1.0 以来，您已经能够在项目中[预览 Gradle 的 Isolated Projects (隔离项目) 功能](whatsnew21.md#preview-gradle-s-isolated-projects-in-kotlin-multiplatform)。
+自从 Kotlin 2.1.0 以来，您已经能够在项目中[预览 Gradle 的 Isolated Projects (隔离项目) 功能](whatsnew21#preview-gradle-s-isolated-projects-in-kotlin-multiplatform)。
 
 以前，您必须配置 Kotlin Gradle 插件以使您的项目与 Isolated Projects (隔离项目) 功能兼容，然后才能试用它。在 Kotlin 2.1.20 中，不再需要此附加步骤。
 
@@ -238,7 +238,7 @@ Kotlin 2.1.20 引入了对添加自定义 [Gradle 发布变体](https://docs.gra
 
 :::
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalKotlinGradlePluginApi::class)` 注解。
+此功能是 [Experimental](components-stability#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalKotlinGradlePluginApi::class)` 注解。
 
 要添加自定义 Gradle 发布变体，请调用 `adhocSoftwareComponent()` 函数，该函数返回一个 [`AdhocComponentWithVariants`](https://docs.gradle.org/current/javadoc/org/gradle/api/component/AdhocComponentWithVariants.html) 的实例，您可以在 Kotlin DSL 中对其进行配置：
 
@@ -275,7 +275,7 @@ kotlin {
 
 在 Kotlin 2.1.20 中，我们正在标准库的 `kotlin.concurrent.atomics` 包中引入通用原子类型，从而为线程安全操作启用共享的、平台无关的代码。通过消除跨源集复制原子相关逻辑的需要，这简化了 Kotlin Multiplatform (KMP) 项目的开发。
 
-`kotlin.concurrent.atomics` 包及其属性是 [Experimental](components-stability.md#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalAtomicApi::class)` 注解或编译器选项 `-opt-in=kotlin.ExperimentalAtomicApi`。
+`kotlin.concurrent.atomics` 包及其属性是 [Experimental](components-stability#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalAtomicApi::class)` 注解或编译器选项 `-opt-in=kotlin.ExperimentalAtomicApi`。
 
 以下示例显示了如何使用 `AtomicInt` 安全地计算跨多个线程处理的项目：
 
@@ -335,7 +335,7 @@ fun main() {
 
 ### UUID 解析、格式化和可比性方面的更改
 
-JetBrains 团队继续改进对 UUID 的支持，UUID 在 [2.0.20 版本中引入了标准库](whatsnew2020.md#support-for-uuids-in-the-common-kotlin-standard-library)。
+JetBrains 团队继续改进对 UUID 的支持，UUID 在 [2.0.20 版本中引入了标准库](whatsnew2020#support-for-uuids-in-the-common-kotlin-standard-library)。
 
 以前，`parse()` 函数仅接受十六进制和破折号格式的 UUID。使用 Kotlin 2.1.20，您可以将 `parse()` 用于_十六进制和破折号格式_以及纯十六进制格式（不带破折号）。
 
@@ -348,7 +348,7 @@ JetBrains 团队继续改进对 UUID 的支持，UUID 在 [2.0.20 版本中引�
 
 Kotlin 中的 UUID 现在是 `Comparable`。从 Kotlin 2.1.20 开始，您可以直接比较和排序 `Uuid` 类型的值。这支持使用 `<` 和 `>` 运算符以及专门为 `Comparable` 类型或其集合（例如 `sorted()`）提供的标准库扩展，并且还允许将 UUID 传递给任何需要 `Comparable` 接口的函数或 API。
 
-请记住，标准库中的 UUID 支持仍然是 [Experimental](components-stability.md#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalUuidApi::class)` 注解或编译器选项 `-opt-in=kotlin.uuid.ExperimentalUuidApi`：
+请记住，标准库中的 UUID 支持仍然是 [Experimental](components-stability#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalUuidApi::class)` 注解或编译器选项 `-opt-in=kotlin.uuid.ExperimentalUuidApi`：
 
 ```kotlin
 import kotlin.uuid.ExperimentalUuidApi
@@ -390,7 +390,7 @@ fun main() {
 * `.toJavaInstant()` 将 `kotlin.time.Instant` 值转换为 `java.time.Instant` 值。
 * `Instant.toJSDate()` 将 `kotlin.time.Instant` 值转换为 JS `Date` 类的实例。此转换不精确；JS 使用毫秒精度来表示日期，而 Kotlin 允许纳秒分辨率。
 
-标准库的新时间功能仍然是 [Experimental](components-stability.md#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalTime::class)` 注解：
+标准库的新时间功能仍然是 [Experimental](components-stability#stability-levels-explained)。要选择加入，请使用 `@OptIn(ExperimentalTime::class)` 注解：
 
 ```kotlin
 import kotlin.time.*
@@ -427,7 +427,7 @@ Compose 编译器在 [1.5.8 版本](https://developer.android.com/jetpack/androi
 
 ### 允许最终覆盖函数是可重启的
 
-虚拟函数（`open` 和 `abstract` 的覆盖，包括接口）[在 2.1.0 版本中被强制设为不可重启](whatsnew21.md#changes-to-open-and-overridden-composable-functions)。现在，对于作为 final 类的成员或本身是 `final` 的函数，此限制已放宽 – 它们将像往常一样重启或跳过。
+虚拟函数（`open` 和 `abstract` 的覆盖，包括接口）[在 2.1.0 版本中被强制设为不可重启](whatsnew21#changes-to-open-and-overridden-composable-functions)。现在，对于作为 final 类的成员或本身是 `final` 的函数，此限制已放宽 – 它们将像往常一样重启或跳过。
 
 升级到 Kotlin 2.1.20 后，您可能会观察到受影响函数中的一些行为更改。要强制执行先前版本中的不可重启逻辑，请将 `@NonRestartableComposable` 注解应用于该函数。
 
@@ -445,7 +445,7 @@ Compose 编译器 Gradle 插件已经在 Android 上默认启用了 [包括源�
 
 ## 破坏性更改和弃用
 
-* 为了使 Kotlin Multiplatform (KMP) 与 Gradle 中即将发生的更改保持一致，我们正在逐步淘汰 `withJava()` 函数。[Java 源集现在默认创建](multiplatform-compatibility-guide.md#java-source-sets-created-by-default)。
+* 为了使 Kotlin Multiplatform (KMP) 与 Gradle 中即将发生的更改保持一致，我们正在逐步淘汰 `withJava()` 函数。[Java 源集现在默认创建](multiplatform-compatibility-guide#java-source-sets-created-by-default)。
 
 * JetBrains 团队正在继续弃用 `kotlin-android-extensions` 插件。如果您尝试在项目中使用它，现在会收到配置错误，并且不会执行任何插件代码。
 
@@ -457,21 +457,21 @@ Kotlin 文档进行了一些值得注意的更改：
 
 ### 改造和新页面
 
-* [Kotlin roadmap](roadmap.md) – 查看 Kotlin 在语言和生态系统演进方面的优先事项的更新列表。
-* [Gradle best practices](gradle-best-practices.md) 页面 – 学习优化 Gradle 构建和提高性能的基本最佳实践。
+* [Kotlin roadmap](roadmap) – 查看 Kotlin 在语言和生态系统演进方面的优先事项的更新列表。
+* [Gradle best practices](gradle-best-practices) 页面 – 学习优化 Gradle 构建和提高性能的基本最佳实践。
 * [Compose Multiplatform and Jetpack Compose](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-and-jetpack-compose.html) – 两个 UI 框架之间关系的概述。
 * [Kotlin Multiplatform and Flutter](https://www.jetbrains.com/help/kotlin-multiplatform-dev/kotlin-multiplatform-flutter.html) – 查看两个流行的跨平台框架的比较。
-* [Interoperability with C](native-c-interop.md) – 探索 Kotlin 与 C 互操作性的详细信息。
-* [Numbers](numbers.md) – 了解用于表示数字的不同 Kotlin 类型。
+* [Interoperability with C](native-c-interop) – 探索 Kotlin 与 C 互操作性的详细信息。
+* [Numbers](numbers) – 了解用于表示数字的不同 Kotlin 类型。
 
 ### 新的和更新的教程
 
 * [Publish your library to Maven Central](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html) – 了解如何将 KMP 库工件发布到最受欢迎的 Maven 存储库。
-* [Kotlin/Native as a dynamic library](native-dynamic-libraries.md) – 创建一个动态 Kotlin 库。
-* [Kotlin/Native as an Apple framework](apple-framework.md) – 创建您自己的框架并在 macOS 和 iOS 上的 Swift/Objective-C 应用程序中使用 Kotlin/Native 代码。
+* [Kotlin/Native as a dynamic library](native-dynamic-libraries) – 创建一个动态 Kotlin 库。
+* [Kotlin/Native as an Apple framework](apple-framework) – 创建您自己的框架并在 macOS 和 iOS 上的 Swift/Objective-C 应用程序中使用 Kotlin/Native 代码。
 
 ## 如何更新到 Kotlin 2.1.20
 
 从 IntelliJ IDEA 2023.3 和 Android Studio Iguana (2023.2.1) Canary 15 开始，Kotlin 插件作为捆绑插件分发，包含在您的 IDE 中。这意味着您无法再从 JetBrains Marketplace 安装该插件。
 
-要更新到新的 Kotlin 版本，请在您的构建脚本中[将 Kotlin 版本更改为 2.1.20](releases.md#update-to-a-new-kotlin-version)。
+要更新到新的 Kotlin 版本，请在您的构建脚本中[将 Kotlin 版本更改为 2.1.20](releases#update-to-a-new-kotlin-version)。

@@ -4,7 +4,7 @@ title: "Kotlin 1.8.20 版本的新特性"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[发布日期：2023年4月25日](releases.md#release-details)_
+_[发布日期：2023年4月25日](releases#release-details)_
 
 Kotlin 1.8.20 版本已发布，以下是其一些最重要的亮点：
 
@@ -36,13 +36,13 @@ Kotlin 1.8.20 版本已发布，以下是其一些最重要的亮点：
 ## 新的 Kotlin K2 编译器更新
 
 Kotlin 团队正在继续稳定 K2 编译器。正如
-[Kotlin 1.7.0 发布公告](whatsnew17.md#new-kotlin-k2-compiler-for-the-jvm-in-alpha)中所述，它仍然处于 **Alpha** 阶段。
+[Kotlin 1.7.0 发布公告](whatsnew17#new-kotlin-k2-compiler-for-the-jvm-in-alpha)中所述，它仍然处于 **Alpha** 阶段。
 此版本引入了在 [K2 Beta](https://youtrack.jetbrains.com/issue/KT-52604) 之路上所做的进一步改进。
 
 从 1.8.20 版本开始，Kotlin K2 编译器：
 
 * 具有序列化插件的预览版本。
-* 为 [JS IR 编译器](js-ir-compiler.md) 提供 Alpha 支持。
+* 为 [JS IR 编译器](js-ir-compiler) 提供 Alpha 支持。
 * 引入了未来发布的
   [新语言版本 Kotlin 2.0](https://blog.jetbrains.com/kotlin/2023/02/k2-kotlin-2-0/)。
 
@@ -96,12 +96,12 @@ kotlin {
 
 ### Enum 类 values 函数的现代高性能替代品
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。
+此功能是 [Experimental](components-stability#stability-levels-explained)。
 它可能会随时删除或更改。 需要选择加入（请参阅下面的详细信息）。 仅用于评估目的。
 我们欢迎您在 [YouTrack](https://kotl.in/issue) 中对此提出反馈。
 
 Enum 类具有一个合成的 `values()` 函数，该函数返回一个已定义的枚举常量数组。 但是，使用数组可能会导致
-Kotlin 和 Java 中 [隐藏的性能问题](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries.md#examples-of-performance-issues)。
+Kotlin 和 Java 中 [隐藏的性能问题](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries#examples-of-performance-issues)。
 此外，大多数 API 都使用集合，这需要最终转换。 为了解决这些问题，我们为 Enum 类引入了 `entries` 属性，
 应使用该属性代替 `values()` 函数。 调用时，`entries` 属性返回一个预分配的已定义的枚举常量不可变列表。
 
@@ -157,7 +157,7 @@ tasks
 从 IntelliJ IDEA 2023.1 开始，如果您已选择加入此功能，则相应的 IDE
 检查将通知您有关从 `values()` 转换为 `entries()` 并提供快速修复。
 
-有关该提案的更多信息，请参阅 [KEEP 说明](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries.md)。
+有关该提案的更多信息，请参阅 [KEEP 说明](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries)。
 
 ### 与数据类对称的数据对象预览
 
@@ -194,7 +194,7 @@ fun main() {
 
 #### 数据对象的语义
 
-自从它们在 [Kotlin 1.7.20](whatsnew1720.md#improved-string-representations-for-singletons-and-sealed-class-hierarchies-with-data-objects) 中首次预览以来，
+自从它们在 [Kotlin 1.7.20](whatsnew1720#improved-string-representations-for-singletons-and-sealed-class-hierarchies-with-data-objects) 中首次预览以来，
 数据对象的语义已得到改进。 编译器现在自动为它们生成许多便捷
 函数：
 
@@ -303,10 +303,10 @@ tasks
 
 ### 取消对内联类中带有主体的二级构造函数的限制预览
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。 它可能会随时删除或更改。
+此功能是 [Experimental](components-stability#stability-levels-explained)。 它可能会随时删除或更改。
 需要选择加入（请参阅下面的详细信息）。 仅用于评估目的。 我们欢迎您在 [YouTrack](https://kotl.in/issue) 中对此提出反馈。
 
-Kotlin 1.8.20 取消了对在 [内联类](inline-classes.md) 中使用带有主体的二级构造函数的限制。
+Kotlin 1.8.20 取消了对在 [内联类](inline-classes) 中使用带有主体的二级构造函数的限制。
 
 内联类过去只允许一个没有 `init` 块的公共主构造函数或二级构造函数具有
 清晰的初始化语义。 因此，无法封装基础值或创建表示某些约束值的内联类。
@@ -369,11 +369,11 @@ tasks
 
 我们鼓励您试用此功能并在 [YouTrack](https://kotl.in/issue) 中提交所有报告，以帮助我们在 Kotlin 1.9.0 中将其设置为默认值。
 
-请在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes.md) 中了解有关 Kotlin 内联类开发的更多信息。
+请在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes) 中了解有关 Kotlin 内联类开发的更多信息。
 
 ## 新的 Kotlin/Wasm 目标平台
 
-Kotlin/Wasm (Kotlin WebAssembly) 在此版本中进入 [Experimental](components-stability.md#stability-levels-explained) 阶段。
+Kotlin/Wasm (Kotlin WebAssembly) 在此版本中进入 [Experimental](components-stability#stability-levels-explained) 阶段。
 Kotlin 团队认为 [WebAssembly](https://webassembly.org/) 是一项很有前途的技术，并希望找到
 更好的方式让您使用它并获得 Kotlin 的所有好处。
 
@@ -474,7 +474,7 @@ Kotlin 1.8.20 引入了 [Java 合成属性引用的预览](#preview-of-java-synt
 
 ### Java 合成属性引用的预览
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。
+此功能是 [Experimental](components-stability#stability-levels-explained)。
 它可能会随时删除或更改。 仅用于评估目的。
 我们欢迎您在 [YouTrack](https://kotl.in/issue) 中对此提出反馈。
 
@@ -549,7 +549,7 @@ tasks
 
 ### 默认情况下支持 kapt 桩生成任务中的 JVM IR 后端
 
-在 Kotlin 1.7.20 中，我们引入了 [对 kapt 桩生成任务中的 JVM IR 后端的支持](whatsnew1720.md#support-for-the-jvm-ir-backend-in-kapt-stub-generating-task)。 从此版本开始，此支持默认情况下有效。 您不再需要在 `gradle.properties` 中指定 `kapt.use.jvm.ir=true` 来启用它。
+在 Kotlin 1.7.20 中，我们引入了 [对 kapt 桩生成任务中的 JVM IR 后端的支持](whatsnew1720#support-for-the-jvm-ir-backend-in-kapt-stub-generating-task)。 从此版本开始，此支持默认情况下有效。 您不再需要在 `gradle.properties` 中指定 `kapt.use.jvm.ir=true` 来启用它。
 我们欢迎您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-49682) 中对此功能提出反馈。
 
 ## Kotlin/Native
@@ -567,7 +567,7 @@ Kotlin 1.8.20 包括对支持的 Kotlin/Native 目标平台、与 Objective-C �
 ### Kotlin/Native 目标平台更新
   
 Kotlin 团队决定重新审视 Kotlin/Native 支持的目标平台列表，将其分为几个层级，
-并从 Kotlin 1.8.20 开始弃用其中的一些目标平台。 有关支持和已弃用目标的完整列表，请参阅 [Kotlin/Native 目标平台支持](native-target-support.md)
+并从 Kotlin 1.8.20 开始弃用其中的一些目标平台。 有关支持和已弃用目标的完整列表，请参阅 [Kotlin/Native 目标平台支持](native-target-support)
 部分。
 
 以下目标平台已在 Kotlin 1.8.20 中弃用，将在 1.9.20 中删除：
@@ -581,10 +581,10 @@ Kotlin 团队决定重新审视 Kotlin/Native 支持的目标平台列表，将�
 * `linuxMipsel32`
 
 对于剩余的目标平台，现在有三个支持层级，具体取决于 Kotlin/Native 编译器中对目标平台的支持和测试程度。 可以将目标平台移动到不同的层级。 例如，我们将尽最大努力
-在未来为 `iosArm64` 提供全面支持，因为它对于 [Kotlin 多平台](multiplatform-intro.md)
+在未来为 `iosArm64` 提供全面支持，因为它对于 [Kotlin 多平台](multiplatform-intro)
 非常重要。
 
-如果您是库的作者，这些目标平台层级可以帮助您决定要在 CI 工具上测试哪些目标平台以及要跳过哪些目标平台。 Kotlin 团队将在开发官方 Kotlin 库（例如 [kotlinx.coroutines](coroutines-guide.md)）时使用相同的方法。
+如果您是库的作者，这些目标平台层级可以帮助您决定要在 CI 工具上测试哪些目标平台以及要跳过哪些目标平台。 Kotlin 团队将在开发官方 Kotlin 库（例如 [kotlinx.coroutines](coroutines-guide)）时使用相同的方法。
 
 请查看我们的 [博客文章](https://blog.jetbrains.com/kotlin/2023/02/update-regarding-kotlin-native-targets/) 以
 了解有关这些更改原因的更多信息。
@@ -592,16 +592,16 @@ Kotlin 团队决定重新审视 Kotlin/Native 支持的目标平台列表，将�
 ### 弃用旧版内存管理器
 
 从 1.8.20 开始，旧版内存管理器已被弃用，将在 1.9.20 中删除。
-[新的内存管理器](native-memory-manager.md) 在 1.7.20 中默认启用，并且一直在接受进一步的
+[新的内存管理器](native-memory-manager) 在 1.7.20 中默认启用，并且一直在接受进一步的
 稳定性更新和性能改进。
 
-如果您仍在使用旧版内存管理器，请从您的 `gradle.properties` 中删除 `kotlin.native.binary.memoryModel=strict` 选项，并按照我们的 [迁移指南](native-migration-guide.md) 进行必要的更改。
+如果您仍在使用旧版内存管理器，请从您的 `gradle.properties` 中删除 `kotlin.native.binary.memoryModel=strict` 选项，并按照我们的 [迁移指南](native-migration-guide) 进行必要的更改。
 
 新的内存管理器不支持 `wasm32` 目标平台。 此目标平台也已[从此版本开始弃用](#update-for-kotlin-native-targets)，将在 1.9.20 中删除。
 
 ### 支持带有 @import 指令的 Objective-C 标头
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。
+此功能是 [Experimental](components-stability#stability-levels-explained)。
 它可能会随时删除或更改。 需要选择加入（请参阅下面的详细信息）。 仅用于评估目的。
 我们欢迎您在 [YouTrack](https://kotl.in/issue) 中对此提出反馈。
 
@@ -610,7 +610,7 @@ Kotlin/Native 现在可以导入带有 `@import` 指令的 Objective-C 标头。
 以前，cinterop 工具无法分析通过 `@import` 指令依赖于 Objective-C 模块的标头。
 原因是它缺少对 `-fmodules` 选项的支持。
 
-从 Kotlin 1.8.20 开始，您可以使用带有 `@import` 的 Objective-C 标头。 为此，请在定义文件中将 `-fmodules` 选项作为 `compilerOpts` 传递给编译器。 如果您使用 [CocoaPods 集成](native-cocoapods.md)，请在此配置块中指定 cinterop 选项：`pod()` 函数，如下所示：
+从 Kotlin 1.8.20 开始，您可以使用带有 `@import` 的 Objective-C 标头。 为此，请在定义文件中将 `-fmodules` 选项作为 `compilerOpts` 传递给编译器。 如果您使用 [CocoaPods 集成](native-cocoapods)，请在此配置块中指定 cinterop 选项：`pod()` 函数，如下所示：
 
 ```kotlin
 kotlin {
@@ -685,7 +685,7 @@ Gradle 属性。
 
 ### 弃用 Cocoapods Gradle 插件中的 useLibraries()
 
-Kotlin 1.8.20 开始弃用用于静态库的 [CocoaPods 集成](native-cocoapods.md) 中的 `useLibraries()` 函数的周期。
+Kotlin 1.8.20 开始弃用用于静态库的 [CocoaPods 集成](native-cocoapods) 中的 `useLibraries()` 函数的周期。
 
 我们引入了 `useLibraries()` 函数以允许依赖于包含静态库的 Pod。 随着时间的推移，这种情况变得非常罕见。 大多数 Pod 都是按源代码分发的，而 Objective-C 框架或 XCFramework 是
 二进制分发的常见选择。
@@ -693,7 +693,7 @@ Kotlin 1.8.20 开始弃用用于静态库的 [CocoaPods 集成](native-cocoapods
 由于此函数不受欢迎，并且它创建了使 Kotlin CocoaPods Gradle
 插件的开发复杂化的问题，因此我们决定弃用它。
 
-有关框架和 XCFramework 的更多信息，请参阅 [构建最终原生二进制文件](multiplatform-build-native-binaries.md)。
+有关框架和 XCFramework 的更多信息，请参阅 [构建最终原生二进制文件](multiplatform-build-native-binaries)。
 
 ## Kotlin 多平台
 
@@ -706,7 +706,7 @@ Kotlin 1.8.20 致力于通过以下 Kotlin 多平台更新来改善开发人员�
 ### 设置源集层次结构的新方法
 
 :::note
-设置源集层次结构的新方法是 [Experimental](components-stability.md#stability-levels-explained)。
+设置源集层次结构的新方法是 [Experimental](components-stability#stability-levels-explained)。
 它可能会在未来的 Kotlin 版本中更改，恕不另行通知。 需要选择加入（请参阅下面的详细信息）。
 我们欢迎您在 [YouTrack](https://kotl.in/issue) 中提供反馈。
 

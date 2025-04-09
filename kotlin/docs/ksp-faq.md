@@ -3,17 +3,17 @@ title: "KSP 常见问题"
 ---
 ### 为什么选择 KSP？
 
-KSP 相较于 [kapt](kapt.md) 有以下几个优势：
+KSP 相较于 [kapt](kapt) 有以下几个优势：
 * 速度更快。
 * 对于 Kotlin 用户来说，API 更加流畅。
-* 支持对生成的 Kotlin 源码进行[多轮处理](ksp-multi-round.md)（multiple round processing）。
+* 支持对生成的 Kotlin 源码进行[多轮处理](ksp-multi-round)（multiple round processing）。
 * 在设计时考虑了多平台兼容性（multiplatform compatibility）。
 
 ### 为什么 KSP 比 kapt 快？
 
 kapt 必须解析并解析每个类型引用才能生成 Java 存根（stubs），而 KSP 则按需解析引用。委托给 javac 也需要时间。
 
-此外，KSP 的[增量处理模型](ksp-incremental.md)（incremental processing model）比仅仅隔离和聚合具有更细的粒度。它可以找到更多避免重新处理一切的机会。而且，由于 KSP 动态地跟踪符号解析，因此文件中发生的更改不太可能污染其他文件，因此需要重新处理的文件集更小。这对于 kapt 来说是不可能的，因为它将处理委托给 javac。
+此外，KSP 的[增量处理模型](ksp-incremental)（incremental processing model）比仅仅隔离和聚合具有更细的粒度。它可以找到更多避免重新处理一切的机会。而且，由于 KSP 动态地跟踪符号解析，因此文件中发生的更改不太可能污染其他文件，因此需要重新处理的文件集更小。这对于 kapt 来说是不可能的，因为它将处理委托给 javac。
 
 ### KSP 是 Kotlin 特有的吗？
 
@@ -47,7 +47,7 @@ KSP 尽量遵循 [Semantic Versioning](https://semver.org/)。对于 KSP 版本 
 * `minor` 保留用于新功能。这将大约每季度更新一次。
 * `patch` 保留用于错误修复和新的 Kotlin 版本。它大约每月更新一次。
 
-通常，在发布新 Kotlin 版本后的几天内，包括[预发布版本 (Beta 或 RC)](eap.md)，都会提供相应的 KSP 版本。
+通常，在发布新 Kotlin 版本后的几天内，包括[预发布版本 (Beta 或 RC)](eap)，都会提供相应的 KSP 版本。
 
 ### 除了 Kotlin 之外，对库还有其他版本要求吗？
 

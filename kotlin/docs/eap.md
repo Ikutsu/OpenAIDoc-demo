@@ -19,7 +19,7 @@ title: "参与 Kotlin 抢先体验预览"
 如果您有任何问题并想参与讨论，欢迎加入 [Kotlin Slack 中的 #eap 频道](https://app.slack.com/client/T09229ZC6/C0KLZSCHF)。
 在此频道中，您还可以收到有关新的 EAP 版本的通知。
 
-**[为 Kotlin EAP 版本配置您的项目](configure-build-for-eap.md)**
+**[为 Kotlin EAP 版本配置您的项目](configure-build-for-eap)**
 
 :::note
 通过参与 EAP，您明确承认 EAP 版本可能不可靠、可能无法按预期工作，并且可能包含错误。
@@ -53,7 +53,7 @@ _当前没有可用的预览版本。_
         </td>
         <td>
             <p>一个默认启用 K2 kapt 的工具版本。</p>
-            <p>有关更多详细信息，请参阅<a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.20-RC3">更新日志 (changelog)</a>或<a href="whatsnew-eap.md">Kotlin 2.1.20-RC3 中的新增功能</a>。</p>
+            <p>有关更多详细信息，请参阅<a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.20-RC3">更新日志 (changelog)</a>或<a href="whatsnew-eap">Kotlin 2.1.20-RC3 中的新增功能</a>。</p>
         </td>
     </tr>
 </table>

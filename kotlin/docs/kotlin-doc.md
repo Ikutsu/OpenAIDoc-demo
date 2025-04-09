@@ -4,7 +4,7 @@ title: "Kotlin 代码文档：KDoc"
 用来记录 Kotlin 代码的语言（相当于 Java 的 Javadoc）被称为 **KDoc**。本质上，KDoc 结合了 Javadoc 的块标签（block tags）语法（扩展后支持 Kotlin 的特定结构）和 Markdown 的内联标记（inline markup）。
 
 :::note
-Kotlin 的文档引擎：Dokka，可以理解 KDoc，并可用于生成各种格式的文档。更多信息，请阅读我们的 [Dokka 文档](dokka-introduction.md)。
+Kotlin 的文档引擎：Dokka，可以理解 KDoc，并可用于生成各种格式的文档。更多信息，请阅读我们的 [Dokka 文档](dokka-introduction)。
 
 :::
 
@@ -134,4 +134,4 @@ For more information about KDoc syntax, see [KDoc](<example-URL>).
 
 ## 接下来做什么？
 
-学习如何使用 Kotlin 的文档生成工具：[Dokka](dokka-introduction.md)。
+学习如何使用 Kotlin 的文档生成工具：[Dokka](dokka-introduction)。

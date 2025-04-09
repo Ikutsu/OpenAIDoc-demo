@@ -13,7 +13,7 @@ title: "Kotlin 实践"
 
 使用 Kotlin/JS 创建一个 React 应用程序，并了解如何利用 Kotlin 的类型系统、库生态系统和互操作性特性。
 
-[**开始**](js-react.md)
+[**开始**](js-react)
 
 ## 使用 Spring Boot 和 Kotlin 构建 Web 应用程序
 
@@ -43,13 +43,13 @@ title: "Kotlin 实践"
 
 了解 Kotlin 中的协程，以及如何使用通道在它们之间进行通信。
 
-[**开始**](coroutines-and-channels.md)
+[**开始**](coroutines-and-channels)
 
 ## Kotlin/Native 简介
 
 创建一个简单的 HTTP 客户端，该客户端可以使用 Kotlin/Native 和 libcurl 在多个平台上以原生方式运行。
 
-[**开始**](native-app-with-c-and-libcurl.md)
+[**开始**](native-app-with-c-and-libcurl)
 
 ## Kotlin Multiplatform：网络和数据存储
 

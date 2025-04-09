@@ -61,7 +61,7 @@ kotlin {
 }
 ```
 
-有关可用功能的详细描述，请查看 Kotlin/JS 参考文档中的[配置测试任务](js-project-setup.md#test-task)。
+有关可用功能的详细描述，请查看 Kotlin/JS 参考文档中的[配置测试任务](js-project-setup#test-task)。
 
 请注意，默认情况下，插件不捆绑任何浏览器。这意味着你必须确保它们在目标系统上可用。
 

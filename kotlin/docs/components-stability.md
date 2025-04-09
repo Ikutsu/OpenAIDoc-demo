@@ -2,7 +2,7 @@
 title: "Kotlin 组件的稳定性"
 ---
 Kotlin 语言和工具集被划分为许多组件，例如用于 JVM、JS 和 Native 目标的编译器、标准库、各种配套工具等等。
-其中许多组件已正式发布为 **Stable（稳定版）**，这意味着它们遵循 [_Comfortable Updates（舒适更新）_ 和 _Keeping the Language Modern（保持语言现代性）_](kotlin-evolution-principles.md) 的原则，以向后兼容的方式发展。
+其中许多组件已正式发布为 **Stable（稳定版）**，这意味着它们遵循 [_Comfortable Updates（舒适更新）_ 和 _Keeping the Language Modern（保持语言现代性）_](kotlin-evolution-principles) 的原则，以向后兼容的方式发展。
 
 遵循 _Feedback Loop（反馈环）_ 原则，我们尽早发布许多内容供社区试用，因此许多组件尚未发布为 **Stable（稳定版）**。
 其中一些组件处于非常早期的阶段，一些则更加成熟。
@@ -81,12 +81,12 @@ Kotlin 语言和工具集被划分为许多组件，例如用于 JVM、JS 和 Na
 
 | **Component**                                    | **Status**   | **Status since version** | **Comments** |
 |--------------------------------------------------|--------------|--------------------------|--------------|
-| [All-open](all-open-plugin.md)                   | Stable       | 1.3.0                    |              |
-| [No-arg](no-arg-plugin.md)                       | Stable       | 1.3.0                    |              |
-| [SAM-with-receiver](sam-with-receiver-plugin.md) | Stable       | 1.3.0                    |              |
-| [kapt](kapt.md)                                  | Stable       | 1.3.0                    |              |
-| [Lombok](lombok.md)                              | Experimental | 1.5.20                   |              |
-| [Power-assert](power-assert.md)                  | Experimental | 2.0.0                    |              |
+| [All-open](all-open-plugin)                   | Stable       | 1.3.0                    |              |
+| [No-arg](no-arg-plugin)                       | Stable       | 1.3.0                    |              |
+| [SAM-with-receiver](sam-with-receiver-plugin) | Stable       | 1.3.0                    |              |
+| [kapt](kapt)                                  | Stable       | 1.3.0                    |              |
+| [Lombok](lombok)                              | Experimental | 1.5.20                   |              |
+| [Power-assert](power-assert)                  | Experimental | 2.0.0                    |              |
 
 ### Kotlin libraries（Kotlin 库）
 
@@ -105,7 +105,7 @@ Kotlin 语言和工具集被划分为许多组件，例如用于 JVM、JS 和 Na
 | **Component**                                    | **Status**   | **Status since version** | **Comments**                                                               |
 |--------------------------------------------------|--------------|--------------------------|----------------------------------------------------------------------------|
 | Kotlin Multiplatform                             | Stable       | 1.9.20                   |                                                                            |
-| Kotlin Multiplatform plugin for Android Studio   | Beta         | 0.8.0                    | [Versioned separately from the language](multiplatform-plugin-releases.md) |
+| Kotlin Multiplatform plugin for Android Studio   | Beta         | 0.8.0                    | [Versioned separately from the language](multiplatform-plugin-releases) |
 
 ### Kotlin/Native
 
@@ -117,7 +117,7 @@ Kotlin 语言和工具集被划分为许多组件，例如用于 JVM、JS 和 Na
 | cinterop klib binaries                       | Beta       | 1.3.0                    |                                         |
 | CocoaPods integration                        | Stable     | 1.9.20                   |                                         |
 
-> For details about Kotlin/Native targets support, see [](native-target-support.md).
+> For details about Kotlin/Native targets support, see [](native-target-support).
 
 ### Language tools（语言工具）
 
@@ -130,4 +130,4 @@ Kotlin 语言和工具集被划分为许多组件，例如用于 JVM、JS 和 Na
 
 ## Language features and design proposals（语言特性和设计提案）
 
-For language features and new design proposals, see [](kotlin-language-features-and-proposals.md).
+For language features and new design proposals, see [](kotlin-language-features-and-proposals).

@@ -50,7 +50,7 @@ Compose 编译器由一个 Gradle 插件进行补充，该插件简化了设置�
  ```
 
 4. 如果你正在使用 Jetpack Compose 编译器的编译器选项，请在 `composeCompiler {}` 块中设置它们。
-   有关参考，请参阅[编译器选项列表](compose-compiler-options.md)。
+   有关参考，请参阅[编译器选项列表](compose-compiler-options)。
 
 5. 如果你直接引用 Compose 编译器构件，你可以删除这些引用，让 Gradle 插件来处理。
 

@@ -1,7 +1,7 @@
 ---
 title: 内联函数
 ---
-使用[高阶函数](lambdas.md)会产生一定的运行时开销：每个函数都是一个对象，并且它捕获了一个闭包（closure）。闭包是可以从函数体内部访问的变量作用域。内存分配（函数对象和类）以及虚函数调用都会引入运行时开销。
+使用[高阶函数](lambdas)会产生一定的运行时开销：每个函数都是一个对象，并且它捕获了一个闭包（closure）。闭包是可以从函数体内部访问的变量作用域。内存分配（函数对象和类）以及虚函数调用都会引入运行时开销。
 
 但是，在许多情况下，这种开销可以通过内联（inlining）lambda表达式来消除。以下显示的函数是这种情况的很好的例子。`lock()`函数可以很容易地在调用点（call-sites）进行内联。考虑以下情况：
 
@@ -49,7 +49,7 @@ inline fun foo(inlined: () `->` Unit, noinline notInlined: () `->` Unit) { ... }
 
 ### Returns
 
-在 Kotlin 中，你只能使用普通的、非限定的 `return` 来退出命名函数或匿名函数。要退出 lambda 表达式，请使用[标签](returns.md#return-to-labels)。lambda 表达式内部禁止使用裸 `return`，因为 lambda 表达式不能使封闭函数 `return`：
+在 Kotlin 中，你只能使用普通的、非限定的 `return` 来退出命名函数或匿名函数。要退出 lambda 表达式，请使用[标签](returns#return-to-labels)。lambda 表达式内部禁止使用裸 `return`，因为 lambda 表达式不能使封闭函数 `return`：
 
 ```kotlin
 fun ordinaryFunction(block: () `->` Unit) {
@@ -110,11 +110,11 @@ inline fun f(crossinline body: () `->` Unit) {
 ### Break and continue
 
 :::caution
-此功能当前处于 [预览版](kotlin-evolution-principles.md#pre-stable-features)。我们计划在未来的版本中使其稳定。要选择启用，请使用 `-Xnon-local-break-continue` 编译器选项。我们欢迎你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-1436) 上提供有关它的反馈。
+此功能当前处于 [预览版](kotlin-evolution-principles#pre-stable-features)。我们计划在未来的版本中使其稳定。要选择启用，请使用 `-Xnon-local-break-continue` 编译器选项。我们欢迎你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-1436) 上提供有关它的反馈。
 
 :::
 
-与非局部 `return` 类似，你可以在传递给封闭循环的内联函数的 lambda 表达式中应用 `break` 和 `continue` [跳转表达式](returns.md)：
+与非局部 `return` 类似，你可以在传递给封闭循环的内联函数的 lambda 表达式中应用 `break` 和 `continue` [跳转表达式](returns)：
 
 ```kotlin
 fun processList(elements: List<Int>): Boolean {
@@ -185,7 +185,7 @@ fun main(s: Array<String>) {
 
 ## 内联属性
 
-`inline` 修饰符可用于没有[幕后字段](properties.md#backing-fields)的属性的访问器。你可以注解单个属性访问器：
+`inline` 修饰符可用于没有[幕后字段](properties#backing-fields)的属性的访问器。你可以注解单个属性访问器：
 
 ```kotlin
 val foo: Foo
@@ -208,7 +208,7 @@ inline var bar: Bar
 
 ## 公共 API 内联函数的限制
 
-当内联函数是 `public` 或 `protected` 但不是 `private` 或 `internal` 声明的一部分时，它被认为是[模块](visibility-modifiers.md#modules)的公共 API。它可以在其他模块中调用，并且也会在此类调用点进行内联。
+当内联函数是 `public` 或 `protected` 但不是 `private` 或 `internal` 声明的一部分时，它被认为是[模块](visibility-modifiers#modules)的公共 API。它可以在其他模块中调用，并且也会在此类调用点进行内联。
 
 这会带来某些二进制不兼容的风险，这些风险是由声明内联函数的模块中的更改引起的，以防在更改后未重新编译调用模块。
 

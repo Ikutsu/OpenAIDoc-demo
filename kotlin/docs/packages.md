@@ -66,9 +66,9 @@ import org.test.Message as TestMessage // TestMessage 代表 'org.test.Message'
 `import` 关键字不限于导入类；您还可以使用它来导入其他声明：
 
   * 顶层函数和属性
-  * 在 [对象声明](object-declarations.md#object-declarations-overview) 中声明的函数和属性
-  * [枚举常量](enum-classes.md)
+  * 在 [对象声明](object-declarations#object-declarations-overview) 中声明的函数和属性
+  * [枚举常量](enum-classes)
 
 ## Visibility of top-level declarations（顶层声明的可见性）
 
-如果顶层声明被标记为 `private`，则它对于声明它的文件是私有的（请参阅 [可见性修饰符](visibility-modifiers.md)）。
+如果顶层声明被标记为 `private`，则它对于声明它的文件是私有的（请参阅 [可见性修饰符](visibility-modifiers)）。

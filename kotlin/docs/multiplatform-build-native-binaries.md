@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
 Kotlin/Native 编译器生成的二进制文件可以包含第三方代码、数据或派生作品。
 这意味着，如果你分发 Kotlin/Native 编译的最终二进制文件，
-你应该始终将必要的[许可证文件](native-binary-licenses.md)包含到你的二进制文件分发中。
+你应该始终将必要的[许可证文件](native-binary-licenses)包含到你的二进制文件分发中。
 
 ## 声明二进制文件
 
@@ -52,7 +52,7 @@ kotlin {
 }
 ```
 
-如果不需要[其他配置](multiplatform-dsl-reference.md#native-targets)，你可以删除 lambda 表达式：
+如果不需要[其他配置](multiplatform-dsl-reference#native-targets)，你可以删除 lambda 表达式：
 
 ```kotlin
 binaries {
@@ -131,7 +131,7 @@ binaries {
 
 ## 访问二进制文件
 
-你可以访问二进制文件以[配置它们](multiplatform-dsl-reference.md#native-targets)或获取它们的属性（例如，输出文件的路径）。
+你可以访问二进制文件以[配置它们](multiplatform-dsl-reference#native-targets)或获取它们的属性（例如，输出文件的路径）。
 
 你可以通过其唯一名称获取二进制文件。此名称基于名称前缀（如果已指定）、构建类型和
 二进制文件类型，遵循以下模式：`<optional-name-prefix><build-type><binary-kind>`，例如，`releaseFramework` 或
@@ -278,7 +278,7 @@ kotlin {
 多个 Kotlin/Native 框架是有限制的，但你可以创建一个伞状框架并将所有这些模块导出到其中。
 
 :::note
-你只能导出相应源集的 [`api` 依赖项](gradle-configure-project.md#dependency-types)。
+你只能导出相应源集的 [`api` 依赖项](gradle-configure-project#dependency-types)。
 
 :::
 
@@ -468,7 +468,7 @@ kotlin {
 
 <anchor name="build-frameworks"/>
 
-如果你在项目中使用 [CocoaPods 集成](native-cocoapods.md)，则可以使用 Kotlin
+如果你在项目中使用 [CocoaPods 集成](native-cocoapods)，则可以使用 Kotlin
 CocoaPods Gradle 插件构建 XCFrameworks。它包括以下任务，这些任务构建具有所有已注册目标的 XCFrameworks 并
 生成 podspec 文件：
 

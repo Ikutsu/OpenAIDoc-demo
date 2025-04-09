@@ -8,7 +8,7 @@ Kotlin/Native 编译器支持大量的不同目标平台，尽管很难为所有
 
 请注意等级表格中使用的以下术语：
 
-* **Gradle target name** 是 Kotlin 多平台 Gradle 插件中用于启用目标平台的[目标名称](multiplatform-dsl-reference.md#targets)。
+* **Gradle target name** 是 Kotlin 多平台 Gradle 插件中用于启用目标平台的[目标名称](multiplatform-dsl-reference#targets)。
 * **Target triple** 是一个目标名称，其结构符合 `<architecture>-<vendor>-<system>-<abi>` 规范，通常被[编译器](https://clang.llvm.org/docs/CrossCompilation.html#target-triple)使用。
 * **Running tests** 指示在 Gradle 和 IDE 中对运行测试的开箱即用支持。
   
@@ -72,4 +72,4 @@ Kotlin/Native 编译器支持大量的不同目标平台，尽管很难为所有
 * 支持第 1、2 和 3 级中的所有目标平台。
 * 定期测试第 1 级和第 2 级中支持开箱即用运行测试的目标平台。
 
-Kotlin 团队在官方 Kotlin 库中使用了这种方法，例如 [kotlinx.coroutines](coroutines-guide.md) 和 [kotlinx.serialization](serialization.md)。
+Kotlin 团队在官方 Kotlin 库中使用了这种方法，例如 [kotlinx.coroutines](coroutines-guide) 和 [kotlinx.serialization](serialization)。

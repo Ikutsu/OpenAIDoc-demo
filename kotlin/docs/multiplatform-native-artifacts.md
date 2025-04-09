@@ -6,12 +6,12 @@ import TabItem from '@theme/TabItem';
 
 <no-index/>
 :::note
-下面描述的新 DSL 处于 [实验性](components-stability.md) 阶段。它可能随时更改。
+下面描述的新 DSL 处于 [实验性](components-stability) 阶段。它可能随时更改。
 我们鼓励您将其用于评估目的。
 
-如果新的 DSL 不适合您，请参阅[之前构建 native 二进制文件的方法](multiplatform-build-native-binaries.md)。
+如果新的 DSL 不适合您，请参阅[之前构建 native 二进制文件的方法](multiplatform-build-native-binaries)。
 
-[Kotlin/Native targets](multiplatform-dsl-reference.md#native-targets) 被编译为 `*.klib` 库产物，
+[Kotlin/Native targets](multiplatform-dsl-reference#native-targets) 被编译为 `*.klib` 库产物，
 它可以被 Kotlin/Native 本身作为依赖项使用，但不能用作 native 库。
  
 要声明最终的 native 二进制文件，请使用带有 `kotlinArtifacts` DSL 的新二进制文件格式。除了默认的 `*.klib` 产物之外，它还表示为此目标构建的 native 二进制文件的集合，并提供了一组用于声明和配置它们的方法。
@@ -31,8 +31,8 @@ Kotlin artifact DSL 可以帮助您解决一个常见问题：当您需要从您
 
 | 工厂方法（Factory method） | 二进制文件种类（Binary kind）                                                                               | 适用于（Available for）                                |
 |----------------|-------------------------------------------------------------------------------------------|----------------------------------------------|
-| `sharedLib`    | [共享 native 库（Shared native library）](native-faq.md#how-do-i-create-a-shared-library)                   | 除 `WebAssembly` 之外的所有 native targets |
-| `staticLib`    | [静态 native 库（Static native library）](native-faq.md#how-do-i-create-a-static-library-or-an-object-file) | 除 `WebAssembly` 之外的所有 native targets |
+| `sharedLib`    | [共享 native 库（Shared native library）](native-faq#how-do-i-create-a-shared-library)                   | 除 `WebAssembly` 之外的所有 native targets |
+| `staticLib`    | [静态 native 库（Static native library）](native-faq#how-do-i-create-a-static-library-or-an-object-file) | 除 `WebAssembly` 之外的所有 native targets |
 | `framework`    | Objective-C 框架（Objective-C framework）                                                                     | 仅适用于 macOS、iOS、watchOS 和 tvOS targets   |
 | `fatFramework` | 通用 fat 框架（Universal fat framework）                                                                   | 仅适用于 macOS、iOS、watchOS 和 tvOS targets   |
 | `XCFramework`  | XCFramework 框架（XCFramework framework）                                                                     | 仅适用于 macOS、iOS、watchOS 和 tvOS targets   |
@@ -119,10 +119,10 @@ kotlinArtifacts {
 |-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `isStatic`      | 可选的链接类型，用于定义库的类型。 默认情况下，它是 `false`，库是动态的。                                              |
 | `modes`         | 可选的构建类型，`DEBUG` 和 `RELEASE`。                                                                                                           |
-| `kotlinOptions` | 应用于编译的可选编译器选项。 请参阅可用[编译器选项](gradle-compiler-options.md)的列表。                        |
+| `kotlinOptions` | 应用于编译的可选编译器选项。 请参阅可用[编译器选项](gradle-compiler-options)的列表。                        |
 | `addModule`     | 除了当前模块，您可以将其他模块添加到结果 artifact 中。                                                                |
 | `setModules`    | 您可以覆盖将添加到结果 artifact 中的所有模块的列表。                                                                 |
-| `target`        | 声明项目的特定 target。 可用 target 的名称在[Targets](multiplatform-dsl-reference.md#targets) 部分列出。 |
+| `target`        | 声明项目的特定 target。 可用 target 的名称在[Targets](multiplatform-dsl-reference#targets) 部分列出。 |
 
 ### 库和框架（Libraries and frameworks）
 
@@ -213,7 +213,7 @@ kotlinArtifacts {
 注册的 Gradle 任务是 `assembleMyframeFramework`，它将所有类型的已注册 "myframe" 框架组装起来。
 
 :::tip
-如果由于某种原因，新的 DSL 不适合您，请尝试[之前的方法](multiplatform-build-native-binaries.md#export-dependencies-to-binaries)
+如果由于某种原因，新的 DSL 不适合您，请尝试[之前的方法](multiplatform-build-native-binaries#export-dependencies-to-binaries)
 将依赖项导出到二进制文件。
 
 :::
@@ -258,7 +258,7 @@ kotlinArtifacts {
 注册的 Gradle 任务是 `assembleMyfatframeFatFramework`，它将所有类型的已注册 "myfatframe" fat 框架组装起来。
 
 :::tip
-如果由于某种原因，新的 DSL 不适合您，请尝试[之前的方法](multiplatform-build-native-binaries.md#build-universal-frameworks)
+如果由于某种原因，新的 DSL 不适合您，请尝试[之前的方法](multiplatform-build-native-binaries#build-universal-frameworks)
 构建 fat 框架。
 
 :::
@@ -305,7 +305,7 @@ kotlinArtifacts {
 注册的 Gradle 任务是 `assembleSdkXCFramework`，它将所有类型的已注册 "sdk" XCFrameworks 组装起来。
 
 :::tip
-如果由于某种原因，新的 DSL 不适合您，请尝试[之前的方法](multiplatform-build-native-binaries.md#build-xcframeworks)
+如果由于某种原因，新的 DSL 不适合您，请尝试[之前的方法](multiplatform-build-native-binaries#build-xcframeworks)
 构建 XCFrameworks。
 
 :::

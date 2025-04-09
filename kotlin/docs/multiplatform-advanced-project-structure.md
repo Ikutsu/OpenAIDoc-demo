@@ -14,7 +14,7 @@ title: 多平台项目结构的高级概念
 * 通常，库和项目依赖的工作方式与往常一样，但为了在多平台项目中正确管理它们，您应该了解 [Gradle 依赖是如何解析的](#dependencies-on-other-libraries-or-projects)，最终成为用于编译的细粒度的 **源集 → 源集** 依赖。
 
 :::note
-在深入研究高级概念之前，我们建议您学习 [多平台项目结构的基础知识](multiplatform-discover-project.md)。
+在深入研究高级概念之前，我们建议您学习 [多平台项目结构的基础知识](multiplatform-discover-project)。
 
 ## dependsOn 和源集层级结构
 
@@ -61,7 +61,7 @@ kotlin {
 
 在某些情况下，您可能需要在项目中拥有一个自定义的中间源集。
 考虑一个编译为 JVM、JS 和 Linux 的项目，并且您只想在 JVM 和 JS 之间共享一些源。
-在这种情况下，您应该为此 target（目标平台）对找到一个特定的源集，如 [多平台项目结构的基础知识](multiplatform-discover-project.md) 中所述。
+在这种情况下，您应该为此 target（目标平台）对找到一个特定的源集，如 [多平台项目结构的基础知识](multiplatform-discover-project) 中所述。
 
 Kotlin 不会自动创建这样的源集。这意味着您应该使用 `by creating` 构造手动创建它：
 
@@ -116,7 +116,7 @@ kotlin {
 <img src="/img/final-structure-diagram.svg" alt="Final project structure" width="700" style={{verticalAlign: 'middle'}}/>
 
 手动配置 `dependsOn` 关系会禁用默认层级结构模板的自动应用。
-有关此类情况以及如何处理它们的更多信息，请参见 [其他配置](multiplatform-hierarchy.md#additional-configuration)。
+有关此类情况以及如何处理它们的更多信息，请参见 [其他配置](multiplatform-hierarchy#additional-configuration)。
 
 :::
 
@@ -198,7 +198,7 @@ kotlin {
 
 ### 对齐跨源集的 common（通用）依赖的版本
 
-在 Kotlin Multiplatform 项目中，common（通用）源集会被编译多次，以生成 klib，并作为每个配置的 [编译](multiplatform-configure-compilations.md) 的一部分。为了生成一致的二进制文件，common（通用）代码应该每次都针对相同版本的多平台依赖进行编译。Kotlin Gradle 插件有助于对齐这些依赖，确保有效的依赖版本对于每个源集都是相同的。
+在 Kotlin Multiplatform 项目中，common（通用）源集会被编译多次，以生成 klib，并作为每个配置的 [编译](multiplatform-configure-compilations) 的一部分。为了生成一致的二进制文件，common（通用）代码应该每次都针对相同版本的多平台依赖进行编译。Kotlin Gradle 插件有助于对齐这些依赖，确保有效的依赖版本对于每个源集都是相同的。
 
 在上面的示例中，假设您想将 `androidx.navigation:navigation-compose:2.7.7` 依赖添加到您的 `androidMain` 源集。您的项目显式声明了 `commonMain` 源集的 `kotlinx-coroutines-core:1.7.3` 依赖，但 2.7.7 版本的 Compose Navigation 库需要 Kotlin 协程 1.8.0 或更高版本。
 
@@ -206,7 +206,7 @@ kotlin {
 
 <img src="/img/multiplatform-source-set-dependency-alignment.svg" alt="Alignment of dependencies among *Main source sets" width="700" style={{verticalAlign: 'middle'}}/>
 
-依赖在 `*Main` 源集和 [`*Test` 源集](multiplatform-discover-project.md#integration-with-tests) 之间分别对齐。
+依赖在 `*Main` 源集和 [`*Test` 源集](multiplatform-discover-project#integration-with-tests) 之间分别对齐。
 `*Test` 源集的 Gradle 配置包括 `*Main` 源集的所有依赖，但反之则不然。
 因此，您可以使用较新的库版本测试您的项目，而不会影响您的主代码。
 

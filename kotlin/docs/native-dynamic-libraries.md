@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 你可以创建动态链接库（dynamic libraries）以在现有程序中使用 Kotlin 代码。这使得跨多个平台或语言（包括 JVM、Python、Android 等）的代码共享成为可能。
 
 :::note
-对于 iOS 和其他 Apple 目标平台，我们建议生成 framework。请参阅 [Kotlin/Native 作为 Apple framework](apple-framework.md) 教程。
+对于 iOS 和其他 Apple 目标平台，我们建议生成 framework。请参阅 [Kotlin/Native 作为 Apple framework](apple-framework) 教程。
 
 你可以从现有的原生应用程序或库中使用 Kotlin/Native 代码。为此，你需要将 Kotlin 代码编译成 `.so`、`.dylib` 或 `.dll` 格式的动态链接库。
 
@@ -18,9 +18,9 @@ import TabItem from '@theme/TabItem';
 * [从 C 语言中使用 Kotlin 动态链接库](#use-generated-headers-from-c)
 * [编译并运行项目](#compile-and-run-the-project)
 
-你可以使用命令行直接或通过脚本文件（例如 `.sh` 或 `.bat` 文件）生成 Kotlin 库。但是，对于具有数百个文件和库的大型项目，这种方法的可扩展性不佳。使用构建系统可以简化此过程，它能下载并缓存 Kotlin/Native 编译器二进制文件和具有传递依赖关系的库，并运行编译器和测试。Kotlin/Native 可以通过 [Kotlin Multiplatform 插件](gradle-configure-project.md#targeting-multiple-platforms) 使用 [Gradle](https://gradle.org) 构建系统。
+你可以使用命令行直接或通过脚本文件（例如 `.sh` 或 `.bat` 文件）生成 Kotlin 库。但是，对于具有数百个文件和库的大型项目，这种方法的可扩展性不佳。使用构建系统可以简化此过程，它能下载并缓存 Kotlin/Native 编译器二进制文件和具有传递依赖关系的库，并运行编译器和测试。Kotlin/Native 可以通过 [Kotlin Multiplatform 插件](gradle-configure-project#targeting-multiple-platforms) 使用 [Gradle](https://gradle.org) 构建系统。
 
-让我们来研究一下 Kotlin/Native 和带有 Gradle 的 [Kotlin Multiplatform](gradle-configure-project.md#targeting-multiple-platforms) 构建的高级 C 互操作相关用法。
+让我们来研究一下 Kotlin/Native 和带有 Gradle 的 [Kotlin Multiplatform](gradle-configure-project#targeting-multiple-platforms) 构建的高级 C 互操作相关用法。
 
 如果你使用 Mac 并且想要为 macOS 或其他 Apple 目标平台创建和运行应用程序，你还需要先安装 [Xcode Command Line Tools](https://developer.apple.com/download/)，启动它并接受许可条款。
 
@@ -33,7 +33,7 @@ Kotlin/Native 编译器可以从 Kotlin 代码生成动态链接库。动态链�
 让我们创建一个 Kotlin 库，并在 C 程序中使用它。
 
 :::note
-有关如何创建新的 Kotlin/Native 项目并在 IntelliJ IDEA 中打开它的详细初始步骤和说明，请参阅 [Kotlin/Native 入门](native-get-started.md#using-gradle)教程。
+有关如何创建新的 Kotlin/Native 项目并在 IntelliJ IDEA 中打开它的详细初始步骤和说明，请参阅 [Kotlin/Native 入门](native-get-started#using-gradle)教程。
 
 1. 导航到 `src/nativeMain/kotlin` 目录并创建包含以下库内容的 `lib.kt` 文件：
 
@@ -211,7 +211,7 @@ Kotlin 对创建的 `libnative_api.h` 文件中的所有声明使用 `libnative_
 | `libnative_KVector128` | `float __attribute__ ((__vector_size__ (16))` |
 | `libnative_KNativePtr` | `void*`                                       |
 
-`libnative_api.h` 文件的定义部分显示了 Kotlin 原始类型如何映射到 C 原始类型。Kotlin/Native 编译器会自动为每个库生成这些条目。反向映射在 [从 C 映射原始数据类型](mapping-primitive-data-types-from-c.md) 教程中进行了描述。
+`libnative_api.h` 文件的定义部分显示了 Kotlin 原始类型如何映射到 C 原始类型。Kotlin/Native 编译器会自动为每个库生成这些条目。反向映射在 [从 C 映射原始数据类型](mapping-primitive-data-types-from-c) 教程中进行了描述。
 
 在自动生成的类型定义之后，你将找到库中使用的单独类型定义：
 
@@ -286,7 +286,7 @@ libnative_KULong (*getNonNullValueOfULong)(libnative_kref_kotlin_ULong);
 
 你可以使用 `IsInstance` 函数来检查 Kotlin 对象（通过其 `.pinned` 指针引用）是否为类型的实例。生成的实际操作集取决于实际用法。
 
-Kotlin/Native 有自己的垃圾回收器（garbage collector），但它不管理从 C 访问的 Kotlin 对象。但是，Kotlin/Native 提供了 [与 Swift/Objective-C 的互操作性](native-objc-interop.md)，并且垃圾回收器 [与 Swift/Objective-C ARC 集成](native-arc-integration.md)。
+Kotlin/Native 有自己的垃圾回收器（garbage collector），但它不管理从 C 访问的 Kotlin 对象。但是，Kotlin/Native 提供了 [与 Swift/Objective-C 的互操作性](native-objc-interop)，并且垃圾回收器 [与 Swift/Objective-C ARC 集成](native-arc-integration)。
 
 ### 你的库函数
 
@@ -429,6 +429,6 @@ gcc main.c libnative.so
 
 ## 接下来做什么
 
-* [详细了解与 Swift/Objective-C 的互操作性](native-objc-interop.md)
-* [查看 Kotlin/Native 作为 Apple framework 的教程](apple-framework.md)
+* [详细了解与 Swift/Objective-C 的互操作性](native-objc-interop)
+* [查看 Kotlin/Native 作为 Apple framework 的教程](apple-framework)
 ```

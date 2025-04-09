@@ -4,7 +4,7 @@ title: "Kotlin 1.9.0 版本的新特性"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[发布日期：2023 年 7 月 6 日](releases.md#release-details)_
+_[发布日期：2023 年 7 月 6 日](releases#release-details)_
 
 Kotlin 1.9.0 版本已发布，JVM 的 K2 编译器现在处于 **Beta** 阶段。此外，以下是一些主要亮点：
 
@@ -48,7 +48,7 @@ JVM 的 K2 编译器现在处于 **Beta** 阶段。
 
 ### `kapt` 编译器插件与 K2 编译器的兼容性
 
-你可以在你的项目中使用 [kapt 插件](kapt.md) 以及 K2 编译器，但有一些限制。
+你可以在你的项目中使用 [kapt 插件](kapt) 以及 K2 编译器，但有一些限制。
 尽管将 `languageVersion` 设置为 `2.0`，但 `kapt` 编译器插件仍然使用旧的编译器。
 
 如果在 `languageVersion` 设置为 `2.0` 的项目中执行 `kapt` 编译器插件，`kapt` 将自动切换到 `1.9` 并禁用特定的版本兼容性检查。
@@ -82,7 +82,7 @@ Gradle 属性添加到你的 `gradle.properties` 文件中来轻松测试 K2 编
 
 ### Gradle 构建报告
 
-[Gradle 构建报告](gradle-compilation-and-caches.md#build-reports) 现在显示是使用当前编译器还是 K2 编译器来编译代码。
+[Gradle 构建报告](gradle-compilation-and-caches#build-reports) 现在显示是使用当前编译器还是 K2 编译器来编译代码。
 在 Kotlin 1.9.0 中，你可以在你的 [Gradle 构建扫描](https://scans.gradle.com/)中看到此信息：
 
 <img src="/img/gradle-build-scan-k1.png" alt="Gradle build scan - K1" width="700" style={{verticalAlign: 'middle'}}/>
@@ -159,11 +159,11 @@ enum class Color(val colorName: String, val rgb: String) {
 fun findByRgb(rgb: String): Color? = Color.entries.find { it.rgb == rgb }
 ```
 
-有关枚举类的 `entries` 属性的更多信息，请参阅 [Kotlin 1.8.20 中的新增功能](whatsnew1820.md#a-modern-and-performant-replacement-of-the-enum-class-values-function)。
+有关枚举类的 `entries` 属性的更多信息，请参阅 [Kotlin 1.8.20 中的新增功能](whatsnew1820#a-modern-and-performant-replacement-of-the-enum-class-values-function)。
 
 ### 数据对象与数据类的对称性
 
-数据对象声明已在 [Kotlin 1.8.20](whatsnew1820.md#preview-of-data-objects-for-symmetry-with-data-classes) 中引入，现在是稳定的。
+数据对象声明已在 [Kotlin 1.8.20](whatsnew1820#preview-of-data-objects-for-symmetry-with-data-classes) 中引入，现在是稳定的。
 这包括为与数据类对称而添加的函数：`toString()`、`equals()` 和 `hashCode()`。
 
 此功能对于 `sealed` 层级结构（如 `sealed class` 或 `sealed interface` 层级结构）特别有用，
@@ -183,11 +183,11 @@ fun main() {
 }
 ```
 
-有关更多信息，请参阅 [Kotlin 1.8.20 中的新增功能](whatsnew1820.md#preview-of-data-objects-for-symmetry-with-data-classes)。
+有关更多信息，请参阅 [Kotlin 1.8.20 中的新增功能](whatsnew1820#preview-of-data-objects-for-symmetry-with-data-classes)。
 
 ### 对内联值类中带有主体的二级构造函数的支持
 
-从 Kotlin 1.9.0 开始，默认情况下可以使用 [内联值类](inline-classes.md) 中带有主体的二级构造函数：
+从 Kotlin 1.9.0 开始，默认情况下可以使用 [内联值类](inline-classes) 中带有主体的二级构造函数：
 
 ```kotlin
 @JvmInline
@@ -211,7 +211,7 @@ value class Person(private val fullName: String) {
 封装底层值或创建表示某些约束值的内联类。
 
 随着 Kotlin 的发展，这些问题得到了修复。Kotlin 1.4.30 取消了对 `init` 块的限制，然后 Kotlin 1.8.20
-提供了带有主体的二级构造函数的预览。它们现在默认可用。在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes.md) 中了解有关 Kotlin 内联类开发的更多信息。
+提供了带有主体的二级构造函数的预览。它们现在默认可用。在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes) 中了解有关 Kotlin 内联类开发的更多信息。
 
 ## Kotlin/JVM
 
@@ -230,7 +230,7 @@ Kotlin 1.6 中 `JvmDefaultWithCompatibility` 的引入，这些模式提供了�
 
 ## Kotlin/Native
 
-除了其他改进之外，此版本还为 [Kotlin/Native 内存管理器](native-memory-manager.md) 带来了更多改进
+除了其他改进之外，此版本还为 [Kotlin/Native 内存管理器](native-memory-manager) 带来了更多改进
 这应增强其稳健性和性能：
 
 * [自定义内存分配器的预览](#preview-of-custom-memory-allocator)
@@ -241,7 +241,7 @@ Kotlin 1.6 中 `JvmDefaultWithCompatibility` 的引入，这些模式提供了�
 
 ### 自定义内存分配器的预览
 
-Kotlin 1.9.0 引入了自定义内存分配器的预览。其分配系统提高了 [Kotlin/Native 内存管理器](native-memory-manager.md) 的运行时性能。
+Kotlin 1.9.0 引入了自定义内存分配器的预览。其分配系统提高了 [Kotlin/Native 内存管理器](native-memory-manager) 的运行时性能。
 
 Kotlin/Native 中当前的对象分配系统使用通用的分配器，该分配器不具有
 用于高效垃圾回收的功能。为了弥补这一点，它在垃圾收集器 (GC) 将它们合并到单个列表之前，维护所有已分配对象的线程本地链接列表，可以在扫描期间对其进行迭代。这种方法带来
@@ -264,7 +264,7 @@ Kotlin/Native 中当前的对象分配系统使用通用的分配器，该分配
 新的分配器允许同时拥有多个独立的分配空间，这将允许 Kotlin 团队
 试验不同的页面布局，以进一步提高性能。
 
-有关新分配器设计的更多信息，请参阅 [此 README](https://github.com/JetBrains/kotlin/blob/master/kotlin-native/runtime/src/alloc/custom/README.md)。
+有关新分配器设计的更多信息，请参阅 [此 README](https://github.com/JetBrains/kotlin/blob/master/kotlin-native/runtime/src/alloc/custom/README)。
 
 #### 如何启用
 
@@ -292,7 +292,7 @@ kotlin {
 ### 主线程上的 Objective-C 或 Swift 对象释放挂钩
 
 从 Kotlin 1.9.0 开始，如果对象传递到 Kotlin，则在主线程上调用 Objective-C 或 Swift 对象释放挂钩。
-[Kotlin/Native 内存管理器](native-memory-manager.md) 先前处理 Objective-C 对象引用的方式可能导致内存泄漏。我们认为新行为应提高内存管理器的稳健性。
+[Kotlin/Native 内存管理器](native-memory-manager) 先前处理 Objective-C 对象引用的方式可能导致内存泄漏。我们认为新行为应提高内存管理器的稳健性。
 
 考虑一个在 Kotlin 代码中引用的 Objective-C 对象，例如，当作为参数传递、由函数返回或从集合中检索时。在这种情况下，Kotlin 创建其自己的对象，该对象保存对 Objective-C 对象的引用。当 Kotlin 对象被释放时，Kotlin/Native 运行时调用 `objc_release` 函数，该函数释放该 Objective-C 引用。
 
@@ -468,7 +468,7 @@ Google 插件将是在多平台项目中处理 Android 的首选方式。准备�
 * Gradle 配置的清晰命名架构 – 该架构现在在 `KotlinSourceSets` 和 `AndroidSourceSets` 中都更加一致和可预测。
 
 新布局需要 Android Gradle 插件版本 7.0 或更高版本，并且在 Android Studio 2022.3 及更高版本中受支持。请参阅我们的
-[迁移指南](multiplatform-android-layout.md) 以在你的 `build.gradle(.kts)` 文件中进行必要的更改。
+[迁移指南](multiplatform-android-layout) 以在你的 `build.gradle(.kts)` 文件中进行必要的更改。
 
 ### Gradle 配置缓存的预览
 
@@ -481,7 +481,7 @@ Gradle 配置缓存通过重用后续
 构建的配置阶段的结果来加速构建过程。自 Gradle 8.1 以来，该功能已变得稳定。要启用它，请按照 [Gradle 文档](https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:usage) 中的说明进行操作。
 
 Kotlin Multiplatform 插件仍然不支持具有 Xcode 集成任务或
-[Kotlin CocoaPods Gradle 插件](native-cocoapods-dsl-reference.md) 的 Gradle 配置缓存。我们希望在将来的 Kotlin 版本中添加此功能。
+[Kotlin CocoaPods Gradle 插件](native-cocoapods-dsl-reference) 的 Gradle 配置缓存。我们希望在将来的 Kotlin 版本中添加此功能。
 
 :::
 
@@ -503,14 +503,14 @@ Kotlin 1.9.0 中 Wasm 的代码占用空间现在比 Kotlin 1.8.20 小 10 倍以
 ### JavaScript 互操作的更新
 
 此 Kotlin 更新引入了 Kotlin/Wasm 的 Kotlin 和 JavaScript 之间的互操作性的更改。由于 Kotlin/Wasm
-是 [实验性](components-stability.md#stability-levels-explained) 功能，因此某些限制适用于其互操作性。
+是 [实验性](components-stability#stability-levels-explained) 功能，因此某些限制适用于其互操作性。
 
 #### 动态类型的限制
 
 从 1.9.0 版本开始，Kotlin 不再支持在 Kotlin/Wasm 中使用 `Dynamic` 类型。现在已弃用
 而推荐使用新的通用 `JsAny` 类型，该类型有助于 JavaScript 互操作性。
 
-有关更多详细信息，请参阅 [Kotlin/Wasm 与 JavaScript 的互操作性](wasm-js-interop.md) 文档。
+有关更多详细信息，请参阅 [Kotlin/Wasm 与 JavaScript 的互操作性](wasm-js-interop) 文档。
 
 #### 非外部类型的限制
 
@@ -526,7 +526,7 @@ Kotlin 1.9.0 中 Wasm 的代码占用空间现在比 Kotlin 1.8.20 小 10 倍以
 为了解决这个问题，Kotlin 将 JavaScript 互操作限制为一组受良好支持的类型。从 Kotlin 1.9.0 开始，仅外部、
 原始、字符串和函数类型在 Kotlin/Wasm JavaScript 互操作中受支持。此外，还引入了一个单独的显式类型 `JsReference` 来表示可用于 JavaScript 互操作的 Kotlin/Wasm 对象的句柄。
 
-有关更多详细信息，请参阅 [Kotlin/Wasm 与 JavaScript 的互操作性](wasm-js-interop.md) 文档。
+有关更多详细信息，请参阅 [Kotlin/Wasm 与 JavaScript 的互操作性](wasm-js-interop) 文档。
 
 ### Kotlin Playground 中的 Kotlin/Wasm
 
@@ -536,7 +536,7 @@ Kotlin Playground 支持 Kotlin/Wasm 目标。
 :::note
 使用 Kotlin/Wasm 需要在你的浏览器中启用实验性功能。
 
-[了解有关如何启用这些功能的更多信息](wasm-troubleshooting.md)。
+[了解有关如何启用这些功能的更多信息](wasm-troubleshooting)。
 
 :::
 
@@ -584,10 +584,10 @@ fun computeAck(m: Int, n: Int) {
 
 ### 删除旧的 Kotlin/JS 编译器
 
-在 Kotlin 1.8.0 中，我们 [宣布](whatsnew18.md#stable-js-ir-compiler-backend) 基于 IR 的后端变为 [稳定](components-stability.md)。
+在 Kotlin 1.8.0 中，我们 [宣布](whatsnew18#stable-js-ir-compiler-backend) 基于 IR 的后端变为 [稳定](components-stability)。
 从那时起，不指定编译器已成为一个错误，并且使用旧编译器会导致警告。
 
-在 Kotlin 1.9.0 中，使用旧后端会导致错误。请按照我们的 [迁移指南](js-ir-migration.md) 迁移到 IR 编译器。
+在 Kotlin 1.9.0 中，使用旧后端会导致错误。请按照我们的 [迁移指南](js-ir-migration) 迁移到 IR 编译器。
 
 ### 弃用 Kotlin/JS Gradle 插件
 
@@ -597,7 +597,7 @@ fun computeAck(m: Int, n: Int) {
 Kotlin/JS Gradle 插件的功能本质上复制了 `kotlin-multiplatform` 插件，并在底层共享了
 相同的实现。这种重叠造成了混乱，并增加了 Kotlin 团队的维护负担。
 
-有关迁移说明，请参阅我们的 [Kotlin Multiplatform 兼容性指南](multiplatform-compatibility-guide.md#migration-from-kotlin-js-gradle-plugin-to-kotlin-multiplatform-gradle-plugin)。
+有关迁移说明，请参阅我们的 [Kotlin Multiplatform 兼容性指南](multiplatform-compatibility-guide#migration-from-kotlin-js-gradle-plugin-to-kotlin-multiplatform-gradle-plugin)。
 如果你发现本指南中未涵盖的任何问题，请将其报告给 [我们的问题跟踪器](http://kotl.in/issue)。
 
 ### 弃用外部枚举
@@ -624,7 +624,7 @@ external sealed class ExternalEnum {
 
 ### 对 ES2015 类和模块的实验性支持
 
-此版本引入了对 ES2015 模块和生成 ES2015 类的 [实验性](components-stability.md#stability-levels-explained) 支持：
+此版本引入了对 ES2015 模块和生成 ES2015 类的 [实验性](components-stability#stability-levels-explained) 支持：
 * 模块提供了一种简化你的代码库并提高可维护性的方法。
 * 类允许你合并面向对象编程 (OOP) 原则，从而生成更清晰、更直观的代码。
 

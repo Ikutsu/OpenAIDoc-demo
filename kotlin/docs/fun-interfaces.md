@@ -13,7 +13,7 @@ fun interface KRunnable {
 
 ## SAM 转换 (SAM conversions)
 
-对于函数式接口，你可以使用 SAM 转换 (SAM conversions)，通过使用 [lambda 表达式](lambdas.md#lambda-expressions-and-anonymous-functions) 来帮助你使代码更简洁和易读。
+对于函数式接口，你可以使用 SAM 转换 (SAM conversions)，通过使用 [lambda 表达式](lambdas#lambda-expressions-and-anonymous-functions) 来帮助你使代码更简洁和易读。
 
 你可以使用 lambda 表达式来代替手动创建一个类来实现函数式接口。通过 SAM 转换 (SAM conversions)，Kotlin 可以将任何签名与接口的单个方法签名匹配的 lambda 表达式转换为代码，该代码会动态地实例化接口实现。
 
@@ -57,11 +57,11 @@ fun main() {
 }
 ```
 
-你也可以将 [SAM 转换 (SAM conversions) 用于 Java 接口](java-interop.md#sam-conversions)。
+你也可以将 [SAM 转换 (SAM conversions) 用于 Java 接口](java-interop#sam-conversions)。
 
 ## 从带有构造函数函数的接口迁移到函数式接口
 
-从 1.6.20 开始，Kotlin 支持对函数式接口构造函数的 [可调用引用](reflection.md#callable-references)，这提供了一种源码兼容的方式，可以从带有构造函数函数的接口迁移到函数式接口。
+从 1.6.20 开始，Kotlin 支持对函数式接口构造函数的 [可调用引用](reflection#callable-references)，这提供了一种源码兼容的方式，可以从带有构造函数函数的接口迁移到函数式接口。
 考虑以下代码：
 
 ```kotlin
@@ -95,7 +95,7 @@ fun Printer(...) {...}
 
 ## 函数式接口 vs. 类型别名
 
-你也可以简单地使用函数类型的 [类型别名](type-aliases.md) 重写上面的内容：
+你也可以简单地使用函数类型的 [类型别名](type-aliases) 重写上面的内容：
 
 ```kotlin
 typealias IntPredicate = (i: Int) `->` Boolean
@@ -107,7 +107,7 @@ fun main() {
 }
 ```
 
-但是，函数式接口和 [类型别名](type-aliases.md) 的用途不同。
+但是，函数式接口和 [类型别名](type-aliases) 的用途不同。
 类型别名只是现有类型的名称——它们不会创建新类型，而函数式接口会创建新类型。
 你可以提供特定于特定函数式接口的扩展，使其不适用于普通函数或其类型别名。
 

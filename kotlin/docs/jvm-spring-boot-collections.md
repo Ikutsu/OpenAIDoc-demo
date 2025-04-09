@@ -6,7 +6,7 @@ title: "在 Spring Boot 项目中使用集合"
    这是 <strong>Spring Boot 和 Kotlin 入门</strong>教程的一部分。在继续之前，请确保您已完成之前的步骤：
 </p><br/>
 <p>
-   <a href="jvm-create-project-with-spring-boot.md">使用 Kotlin 创建 Spring Boot 项目</a><br/><a href="jvm-spring-boot-add-data-class.md">向 Spring Boot 项目添加数据类</a><br/><strong>为 Spring Boot 项目添加数据库支持</strong><br/>
+   <a href="jvm-create-project-with-spring-boot">使用 Kotlin 创建 Spring Boot 项目</a><br/><a href="jvm-spring-boot-add-data-class">向 Spring Boot 项目添加数据类</a><br/><strong>为 Spring Boot 项目添加数据库支持</strong><br/>
 </p>
 
 :::
@@ -172,4 +172,4 @@ fun reduce(): Message {
 
 ## 下一步
 
-转到[下一节](jvm-spring-boot-using-crudrepository.md)。
+转到[下一节](jvm-spring-boot-using-crudrepository)。

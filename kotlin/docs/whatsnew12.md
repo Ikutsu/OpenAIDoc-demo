@@ -51,7 +51,7 @@ actual fun hello(world: String): String =
 actual typealias URL = java.net.URL
 ```
 
-有关构建多平台项目的详细信息和步骤，请参阅[多平台编程文档](multiplatform-intro.md)。
+有关构建多平台项目的详细信息和步骤，请参阅[多平台编程文档](multiplatform-intro)。
 
 ## 其他语言特性
 

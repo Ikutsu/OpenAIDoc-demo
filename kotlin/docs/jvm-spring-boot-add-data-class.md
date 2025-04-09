@@ -7,7 +7,7 @@ description: "向 Spring Boot 项目添加 Kotlin 数据类。"
    这是 <strong>Spring Boot 和 Kotlin 入门</strong>教程的第二部分。在继续之前，请确保已完成之前的步骤：
 </p><br/>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot.md">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="/img/icon-2.svg" width="20" alt="Second step"/> <strong>向 Spring Boot 项目添加一个数据类（data class）</strong><br/><img src="/img/icon-3-todo.svg" width="20" alt="Third step"/> 为 Spring Boot 项目添加数据库支持<br/><img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> 使用 Spring Data CrudRepository 进行数据库访问
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="/img/icon-2.svg" width="20" alt="Second step"/> <strong>向 Spring Boot 项目添加一个数据类（data class）</strong><br/><img src="/img/icon-3-todo.svg" width="20" alt="Third step"/> 为 Spring Boot 项目添加数据库支持<br/><img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> 使用 Spring Data CrudRepository 进行数据库访问
 </p>
 
 :::
@@ -29,14 +29,14 @@ description: "向 Spring Boot 项目添加 Kotlin 数据类。"
    `Message` 类将用于数据传输：序列化的 `Message` 对象列表将构成控制器（controller）将响应浏览器请求的 JSON 文档。
 <h3>数据类（Data classes）– data class Message</h3>
 <p>
-   Kotlin 中<a href="data-classes.md">数据类（data classes）</a>的主要目的是保存数据。此类用 `data` 关键字标记，并且一些标准功能和一些实用函数通常可以从类结构中机械地导出。
+   Kotlin 中<a href="data-classes">数据类（data classes）</a>的主要目的是保存数据。此类用 `data` 关键字标记，并且一些标准功能和一些实用函数通常可以从类结构中机械地导出。
 </p>
 <p>
    在此示例中，你已将 `Message` 声明为数据类（data class），因为其主要目的是存储数据。
 </p>
 <h3>val 和 var 属性（properties）</h3>
 <p>
-   Kotlin 类中的<a href="properties.md">属性（properties）</a>可以声明为：
+   Kotlin 类中的<a href="properties">属性（properties）</a>可以声明为：
 </p>
 <list>
 <li><i>可变的（mutable）</i>，使用 `var` 关键字</li>
@@ -49,7 +49,7 @@ description: "向 Spring Boot 项目添加 Kotlin 数据类。"
 </p>
 <h3>可空类型（Nullable types）– String?</h3>
 <p>
-   Kotlin 提供了<a href="null-safety.md#nullable-types-and-non-nullable-types">对可空类型（nullable types）的内置支持</a>。在 Kotlin 中，类型系统区分可以包含 `null` 的引用（<i>可空引用（nullable references）</i>）和不能包含 `null` 的引用（<i>非空引用（non-nullable references）</i>）。<br/>
+   Kotlin 提供了<a href="null-safety#nullable-types-and-non-nullable-types">对可空类型（nullable types）的内置支持</a>。在 Kotlin 中，类型系统区分可以包含 `null` 的引用（<i>可空引用（nullable references）</i>）和不能包含 `null` 的引用（<i>非空引用（non-nullable references）</i>）。<br/>
           例如，`String` 类型的常规变量不能包含 `null`。要允许空值（nulls），你可以通过编写 `String?` 将变量声明为可空字符串。
 </p>
 <p>
@@ -101,7 +101,7 @@ Message(null, "Hello!")
 </p>
 <h3>尾随逗号（Trailing comma）</h3>
 <p>
-   <a href="coding-conventions.md#trailing-commas">尾随逗号（trailing comma）</a>是元素系列中<b>最后一项</b>之后的逗号符号：
+   <a href="coding-conventions#trailing-commas">尾随逗号（trailing comma）</a>是元素系列中<b>最后一项</b>之后的逗号符号：
 </p>
             ```kotlin
 Message("3", "Privet!"),
@@ -119,7 +119,7 @@ Message("3", "Privet!"),
 
 :::note
 如果 Jackson 库位于类路径（classpath）中，则 Spring 应用程序中的任何控制器（controller）默认都会呈现 JSON 响应。
-正如你[在 `build.gradle.kts` 文件中指定了 `spring-boot-starter-web` 依赖项](jvm-create-project-with-spring-boot.md#explore-the-project-gradle-build-file)一样，你收到了 Jackson 作为<i>传递（transitive）</i>依赖项。
+正如你[在 `build.gradle.kts` 文件中指定了 `spring-boot-starter-web` 依赖项](jvm-create-project-with-spring-boot#explore-the-project-gradle-build-file)一样，你收到了 Jackson 作为<i>传递（transitive）</i>依赖项。
 因此，如果端点（endpoint）返回可以序列化为 JSON 的数据结构，则应用程序将响应 JSON 文档。
 
 :::
@@ -188,4 +188,4 @@ Spring 应用程序已准备好运行：
 
 在本教程的下一部分中，你将向项目添加和配置数据库，并发出 HTTP 请求。
 
-**[继续下一章](jvm-spring-boot-add-db-support.md)**
+**[继续下一章](jvm-spring-boot-add-db-support)**

@@ -1,11 +1,11 @@
 ---
 title: 列表特定操作
 ---
-[`List`](collections-overview.md#list) 是 Kotlin 中最流行的内置集合类型。通过索引访问列表元素为列表提供了一组强大的操作。
+[`List`](collections-overview#list) 是 Kotlin 中最流行的内置集合类型。通过索引访问列表元素为列表提供了一组强大的操作。
 
 ## 通过索引检索元素
 
-列表支持所有常用的元素检索操作：`elementAt()`、`first()`、`last()` 以及 [检索单个元素](collection-elements.md) 中列出的其他操作。列表的特殊之处在于可以通过索引访问元素，因此读取元素最简单的方法是通过索引检索。这可以通过 [`get()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/get.html) 函数来实现，该函数将索引作为参数传入，或者使用简写 `[index]` 语法。
+列表支持所有常用的元素检索操作：`elementAt()`、`first()`、`last()` 以及 [检索单个元素](collection-elements) 中列出的其他操作。列表的特殊之处在于可以通过索引访问元素，因此读取元素最简单的方法是通过索引检索。这可以通过 [`get()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/get.html) 函数来实现，该函数将索引作为参数传入，或者使用简写 `[index]` 语法。
 
 如果列表大小小于指定的索引，则会抛出异常。以下两个函数可以帮助你避免此类异常：
 
@@ -28,7 +28,7 @@ fun main() {
 
 ## 检索列表片段
 
-除了 [检索集合片段](collection-parts.md) 的常用操作外，列表还提供了 [`subList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/sub-list.html) 函数，该函数将指定元素范围的视图作为列表返回。因此，如果原始集合的元素发生更改，则先前创建的子列表中的元素也会更改，反之亦然。
+除了 [检索集合片段](collection-parts) 的常用操作外，列表还提供了 [`subList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/sub-list.html) 函数，该函数将指定元素范围的视图作为列表返回。因此，如果原始集合的元素发生更改，则先前创建的子列表中的元素也会更改，反之亦然。
 
 ```kotlin
 
@@ -75,7 +75,7 @@ fun main() {
 
 ### 在排序列表中进行二分查找
 
-还有一种在列表中搜索元素的方法——[二分查找](https://en.wikipedia.org/wiki/Binary_search_algorithm)。它比其他内置搜索函数快得多，但 *要求列表根据特定排序[排序](collection-ordering.md)*，升序排列：自然排序或函数参数中提供的另一种排序。否则，结果是未定义的。
+还有一种在列表中搜索元素的方法——[二分查找](https://en.wikipedia.org/wiki/Binary_search_algorithm)。它比其他内置搜索函数快得多，但 *要求列表根据特定排序[排序](collection-ordering)*，升序排列：自然排序或函数参数中提供的另一种排序。否则，结果是未定义的。
 
 要在排序列表中搜索元素，请调用 [`binarySearch()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/binary-search.html) 函数，并将该值作为参数传递。如果存在这样的元素，该函数将返回其索引；否则，它将返回 `(-insertionPoint - 1)`，其中 `insertionPoint` 是应插入此元素的索引，以便列表保持排序。如果存在多个具有给定值的元素，则搜索可以返回它们的任何索引。
 
@@ -158,7 +158,7 @@ fun main() {
 
 ## 列表写入操作
 
-除了 [集合写入操作](collection-write.md) 中描述的集合修改操作之外，[可变](collections-overview.md#collection-types) 列表还支持特定的写入操作。这些操作使用索引来访问元素，以扩展列表修改功能。
+除了 [集合写入操作](collection-write) 中描述的集合修改操作之外，[可变](collections-overview#collection-types) 列表还支持特定的写入操作。这些操作使用索引来访问元素，以扩展列表修改功能。
 
 ### 添加
 
@@ -221,7 +221,7 @@ fun main() {
 
 ### 排序
 
-在 [集合排序](collection-ordering.md) 中，我们描述了以特定顺序检索集合元素的操作。对于可变列表，标准库提供了类似的扩展函数，这些函数可以就地执行相同的排序操作。当你将此类操作应用于列表实例时，它会更改该实例中元素的顺序。
+在 [集合排序](collection-ordering) 中，我们描述了以特定顺序检索集合元素的操作。对于可变列表，标准库提供了类似的扩展函数，这些函数可以就地执行相同的排序操作。当你将此类操作应用于列表实例时，它会更改该实例中元素的顺序。
 
 就地排序函数的名称与应用于只读列表的函数名称相似，但没有 `ed/d` 后缀：
 

@@ -6,16 +6,16 @@ title: "C 语言中的字符串映射 – 教程"
    这是 <strong>Kotlin 和 C 映射</strong>系列教程的最后一部分。在继续之前，请确保已完成之前的步骤。
 </p>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="mapping-primitive-data-types-from-c.md">映射 C 中的基本数据类型</a><br/>
-        <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="mapping-struct-union-types-from-c.md">映射 C 中的结构体和联合体类型</a><br/>
-      <img src="/img/icon-3-done.svg" width="20" alt="Third step"/> <a href="mapping-function-pointers-from-c.md">映射函数指针</a><br/>
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="mapping-primitive-data-types-from-c">映射 C 中的基本数据类型</a><br/>
+        <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="mapping-struct-union-types-from-c">映射 C 中的结构体和联合体类型</a><br/>
+      <img src="/img/icon-3-done.svg" width="20" alt="Third step"/> <a href="mapping-function-pointers-from-c">映射函数指针</a><br/>
       <img src="/img/icon-4.svg" width="20" alt="Fourth step"/> <strong>映射 C 中的字符串</strong><br/>
 </p>
 
 :::
 
 :::caution
-C 库导入是 [Experimental (实验性)](components-stability.md#stability-levels-explained) 的。所有由 cinterop 工具从 C 库生成的 Kotlin 声明都应该带有 `@ExperimentalForeignApi` 注解。
+C 库导入是 [Experimental (实验性)](components-stability#stability-levels-explained) 的。所有由 cinterop 工具从 C 库生成的 Kotlin 声明都应该带有 `@ExperimentalForeignApi` 注解。
 
 Kotlin/Native 附带的 Native 平台库（例如 Foundation、UIKit 和 POSIX）仅对某些 API 需要选择加入（opt-in）。
 
@@ -35,7 +35,7 @@ C 没有专用的字符串类型。方法签名或文档可以帮助你识别给
 
 C 语言中的字符串以 null 结尾，因此在字节序列的末尾添加一个尾随零字符 `\0` 以标记字符串的结尾。通常，使用 [UTF-8 编码字符串](https://en.wikipedia.org/wiki/UTF-8)。UTF-8 编码使用可变宽度字符，并且向后兼容 [ASCII](https://en.wikipedia.org/wiki/ASCII)。Kotlin/Native 默认使用 UTF-8 字符编码。
 
-为了理解字符串如何在 Kotlin 和 C 之间映射，首先创建库头文件。在 [本系列的第一部分](mapping-primitive-data-types-from-c.md) 中，你已经创建了一个包含必要文件的 C 库。对于此步骤：
+为了理解字符串如何在 Kotlin 和 C 之间映射，首先创建库头文件。在 [本系列的第一部分](mapping-primitive-data-types-from-c) 中，你已经创建了一个包含必要文件的 C 库。对于此步骤：
 
 1. 使用以下处理 C 字符串的函数声明更新你的 `lib.h` 文件：
 
@@ -81,7 +81,7 @@ C 语言中的字符串以 null 结尾，因此在字节序列的末尾添加一
 
 让我们看看 C 字符串声明如何映射到 Kotlin/Native 中：
 
-1. 在 `src/nativeMain/kotlin` 中，使用 [上一个教程](mapping-function-pointers-from-c.md) 中的以下内容更新你的 `hello.kt` 文件：
+1. 在 `src/nativeMain/kotlin` 中，使用 [上一个教程](mapping-function-pointers-from-c) 中的以下内容更新你的 `hello.kt` 文件：
 
    ```kotlin
    import interop.*
@@ -125,7 +125,7 @@ fun passStringToC() {
 }
 ```
 
-由于 `String.cstr` [扩展属性](extensions.md#extension-properties)，将 Kotlin 字符串传递给 C 非常简单。对于涉及 UTF-16 字符的情况，还有 `String.wcstr` 属性。
+由于 `String.cstr` [扩展属性](extensions#extension-properties)，将 Kotlin 字符串传递给 C 非常简单。对于涉及 UTF-16 字符的情况，还有 `String.wcstr` 属性。
 
 ## 在 Kotlin 中读取 C 字符串
 
@@ -211,7 +211,7 @@ fun main() {
 }
 ```
 
-要验证一切是否按预期工作，请[在你的 IDE 中](native-get-started.md) 运行 `runDebugExecutableNative` Gradle 任务，或者使用以下命令来运行代码：
+要验证一切是否按预期工作，请[在你的 IDE 中](native-get-started) 运行 `runDebugExecutableNative` Gradle 任务，或者使用以下命令来运行代码：
 
 ```bash
 ./gradlew runDebugExecutableNative
@@ -219,4 +219,4 @@ fun main() {
 
 ## 接下来是什么
 
-在 [与 C 的互操作性](native-c-interop.md) 文档中了解更多信息，该文档涵盖了更高级的场景。
+在 [与 C 的互操作性](native-c-interop) 文档中了解更多信息，该文档涵盖了更高级的场景。

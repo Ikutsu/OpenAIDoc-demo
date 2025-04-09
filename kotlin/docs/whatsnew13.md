@@ -5,13 +5,13 @@ _发布日期：2018 年 10 月 29 日_
 
 ## 协程发布
 
-经过长时间和广泛的实战测试，协程现在发布了！这意味着从 Kotlin 1.3 开始，语言支持和 API 都是[完全稳定的](components-stability.md)。查看新的[协程概览](coroutines-overview.md)页面。
+经过长时间和广泛的实战测试，协程现在发布了！这意味着从 Kotlin 1.3 开始，语言支持和 API 都是[完全稳定的](components-stability)。查看新的[协程概览](coroutines-overview)页面。
 
 Kotlin 1.3 引入了挂起函数的可调用引用以及反射 API 中对协程的支持。
 
 ## Kotlin/Native
 
-Kotlin 1.3 继续改进和完善 Native 目标。有关详细信息，请参见 [Kotlin/Native 概述](native-overview.md)。
+Kotlin 1.3 继续改进和完善 Native 目标。有关详细信息，请参见 [Kotlin/Native 概述](native-overview)。
 
 ## 多平台项目
 
@@ -21,12 +21,12 @@ Kotlin 1.3 继续改进和完善 Native 目标。有关详细信息，请参见 
 
   * 在旧模型中，通用代码和平台特定代码需要放置在单独的模块中，并通过 `expectedBy` 依赖项链接。
     现在，通用代码和平台特定代码放置在同一模块的不同源根中，从而使项目更易于配置。
-  * 现在有大量针对不同支持平台的[预设平台配置](multiplatform-dsl-reference.md#targets)。
-  * [依赖项配置](multiplatform-add-dependencies.md)已更改；现在为每个源根分别指定依赖项。
+  * 现在有大量针对不同支持平台的[预设平台配置](multiplatform-dsl-reference#targets)。
+  * [依赖项配置](multiplatform-add-dependencies)已更改；现在为每个源根分别指定依赖项。
   * 现在可以在任意平台子集之间共享源集（例如，在面向 JS、Android 和 iOS 的模块中，您可以拥有一个仅在 Android 和 iOS 之间共享的源集）。
-  * 现在支持[发布多平台库](multiplatform-publish-lib.md)。
+  * 现在支持[发布多平台库](multiplatform-publish-lib)。
 
-有关更多信息，请参考[多平台编程文档](multiplatform-intro.md)。
+有关更多信息，请参考[多平台编程文档](multiplatform-intro)。
 
 ## 契约 (Contracts)
 
@@ -126,7 +126,7 @@ fun String?.isNullOrEmpty(): Boolean {
 }
 ```
 
-有关语法以及兼容性声明的详细信息，请参见 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/kotlin-contracts.md)。
+有关语法以及兼容性声明的详细信息，请参见 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/kotlin-contracts)。
 
 ## 在变量中捕获 when 主题
 
@@ -141,7 +141,7 @@ fun Request.getBody() =
 ```
 
 虽然已经可以在 `when` 之前提取此变量，但是 `when` 中的 `val` 将其作用域正确地限制为
-`when` 的主体，从而防止命名空间污染。[在此处查看有关 `when` 的完整文档](control-flow.md#when-expressions-and-statements)。
+`when` 的主体，从而防止命名空间污染。[在此处查看有关 `when` 的完整文档](control-flow#when-expressions-and-statements)。
 
 ## 接口伴生对象中的 @JvmStatic 和 @JvmField
 
@@ -242,9 +242,9 @@ Kotlin 非常关心代码的稳定性和向后兼容性：Kotlin 兼容性策略
 ## 内联类 (Inline classes)
 
 :::caution
-内联类 (Inline classes) 处于 [Alpha](components-stability.md) 阶段。将来可能会发生不兼容的更改，并且需要手动迁移。
+内联类 (Inline classes) 处于 [Alpha](components-stability) 阶段。将来可能会发生不兼容的更改，并且需要手动迁移。
 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issues/KT) 中对此的反馈。
-有关详细信息，请参见[参考](inline-classes.md)。
+有关详细信息，请参见[参考](inline-classes)。
 
 :::
 
@@ -271,12 +271,12 @@ fun main() {
 
 ```
 
-有关详细信息，请参见[参考](inline-classes.md)中的内联类 (Inline classes)。
+有关详细信息，请参见[参考](inline-classes)中的内联类 (Inline classes)。
 
 ## 无符号整数
 
 :::caution
-无符号整数处于 [Beta](components-stability.md) 阶段。
+无符号整数处于 [Beta](components-stability) 阶段。
 它们的实现几乎是稳定的，但是在将来可能需要迁移步骤。
 我们将尽力最大程度地减少您必须进行的任何更改。
 
@@ -315,12 +315,12 @@ println("x: $x, y: $y, z: $z, range: $range")
 }
 ```
 
-有关详细信息，请参见[参考](unsigned-integer-types.md)。
+有关详细信息，请参见[参考](unsigned-integer-types)。
 
 ## @JvmDefault
 
 :::caution
-`@JvmDefault` 是 [实验性的](components-stability.md)。可能会随时删除或更改。
+`@JvmDefault` 是 [实验性的](components-stability)。可能会随时删除或更改。
 仅将其用于评估目的。我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issues/KT) 中对此的反馈。
 
 :::
@@ -452,8 +452,8 @@ fun main() {
 
 ### IDE 中的代码样式支持
 
-Kotlin 1.3 在 IntelliJ IDEA 中引入了对[推荐的代码样式](coding-conventions.md)的支持。
-查看[此页面](code-style-migration-guide.md)以获取迁移指南。
+Kotlin 1.3 在 IntelliJ IDEA 中引入了对[推荐的代码样式](coding-conventions)的支持。
+查看[此页面](code-style-migration-guide)以获取迁移指南。
 
 ### kotlinx.serialization
 
@@ -472,7 +472,7 @@ Kotlin 1.3 在 IntelliJ IDEA 中引入了对[推荐的代码样式](coding-conve
 ### 脚本更新
 
 :::caution
-脚本是 [实验性的](components-stability.md)。可能会随时删除或更改。
+脚本是 [实验性的](components-stability)。可能会随时删除或更改。
 仅将其用于评估目的。我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issues/KT) 中对此的反馈。
 
 :::
@@ -480,7 +480,7 @@ Kotlin 1.3 在 IntelliJ IDEA 中引入了对[推荐的代码样式](coding-conve
 Kotlin 1.3 继续发展和改进脚本 API，引入了对脚本自定义的一些实验性支持，
 例如添加外部属性、提供静态或动态依赖项等。
 
-有关更多详细信息，请参阅 [KEEP-75](https://github.com/Kotlin/KEEP/blob/master/proposals/scripting-support.md)。
+有关更多详细信息，请参阅 [KEEP-75](https://github.com/Kotlin/KEEP/blob/master/proposals/scripting-support)。
 
 ### Scratches 支持
 

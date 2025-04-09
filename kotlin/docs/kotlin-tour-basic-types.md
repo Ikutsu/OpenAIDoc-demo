@@ -4,13 +4,13 @@ title: 基本类型
 <no-index/>
 :::info
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
+   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world">Hello world</a><br />
         <img src="/img/icon-2.svg" width="20" alt="Second step" /> <strong>基本类型 (Basic types)</strong><br />
-        <img src="/img/icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合 (Collections)</a><br />
-        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流 (Control flow)</a><br />
-        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数 (Functions)</a><br />
-        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类 (Classes)</a><br />
-        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null 安全 (Null safety)</a>
+        <img src="/img/icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections">集合 (Collections)</a><br />
+        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow">控制流 (Control flow)</a><br />
+        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions">函数 (Functions)</a><br />
+        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes">类 (Classes)</a><br />
+        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety">Null 安全 (Null safety)</a>
 </p>
 
 :::
@@ -40,7 +40,7 @@ fun main() {
 ```
 
 :::tip
-`+=`、`-=`、`*=`、`/=` 和 `%=` 是增量赋值运算符。 更多信息，请参见 [增量赋值](operator-overloading.md#augmented-assignments)。
+`+=`、`-=`、`*=`、`/=` 和 `%=` 是增量赋值运算符。 更多信息，请参见 [增量赋值](operator-overloading#augmented-assignments)。
 
 :::
 
@@ -55,7 +55,7 @@ fun main() {
 | 字符 (Characters)             | `Char`                             | `val separator: Char = ','`                                   |
 | 字符串 (Strings)                | `String`                           | `val message: String = "Hello, world!"`                       |
 
-有关基本类型及其属性的更多信息，请参见 [基本类型](basic-types.md)。
+有关基本类型及其属性的更多信息，请参见 [基本类型](basic-types)。
 
 有了这些知识，你可以声明变量并在以后初始化它们。 只要变量在第一次读取之前被初始化，Kotlin 就可以管理这一点。
 
@@ -94,7 +94,7 @@ fun main() {
 }
 ```
 
-现在你已经知道如何声明基本类型，是时候学习 [集合](kotlin-tour-collections.md) 了。
+现在你已经知道如何声明基本类型，是时候学习 [集合](kotlin-tour-collections) 了。
 
 ## 练习 (Practice)
 
@@ -130,4 +130,4 @@ fun main() {
 
 ## 下一步 (Next step)
 
-[集合 (Collections)](kotlin-tour-collections.md)
+[集合 (Collections)](kotlin-tour-collections)

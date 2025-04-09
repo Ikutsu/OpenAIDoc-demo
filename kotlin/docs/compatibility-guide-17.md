@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.7 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构；后者指出，应事先充分沟通移除行为，以尽可能平滑地进行代码迁移。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构；后者指出，应事先充分沟通移除行为，以尽可能平滑地进行代码迁移。
 
 虽然大多数语言变更已通过其他渠道（如更新日志或编译器警告）发布，但本文档对所有变更进行了总结，为从 Kotlin 1.6 迁移到 Kotlin 1.7 提供了完整的参考。
 
@@ -405,7 +405,7 @@ _[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更�
 >
 > **不兼容变更类型**: 源码
 >
-> **简短摘要**: 删除 `kotlinOptions.jdkHome` 编译器选项，该选项用于将指定位置的自定义 JDK 包含到类路径中，而不是默认的 `JAVA_HOME`。请改用 [Java toolchains](gradle-configure-project.md#gradle-java-toolchains-support) (Java 工具链)
+> **简短摘要**: 删除 `kotlinOptions.jdkHome` 编译器选项，该选项用于将指定位置的自定义 JDK 包含到类路径中，而不是默认的 `JAVA_HOME`。请改用 [Java toolchains](gradle-configure-project#gradle-java-toolchains-support) (Java 工具链)
 >
 > **弃用周期:**
 >
@@ -435,7 +435,7 @@ _[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更�
 >
 > **不兼容变更类型**: 源码
 >
-> **简短摘要**: 删除 `kotlin2js` 和 `kotlin-dce-plugin` 插件。代替 `kotlin2js`，使用新的 `org.jetbrains.kotlin.js` 插件。当 Kotlin/JS Gradle 插件[正确配置](http://javascript-dce.md)时，死代码消除 (DCE) 才会起作用
+> **简短摘要**: 删除 `kotlin2js` 和 `kotlin-dce-plugin` 插件。代替 `kotlin2js`，使用新的 `org.jetbrains.kotlin.js` 插件。当 Kotlin/JS Gradle 插件[正确配置](http://javascript-dce)时，死代码消除 (DCE) 才会起作用
 
 >
 > **弃用周期:**

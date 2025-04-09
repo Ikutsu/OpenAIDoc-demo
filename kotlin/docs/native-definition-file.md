@@ -61,12 +61,12 @@ Kotlin/Native 使你能够使用 C 和 Objective-C 库，从而在 Kotlin 中使
 | [`linkerOpts`](#pass-compiler-and-linker-options)                                   | cinterop 工具传递给链接器的链接器选项。                                                                                                                                                              |
 | [`excludedFunctions`](#ignore-specific-functions)                                   | 应该忽略的函数名称的空格分隔列表。                                                                                                                                                         |                                              
 | `excludedMacros`                                                                    |                                                                                                                                                                                                                          |
-| [`staticLibraries`](#include-a-static-library)                                      | [实验性](components-stability.md#stability-levels-explained)。将静态库包含到 `.klib` 中。                                                                                                              |
-| [`libraryPaths`](#include-a-static-library)                                         | [实验性](components-stability.md#stability-levels-explained)。cinterop 工具在其中搜索要包含在 `.klib` 中的库的目录的空格分隔列表。                                    |
+| [`staticLibraries`](#include-a-static-library)                                      | [实验性](components-stability#stability-levels-explained)。将静态库包含到 `.klib` 中。                                                                                                              |
+| [`libraryPaths`](#include-a-static-library)                                         | [实验性](components-stability#stability-levels-explained)。cinterop 工具在其中搜索要包含在 `.klib` 中的库的目录的空格分隔列表。                                    |
 | `packageName`                                                                       | 生成的 Kotlin API 的包前缀。                                                                                                                                                                             |
 | [`headerFilter`](#filter-headers-by-globs)                                          | 按 glob 过滤头文件，并且仅在导入库时包含它们。                                                                                                                                                |
 | [`excludeFilter`](#exclude-headers)                                                 | 导入库时排除特定的头文件，并优先于 `headerFilter`。                                                                                                                               |
-| [`strictEnums`](#configure-enums-generation)                                        | 应该生成为 [Kotlin 枚举](enum-classes.md) 的枚举的空格分隔列表。                                                                                                                             |
+| [`strictEnums`](#configure-enums-generation)                                        | 应该生成为 [Kotlin 枚举](enum-classes) 的枚举的空格分隔列表。                                                                                                                             |
 | [`nonStrictEnums`](#configure-enums-generation)                                     | 应该生成为整数值的枚举的空格分隔列表。                                                                                                                                             |
 | [`noStringConversion`](#set-up-string-conversion)                                   | 不应自动转换为 Kotlin `String` 的函数的 `const char*` 参数的空格分隔列表。                                                                                                     |
 | `allowedOverloadsForCFunctions`                                                     | 默认情况下，假定 C 函数具有唯一的名称。如果多个函数具有相同的名称，则仅选择一个。但是，你可以通过在 `allowedOverloadsForCFunctions` 中指定这些函数来更改此设置。 |
@@ -145,7 +145,7 @@ compilerOpts.macos_x64 = -DFOO=foo2
 ### 包含静态库
 
 :::caution
-此功能是[实验性](components-stability.md#stability-levels-explained)的。它可能随时被删除或更改。仅将其用于评估目的。
+此功能是[实验性](components-stability#stability-levels-explained)的。它可能随时被删除或更改。仅将其用于评估目的。
 
 :::
 
@@ -181,13 +181,13 @@ libraryPaths = /opt/local/lib /usr/local/opt/curl/lib
 
 #### 帮助解决链接器错误
 
-当 Kotlin 库依赖于 C 或 Objective-C 库时，可能会发生链接器错误，例如，使用 [CocoaPods 集成](native-cocoapods.md)。如果依赖库未在本地计算机上安装或未在项目构建脚本中显式配置，则会发生“Framework not found”错误。
+当 Kotlin 库依赖于 C 或 Objective-C 库时，可能会发生链接器错误，例如，使用 [CocoaPods 集成](native-cocoapods)。如果依赖库未在本地计算机上安装或未在项目构建脚本中显式配置，则会发生“Framework not found”错误。
 
 如果你是库作者，你可以使用自定义消息帮助你的用户解决链接器错误。为此，请将 `userSetupHint=message` 属性添加到你的 `.def` 文件，或将 `-Xuser-setup-hint` 编译器选项传递给 `cinterop`。
 
 ### 添加自定义声明
 
-有时需要在生成绑定之前向库添加自定义 C 声明（例如，对于 [宏](native-c-interop.md#macros)）。你可以直接将它们包含到 `.def` 文件的末尾，而不是创建一个包含这些声明的附加头文件，在包含仅包含分隔符序列 `---` 的分隔行之后：
+有时需要在生成绑定之前向库添加自定义 C 声明（例如，对于 [宏](native-c-interop#macros)）。你可以直接将它们包含到 `.def` 文件的末尾，而不是创建一个包含这些声明的附加头文件，在包含仅包含分隔符序列 `---` 的分隔行之后：
 
 ```none
 headers = errno.h
@@ -218,6 +218,6 @@ cinterop -def png.def -compiler-option -I/usr/local/include -o png
 
 ## 接下来做什么
 
-* [C 互操作的绑定](native-c-interop.md#bindings)
-* [与 Swift/Objective-C 的互操作性](native-objc-interop.md)
+* [C 互操作的绑定](native-c-interop#bindings)
+* [与 Swift/Objective-C 的互操作性](native-objc-interop)
 ```

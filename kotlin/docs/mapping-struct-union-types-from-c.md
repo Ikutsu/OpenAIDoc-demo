@@ -9,22 +9,22 @@ import TabItem from '@theme/TabItem';
    这是 <strong>Kotlin 和 C 映射</strong> 教程系列的第二部分。在继续之前，请确保已完成上一步。
 </p>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="mapping-primitive-data-types-from-c.md">映射 C 语言的基本数据类型</a><br/>
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="mapping-primitive-data-types-from-c">映射 C 语言的基本数据类型</a><br/>
        <img src="/img/icon-2.svg" width="20" alt="Second step"/> <strong>映射 C 语言的结构体和联合体类型</strong><br/>
-       <img src="/img/icon-3-todo.svg" width="20" alt="Third step"/> <a href="mapping-function-pointers-from-c.md">映射函数指针</a><br/>
-       <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> <a href="mapping-strings-from-c.md">映射 C 语言的字符串</a><br/>
+       <img src="/img/icon-3-todo.svg" width="20" alt="Third step"/> <a href="mapping-function-pointers-from-c">映射函数指针</a><br/>
+       <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> <a href="mapping-strings-from-c">映射 C 语言的字符串</a><br/>
 </p>
 
 :::
 
 :::caution
-C 库的导入是 [实验性的（Experimental）](components-stability.md#stability-levels-explained)。由 cinterop 工具从 C 库生成的所有 Kotlin 声明都应该带有 `@ExperimentalForeignApi` 注解。
+C 库的导入是 [实验性的（Experimental）](components-stability#stability-levels-explained)。由 cinterop 工具从 C 库生成的所有 Kotlin 声明都应该带有 `@ExperimentalForeignApi` 注解。
 
 Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）仅对某些 API 需要选择启用。
 
 :::
 
-让我们来探索哪些 C 结构体（struct）和联合体（union）声明在 Kotlin 中是可见的，并检查 Kotlin/Native 和 [多平台（multiplatform）](gradle-configure-project.md#targeting-multiple-platforms) Gradle 构建中与 C 互操作相关的高级用例。
+让我们来探索哪些 C 结构体（struct）和联合体（union）声明在 Kotlin 中是可见的，并检查 Kotlin/Native 和 [多平台（multiplatform）](gradle-configure-project#targeting-multiple-platforms) Gradle 构建中与 C 互操作相关的高级用例。
 
 在本教程中，你将学习：
 
@@ -35,7 +35,7 @@ Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）�
 
 为了理解 Kotlin 如何映射结构体和联合体类型，让我们在 C 语言中声明它们，并检查它们在 Kotlin 中的表示方式。
 
-在 [之前的教程](mapping-primitive-data-types-from-c.md) 中，你已经创建了一个包含必要文件的 C 库。对于此步骤，请在 `interop.def` 文件中的 `---` 分隔符后更新声明：
+在 [之前的教程](mapping-primitive-data-types-from-c) 中，你已经创建了一个包含必要文件的 C 库。对于此步骤，请在 `interop.def` 文件中的 `---` 分隔符后更新声明：
 
 ```c
 
@@ -65,7 +65,7 @@ void union_by_pointer(MyUnion* u) {}
 
 让我们看看 C 结构体和联合体类型如何映射到 Kotlin/Native 中，并更新你的项目：
 
-1. 在 `src/nativeMain/kotlin` 中，使用 [之前的教程](mapping-primitive-data-types-from-c.md) 中的以下内容更新你的 `hello.kt` 文件：
+1. 在 `src/nativeMain/kotlin` 中，使用 [之前的教程](mapping-primitive-data-types-from-c) 中的以下内容更新你的 `hello.kt` 文件：
 
    ```kotlin
    import interop.*
@@ -156,7 +156,7 @@ Kotlin 提供了一个方便的 API，用于创建和使用这些类型。让我
 
 ### 创建 CValue&lt;T&gt;
 
-`CValue<T>` 类型用于将按值参数传递给 C 函数调用。使用 `cValue` 函数创建 `CValue<T>` 实例。该函数需要一个[带有接收者的 Lambda 函数](lambdas.md#function-literals-with-receiver)，以就地初始化底层 C 类型。该函数声明如下：
+`CValue<T>` 类型用于将按值参数传递给 C 函数调用。使用 `cValue` 函数创建 `CValue<T>` 实例。该函数需要一个[带有接收者的 Lambda 函数](lambdas#function-literals-with-receiver)，以就地初始化底层 C 类型。该函数声明如下：
 
 ```kotlin
 fun <reified T : CStructVar> cValue(initialize: T.() `->` Unit): CValue<T>
@@ -322,7 +322,7 @@ fun main() {
 }
 ```
 
-要验证一切是否按预期工作，请[在你的 IDE 中](native-get-started.md#build-and-run-the-application) 运行 `runDebugExecutableNative` Gradle 任务，或者使用以下命令运行代码：
+要验证一切是否按预期工作，请[在你的 IDE 中](native-get-started#build-and-run-the-application) 运行 `runDebugExecutableNative` Gradle 任务，或者使用以下命令运行代码：
 
 ```bash
 ./gradlew runDebugExecutableNative
@@ -332,8 +332,8 @@ fun main() {
 
 在本系列的下一部分中，你将学习如何在 Kotlin 和 C 之间映射函数指针：
 
-**[继续到下一部分](mapping-function-pointers-from-c.md)**
+**[继续到下一部分](mapping-function-pointers-from-c)**
 
 ### 参见
 
-在 [与 C 互操作](native-c-interop.md) 文档中了解更多信息，该文档涵盖了更高级的场景。
+在 [与 C 互操作](native-c-interop) 文档中了解更多信息，该文档涵盖了更高级的场景。

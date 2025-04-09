@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 
 [`kotlin-metadata-jvm`](https://github.com/JetBrains/kotlin/tree/master/libraries/kotlinx-metadata/jvm) 库提供了一些工具，用于读取、修改和生成从为 JVM 编译的 Kotlin 类中的元数据。
 这些元数据存储在 `.class` 文件中的 [`@Metadata`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-metadata/) 注解中，
-供诸如 [`kotlin-reflect`](reflection.md) 之类的库和工具在运行时检查 Kotlin 特定的结构，例如属性、函数
+供诸如 [`kotlin-reflect`](reflection) 之类的库和工具在运行时检查 Kotlin 特定的结构，例如属性、函数
 和类。
 
 :::note
@@ -109,7 +109,7 @@ fun main() {
     > `readStrict()` 函数支持最高到 [`JvmMetadataVersion.LATEST_STABLE_SUPPORTED`](https://kotlinlang.org/api/kotlinx-metadata-jvm/kotlin-metadata-jvm/kotlin.metadata.jvm/-jvm-metadata-version/-companion/-l-a-t-e-s-t_-s-t-a-b-l-e_-s-u-p-p-o-r-t-e-d.html) 之前一个版本的元数据格式，它对应于项目中使用的最新 Kotlin 版本。
     > 例如，如果你的项目依赖于 `kotlin-metadata-jvm:2.1.0`，则 `readStrict()` 可以处理最高到 Kotlin `2.2.x` 的元数据；否则，它会抛出错误以防止错误处理未知格式。
     > 
-    > 更多信息，请参见 [Kotlin Metadata GitHub 仓库](https://github.com/JetBrains/kotlin/blob/master/libraries/kotlinx-metadata/jvm/ReadMe.md#detailed-explanation)。 
+    > 更多信息，请参见 [Kotlin Metadata GitHub 仓库](https://github.com/JetBrains/kotlin/blob/master/libraries/kotlinx-metadata/jvm/ReadMe#detailed-explanation)。 
     >
     
 
@@ -344,7 +344,7 @@ fun main() {
 1. 创建 `KmClass`、`KmPackage` 或 `KmLambda` 的实例，具体取决于你要生成的元数据的类型。
 2. 向实例添加属性，例如类名、可见性、构造函数和函数签名。
 
-    > 你可以使用 `apply()` [作用域函数](scope-functions.md) 来减少设置属性时的样板代码。
+    > 你可以使用 `apply()` [作用域函数](scope-functions) 来减少设置属性时的样板代码。
     >
     
 
@@ -419,6 +419,6 @@ fun main() {
 
 * [查看 Kotlin Metadata JVM 库的 API 参考](https://kotlinlang.org/api/kotlinx-metadata-jvm/)。
 * [查看 Kotlin Metadata JVM GitHub 仓库](https://github.com/JetBrains/kotlin/tree/master/libraries/kotlinx-metadata/jvm)。
-* [了解模块元数据以及使用 `.kotlin_module` 文件](https://github.com/JetBrains/kotlin/blob/master/libraries/kotlinx-metadata/jvm/ReadMe.md#module-metadata)。
+* [了解模块元数据以及使用 `.kotlin_module` 文件](https://github.com/JetBrains/kotlin/blob/master/libraries/kotlinx-metadata/jvm/ReadMe#module-metadata)。
 
   ```

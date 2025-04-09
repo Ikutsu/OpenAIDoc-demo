@@ -5,14 +5,14 @@ title: 基本类型
 
 本节介绍 Kotlin 中使用的基本类型：
 
-* [数字 (Numbers)](numbers.md) 及其 [无符号对应项 (unsigned counterparts)](unsigned-integer-types.md)
-* [布尔值 (Booleans)](booleans.md)
-* [字符 (Characters)](characters.md)
-* [字符串 (Strings)](strings.md)
-* [数组 (Arrays)](arrays.md)
+* [数字 (Numbers)](numbers) 及其 [无符号对应项 (unsigned counterparts)](unsigned-integer-types)
+* [布尔值 (Booleans)](booleans)
+* [字符 (Characters)](characters)
+* [字符串 (Strings)](strings)
+* [数组 (Arrays)](arrays)
 
 :::tip
-[了解如何在 Kotlin 中执行类型检查和转换](typecasts.md)。
+[了解如何在 Kotlin 中执行类型检查和转换](typecasts)。
 
 :::
 

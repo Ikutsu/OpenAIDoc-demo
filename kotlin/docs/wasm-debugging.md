@@ -2,7 +2,7 @@
 title: "调试 Kotlin/Wasm 代码"
 ---
 :::note
-Kotlin/Wasm 处于 [Alpha](components-stability.md) 阶段。它可能随时更改。
+Kotlin/Wasm 处于 [Alpha](components-stability) 阶段。它可能随时更改。
 
 :::
 
@@ -168,7 +168,7 @@ kotlin {
 ### 调试 Kotlin/Wasm 应用程序
 
 :::tip
-本教程使用 Chrome 浏览器，但你应该可以使用其他浏览器按照这些步骤操作。有关更多信息，请参见 [浏览器版本](wasm-troubleshooting.md#browser-versions)。
+本教程使用 Chrome 浏览器，但你应该可以使用其他浏览器按照这些步骤操作。有关更多信息，请参见 [浏览器版本](wasm-troubleshooting#browser-versions)。
 
 :::
 

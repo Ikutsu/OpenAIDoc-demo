@@ -5,13 +5,13 @@ title: 控制流
 
 :::info
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
-        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
+   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world">Hello world</a><br />
+        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types">Basic types</a><br />
+        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections">Collections</a><br />
         <img src="/img/icon-4.svg" width="20" alt="Fourth step" /> <strong>Control flow (控制流)</strong><br />
-        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions (函数)</a><br />
-        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">Classes (类)</a><br />
-        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety (空安全)</a>
+        <img src="/img/icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions">Functions (函数)</a><br />
+        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes">Classes (类)</a><br />
+        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety">Null safety (空安全)</a>
 </p>
 
 :::
@@ -173,11 +173,11 @@ fun main() {
 创建一个简单的游戏，如果掷两个骰子得到相同的数字，你就会赢。 使用 `if` 打印 `You win :)`，否则打印 `You lose :(`。
 
 :::tip
-在本练习中，你需要导入一个包，以便可以使用 `Random.nextInt()` 函数来为你提供一个随机的 `Int`。有关导入包的更多信息，请参见 [Packages and imports (包和导入)](packages.md)。
+在本练习中，你需要导入一个包，以便可以使用 `Random.nextInt()` 函数来为你提供一个随机的 `Int`。有关导入包的更多信息，请参见 [Packages and imports (包和导入)](packages)。
 
 :::
 <h3>Hint</h3>
-        使用 <a href="operator-overloading.md#equality-and-inequality-operators">equality operator (相等运算符)</a> (`==`) 来比较骰子的结果。 
+        使用 <a href="operator-overloading#equality-and-inequality-operators">equality operator (相等运算符)</a> (`==`) 来比较骰子的结果。 
     
 
 |---|---|
@@ -314,7 +314,7 @@ fun main() {
 * 在圆括号 `()` 内声明 while 循环继续的条件表达式。
 * 将要完成的操作添加到花括号 `{}` 中。
 
-以下示例使用 [increment operator (递增运算符)](operator-overloading.md#increments-and-decrements) `++` 来递增 `cakesEaten` 变量的值。
+以下示例使用 [increment operator (递增运算符)](operator-overloading#increments-and-decrements) `++` 来递增 `cakesEaten` 变量的值。
 
 :::
 
@@ -361,9 +361,9 @@ fun main() {
 }
 ```
 
-有关条件表达式和循环的更多信息和示例，请参见 [Conditions and loops (条件和循环)](control-flow.md)。
+有关条件表达式和循环的更多信息和示例，请参见 [Conditions and loops (条件和循环)](control-flow)。
 
-现在你已经了解了 Kotlin 控制流的基础知识，是时候学习如何编写自己的 [functions (函数)](kotlin-tour-functions.md)了。
+现在你已经了解了 Kotlin 控制流的基础知识，是时候学习如何编写自己的 [functions (函数)](kotlin-tour-functions)了。
 
 ## Loops practice (循环练习)
 
@@ -432,7 +432,7 @@ fun main() {
 <h3>Hint 1</h3>
         使用 `for` 循环来计数数字，并使用 `when` 表达式来决定每一步要打印的内容。
 <h3>Hint 2</h3>
-        使用取模运算符 (`%`) 返回数字被除后的余数。 使用 <a href="operator-overloading.md#equality-and-inequality-operators">equality operator (相等运算符)</a> 
+        使用取模运算符 (`%`) 返回数字被除后的余数。 使用 <a href="operator-overloading#equality-and-inequality-operators">equality operator (相等运算符)</a> 
         (`==`) 检查余数是否等于零。
     
 
@@ -488,4 +488,4 @@ fun main() {
 
 ## Next step (下一步)
 
-[Functions (函数)](kotlin-tour-functions.md)
+[Functions (函数)](kotlin-tour-functions)

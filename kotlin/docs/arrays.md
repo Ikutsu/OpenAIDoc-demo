@@ -12,7 +12,7 @@ Kotlin 中最常见的数组类型是对象类型数组，由 [`Array`](https://
 
 ## 何时使用数组
 
-当你有需要满足的特定底层要求时，请在 Kotlin 中使用数组。例如，如果你的性能要求超出了常规应用程序的需求，或者你需要构建自定义数据结构。如果没有这些限制，请改用[集合](collections-overview.md)。
+当你有需要满足的特定底层要求时，请在 Kotlin 中使用数组。例如，如果你的性能要求超出了常规应用程序的需求，或者你需要构建自定义数据结构。如果没有这些限制，请改用[集合](collections-overview)。
 
 与数组相比，集合具有以下优点：
 * 集合可以是只读的，这可以让你更好地控制并编写意图清晰的健壮代码。
@@ -35,7 +35,7 @@ Kotlin 中最常见的数组类型是对象类型数组，由 [`Array`](https://
 
 * 你可以使用相等运算符 (`==`) 来检查集合在结构上是否相等。 你不能对数组使用此运算符。 相反，你必须使用一个特殊的函数，你可以在 [比较数组](#compare-arrays) 中阅读更多相关信息。
 
-有关集合的更多信息，请参阅 [集合概述](collections-overview.md)。
+有关集合的更多信息，请参阅 [集合概述](collections-overview)。
 
 ## 创建数组
 
@@ -141,7 +141,7 @@ fun main() {
 
 ## 访问和修改元素
 
-数组始终是可变的。 要访问和修改数组中的元素，请使用[索引访问运算符](operator-overloading.md#indexed-access-operator)`[]`：
+数组始终是可变的。 要访问和修改数组中的元素，请使用[索引访问运算符](operator-overloading#indexed-access-operator)`[]`：
 
 ```kotlin
 fun main() {
@@ -162,7 +162,7 @@ fun main() {
 
 Kotlin 中的数组是_不变的 (invariant)_。 这意味着 Kotlin 不允许你将 `Array<String>`
 分配给 `Array<Any>`，以防止可能的运行时故障。 相反，你可以使用 `Array<out Any>`。 有关更多信息，
-请参阅 [类型投影](generics.md#type-projections)。
+请参阅 [类型投影](generics#type-projections)。
 
 ## 使用数组
 
@@ -170,7 +170,7 @@ Kotlin 中的数组是_不变的 (invariant)_。 这意味着 Kotlin 不允许�
 
 ### 将可变数量的参数传递给函数
 
-在 Kotlin 中，你可以通过 [`vararg`](functions.md#variable-number-of-arguments-varargs)
+在 Kotlin 中，你可以通过 [`vararg`](functions#variable-number-of-arguments-varargs)
 参数将可变数量的参数传递给函数。 当你事先不知道参数的数量时，这非常有用，例如在格式化消息或
 创建 SQL 查询时。
 
@@ -191,7 +191,7 @@ fun printAllStrings(vararg strings: String) {
 }
 ```
 
-有关更多信息，请参阅 [可变数量的参数 (varargs)](functions.md#variable-number-of-arguments-varargs)。
+有关更多信息，请参阅 [可变数量的参数 (varargs)](functions#variable-number-of-arguments-varargs)。
 
 ### 比较数组
 
@@ -218,7 +218,7 @@ fun main() {
 ```
 
 :::note
-不要使用相等 (`==`) 和不等 (`!=`) [运算符](equality.md#structural-equality)来比较数组的内容。 这些运算符检查分配的变量是否指向同一个对象。
+不要使用相等 (`==`) 和不等 (`!=`) [运算符](equality#structural-equality)来比较数组的内容。 这些运算符检查分配的变量是否指向同一个对象。
 
 要了解有关 Kotlin 中数组以这种方式运行的原因的更多信息，请参阅我们的 [博客文章](https://blog.jetbrains.com/kotlin/2015/09/feedback-request-limitations-on-data-classes/#Appendix.Comparingarrays)。
 
@@ -244,7 +244,7 @@ fun main() {
 }
 ```
 
-`.sum()` 函数只能与 [数值数据类型](numbers.md) 的数组一起使用，例如 `Int`。
+`.sum()` 函数只能与 [数值数据类型](numbers) 的数组一起使用，例如 `Int`。
 
 :::
 
@@ -271,7 +271,7 @@ fun main() {
 
 ### 将数组转换为集合
 
-如果你使用不同的 API，其中一些使用数组，另一些使用集合，那么你可以将数组转换为[集合](collections-overview.md)，
+如果你使用不同的 API，其中一些使用数组，另一些使用集合，那么你可以将数组转换为[集合](collections-overview)，
 反之亦然。
 
 #### 转换为 List (列表) 或 Set (集合)
@@ -301,7 +301,7 @@ fun main() {
 函数。
 
 只有 [`Pair<K,V>`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/) 数组才能转换为 `Map`。
-`Pair` 实例的第一个值成为键，第二个值成为值。 此示例使用 [中缀表示法](functions.md#infix-notation)
+`Pair` 实例的第一个值成为键，第二个值成为值。 此示例使用 [中缀表示法](functions#infix-notation)
 来调用 [`to`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/to.html) 函数以创建 `Pair` 元组：
 
 ```kotlin
@@ -362,6 +362,6 @@ fun main() {
 
 ## 下一步是什么？
 
-* 要了解有关为什么我们建议在大多数用例中使用集合的更多信息，请阅读我们的 [集合概述](collections-overview.md)。
-* 了解其他 [基本类型](basic-types.md)。
-* 如果你是 Java 开发人员，请阅读我们的 Java 到 Kotlin 迁移指南，了解 [集合](java-to-kotlin-collections-guide.md)。
+* 要了解有关为什么我们建议在大多数用例中使用集合的更多信息，请阅读我们的 [集合概述](collections-overview)。
+* 了解其他 [基本类型](basic-types)。
+* 如果你是 Java 开发人员，请阅读我们的 Java 到 Kotlin 迁移指南，了解 [集合](java-to-kotlin-collections-guide)。

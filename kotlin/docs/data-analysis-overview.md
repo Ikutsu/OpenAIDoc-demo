@@ -21,7 +21,7 @@ title: "用于数据分析的 Kotlin"
 
 你想尝试我们的 Kotlin 数据分析工具吗？
 
-<a href="get-started-with-kotlin-notebooks.md"><img src="/img/kotlin-notebooks-button.svg" width="600" alt="Get started with Kotlin Notebook" /></a>
+<a href="get-started-with-kotlin-notebooks"><img src="/img/kotlin-notebooks-button.svg" width="600" alt="Get started with Kotlin Notebook" /></a>
 
 我们的 Kotlin 数据分析工具使你可以从头到尾顺利地处理数据。使用我们的 Kotlin Notebook 中简单的拖放功能轻松地
 检索数据。只需几行代码即可清理、转换和可视化数据。
@@ -50,7 +50,7 @@ Kotlin 提供了不同的 notebook 解决方案，例如 [Kotlin Notebook](#kotl
 
 ### Kotlin Notebook
 
-[Kotlin Notebook](kotlin-notebook-overview.md) 是 IntelliJ IDEA 的一个插件，允许你用 Kotlin 创建 notebook。它提供我们的 IDE 体验以及所有常见的 IDE 功能，
+[Kotlin Notebook](kotlin-notebook-overview) 是 IntelliJ IDEA 的一个插件，允许你用 Kotlin 创建 notebook。它提供我们的 IDE 体验以及所有常见的 IDE 功能，
 提供实时的代码洞察和项目集成。
 
 ### Datalore 中的 Kotlin notebooks
@@ -89,7 +89,7 @@ Kotlin DataFrame 库结合起来以完成不同的数据相关任务。
 
 ## 接下来
 
-* [Kotlin Notebook 入门](get-started-with-kotlin-notebooks.md)
-* [使用 Kotlin DataFrame 库检索和转换数据](data-analysis-work-with-data-sources.md)
-* [使用 Kandy 库可视化数据](data-analysis-visualization.md)
-* [详细了解用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries.md)
+* [Kotlin Notebook 入门](get-started-with-kotlin-notebooks)
+* [使用 Kotlin DataFrame 库检索和转换数据](data-analysis-work-with-data-sources)
+* [使用 Kandy 库可视化数据](data-analysis-visualization)
+* [详细了解用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries)

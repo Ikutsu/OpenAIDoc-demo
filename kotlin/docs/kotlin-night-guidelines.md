@@ -4,13 +4,13 @@ title: "Kotlin Night 指南"
 Kotlin Night 是一个包含 3-4 个关于 Kotlin 或相关技术的讲座的聚会。
 
 :::note
-有关 Kotlin Night 品牌资源，请参阅 [Kotlin 品牌资源文档](kotlin-brand-assets.md#kotlin-night-brand-assets)。
+有关 Kotlin Night 品牌资源，请参阅 [Kotlin 品牌资源文档](kotlin-brand-assets#kotlin-night-brand-assets)。
 
 :::
 
 ## 活动指南
 
-* 请使用我们提供的[品牌材料](kotlin-brand-assets.md#kotlin-night-brand-assets)。以相同的风格举办所有活动并制作材料，将有助于保持 Kotlin Night 体验的一致性。
+* 请使用我们提供的[品牌材料](kotlin-brand-assets#kotlin-night-brand-assets)。以相同的风格举办所有活动并制作材料，将有助于保持 Kotlin Night 体验的一致性。
 * Kotlin Night 应该是一个免费活动。可以收取最低费用以支付费用，但它应该仍然是一个非营利性活动。
 * 该活动应公开宣布，并向所有人开放，不得有任何形式的歧视。
 * 如果您在活动结束后在线发布讲座内容，则必须免费提供给所有人，无需任何注册程序。

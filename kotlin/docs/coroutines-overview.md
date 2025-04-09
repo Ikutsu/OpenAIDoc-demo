@@ -9,23 +9,23 @@ Kotlin 通过在语言层面提供 [协程](https://en.wikipedia.org/wiki/Corout
 
 ## 如何开始
 
-Kotlin 新手？请查看 [入门](getting-started.md) 页面。
+Kotlin 新手？请查看 [入门](getting-started) 页面。
 
 ### 文档
 
-- [协程指南](coroutines-guide.md)
-- [基础](coroutines-basics.md)
-- [通道](channels.md)
-- [协程上下文与调度器](coroutine-context-and-dispatchers.md)
-- [共享可变状态与并发](shared-mutable-state-and-concurrency.md)
-- [异步流](flow.md)
+- [协程指南](coroutines-guide)
+- [基础](coroutines-basics)
+- [通道](channels)
+- [协程上下文与调度器](coroutine-context-and-dispatchers)
+- [共享可变状态与并发](shared-mutable-state-and-concurrency)
+- [异步流](flow)
 
 ### 教程
 
-- [异步编程技巧](async-programming.md)
-- [协程与通道入门](coroutines-and-channels.md)
-- [使用 IntelliJ IDEA 调试协程](debug-coroutines-with-idea.md)
-- [使用 IntelliJ IDEA 调试 Kotlin Flow – 教程](debug-flow-with-idea.md)
+- [异步编程技巧](async-programming)
+- [协程与通道入门](coroutines-and-channels)
+- [使用 IntelliJ IDEA 调试协程](debug-coroutines-with-idea)
+- [使用 IntelliJ IDEA 调试 Kotlin Flow – 教程](debug-flow-with-idea)
 - [在 Android 上测试 Kotlin 协程](https://developer.android.com/kotlin/coroutines/test)
 
 ## 示例项目

@@ -1,7 +1,7 @@
 ---
 title: 类型安全的构建器
 ---
-通过将命名良好的函数用作构建器，并结合[带接收者的函数字面量](lambdas.md#function-literals-with-receiver)，可以在 Kotlin 中创建类型安全、静态类型的构建器。
+通过将命名良好的函数用作构建器，并结合[带接收者的函数字面量](lambdas#function-literals-with-receiver)，可以在 Kotlin 中创建类型安全、静态类型的构建器。
 
 类型安全的构建器允许创建基于 Kotlin 的领域特定语言（DSL），适合以半声明式的方式构建复杂的层级数据结构。构建器的示例用例包括：
 
@@ -63,7 +63,7 @@ html {
 }
 ```
 
-`html` 实际上是一个函数调用，它接受一个 [lambda 表达式](lambdas.md) 作为参数。
+`html` 实际上是一个函数调用，它接受一个 [lambda 表达式](lambdas) 作为参数。
 这个函数定义如下：
 
 ```kotlin
@@ -239,7 +239,7 @@ html {
 }
 ```
 
-你还可以将 `@DslMarker` 注解直接应用于[函数类型](lambdas.md#function-types)。
+你还可以将 `@DslMarker` 注解直接应用于[函数类型](lambdas#function-types)。
 只需使用 `@Target(AnnotationTarget.TYPE)` 注解 `@DslMarker` 注解：
 
 ```kotlin
@@ -275,7 +275,7 @@ html {
 ### com.example.html 包的完整定义
 
 这是 `com.example.html` 包的定义方式（仅使用上面示例中使用的元素）。
-它构建一个 HTML 树。它大量使用了[扩展函数](extensions.md)和[带接收者的 lambda 表达式](lambdas.md#function-literals-with-receiver)。
+它构建一个 HTML 树。它大量使用了[扩展函数](extensions)和[带接收者的 lambda 表达式](lambdas#function-literals-with-receiver)。
 
 ```kotlin
 package com.example.html

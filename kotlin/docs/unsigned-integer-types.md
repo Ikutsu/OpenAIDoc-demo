@@ -1,7 +1,7 @@
 ---
 title: 无符号整型
 ---
-除了[整型](numbers.md#integer-types)之外，Kotlin 还为无符号整数数字提供了以下类型：
+除了[整型](numbers#integer-types)之外，Kotlin 还为无符号整数数字提供了以下类型：
 
 | 类型      | 大小 (位) | 最小值 | 最大值                                            |
 |-----------|-----------|--------|--------------------------------------------------|
@@ -13,14 +13,14 @@ title: 无符号整型
 无符号类型支持与其有符号对应类型的大多数操作。
 
 :::note
-无符号数是作为[内联类](inline-classes.md)实现的，该类具有一个包含相同宽度的相应有符号对应类型（signed counterpart type）的单个存储属性。 如果要在无符号和有符号整数类型之间进行转换，请确保更新代码，以使任何函数调用和操作都支持新类型。
+无符号数是作为[内联类](inline-classes)实现的，该类具有一个包含相同宽度的相应有符号对应类型（signed counterpart type）的单个存储属性。 如果要在无符号和有符号整数类型之间进行转换，请确保更新代码，以使任何函数调用和操作都支持新类型。
 
 :::
 
 ## 无符号数组和区间
 
 :::caution
-无符号数组及其上的操作处于 [Beta](components-stability.md) 阶段。 它们可能随时发生不兼容的更改。 需要选择加入（请参见下面的详细信息）。
+无符号数组及其上的操作处于 [Beta](components-stability) 阶段。 它们可能随时发生不兼容的更改。 需要选择加入（请参见下面的详细信息）。
 
 :::
 
@@ -36,9 +36,9 @@ title: 无符号整型
 当你使用无符号数组时，你会收到一个警告，表明此功能尚不稳定。
 要消除该警告，请使用 `@ExperimentalUnsignedTypes` 注解选择加入。
 是否需要你的客户端显式选择加入你的 API 由你决定，但请记住，无符号数组不是一个稳定的功能，因此使用它们的 API 可能会因语言的更改而中断。
-[了解更多关于选择加入的要求](opt-in-requirements.md)。
+[了解更多关于选择加入的要求](opt-in-requirements)。
 
-`UInt` 和 `ULong` 的[区间和数列](ranges.md)由类 `UIntRange`,`UIntProgression`、 `ULongRange` 和 `ULongProgression` 支持。 连同无符号整数类型一起，这些类是稳定的。
+`UInt` 和 `ULong` 的[区间和数列](ranges)由类 `UIntRange`,`UIntProgression`、 `ULongRange` 和 `ULongProgression` 支持。 连同无符号整数类型一起，这些类是稳定的。
 
 ## 无符号整数的字面值
 

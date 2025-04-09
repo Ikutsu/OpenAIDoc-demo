@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.4 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的根本原则。前者表示应该移除那些阻碍语言发展的结构，后者表示应该提前充分沟通这些移除，以使代码迁移尽可能平滑。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的根本原则。前者表示应该移除那些阻碍语言发展的结构，后者表示应该提前充分沟通这些移除，以使代码迁移尽可能平滑。
 
 虽然大多数语言变更已经通过其他渠道宣布，如更新日志或编译器警告，但本文档将它们全部汇总，为从 Kotlin 1.3 迁移到 Kotlin 1.4 提供完整的参考。
 

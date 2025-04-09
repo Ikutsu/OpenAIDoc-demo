@@ -4,13 +4,13 @@ title: 类
 <no-index/>
 :::info
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
-        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
-        <img src="/img/icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow</a><br />
-        <img src="/img/icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions</a><br />
+   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world">Hello world</a><br />
+        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types">Basic types</a><br />
+        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections">Collections</a><br />
+        <img src="/img/icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow">Control flow</a><br />
+        <img src="/img/icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions">Functions</a><br />
         <img src="/img/icon-6.svg" width="20" alt="Sixth step" /> <strong>类 (Classes)</strong><br />
-        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety</a>
+        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety">Null safety</a>
 </p>
 
 :::
@@ -46,7 +46,7 @@ class Contact(val id: Int, var email: String) {
 
 :::note
 * 括号 `()` 中包含的内容称为**类头 (class header)**。
-* 在声明类属性时，可以使用[尾随逗号 (trailing comma)](coding-conventions.md#trailing-commas)。
+* 在声明类属性时，可以使用[尾随逗号 (trailing comma)](coding-conventions#trailing-commas)。
 
 :::
 
@@ -79,7 +79,7 @@ fun main() {
 * `id` 和 `email` 是属性。
 * `id` 和 `email` 与默认构造函数一起用于创建 `contact`。
 
-Kotlin 类可以有多个构造函数，包括你自己定义的构造函数。要了解有关如何声明多个构造函数的更多信息，请参见[构造函数 (Constructors)](classes.md#constructors)。
+Kotlin 类可以有多个构造函数，包括你自己定义的构造函数。要了解有关如何声明多个构造函数的更多信息，请参见[构造函数 (Constructors)](classes#constructors)。
 
 ## 访问属性 (Access properties)
 
@@ -234,9 +234,9 @@ fun main() {
 
 创建实例的副本比修改原始实例更安全，因为任何依赖原始实例的代码都不会受到副本以及你对它所做的操作的影响。
 
-有关数据类的更多信息，请参见[数据类 (Data classes)](data-classes.md)。
+有关数据类的更多信息，请参见[数据类 (Data classes)](data-classes)。
 
-本教程的最后一章是关于 Kotlin 的 [Null safety](kotlin-tour-null-safety.md)。
+本教程的最后一章是关于 Kotlin 的 [Null safety](kotlin-tour-null-safety)。
 
 ## 练习 (Practice)
 
@@ -308,7 +308,7 @@ fun main() {
 要测试你的代码，你需要一个可以创建随机员工的生成器。定义一个 `RandomEmployeeGenerator` 类，其中包含一个固定的潜在名称列表（在类主体内）。使用最小和最大薪水配置该类（在类头内）。在类主体中，定义 `generateEmployee()` 函数。同样，`main` 函数演示了如何使用此类。
 
 > 在本练习中，你导入一个包，以便可以使用 [`Random.nextInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.random/-random/next-int.html) 函数。
-> 有关导入包的更多信息，请参见[包和导入 (Packages and imports)](packages.md)。
+> 有关导入包的更多信息，请参见[包和导入 (Packages and imports)](packages)。
 >
 
 <h3>提示 1</h3>
@@ -363,4 +363,4 @@ fun main() {
 
 ## 下一步 (Next step)
 
-[Null safety](kotlin-tour-null-safety.md)
+[Null safety](kotlin-tour-null-safety)

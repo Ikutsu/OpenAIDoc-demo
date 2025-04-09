@@ -1,7 +1,7 @@
 ---
 title: "Map-specific operations"
 ---
-在 [映射（maps）](collections-overview.md#map) 中，键（keys）和值（values）的类型都是用户定义的。
+在 [映射（maps）](collections-overview#map) 中，键（keys）和值（values）的类型都是用户定义的。
 基于键（key）访问映射条目，可以实现各种特定于映射的处理功能，从通过键（key）获取值（value）到单独筛选键（keys）和值（values）。
 在本页中，我们将提供标准库中映射处理函数的说明。
 
@@ -46,7 +46,7 @@ fun main() {
 
 ## 过滤
 
-你可以使用 [`filter()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/filter.html) 函数以及其他集合（collections）来[过滤](collection-filtering.md)映射（maps）。
+你可以使用 [`filter()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/filter.html) 函数以及其他集合（collections）来[过滤](collection-filtering)映射（maps）。
 在映射（map）上调用 `filter()` 时，将带有 `Pair` 作为参数的谓词（predicate）传递给它。
 这使你可以在过滤谓词（predicate）中使用键（key）和值（value）。
 
@@ -118,7 +118,7 @@ fun main() {
 
 ## 映射写入操作
 
-[可变（Mutable）](collections-overview.md#collection-types) 映射（maps）提供特定于映射的写入操作。
+[可变（Mutable）](collections-overview#collection-types) 映射（maps）提供特定于映射的写入操作。
 这些操作使你可以使用基于键（key）的访问来更改映射内容。
 
 有一些规则定义了映射（maps）上的写入操作：

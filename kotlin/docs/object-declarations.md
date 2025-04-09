@@ -18,7 +18,7 @@ title: 对象声明和表达式
 [伴生对象](#companion-objects)允许你定义与类关联的类级别函数和属性，从而简化这些实例的创建和管理。
 * **临时修改现有类的行为：** 你想修改现有类的行为，而无需创建新的子类。
 例如，为特定操作向对象添加临时功能。
-* **需要类型安全的设计：** 你需要使用对象表达式对接口或[抽象类](classes.md#abstract-classes)进行一次性实现。
+* **需要类型安全的设计：** 你需要使用对象表达式对接口或[抽象类](classes#abstract-classes)进行一次性实现。
 这对于诸如按钮点击处理程序之类的场景非常有用。
 
 ## 对象声明
@@ -114,7 +114,7 @@ fun main() {
 ```
 
 但是，通过使用 `data` 修饰符标记对象声明，
-你可以指示编译器在调用 `toString()` 时返回对象的实际名称，就像它对[数据类](data-classes.md)的工作方式一样：
+你可以指示编译器在调用 `toString()` 时返回对象的实际名称，就像它对[数据类](data-classes)的工作方式一样：
 
 ```kotlin
 data object MyDataObject {
@@ -192,7 +192,7 @@ fun createInstanceViaReflection(): MySingleton {
 #### 将数据对象与密封层级结构一起使用
 
 数据对象声明对于密封层级结构（如
-[密封类或密封接口](sealed-classes.md)）特别有用。
+[密封类或密封接口](sealed-classes)）特别有用。
 它们允许你与可能已与该对象一起定义的任何数据类保持对称性。
 
 在此示例中，将 `EndOfFile` 声明为 `data object` 而不是普通的 `object`
@@ -336,7 +336,7 @@ fun main() {
 ```
 
 但是，在 JVM 上，如果你使用 `@JvmStatic` 注解，你可以将伴生对象的成员生成为真正的静态方法和字段。
-有关更多详细信息，请参见 [Java 互操作性](java-to-kotlin-interop.md#static-fields) 部分。
+有关更多详细信息，请参见 [Java 互操作性](java-to-kotlin-interop#static-fields) 部分。
 
 ## 对象表达式
 
@@ -371,7 +371,7 @@ fun main() {
 ### 从超类型继承匿名对象
 
 要创建一个从某种类型（或多种类型）继承的匿名对象，请在 `object` 和
-冒号 `:` 之后指定此类型。 然后实现或覆盖此类的成员，就像你从它[继承](inheritance.md)一样：
+冒号 `:` 之后指定此类型。 然后实现或覆盖此类的成员，就像你从它[继承](inheritance)一样：
 
 ```kotlin
 window.addMouseListener(object : MouseAdapter() {
@@ -424,7 +424,7 @@ fun main() {
 
 ### 使用匿名对象作为返回和值类型
 
-当你从局部或 [`private`](visibility-modifiers.md#packages) 函数或属性返回一个匿名对象时，
+当你从局部或 [`private`](visibility-modifiers#packages) 函数或属性返回一个匿名对象时，
 可以通过该函数或属性访问该匿名对象的所有成员：
 
 ```kotlin

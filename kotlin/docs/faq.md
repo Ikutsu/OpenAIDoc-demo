@@ -31,7 +31,7 @@ Kotlin 更简洁。粗略估计表明，代码行数减少了大约 40%。
 
 ### Kotlin 与 Java 编程语言兼容吗？
 
-是的。Kotlin 与 Java 编程语言 100% 互操作，并且非常重视确保您现有的代码库可以与 Kotlin 正确交互。您可以轻松地[从 Java 调用 Kotlin 代码](java-to-kotlin-interop.md)和[从 Kotlin 调用 Java 代码](java-interop.md)。这使得采用更容易且风险更低。还有一个自动化的 [Java 到 Kotlin 转换器内置在 IDE 中](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k)，简化了现有代码的迁移。
+是的。Kotlin 与 Java 编程语言 100% 互操作，并且非常重视确保您现有的代码库可以与 Kotlin 正确交互。您可以轻松地[从 Java 调用 Kotlin 代码](java-to-kotlin-interop)和[从 Kotlin 调用 Java 代码](java-interop)。这使得采用更容易且风险更低。还有一个自动化的 [Java 到 Kotlin 转换器内置在 IDE 中](mixing-java-kotlin-intellij#converting-an-existing-java-file-to-kotlin-with-j2k)，简化了现有代码的迁移。
 
 ### Kotlin 可以用来做什么？
 
@@ -43,19 +43,19 @@ Kotlin 可以用于任何类型的开发，无论是服务器端、客户端 Web
 ### 我可以使用 Kotlin 进行 Android 开发吗？
 
 是的。Kotlin 在 Android 上作为一等公民语言受到支持。已经有数百个应用程序在使用 Kotlin
-进行 Android 开发，例如 Basecamp、Pinterest 等。有关更多信息，请查看 [Android 开发资源](android-overview.md)。
+进行 Android 开发，例如 Basecamp、Pinterest 等。有关更多信息，请查看 [Android 开发资源](android-overview)。
 
 ### 我可以使用 Kotlin 进行服务器端开发吗？
 
 是的。Kotlin 与 JVM 100% 兼容，因此您可以使用任何现有的框架，如 Spring Boot、
 vert.x 或 JSF。此外，还有用 Kotlin 编写的特定框架，例如 [Ktor](https://github.com/kotlin/ktor)。
-有关更多信息，请查看 [服务器端开发资源](server-overview.md)。
+有关更多信息，请查看 [服务器端开发资源](server-overview)。
 
 ### 我可以使用 Kotlin 进行 Web 开发吗？
 
 是的。对于后端 Web 开发，Kotlin 可以很好地与 [Ktor](https://ktor.io/) 和 [Spring](https://spring.io/) 等框架配合使用，使您能够高效地构建
 服务器端应用程序。此外，您可以使用 Kotlin/Wasm 进行客户端 Web 开发。
-了解如何 [开始使用 Kotlin/Wasm](wasm-get-started.md)。
+了解如何 [开始使用 Kotlin/Wasm](wasm-get-started)。
 
 ### 我可以使用 Kotlin 进行桌面开发吗？
 
@@ -66,7 +66,7 @@ vert.x 或 JSF。此外，还有用 Kotlin 编写的特定框架，例如 [Ktor]
 
 是的。Kotlin/Native 作为 Kotlin 的一部分提供。它将 Kotlin 编译为可以在没有 VM 的情况下运行的本机代码。
 您可以在流行的桌面和移动平台，甚至是一些 IoT 设备上尝试它。
-有关更多信息，请查看 [Kotlin/Native 文档](native-overview.md)。
+有关更多信息，请查看 [Kotlin/Native 文档](native-overview)。
 
 ### 哪些 IDE 支持 Kotlin？
 
@@ -79,12 +79,12 @@ Kotlin 在 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) 和
 您还可以尝试 [Kotlin Playground](https://play.kotlinlang.org)，在浏览器中编写、运行和共享
 Kotlin 代码。
 
-此外，还提供了一个 [命令行编译器](command-line.md)，它为编译和运行应用程序提供了简单的支持。
+此外，还提供了一个 [命令行编译器](command-line)，它为编译和运行应用程序提供了简单的支持。
 
 ### 哪些构建工具支持 Kotlin？
 
-在 JVM 方面，主要的构建工具包括 [Gradle](gradle.md)、[Maven](maven.md)、
-[Ant](ant.md) 和 [Kobalt](https://beust.com/kobalt/home/index.html)。还有一些构建工具可用于
+在 JVM 方面，主要的构建工具包括 [Gradle](gradle)、[Maven](maven)、
+[Ant](ant) 和 [Kobalt](https://beust.com/kobalt/home/index.html)。还有一些构建工具可用于
 面向客户端 JavaScript。
 
 ### Kotlin 编译成什么？
@@ -101,7 +101,7 @@ Kotlin 代码。
 Kotlin 允许您选择用于执行的 JVM 版本。默认情况下，Kotlin/JVM 编译器生成与 Java 8 兼容的字节码。
 如果您想利用 Java 的较新版本中提供的优化，您可以显式指定目标 Java
 版本，从 9 到 23。请注意，在这种情况下，生成的字节码可能无法在较低版本上运行。
-从 [Kotlin 1.5](whatsnew15.md#new-default-jvm-target-1-8) 开始，编译器不支持生成与低于 8 的 Java 版本兼容的字节码。
+从 [Kotlin 1.5](whatsnew15#new-default-jvm-target-1-8) 开始，编译器不支持生成与低于 8 的 Java 版本兼容的字节码。
 
 ### Kotlin 难学吗？
 
@@ -109,7 +109,7 @@ Kotlin 的灵感来自现有的语言，如 Java、C#、JavaScript、Scala 和 G
 Kotlin 易于学习，以便人们可以在几天内轻松上手，阅读和编写 Kotlin 代码。
 学习惯用的 Kotlin 并使用其更多高级功能可能需要更长的时间，但总的来说，它不是
 一种复杂的语言。
-有关更多信息，请查看 [我们的学习资料](learning-materials-overview.md)。
+有关更多信息，请查看 [我们的学习资料](learning-materials-overview)。
 
 ### 哪些公司在使用 Kotlin？
 
@@ -126,12 +126,12 @@ Kotlin 由 [JetBrains 的一个工程师团队开发（目前团队规模为 100
 ### 在哪里可以了解更多关于 Kotlin 的信息？
 
 最好的起点是 [我们的网站](https://kotlinlang.org)。
-要开始使用 Kotlin，您可以安装其中一个 [官方 IDE](kotlin-ide.md) 或 [在线尝试](https://play.kotlinlang.org)。
+要开始使用 Kotlin，您可以安装其中一个 [官方 IDE](kotlin-ide) 或 [在线尝试](https://play.kotlinlang.org)。
 
 ### 有关于 Kotlin 的书籍吗？
 
 有很多关于 Kotlin 的书籍。其中一些我们已经评论过，可以推荐作为入门读物。它们在
-[书籍](books.md) 页面上列出。有关更多书籍，请参阅社区维护的列表，网址为 [kotlin.link](https://kotlin.link/)。
+[书籍](books) 页面上列出。有关更多书籍，请参阅社区维护的列表，网址为 [kotlin.link](https://kotlin.link/)。
 
 ### 有关于 Kotlin 的在线课程吗？
 
@@ -182,4 +182,4 @@ Kotlin 也在世界各地的不同会议上被报道。您可以在
 可以在 [此处](https://resources.jetbrains.com/storage/products/kotlin/docs/kotlin_logos.zip) 下载徽标。
 使用徽标时，请遵循存档中的 `guidelines.pdf` 和 [Kotlin 品牌使用指南](https://kotlinfoundation.org/guidelines/) 中的简单规则。
 
-有关更多信息，请查看关于 [Kotlin 品牌资产](kotlin-brand-assets.md) 的页面。
+有关更多信息，请查看关于 [Kotlin 品牌资产](kotlin-brand-assets) 的页面。

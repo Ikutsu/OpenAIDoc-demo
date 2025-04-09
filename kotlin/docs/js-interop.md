@@ -3,7 +3,7 @@ title: "从 Kotlin 中使用 JavaScript 代码"
 ---
 Kotlin 最初被设计为易于与 Java 平台互操作：它将 Java 类视为 Kotlin 类，而 Java 将 Kotlin 类视为 Java 类。
 
-然而，JavaScript 是一种动态类型语言，这意味着它不会在编译时检查类型。你可以通过 [dynamic](dynamic-type.md) (动态类型) 类型从 Kotlin 自由地与 JavaScript 进行交互。如果你想使用 Kotlin 类型系统的全部功能，你可以为 JavaScript 库创建外部声明，这些声明将被 Kotlin 编译器和周围的工具所理解。
+然而，JavaScript 是一种动态类型语言，这意味着它不会在编译时检查类型。你可以通过 [dynamic](dynamic-type) (动态类型) 类型从 Kotlin 自由地与 JavaScript 进行交互。如果你想使用 Kotlin 类型系统的全部功能，你可以为 JavaScript 库创建外部声明，这些声明将被 Kotlin 编译器和周围的工具所理解。
 
 ## 内联 JavaScript
 
@@ -31,12 +31,12 @@ fun getTypeof() = "typeof"
 
 :::
 
-请注意，调用 `js()` 返回类型为 [`dynamic`](dynamic-type.md) 的结果，该类型在编译时不提供类型安全。
+请注意，调用 `js()` 返回类型为 [`dynamic`](dynamic-type) 的结果，该类型在编译时不提供类型安全。
 
 ## external 修饰符
 
 要告诉 Kotlin 某个声明是用纯 JavaScript 编写的，你应该用 `external` 修饰符标记它。
-当编译器看到这样的声明时，它会假定相应类、函数或属性的实现是由外部提供的（由开发人员或通过 [npm 依赖项](js-project-setup.md#npm-dependencies)），
+当编译器看到这样的声明时，它会假定相应类、函数或属性的实现是由外部提供的（由开发人员或通过 [npm 依赖项](js-project-setup#npm-dependencies)），
 因此不会尝试从声明中生成任何 JavaScript 代码。这也是为什么 `external` 声明不能有主体的原因。例如：
 
 ```kotlin
@@ -69,7 +69,7 @@ MyClass.sharedMember = function() { /* implementation */ };
 MyClass.prototype.ownMember = function() { /* implementation */ };
 ```
 
-Kotlin 中没有这样的语法。但是，在 Kotlin 中，我们有 [`companion`](object-declarations.md#companion-objects) (伴生) 对象。Kotlin 以特殊的方式处理 `external` 类的伴生对象：它不是期望一个对象，
+Kotlin 中没有这样的语法。但是，在 Kotlin 中，我们有 [`companion`](object-declarations#companion-objects) (伴生) 对象。Kotlin 以特殊的方式处理 `external` 类的伴生对象：它不是期望一个对象，
 而是假定伴生对象的成员是类本身的成员。上面示例中的 `MyClass` 可以描述如下：
 
 ```kotlin
@@ -185,7 +185,7 @@ fun sendQuery() {
 
 ### 类型转换
 
-除了 ["unsafe" cast operator](typecasts.md#unsafe-cast-operator) (不安全的转换运算符) `as` 之外，如果转换不可能，它会抛出 `ClassCastException`
+除了 ["unsafe" cast operator](typecasts#unsafe-cast-operator) (不安全的转换运算符) `as` 之外，如果转换不可能，它会抛出 `ClassCastException`
 异常，Kotlin/JS 还提供了 [`unsafeCast<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/unsafe-cast.html)。当使用 `unsafeCast` 时，
 在运行时_根本不进行类型检查_。例如，考虑以下两种方法：
 
@@ -211,7 +211,7 @@ function usingAsOperator(s) {
 
 与其他平台相比，Kotlin/JS 在相等性检查方面具有特殊的语义。
 
-在 Kotlin/JS 中，Kotlin [referential equality](equality.md#referential-equality) (引用相等) 运算符 (`===`) 总是转换为 JavaScript
+在 Kotlin/JS 中，Kotlin [referential equality](equality#referential-equality) (引用相等) 运算符 (`===`) 总是转换为 JavaScript
 [strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) (严格相等) 运算符 (`===`)。
 
 JavaScript `===` 运算符不仅检查两个值是否相等，还检查
@@ -229,7 +229,7 @@ fun main() {
 }
  ```
 
-此外，在 Kotlin/JS 中，[`Byte`, `Short`, `Int`, `Float`, 和 `Double`](js-to-kotlin-interop.md#kotlin-types-in-javascript) (字节型，短整型，整型，浮点型和双精度浮点型) 数字类型
+此外，在 Kotlin/JS 中，[`Byte`, `Short`, `Int`, `Float`, 和 `Double`](js-to-kotlin-interop#kotlin-types-in-javascript) (字节型，短整型，整型，浮点型和双精度浮点型) 数字类型
 在运行时都用 `Number` JavaScript 类型表示。因此，这五种类型的值是无法区分的：
 
  ```kotlin
@@ -241,6 +241,6 @@ fun main() {
  ```
 
 :::tip
-有关 Kotlin 中相等性的更多信息，请参见 [Equality](equality.md) (相等性) 文档。
+有关 Kotlin 中相等性的更多信息，请参见 [Equality](equality) (相等性) 文档。
 
 :::

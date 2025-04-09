@@ -1,7 +1,7 @@
 ---
 title: "将 Kotlin/JS 项目迁移到 IR 编译器"
 ---
-我们用 [基于 IR 的编译器](js-ir-compiler.md) 替换了旧的 Kotlin/JS 编译器，原因是为了统一 Kotlin 在所有平台上的行为，并使其能够实现新的 JS 特定的优化等等。
+我们用 [基于 IR 的编译器](js-ir-compiler) 替换了旧的 Kotlin/JS 编译器，原因是为了统一 Kotlin 在所有平台上的行为，并使其能够实现新的 JS 特定的优化等等。
 您可以在 Sebastian Aigner 的博文中了解更多关于这两个编译器内部差异的信息：
 [将我们的 Kotlin/JS 应用迁移到新的 IR 编译器](https://dev.to/kotlin/migrating-our-kotlin-js-app-to-the-new-ir-compiler-3o6i)。
 
@@ -21,7 +21,7 @@ title: "将 Kotlin/JS 项目迁移到 IR 编译器"
 **问题**：使用派生自纯 JS 类的 Kotlin 接口和类（包括 data class（数据类）），例如 React 的 `State` 和 `Props`，可能会导致 `ClassCastException`。
 出现此类异常是因为编译器尝试将这些类的实例视为 Kotlin 对象，而它们实际上来自 JS。
 
-**解决方案**：将所有派生自纯 JS 类的类和接口转换为 [external interface（外部接口）](js-interop.md#external-interfaces)：
+**解决方案**：将所有派生自纯 JS 类的类和接口转换为 [external interface（外部接口）](js-interop#external-interfaces)：
 
 ```kotlin
 // Replace this
@@ -149,7 +149,7 @@ val jsonApp = kotlin.js.json(Pair("name", "App1")) as AppProps
 **问题**：编译器不生成可执行的 `.js` 文件。
 
 这可能是因为默认编译器默认生成 JavaScript 可执行文件，而 IR 编译器需要显式指令才能执行此操作。
-在 [Kotlin/JS 项目设置说明](js-project-setup.md#execution-environments) 中了解更多信息。
+在 [Kotlin/JS 项目设置说明](js-project-setup#execution-environments) 中了解更多信息。
 
 **解决方案**：将 `binaries.executable()` 行添加到项目的 `build.gradle(.kts)` 中。
 

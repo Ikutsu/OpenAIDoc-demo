@@ -274,7 +274,7 @@ sourceSets {
 
 有时，库作者会提供 API，但希望要求用户在扩展它之前明确选择加入。
 例如，库 API 可能对于使用是稳定的，但对于继承是不稳定的，因为它可能会在将来
-使用新的抽象函数进行扩展。库作者可以通过使用 [`@SubclassOptInRequired`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-subclass-opt-in-required/) 注解标记 [open](inheritance.md) 或 [抽象类](classes.md#abstract-classes) 和 [非函数式接口](interfaces.md) 来强制执行此操作。
+使用新的抽象函数进行扩展。库作者可以通过使用 [`@SubclassOptInRequired`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-subclass-opt-in-required/) 注解标记 [open](inheritance) 或 [抽象类](classes#abstract-classes) 和 [非函数式接口](interfaces) 来强制执行此操作。
 
 要选择加入以使用此类 API 元素并在您的代码中扩展它，请使用 `@SubclassOptInRequired` 注解，
 并引用注解类。例如，假设您要使用需要选择加入的 `CoreLibraryApi` 接口：
@@ -302,7 +302,7 @@ interface SomeImplementation : CoreLibraryApi
 ```
 
 请注意，当您在类上使用 `@SubclassOptInRequired` 注解时，选择加入要求不会传播到
-任何[内部或嵌套类](nested-classes.md)：
+任何[内部或嵌套类](nested-classes)：
 
 ```kotlin
 // Library code (库代码)
@@ -411,7 +411,7 @@ fun getTime(): Time {}
 * **具有可能在将来以向后不兼容的方式为外部实现削弱的契约**，例如将输入参数 `T` 更改为可为空的版本 `T?`，而代码以前没有考虑 `null` 值。
 
 在这种情况下，您可以要求用户在可以进一步扩展您的 API 之前选择加入。用户可以通过从 API 继承或实现抽象函数来扩展您的 API。通过使用 [`@SubclassOptInRequired`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-subclass-opt-in-required/) 注解，
-您可以强制执行此要求，以选择加入 [open](inheritance.md) 或 [抽象类](classes.md#abstract-classes) 和 [非函数式接口](interfaces.md)。
+您可以强制执行此要求，以选择加入 [open](inheritance) 或 [抽象类](classes#abstract-classes) 和 [非函数式接口](interfaces)。
 
 要将选择加入要求添加到 API 元素，请使用 [`@SubclassOptInRequired`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-subclass-opt-in-required/)
 注解，并引用注解类：
@@ -429,7 +429,7 @@ interface CoreLibraryApi
 ```
 
 请注意，当您使用 `@SubclassOptInRequired` 注解来要求选择加入时，该要求不会传播到
-任何[内部或嵌套类](nested-classes.md)。
+任何[内部或嵌套类](nested-classes)。
 
 有关如何在您的 API 中使用 `@SubclassOptInRequired` 注解的真实示例，请查看 `kotlinx.coroutines` 库中的 [`SharedFlow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-shared-flow/)
 接口。

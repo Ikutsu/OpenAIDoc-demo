@@ -3,7 +3,7 @@ title: "用于数据分析的 Kotlin 和 Java 库"
 ---
 从数据收集到模型构建，Kotlin 提供了强大的库，方便数据管道中的不同任务。
 
-除了它自己的库之外，Kotlin 与 Java 100% 互操作。这种互操作性有助于利用整个经过验证的、性能卓越的 Java 库生态系统。有了这个优势，在 [Kotlin 数据项目](data-analysis-overview.md) 中，您可以轻松使用 Kotlin 或 Java 库。
+除了它自己的库之外，Kotlin 与 Java 100% 互操作。这种互操作性有助于利用整个经过验证的、性能卓越的 Java 库生态系统。有了这个优势，在 [Kotlin 数据项目](data-analysis-overview) 中，您可以轻松使用 Kotlin 或 Java 库。
 
 ## Kotlin 库
 <table>

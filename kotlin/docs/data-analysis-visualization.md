@@ -3,7 +3,7 @@ title: "在 Kotlin Notebook 中使用 Kandy 进行数据可视化"
 ---
 Kotlin 提供了一个一体化的解决方案，用于强大而灵活的数据可视化，提供了一种直观的方式来呈现和探索数据，然后再深入研究复杂的模型。
 
-本教程演示了如何使用 [Kandy](https://kotlin.github.io/kandy/welcome.html) 和 [Kotlin DataFrame](https://kotlin.github.io/dataframe/gettingstarted.html) 库，在 IntelliJ IDEA 中使用 [Kotlin Notebook](kotlin-notebook-overview.md) 创建不同的图表类型。
+本教程演示了如何使用 [Kandy](https://kotlin.github.io/kandy/welcome.html) 和 [Kotlin DataFrame](https://kotlin.github.io/dataframe/gettingstarted.html) 库，在 IntelliJ IDEA 中使用 [Kotlin Notebook](kotlin-notebook-overview) 创建不同的图表类型。
 
 ## 开始之前
 
@@ -156,6 +156,6 @@ df.groupBy { City }.plot {
 ## 接下来做什么
 
 * 在 [Kandy 库文档](https://kotlin.github.io/kandy/examples.html) 中探索更多图表示例
-* 在 [Lets-Plot 库文档](lets-plot.md) 中探索更高级的绘图选项
+* 在 [Lets-Plot 库文档](lets-plot) 中探索更高级的绘图选项
 * 在 [Kotlin DataFrame 库文档](https://kotlin.github.io/dataframe/info.html) 中查找有关创建、探索和管理数据帧的其他信息
 * 在此 [YouTube 视频]( https://www.youtube.com/watch?v=m4Cqz2_P9rI&t=4s) 中了解有关 Kotlin Notebook 中的数据可视化的更多信息

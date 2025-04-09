@@ -73,5 +73,5 @@ androidTarget {
 查阅有关在多平台项目中添加依赖项的其他资源，并了解更多信息：
 
 * [在官方 Android 文档中添加依赖项](https://developer.android.com/studio/build/dependencies)
-* [添加多平台库或其他多平台项目的依赖项](multiplatform-add-dependencies.md)
-* [添加 iOS 依赖项](multiplatform-ios-dependencies.md)
+* [添加多平台库或其他多平台项目的依赖项](multiplatform-add-dependencies)
+* [添加 iOS 依赖项](multiplatform-ios-dependencies)

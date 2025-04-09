@@ -143,7 +143,7 @@ SwiftExample deinit
 
 Objective-C 对象的生命周期可能比它们应该的更长，这有时可能会导致性能问题。例如，当一个长时间运行的循环在每次迭代中创建几个跨越 Swift/Objective-C 互操作边界的临时对象时。
 
-在[GC 日志](native-memory-manager.md#monitor-gc-performance)中，根集中有一个稳定的引用（stable refs）数量。如果这个数字持续增长，可能表明 Swift/Objective-C 对象没有在应该释放的时候被释放。在这种情况下，尝试在进行互操作调用的循环体周围使用 `autoreleasepool` 块：
+在[GC 日志](native-memory-manager#monitor-gc-performance)中，根集中有一个稳定的引用（stable refs）数量。如果这个数字持续增长，可能表明 Swift/Objective-C 对象没有在应该释放的时候被释放。在这种情况下，尝试在进行互操作调用的循环体周围使用 `autoreleasepool` 块：
 
 ```kotlin
 // Kotlin
@@ -252,7 +252,7 @@ Kotlin 的追踪 GC 和 Objective-C 的 ARC 以不同的方式处理循环引用
 
 当前的内存管理器默认情况下不跟踪应用程序状态，并且不与 [App Extensions](https://developer.apple.com/app-extensions/) 集成。
 
-这意味着内存管理器不会相应地调整 GC 行为，这在某些情况下可能是有害的。要更改此行为，请将以下[实验性](components-stability.md)二进制选项添加到您的 `gradle.properties` 中：
+这意味着内存管理器不会相应地调整 GC 行为，这在某些情况下可能是有害的。要更改此行为，请将以下[实验性](components-stability)二进制选项添加到您的 `gradle.properties` 中：
 
 ```none
 kotlin.native.binary.appStateTracking=enabled
@@ -262,4 +262,4 @@ kotlin.native.binary.appStateTracking=enabled
 
 ## 接下来
 
-了解更多关于 [Swift/Objective-C 互操作性](native-objc-interop.md)。
+了解更多关于 [Swift/Objective-C 互操作性](native-objc-interop)。

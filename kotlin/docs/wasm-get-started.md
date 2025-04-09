@@ -2,13 +2,13 @@
 title: "Kotlin/Wasm 和 Compose Multiplatform 入门"
 ---
 :::note
-Kotlin/Wasm 处于 [Alpha](components-stability.md) 阶段。它可能随时更改。
+Kotlin/Wasm 处于 [Alpha](components-stability) 阶段。它可能随时更改。
 
 [加入 Kotlin/Wasm 社区。](https://slack-chats.kotlinlang.org/c/webassembly)
 
 :::
 
-本教程演示了如何在 IntelliJ IDEA 中使用 [Kotlin/Wasm](wasm-overview.md) 运行 [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 应用程序，并生成构件以作为网站发布在 [GitHub pages](https://pages.github.com/) 上。
+本教程演示了如何在 IntelliJ IDEA 中使用 [Kotlin/Wasm](wasm-overview) 运行 [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 应用程序，并生成构件以作为网站发布在 [GitHub pages](https://pages.github.com/) 上。
 
 ## 开始之前
 

@@ -43,7 +43,7 @@ for ((a, b) in collection) { ... }
 ## 示例：从函数返回两个值
 
 假设你需要从一个函数返回两个东西——例如，一个结果对象和一个某种类型的状态。
-在 Kotlin 中实现此目的的一种简洁方法是声明一个 [数据类（data class）](data-classes.md) 并返回它的实例：
+在 Kotlin 中实现此目的的一种简洁方法是声明一个 [数据类（data class）](data-classes) 并返回它的实例：
 
 ```kotlin
 data class Result(val result: Int, val status: Status)

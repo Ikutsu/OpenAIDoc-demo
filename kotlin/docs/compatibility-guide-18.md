@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.8 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构；后者指出，应事先充分沟通此类移除，以尽可能顺利地进行代码迁移。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构；后者指出，应事先充分沟通此类移除，以尽可能顺利地进行代码迁移。
 
 虽然大多数语言变更已通过其他渠道（如更新日志或编译器警告）发布，但本文档对所有变更进行了总结，为从 Kotlin 1.7 迁移到 Kotlin 1.8 提供了完整的参考。
 
@@ -557,7 +557,7 @@ _[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更�
 > `KotlinNativeLink` task 不再继承 `AbstractKotlinNativeCompile` task。
 > `KotlinJsCompilerOptions.outputFile` 和相关的 `KotlinJsOptions.outputFile` 选项已被弃用。
 > 使用 `Kotlin2JsCompile.outputFileProperty` task 输入代替。`kotlinOptions` task 输入和 `kotlinOptions{...}`
-> task DSL 处于支持模式，将在即将发布的版本中被弃用。无法在 task 执行阶段更改 `compilerOptions` 和 `kotlinOptions`（请参阅 [Kotlin 1.8 中的新特性](whatsnew18.md#limitations) 中的一个例外）。
+> task DSL 处于支持模式，将在即将发布的版本中被弃用。无法在 task 执行阶段更改 `compilerOptions` 和 `kotlinOptions`（请参阅 [Kotlin 1.8 中的新特性](whatsnew18#limitations) 中的一个例外）。
 > `freeCompilerArgs` 返回一个不可变的 `List<String>` – `kotlinOptions.freeCompilerArgs.remove("something")` 将会失败。
 > 允许使用旧 JVM 后端的 `useOldBackend` 属性已被移除
 >

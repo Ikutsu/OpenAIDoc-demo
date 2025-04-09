@@ -1,14 +1,14 @@
 ---
 title: "Kotlin 编译器选项"
 ---
-Kotlin 的每个版本都包含对支持目标平台的编译器：JVM、JavaScript 以及适用于[支持平台](native-overview.md#target-platforms)的原生二进制文件。
+Kotlin 的每个版本都包含对支持目标平台的编译器：JVM、JavaScript 以及适用于[支持平台](native-overview#target-platforms)的原生二进制文件。
 
 这些编译器被以下工具使用：
 * IDE，当您为 Kotlin 项目点击“__编译(Compile)__”或“__运行(Run)__”按钮时。
 * Gradle，当您在控制台或 IDE 中调用 `gradle build` 时。
 * Maven，当您在控制台或 IDE 中调用 `mvn compile` 或 `mvn test-compile` 时。
 
-您也可以按照[使用命令行编译器](command-line.md)教程中的描述，从命令行手动运行 Kotlin 编译器。
+您也可以按照[使用命令行编译器](command-line)教程中的描述，从命令行手动运行 Kotlin 编译器。
 
 ## 编译器选项
 
@@ -18,9 +18,9 @@ Kotlin 编译器有许多选项可以定制编译过程。
 有几种方法可以设置编译器选项及其值（_编译器参数(compiler arguments)_）：
 * 在 IntelliJ IDEA 中，在**设置/偏好设置(Settings/Preferences)** | **构建、执行、部署(Build, Execution, Deployment)** | **编译器(Compiler)** | **Kotlin 编译器(Kotlin Compiler)**中的**附加命令行参数(Additional command line parameters)**文本框中写入编译器参数。
 * 如果您使用的是 Gradle，请在 Kotlin 编译任务的 `compilerOptions` 属性中指定编译器参数。
-有关详细信息，请参阅 [Gradle 编译器选项](gradle-compiler-options.md#how-to-define-options)。
+有关详细信息，请参阅 [Gradle 编译器选项](gradle-compiler-options#how-to-define-options)。
 * 如果您使用的是 Maven，请在 Maven 插件节点的 `<configuration>` 元素中指定编译器参数。
-有关详细信息，请参阅 [Maven](maven.md#specify-compiler-options)。
+有关详细信息，请参阅 [Maven](maven#specify-compiler-options)。
 * 如果您运行命令行编译器，请将编译器参数直接添加到实用程序调用中，或将其写入 [argfile](#argfile)。
 
 例如：
@@ -55,7 +55,7 @@ $ kotlinc.bat hello.kt -include-runtime -d "My Folder\hello.jar"
 
 ### -Wextra
 
-启用[额外的声明、表达式和类型编译器检查](whatsnew21.md#extra-compiler-checks)，如果为真，则发出警告。
+启用[额外的声明、表达式和类型编译器检查](whatsnew21#extra-compiler-checks)，如果为真，则发出警告。
 
 ### -verbose
 
@@ -81,7 +81,7 @@ $ kotlinc.bat hello.kt -include-runtime -d "My Folder\hello.jar"
 ### -P plugin:pluginId:optionName=value
 
 将选项传递给 Kotlin 编译器插件。
-核心插件及其选项在文档的 [核心编译器插件](components-stability.md#core-compiler-plugins) 部分列出。
+核心插件及其选项在文档的 [核心编译器插件](components-stability#core-compiler-plugins) 部分列出。
 
 ### -language-version _version_
 
@@ -93,7 +93,7 @@ $ kotlinc.bat hello.kt -include-runtime -d "My Folder\hello.jar"
 
 ### -progressive
 
-为编译器启用[渐进模式](whatsnew13.md#progressive-mode)。
+为编译器启用[渐进模式](whatsnew13#progressive-mode)。
 
 在渐进模式下，不稳定的代码的弃用和错误修复会立即生效，而不是经历平稳的迁移周期。
 以渐进模式编写的代码是向后兼容的；但是，以非渐进模式编写的代码可能会在渐进模式下导致编译错误。
@@ -125,11 +125,11 @@ $ kotlinc @options/compiler.options hello.kt
 
 ### -opt-in _annotation_
 
-启用需要[选择加入(opt-in)](opt-in-requirements.md)的 API 的用法，该 API 具有带有给定完全限定名称的需求注解。
+启用需要[选择加入(opt-in)](opt-in-requirements)的 API 的用法，该 API 具有带有给定完全限定名称的需求注解。
 
 ### -Xsuppress-warning
 
-[在全球范围内跨整个项目](whatsnew21.md#global-warning-suppression)禁止显示特定警告，例如：
+[在全球范围内跨整个项目](whatsnew21#global-warning-suppression)禁止显示特定警告，例如：
 
 ```bash
 kotlinc -Xsuppress-warning=NOTHING_TO_INLINE -Xsuppress-warning=NO_TAIL_CALLS_FOUND main.kt
@@ -277,7 +277,7 @@ Kotlin 库的路径，其中包含 `.meta.js` 和 `.kjsm` 文件，用系统路�
 
 ## Kotlin/Native 编译器选项
 
-Kotlin/Native 编译器将 Kotlin 源文件编译为[支持平台](native-overview.md#target-platforms)的原生二进制文件。
+Kotlin/Native 编译器将 Kotlin 源文件编译为[支持平台](native-overview#target-platforms)的原生二进制文件。
 用于 Kotlin/Native 编译的命令行工具是 `kotlinc-native`。
 
 除了[常用选项](#common-options)之外，Kotlin/Native 编译器还具有以下列出的选项。
@@ -304,7 +304,7 @@ Kotlin/Native 编译器将 Kotlin 源文件编译为[支持平台](native-overvi
 
 ### -library _path_ (-l _path_)
 
-与库链接。要了解有关在 Kotlin/Native 项目中使用库的信息，请参阅[Kotlin/Native 库](native-libraries.md)。
+与库链接。要了解有关在 Kotlin/Native 项目中使用库的信息，请参阅[Kotlin/Native 库](native-libraries)。
 
 ### -library-version _version_ (-lv _version_)
 
@@ -322,7 +322,7 @@ Kotlin/Native 编译器将 Kotlin 源文件编译为[支持平台](native-overvi
 
 指定编译模块的名称。
 此选项还可用于为导出到 Objective-C 的声明指定名称前缀：
-[如何为我的 Kotlin 框架指定自定义 Objective-C 前缀/名称？](native-faq.md#how-do-i-specify-a-custom-objective-c-prefix-name-for-my-kotlin-framework)
+[如何为我的 Kotlin 框架指定自定义 Objective-C 前缀/名称？](native-faq#how-do-i-specify-a-custom-objective-c-prefix-name-for-my-kotlin-framework)
 
 ### -native-library _path_ (-nl _path_)
 
@@ -330,7 +330,7 @@ Kotlin/Native 编译器将 Kotlin 源文件编译为[支持平台](native-overvi
 
 ### -no-default-libs
 
-禁用将用户代码与编译器分发的预构建[平台库](native-platform-libs.md)链接。
+禁用将用户代码与编译器分发的预构建[平台库](native-platform-libs)链接。
 
 ### -nomain
 
@@ -377,7 +377,7 @@ Kotlin/Native 编译器将 Kotlin 源文件编译为[支持平台](native-overvi
 
 ### -repo _path_ (-r _path_)
 
-库搜索路径。有关更多信息，请参阅[库搜索顺序](native-libraries.md#library-search-sequence)。
+库搜索路径。有关更多信息，请参阅[库搜索顺序](native-libraries#library-search-sequence)。
 
 ### -target _target_
 

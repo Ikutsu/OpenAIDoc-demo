@@ -40,11 +40,11 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* 支持 Kotlin 的 [K2 模式](k2-compiler-migration-guide.md#support-in-ides)，以提高稳定性和代码分析能力。
+* 支持 Kotlin 的 [K2 模式](k2-compiler-migration-guide#support-in-ides)，以提高稳定性和代码分析能力。
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -60,7 +60,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -77,7 +77,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -98,7 +98,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -121,7 +121,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -135,12 +135,12 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 
 * 支持新的 Canary Android Studio Hedgehog。
 * 更新了 Multiplatform 项目中的 Kotlin、Gradle 和库的版本。
-* 在 Multiplatform 项目中应用了新的 [`targetHierarchy.default()`](whatsnew1820.md#new-approach-to-source-set-hierarchy)。
+* 在 Multiplatform 项目中应用了新的 [`targetHierarchy.default()`](whatsnew1820#new-approach-to-source-set-hierarchy)。
 * 在 Multiplatform 项目中将源集名称后缀应用于平台特定文件。
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -159,7 +159,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -179,7 +179,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [任何 Kotlin 插件版本](releases.md#release-details)
+* [任何 Kotlin 插件版本](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -195,7 +195,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](releases.md#release-details)
+* [Kotlin 1.7.0—*](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -214,7 +214,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](releases.md#release-details)
+* [Kotlin 1.7.0—*](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -240,7 +240,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](releases.md#release-details)
+* [Kotlin 1.7.0—1.7.*](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -256,7 +256,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](releases.md#release-details)
+* [Kotlin 1.7.0—1.7.*](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -272,7 +272,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](releases.md#release-details)
+* [Kotlin 1.5.0—1.6.*](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -293,7 +293,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](releases.md#release-details)
+* [Kotlin 1.5.0—1.6.*](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -306,8 +306,8 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 <td>
 
 * [新的 Kotlin Multiplatform Library 向导](https://youtrack.jetbrains.com/issue/KTIJ-19367)。
-* 支持新的 Kotlin Multiplatform 库分发类型：[XCFramework](multiplatform-build-native-binaries.md#build-xcframeworks)。
-* 为新的跨平台移动项目启用了[分层项目结构](multiplatform-hierarchy.md#manual-configuration)。
+* 支持新的 Kotlin Multiplatform 库分发类型：[XCFramework](multiplatform-build-native-binaries#build-xcframeworks)。
+* 为新的跨平台移动项目启用了[分层项目结构](multiplatform-hierarchy#manual-configuration)。
 * 支持 [显式的 iOS targets 声明](https://youtrack.jetbrains.com/issue/KT-46861)。
 * [在非 Mac 机器上启用了 Kotlin Multiplatform Mobile 插件向导](https://youtrack.jetbrains.com/issue/KT-48614)。
 * [支持 Kotlin Multiplatform 模块向导中的子文件夹](https://youtrack.jetbrains.com/issue/KT-47923)。
@@ -319,7 +319,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.6.0](releases.md#release-details)
+* [Kotlin 1.6.0](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -342,7 +342,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.5.10](releases.md#release-details)
+* [Kotlin 1.5.10](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -355,11 +355,11 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 <td>
 
 * 与 Android Studio Bumblebee Canary 1 兼容。
-* 支持 [Kotlin 1.5.20](whatsnew1520.md)：在 Project Wizard 中使用新的 framework-packing 任务用于 Kotlin/Native。
+* 支持 [Kotlin 1.5.20](whatsnew1520)：在 Project Wizard 中使用新的 framework-packing 任务用于 Kotlin/Native。
 </td>
 <td>
 
-* [Kotlin 1.5.10](releases.md#release-details)
+* [Kotlin 1.5.10](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -375,7 +375,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.5.10](releases.md#release-details)
+* [Kotlin 1.5.10](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -388,12 +388,12 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 <td>
 
 将此版本的插件与 Android Studio 4.2 或 Android Studio 2020.3.1 Canary 8 或更高版本一起使用。
-* 与 [Kotlin 1.5.0](whatsnew15.md) 兼容。
+* 与 [Kotlin 1.5.0](whatsnew15) 兼容。
 * [能够在 Kotlin Multiplatform 模块中使用 CocoaPods 依赖管理器进行 iOS 集成](https://youtrack.jetbrains.com/issue/KT-45946)。
 </td>
 <td>
 
-* [Kotlin 1.5.0](releases.md#release-details)
+* [Kotlin 1.5.0](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -413,7 +413,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.4.30](releases.md#release-details)
+* [Kotlin 1.4.30](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -432,7 +432,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.4.30](releases.md#release-details)
+* [Kotlin 1.4.30](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -450,7 +450,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.4.30](releases.md#release-details)
+* [Kotlin 1.4.30](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -473,7 +473,7 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.20](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -490,8 +490,8 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.4.10](releases.md#release-details)
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.10](releases#release-details)
+* [Kotlin 1.4.20](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -503,13 +503,13 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
- * 修复了与 [Kotlin 1.4.20-M1](eap.md#build-details) 的兼容性。
+ * 修复了与 [Kotlin 1.4.20-M1](eap#build-details) 的兼容性。
  * 默认启用向 JetBrains 报告错误。
 </td>
 <td>
 
-* [Kotlin 1.4.10](releases.md#release-details)
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.10](releases#release-details)
+* [Kotlin 1.4.20](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -525,8 +525,8 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.4.10](releases.md#release-details)
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.10](releases#release-details)
+* [Kotlin 1.4.20](releases#release-details)
 </td>
 </tr>
 <tr>
@@ -542,8 +542,8 @@ Android Studio 会在新 Kotlin Multiplatform 插件版本可用时立即建议�
 </td>
 <td>
 
-* [Kotlin 1.4.0](releases.md#release-details)
-* [Kotlin 1.4.10](releases.md#release-details)
+* [Kotlin 1.4.0](releases#release-details)
+* [Kotlin 1.4.10](releases#release-details)
 </td>
 </tr>
 </table>

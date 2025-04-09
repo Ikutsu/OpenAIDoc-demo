@@ -46,7 +46,7 @@ title: "使用 Spring Boot 创建带有数据库的 RESTful Web 服务 – 教�
 
 这是 Gradle Kotlin 构建脚本，其中包含应用程序所需的依赖项列表。
 
-Gradle 文件是 Spring Boot 的标准文件，但它也包含必要的 Kotlin 依赖项，包括 [kotlin-spring](all-open-plugin.md#spring-support) Gradle 插件。
+Gradle 文件是 Spring Boot 的标准文件，但它也包含必要的 Kotlin 依赖项，包括 [kotlin-spring](all-open-plugin#spring-support) Gradle 插件。
 
 ## 探索 Spring Boot 应用程序
 
@@ -67,12 +67,12 @@ fun main(args: Array<String>) {
 ```
 
 请注意，Kotlin 应用程序文件与 Java 应用程序文件不同：
-* 虽然 Spring Boot 查找公共静态 `main()` 方法，但 Kotlin 应用程序使用在 `DemoApplication` 类之外定义的[顶级函数](functions.md#function-scope)。
-* `DemoApplication` 类未声明为 `open`，因为 [kotlin-spring](all-open-plugin.md#spring-support) 插件会自动执行此操作。
+* 虽然 Spring Boot 查找公共静态 `main()` 方法，但 Kotlin 应用程序使用在 `DemoApplication` 类之外定义的[顶级函数](functions#function-scope)。
+* `DemoApplication` 类未声明为 `open`，因为 [kotlin-spring](all-open-plugin#spring-support) 插件会自动执行此操作。
 
 ## 创建数据类和控制器
 
-要创建端点，请向你的项目添加一个[数据类](data-classes.md)和一个控制器：
+要创建端点，请向你的项目添加一个[数据类](data-classes)和一个控制器：
 
 1. 在 `DemoApplication.kt` 文件中，创建一个具有两个属性 `id` 和 `text` 的 `Message` 数据类：
 

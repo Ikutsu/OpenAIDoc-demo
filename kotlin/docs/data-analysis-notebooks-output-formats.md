@@ -1,7 +1,7 @@
 ---
 title: "Kotlin Notebook 支持的输出格式"
 ---
-[Kotlin Notebook](kotlin-notebook-overview.md) 支持多种输出类型，包括文本 (text)、HTML 和图像 (images)。借助外部库，你可以扩展输出选项，并使用图表 (charts)、电子表格等可视化你的数据。
+[Kotlin Notebook](kotlin-notebook-overview) 支持多种输出类型，包括文本 (text)、HTML 和图像 (images)。借助外部库，你可以扩展输出选项，并使用图表 (charts)、电子表格等可视化你的数据。
 
 每个输出都是一个 JSON 对象，它将 [Jupiter MIME type](https://jupyterlab.readthedocs.io/en/latest/user/file_formats.html) 映射到一些数据。Kotlin Notebook 从这个映射中选择优先级最高的受支持 MIME type，并像这样渲染它：
 
@@ -75,8 +75,8 @@ var a3: Int? = a1 + a2
 | `%useLatestDescriptors` | Use latest versions of library descriptors available. By default, bundled descriptors are used.                  | `%useLatestDescriptors [on|off]`                                           |
 | `%output`               | Output capturing settings.                                                                                       | `%output --max-cell-size=1000 --no-stdout --max-time=100 --max-buffer=400` |
 | `%logLevel`             | Set logging level.                                                                                               | `%logLevel [off|error|warn|info|debug]`                                    |
-<ul><li><a href="https://github.com/Kotlin/kotlin-jupyter/blob/master/docs/magics.md">Learn more detailes about line magics</a>.</li>
-<li><a href="https://github.com/Kotlin/kotlin-jupyter/blob/master/docs/magics.md">See the full list of supported libraries</a>.</li></ul>
+<ul><li><a href="https://github.com/Kotlin/kotlin-jupyter/blob/master/docs/magics">Learn more detailes about line magics</a>.</li>
+<li><a href="https://github.com/Kotlin/kotlin-jupyter/blob/master/docs/magics">See the full list of supported libraries</a>.</li></ul>
 ```
 
 <img src="/img/markdown-cells-output.png" alt="Rich text in Markdown cells" width="700" style={{verticalAlign: 'middle'}}/>
@@ -277,7 +277,7 @@ kotlinMascot
 
 ## 下一步
 
-* [使用 DataFrame 和 Kandy 库可视化数据](data-analysis-visualization.md)
+* [使用 DataFrame 和 Kandy 库可视化数据](data-analysis-visualization)
 * [了解更多关于在 Kotlin Notebook 中渲染和显示富输出](https://www.jetbrains.com/help/idea/kotlin-notebook.html#render-rich-output)
-* [从 CSV 和 JSON 文件中检索数据](data-analysis-work-with-data-sources.md)
-* [查看推荐的库列表](data-analysis-libraries.md)
+* [从 CSV 和 JSON 文件中检索数据](data-analysis-work-with-data-sources)
+* [查看推荐的库列表](data-analysis-libraries)

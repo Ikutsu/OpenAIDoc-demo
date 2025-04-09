@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 :::
 
-_[已发布：2022 年 9 月 29 日](releases.md#release-details)_
+_[已发布：2022 年 9 月 29 日](releases#release-details)_
 
 Kotlin 1.7.20 版本已发布！以下是此版本的一些亮点：
 
@@ -27,16 +27,16 @@ Kotlin 1.7.20 版本已发布！以下是此版本的一些亮点：
 ## 支持 Kotlin K2 编译器插件
 
 Kotlin 团队正在继续稳定 K2 编译器。
-正如在 [Kotlin 1.7.0 版本](whatsnew17.md#new-kotlin-k2-compiler-for-the-jvm-in-alpha)中宣布的那样，K2 仍处于 **Alpha** 阶段，
+正如在 [Kotlin 1.7.0 版本](whatsnew17#new-kotlin-k2-compiler-for-the-jvm-in-alpha)中宣布的那样，K2 仍处于 **Alpha** 阶段，
 但它现在支持几个编译器插件。您可以关注 [此 YouTrack issue](https://youtrack.jetbrains.com/issue/KT-52604)
 以获取 Kotlin 团队关于新编译器的更新。
 
 从 1.7.20 版本开始，Kotlin K2 编译器支持以下插件：
 
-* [`all-open`](all-open-plugin.md)
-* [`no-arg`](no-arg-plugin.md)
-* [带接收者的 SAM（SAM with receiver）](sam-with-receiver-plugin.md)
-* [Lombok](lombok.md)
+* [`all-open`](all-open-plugin)
+* [`no-arg`](no-arg-plugin)
+* [带接收者的 SAM（SAM with receiver）](sam-with-receiver-plugin)
+* [Lombok](lombok)
 * AtomicFU
 * `jvm-abi-gen`
 
@@ -97,7 +97,7 @@ Kotlin 1.7.20 引入了新语言功能的预览版本，并对构建器类型推
 
 ### 创建开放范围的 ..< 运算符的预览
 
-新运算符是 [Experimental](components-stability.md#stability-levels-explained)，并且在 IDE 中的支持有限。
+新运算符是 [Experimental](components-stability#stability-levels-explained)，并且在 IDE 中的支持有限。
 
 此版本引入了新的 `..<` 运算符。Kotlin 具有 `..` 运算符来表示一系列值。新的 `..<`
 运算符的作用类似于 `until` 函数，可帮助您定义开放范围。
@@ -167,11 +167,11 @@ class IntRange : IntProgression(...), ClosedRange<Int>, OpenEndRange<Int> {
 实验性 stdlib API 一样：`@OptIn(ExperimentalStdlibApi::class)`。或者，您可以使用
 `-opt-in=kotlin.ExperimentalStdlibApi` 编译器选项。
 
-[在此 KEEP 文档中阅读有关新运算符的更多信息](https://github.com/kotlin/KEEP/blob/open-ended-ranges/proposals/open-ended-ranges.md)。
+[在此 KEEP 文档中阅读有关新运算符的更多信息](https://github.com/kotlin/KEEP/blob/open-ended-ranges/proposals/open-ended-ranges)。
 
 ### 改进了具有 data object 的单例和密封类层次结构的字符串表示形式
 
-Data object 是 [Experimental](components-stability.md#stability-levels-explained)，目前在 IDE 中的支持有限。
+Data object 是 [Experimental](components-stability#stability-levels-explained)，目前在 IDE 中的支持有限。
 
 此版本引入了一种新的 `object` 声明供您使用：`data object`。[Data object](https://youtrack.jetbrains.com/issue/KT-4107)
 在概念上与常规 `object` 声明完全相同，但开箱即用地提供了干净的 `toString` 表示形式。
@@ -239,7 +239,7 @@ compileKotlin {
 
 ### 新的构建器类型推断限制
 
-Kotlin 1.7.20 对 [构建器类型推断的使用](using-builders-with-builder-inference.md)施加了一些主要限制，
+Kotlin 1.7.20 对 [构建器类型推断的使用](using-builders-with-builder-inference)施加了一些主要限制，
 这些限制可能会影响您的代码。这些限制适用于包含构建器 lambda 函数的代码，在这些代码中，不可能
 在不分析 lambda 本身的情况下推导出参数。该参数用作参数。现在，编译器将
 始终显示此类代码的错误，并要求您显式指定类型。
@@ -346,7 +346,7 @@ kapt 存根生成任务中的 IR（Intermediate Representation，中间表示）
 
 ### 泛型内联类
 
-泛型内联类是一项 [Experimental](components-stability.md#stability-levels-explained) 功能。
+泛型内联类是一项 [Experimental](components-stability#stability-levels-explained) 功能。
 它可能随时被删除或更改。需要选择加入（请参阅下面的详细信息），您应该仅将其用于评估目的。
 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-52994) 中提供的反馈。
 
@@ -373,7 +373,7 @@ fun compute(s: UserId<String>) {} // Compiler generates fun compute-<hashcode>(s
 ### 委托属性的更多优化案例
 
 在 Kotlin 1.6.0 中，我们通过省略 `$delegate` 字段并 [生成
-对引用属性的直接访问](whatsnew16.md#optimize-delegated-properties-which-call-get-set-on-the-given-kproperty-instance)来优化了委托给属性的情况。在 1.7.20 中，我们为更多情况实现了此优化。
+对引用属性的直接访问](whatsnew16#optimize-delegated-properties-which-call-get-set-on-the-given-kproperty-instance)来优化了委托给属性的情况。在 1.7.20 中，我们为更多情况实现了此优化。
 如果委托是：
 
 * 命名对象：
@@ -387,7 +387,7 @@ fun compute(s: UserId<String>) {} // Compiler generates fun compute-<hashcode>(s
   ```
   
 
-* 具有 [后备字段](properties.md#backing-fields) 和同一模块中默认 getter 的最终 `val` 属性：
+* 具有 [后备字段](properties#backing-fields) 和同一模块中默认 getter 的最终 `val` 属性：
 
   ```kotlin
   val impl: ReadOnlyProperty<Any?, String> = ...
@@ -409,17 +409,17 @@ fun compute(s: UserId<String>) {} // Compiler generates fun compute-<hashcode>(s
   ```
   
 
-了解有关 [委托属性](delegated-properties.md) 的更多信息。
+了解有关 [委托属性](delegated-properties) 的更多信息。
 
 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-23397) 中提供的有关此功能的反馈。
 
 ### 在 kapt 存根生成任务中支持 JVM IR 后端
 
-在 kapt 存根生成任务中支持 JVM IR 后端是一项 [Experimental](components-stability.md) 功能。
+在 kapt 存根生成任务中支持 JVM IR 后端是一项 [Experimental](components-stability) 功能。
 它可能随时被更改。需要选择加入（请参阅下面的详细信息），您应该仅将其用于评估目的。
 
-在 1.7.20 之前，kapt 存根生成任务使用旧后端，并且 [可重复注解](annotations.md#repeatable-annotations)
-不适用于 [kapt](kapt.md)。使用 Kotlin 1.7.20，我们在 kapt 存根生成任务中添加了对 [JVM IR 后端](whatsnew15.md#stable-jvm-ir-backend) 的支持。
+在 1.7.20 之前，kapt 存根生成任务使用旧后端，并且 [可重复注解](annotations#repeatable-annotations)
+不适用于 [kapt](kapt)。使用 Kotlin 1.7.20，我们在 kapt 存根生成任务中添加了对 [JVM IR 后端](whatsnew15#stable-jvm-ir-backend) 的支持。
 这使得可以使用所有最新的 Kotlin 功能与 kapt，包括
 可重复注解。
 
@@ -442,7 +442,7 @@ Kotlin 1.7.20 默认启用新的 Kotlin/Native 内存管理器，并为您提供
 ### 新的 Kotlin/Native 内存管理器现在默认启用
 
 此版本为新的内存管理器带来了进一步的稳定性和性能改进，使我们能够将
-新的内存管理器提升到 [Beta](components-stability.md)。
+新的内存管理器提升到 [Beta](components-stability)。
 
 先前的内存管理器使编写并发和异步代码变得复杂，包括实现
 `kotlinx.coroutines` 库的问题。这阻碍了 Kotlin Multiplatform Mobile 的采用，因为并发限制
@@ -451,7 +451,7 @@ Kotlin 1.7.20 默认启用新的 Kotlin/Native 内存管理器，并为您提供
 
 新的内存管理器还支持编译器缓存，这使得编译时间与以前的版本相当。
 有关新内存管理器的优点的更多信息，请参阅我们的原始 [博客文章](https://blog.jetbrains.com/kotlin/2021/08/try-the-new-kotlin-native-memory-manager-development-preview/)
-以获取预览版本。您可以在 [文档](native-memory-manager.md) 中找到更多技术详细信息。
+以获取预览版本。您可以在 [文档](native-memory-manager) 中找到更多技术详细信息。
 
 #### 配置和设置
 
@@ -525,7 +525,7 @@ Kotlin 团队非常感谢 Mads Ager 实现此功能。
 Kotlin/JS 收到了一些增强功能，可改善开发人员体验并提高性能：
 
 * 由于加载依赖项的效率提高，Klib 生成在增量构建和全新构建中都更快。
-* [开发二进制文件的增量编译](js-ir-compiler.md#incremental-compilation-for-development-binaries)
+* [开发二进制文件的增量编译](js-ir-compiler#incremental-compilation-for-development-binaries)
   已得到改进，从而大大改善了全新构建方案、更快的增量构建和稳定性修复。
 * 我们改进了嵌套对象、密封类和构造函数中可选参数的 `.d.ts` 生成。
 
@@ -543,7 +543,7 @@ Kotlin 1.7.20 包含支持 Gradle 7.1 的更改。已删除或替换已弃用的
 
 * `org.jetbrains.kotlin.gradle.dsl.SingleTargetExtension` 现在具有泛型参数 `SingleTargetExtension<T : KotlinTarget>`。
 * `kotlin.targets.fromPreset()` 约定已弃用。相反，您仍然可以使用 `kotlin.targets { fromPreset() }`，
-  但我们建议 [显式设置目标](multiplatform-discover-project.md#targets)。
+  但我们建议 [显式设置目标](multiplatform-discover-project#targets)。
 * 由 Gradle 自动生成的目标访问器在 `kotlin.targets { }` 块内不再可用。请改用 `findByName("targetName")`
   方法。
 
@@ -582,7 +582,7 @@ kotlin {
 
 ### 用于 JVM 工具链配置的新方法
 
-此版本提供了一个新的 `jvmToolchain()` 方法，用于启用 [JVM 工具链功能](gradle-configure-project.md#gradle-java-toolchains-support)。
+此版本提供了一个新的 `jvmToolchain()` 方法，用于启用 [JVM 工具链功能](gradle-configure-project#gradle-java-toolchains-support)。
 如果您不需要任何额外的 [配置字段](https://docs.gradle.org/current/javadoc/org/gradle/jvm/toolchain/JavaToolchainSpec.html)，
 例如 `implementation` 或 `vendor`，则可以从 Kotlin 扩展中使用此方法：
 
@@ -605,7 +605,7 @@ kotlin {
 
 ## 标准库
 
-Kotlin 1.7.20 为 `java.nio.file.Path` 类提供了新的 [扩展函数](extensions.md#extension-functions)，
+Kotlin 1.7.20 为 `java.nio.file.Path` 类提供了新的 [扩展函数](extensions#extension-functions)，
 这使您可以遍历文件树：
 
 * `walk()` 延迟遍历以指定路径为根的文件树。
@@ -617,7 +617,7 @@ Kotlin 1.7.20 为 `java.nio.file.Path` 类提供了新的 [扩展函数](extensi
 * `FileVisitResult`，`FileVisitor` 的返回类型，具有 `CONTINUE` 默认值，该默认值继续处理
   文件。
 
-用于 `java.nio.file.Path` 的新扩展函数是 [Experimental](components-stability.md)。
+用于 `java.nio.file.Path` 的新扩展函数是 [Experimental](components-stability)。
 它们可能随时被更改。需要选择加入（请参阅下面的详细信息），您应该仅将其用于评估目的。
 
 以下是您可以使用这些新扩展函数执行的一些操作：
@@ -724,8 +724,8 @@ Kotlin 1.7.20 为 `java.nio.file.Path` 类提供了新的 [扩展函数](extensi
 
 ### 改进和完善的页面
 
-* [基本类型概述](basic-types.md) – 了解 Kotlin 中使用的基本类型：数字、布尔值、字符、字符串、数组和无符号整数。
-* [用于 Kotlin 开发的 IDE](kotlin-ide.md) – 查看具有官方 Kotlin 支持的 IDE 列表以及具有社区支持插件的工具。
+* [基本类型概述](basic-types) – 了解 Kotlin 中使用的基本类型：数字、布尔值、字符、字符串、数组和无符号整数。
+* [用于 Kotlin 开发的 IDE](kotlin-ide) – 查看具有官方 Kotlin 支持的 IDE 列表以及具有社区支持插件的工具。
 
 ### Kotlin Multiplatform 杂志中的新文章
 
@@ -735,7 +735,7 @@ Kotlin 1.7.20 为 `java.nio.file.Path` 类提供了新的 [扩展函数](extensi
 ### 新的和更新的教程
 
 * [Kotlin Multiplatform 入门](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html) – 了解使用 Kotlin 进行跨平台移动开发，并创建一个可在 Android 和 iOS 上运行的应用。
-* [使用 React 和 Kotlin/JS 构建 Web 应用程序](js-react.md) – 创建一个浏览器应用，探索 Kotlin 的 DSL（领域特定语言）和典型 React 程序的特性。
+* [使用 React 和 Kotlin/JS 构建 Web 应用程序](js-react) – 创建一个浏览器应用，探索 Kotlin 的 DSL（领域特定语言）和典型 React 程序的特性。
 
 ### 版本文档中的更改
 
@@ -761,4 +761,4 @@ Kotlin 1.7.20 为 `java.nio.file.Path` 类提供了新的 [扩展函数](extensi
 尽管 Kotlin 1.7.20 是一个增量版本，但我们仍然必须进行不兼容的更改，以限制
 Kotlin 1.7.0 中引入的问题的蔓延。
 
-在 [Kotlin 1.7.20 兼容性指南](compatibility-guide-1720.md) 中查找此类更改的详细列表。
+在 [Kotlin 1.7.20 兼容性指南](compatibility-guide-1720) 中查找此类更改的详细列表。

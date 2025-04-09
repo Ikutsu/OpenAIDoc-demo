@@ -5,10 +5,10 @@ Kotlin CocoaPods Gradle 插件是用于创建 Podspec 文件的工具。这些�
 项目与 [CocoaPods 依赖管理器](https://cocoapods.org/) 集成所必需的。
 
 本文档包含 Kotlin CocoaPods Gradle 插件的完整块（block）、函数和属性列表，
-您可以在使用 [CocoaPods 集成](native-cocoapods.md)时使用。
+您可以在使用 [CocoaPods 集成](native-cocoapods)时使用。
 
-* 了解如何[设置环境并配置 Kotlin CocoaPods Gradle 插件](native-cocoapods.md)。
-* 根据您的项目和目的，您可以在 [Kotlin 项目和 Pod 库](native-cocoapods-libraries.md) 以及 [Kotlin Gradle 项目和 Xcode 项目](native-cocoapods-xcode.md) 之间添加依赖项。
+* 了解如何[设置环境并配置 Kotlin CocoaPods Gradle 插件](native-cocoapods)。
+* 根据您的项目和目的，您可以在 [Kotlin 项目和 Pod 库](native-cocoapods-libraries) 以及 [Kotlin Gradle 项目和 Xcode 项目](native-cocoapods-xcode) 之间添加依赖项。
 
 ## 启用插件
 
@@ -21,7 +21,7 @@ plugins {
 }
 ```
 
-插件版本与 [Kotlin 发布版本](releases.md) 匹配。最新的稳定版本是 2.1.20。
+插件版本与 [Kotlin 发布版本](releases) 匹配。最新的稳定版本是 2.1.20。
 
 ## cocoapods 块
 

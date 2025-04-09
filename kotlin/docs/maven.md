@@ -50,7 +50,7 @@ Maven 是一个构建系统，你可以使用它来构建和管理任何基于 J
 ```
 
 :::note
-如果你在 Gradle 项目中声明 `mavenLocal()` 作为仓库，那么在 Gradle 和 Maven 项目之间切换时，你可能会遇到问题。更多信息，请查看 [声明仓库](gradle-configure-project.md#declare-repositories)。
+如果你在 Gradle 项目中声明 `mavenLocal()` 作为仓库，那么在 Gradle 和 Maven 项目之间切换时，你可能会遇到问题。更多信息，请查看 [声明仓库](gradle-configure-project#declare-repositories)。
 
 :::
 
@@ -223,7 +223,7 @@ Kotlin 拥有一个广泛的标准库，可以在你的应用中使用。要在�
 
 ## 配置注解处理器
 
-请参阅 [`kapt` – 在 Maven 中使用](kapt.md#use-in-maven)。
+请参阅 [`kapt` – 在 Maven 中使用](kapt#use-in-maven)。
 
 ## 创建 JAR 文件
 
@@ -347,8 +347,8 @@ java -jar target/mymodule-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 ## 生成文档
 
-标准的 Javadoc 生成插件 (`maven-javadoc-plugin`) 不支持 Kotlin 代码。要为 Kotlin 项目生成文档，请使用 [Dokka](https://github.com/Kotlin/dokka)。Dokka 支持混合语言项目，并且可以生成多种格式的输出，包括标准 Javadoc。有关如何在 Maven 项目中配置 Dokka 的更多信息，请参见 [Maven](dokka-maven.md)。
+标准的 Javadoc 生成插件 (`maven-javadoc-plugin`) 不支持 Kotlin 代码。要为 Kotlin 项目生成文档，请使用 [Dokka](https://github.com/Kotlin/dokka)。Dokka 支持混合语言项目，并且可以生成多种格式的输出，包括标准 Javadoc。有关如何在 Maven 项目中配置 Dokka 的更多信息，请参见 [Maven](dokka-maven)。
 
 ## 启用 OSGi 支持
 
-[了解如何在你的 Maven 项目中启用 OSGi 支持](kotlin-osgi.md#maven)。
+[了解如何在你的 Maven 项目中启用 OSGi 支持](kotlin-osgi#maven)。

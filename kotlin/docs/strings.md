@@ -82,7 +82,7 @@ val s = "Hello, world!
 ```
 
 转义以传统方式完成，使用反斜杠（`\`）。
-有关支持的转义序列的列表，请参见[字符](characters.md)页面。
+有关支持的转义序列的列表，请参见[字符](characters)页面。
 
 ### 多行字符串（Multiline strings）
 

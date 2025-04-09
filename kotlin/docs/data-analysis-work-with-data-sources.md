@@ -1,7 +1,7 @@
 ---
 title: 从文件中检索数据
 ---
-[Kotlin Notebook](kotlin-notebook-overview.md) 结合 [Kotlin DataFrame 库](https://kotlin.github.io/dataframe/gettingstarted.html)，使你能够处理非结构化和结构化数据。这种结合提供了将非结构化数据（例如 TXT 文件中的数据）转换为结构化数据集的灵活性。
+[Kotlin Notebook](kotlin-notebook-overview) 结合 [Kotlin DataFrame 库](https://kotlin.github.io/dataframe/gettingstarted.html)，使你能够处理非结构化和结构化数据。这种结合提供了将非结构化数据（例如 TXT 文件中的数据）转换为结构化数据集的灵活性。
 
 对于数据转换，你可以使用诸如 [`add`](https://kotlin.github.io/dataframe/adddf.html)、[`split`](https://kotlin.github.io/dataframe/split.html)、[`convert`](https://kotlin.github.io/dataframe/convert.html) 和 [`parse`](https://kotlin.github.io/dataframe/parse.html) 等方法。此外，此工具集还能够检索和操作来自各种结构化文件格式的数据，包括 CSV、JSON、XLS、XLSX 和 Apache Arrow。
 
@@ -158,5 +158,5 @@ dfJson
 ## 接下来做什么
 
 * 使用 [Kandy 库](https://kotlin.github.io/kandy/examples.html) 探索数据可视化
-* 在 [在 Kotlin Notebook 中使用 Kandy 进行数据可视化](data-analysis-visualization.md) 中查找有关数据可视化的更多信息
-* 有关 Kotlin 中可用于数据科学和分析的工具和资源的广泛概述，请参阅 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries.md)
+* 在 [在 Kotlin Notebook 中使用 Kandy 进行数据可视化](data-analysis-visualization) 中查找有关数据可视化的更多信息
+* 有关 Kotlin 中可用于数据科学和分析的工具和资源的广泛概述，请参阅 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries)

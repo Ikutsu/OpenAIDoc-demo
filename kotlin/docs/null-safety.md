@@ -15,14 +15,14 @@ Kotlin 中 NPE 的唯一可能原因有：
 * 使用 [非空断言运算符 `!!`](#not-null-assertion-operator)。
 * 初始化期间的数据不一致，例如：
   * 在构造函数中可用的未初始化的 `this` 在其他地方使用（[“泄漏的 `this`”](https://youtrack.jetbrains.com/issue/KTIJ-9751)）。
-  * [超类构造函数调用开放成员](inheritance.md#derived-class-initialization-order)，其在派生类中的实现使用未初始化的状态。
+  * [超类构造函数调用开放成员](inheritance#derived-class-initialization-order)，其在派生类中的实现使用未初始化的状态。
 * Java 互操作：
-  * 尝试访问 [平台类型](java-interop.md#null-safety-and-platform-types)的 `null` 引用的成员。
+  * 尝试访问 [平台类型](java-interop#null-safety-and-platform-types)的 `null` 引用的成员。
   * 泛型类型的可空性问题。例如，一段 Java 代码将 `null` 添加到 Kotlin 的 `MutableList<String>` 中，这需要 `MutableList<String?>` 才能正确处理。
   * 由外部 Java 代码引起的其他问题。
 
 :::tip
-除了 NPE 之外，另一个与空安全相关的异常是 [`UninitializedPropertyAccessException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-uninitialized-property-access-exception/)。当您尝试访问尚未初始化的属性时，Kotlin 会抛出此异常，从而确保在非空属性准备就绪之前不会使用它们。这通常发生在 [`lateinit` 属性](properties.md#late-initialized-properties-and-variables)中。
+除了 NPE 之外，另一个与空安全相关的异常是 [`UninitializedPropertyAccessException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-uninitialized-property-access-exception/)。当您尝试访问尚未初始化的属性时，Kotlin 会抛出此异常，从而确保在非空属性准备就绪之前不会使用它们。这通常发生在 [`lateinit` 属性](properties#late-initialized-properties-and-variables)中。
 
 :::
 
@@ -122,7 +122,7 @@ fun main() {
 }
 ```
 
-在上面的示例中，编译器执行[智能类型转换](typecasts.md#smart-casts)，将类型从可为空的 `String?` 更改为不可为空的 `String`。它还会跟踪有关您执行的检查的信息，并允许在 `if` 条件语句中调用 `length`。
+在上面的示例中，编译器执行[智能类型转换](typecasts#smart-casts)，将类型从可为空的 `String?` 更改为不可为空的 `String`。它还会跟踪有关您执行的检查的信息，并允许在 `if` 条件语句中调用 `length`。
 
 也支持更复杂的条件：
 
@@ -144,7 +144,7 @@ fun main() {
 }
 ```
 
-请注意，只有当编译器可以保证 `b` 在检查和使用之间没有更改时，上面的示例才有效，与[智能类型转换的先决条件](typecasts.md#smart-cast-prerequisites)相同。
+请注意，只有当编译器可以保证 `b` 在检查和使用之间没有更改时，上面的示例才有效，与[智能类型转换的先决条件](typecasts#smart-cast-prerequisites)相同。
 
 ## 安全调用运算符 (Safe call operator)
 
@@ -169,7 +169,7 @@ fun main() {
 
 `b?.length` 表达式检查可空性，如果 `b` 不为 null，则返回 `b.length`，否则返回 `null`。此表达式的类型为 `Int?`。
 
-您可以在 Kotlin 中将 `?.` 运算符与 [`var` 和 `val` 变量](basic-syntax.md#variables)一起使用：
+您可以在 Kotlin 中将 `?.` 运算符与 [`var` 和 `val` 变量](basic-syntax#variables)一起使用：
 
 * 可为空的 `var` 可以保存 `null`（例如，`var nullableValue: String? = null`）或非空值（例如，`var nullableValue: String? = "Kotlin"`）。如果它是一个非空值，您可以随时将其更改为 `null`。
 * 可为空的 `val` 可以保存 `null`（例如，`val nullableValue: String? = null`）或非空值（例如，`val nullableValue: String? = "Kotlin"`）。如果它是一个非空值，您不能随后将其更改为 `null`。
@@ -282,7 +282,7 @@ fun main() {
 
 ## 可空接收器 (Nullable receiver)
 
-您可以将扩展函数与[可空接收器类型](extensions.md#nullable-receiver)一起使用，从而允许在可能为 `null` 的变量上调用这些函数。
+您可以将扩展函数与[可空接收器类型](extensions#nullable-receiver)一起使用，从而允许在可能为 `null` 的变量上调用这些函数。
 
 通过在可空接收器类型上定义扩展函数，您可以在函数本身中处理 `null` 值，而不是在调用函数的每个位置检查 `null`。
 
@@ -333,7 +333,7 @@ data class Person(val name: String)
 ## Let 函数 (Let function)
 
 要处理 `null` 值并仅对非空类型执行操作，您可以将安全调用运算符 `?.` 与
-[`let` 函数](scope-functions.md#let)一起使用。
+[`let` 函数](scope-functions#let)一起使用。
 
 此组合对于评估表达式、检查结果是否为 `null` 以及仅在结果不为 `null` 时才执行代码非常有用，从而避免了手动 null 检查：
 
@@ -355,7 +355,7 @@ fun main() {
 
 ## 安全转换 (Safe casts)
 
-用于[类型转换](typecasts.md#unsafe-cast-operator)的常规 Kotlin 运算符是 `as` 运算符。但是，如果对象不是目标类型，则常规类型转换可能会导致异常。
+用于[类型转换](typecasts#unsafe-cast-operator)的常规 Kotlin 运算符是 `as` 运算符。但是，如果对象不是目标类型，则常规类型转换可能会导致异常。
 
 您可以使用 `as?` 运算符进行安全转换。它尝试将值转换为指定的类型，如果该值不是该类型，则返回 `null`：
 
@@ -403,5 +403,5 @@ fun main() {
 
 ## 下一步是什么？ (What's next?)
 
-* 了解如何在 [Java 和 Kotlin 中处理可空性](java-to-kotlin-nullability-guide.md)。
-* 了解[明确的非空](generics.md#definitely-non-nullable-types)泛型类型。
+* 了解如何在 [Java 和 Kotlin 中处理可空性](java-to-kotlin-nullability-guide)。
+* 了解[明确的非空](generics#definitely-non-nullable-types)泛型类型。

@@ -22,7 +22,7 @@ Kotlin Notebook 插件提供了[各种功能](https://www.jetbrains.com/help/ide
 * 使用单行代码导入各种库，甚至向项目中添加新库
 * 通过错误消息和回溯获取调试见解
 
-Kotlin Notebook 基于我们的 [Kotlin Kernel for Jupyter Notebooks](https://github.com/Kotlin/kotlin-jupyter?tab=readme-ov-file#kotlin-kernel-for-ipythonjupyter)，使其易于与其他 [Kotlin notebook 解决方案](data-analysis-overview.md#notebooks)集成。没有兼容性问题，您可以轻松地在 Kotlin Notebook、[Datalore](https://datalore.jetbrains.com/) 和 [Kotlin-Jupyter Notebook](https://github.com/Kotlin/kotlin-jupyter) 之间共享您的工作。
+Kotlin Notebook 基于我们的 [Kotlin Kernel for Jupyter Notebooks](https://github.com/Kotlin/kotlin-jupyter?tab=readme-ov-file#kotlin-kernel-for-ipythonjupyter)，使其易于与其他 [Kotlin notebook 解决方案](data-analysis-overview#notebooks)集成。没有兼容性问题，您可以轻松地在 Kotlin Notebook、[Datalore](https://datalore.jetbrains.com/) 和 [Kotlin-Jupyter Notebook](https://github.com/Kotlin/kotlin-jupyter) 之间共享您的工作。
 
 借助这些功能，您可以执行各种任务，从简单的代码实验到全面的数据项目。
 
@@ -32,7 +32,7 @@ Kotlin Notebook 基于我们的 [Kotlin Kernel for Jupyter Notebooks](https://gi
 
 无论您是进行初步的数据探索还是完成端到端的数据分析项目，Kotlin Notebook 都能为您提供合适的工具。
 
-在 Kotlin Notebook 中，您可以直观地集成 [libraries](data-analysis-libraries.md)，以便检索、转换、绘制和建模您的数据，同时获得操作的即时输出。
+在 Kotlin Notebook 中，您可以直观地集成 [libraries](data-analysis-libraries)，以便检索、转换、绘制和建模您的数据，同时获得操作的即时输出。
 
 对于与分析相关的任务，[Kotlin DataFrame](https://kotlin.github.io/dataframe/overview.html) 库提供了强大的解决方案。 该库有助于加载、创建、过滤和清理结构化数据。
 
@@ -75,5 +75,5 @@ Kotlin Notebook 提供了在单元格中调用 API 以及使用 OpenAPI 等协�
 ## 接下来
 
 * [了解 Kotlin Notebook 的用法和主要功能。](https://www.jetbrains.com/help/idea/kotlin-notebook.html)
-* [试用 Kotlin Notebook。](get-started-with-kotlin-notebooks.md)
-* [深入了解用于数据分析的 Kotlin。](data-analysis-overview.md)
+* [试用 Kotlin Notebook。](get-started-with-kotlin-notebooks)
+* [深入了解用于数据分析的 Kotlin。](data-analysis-overview)

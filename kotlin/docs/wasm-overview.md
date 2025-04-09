@@ -2,7 +2,7 @@
 title: Kotlin/Wasm
 ---
 :::note
-Kotlin/Wasm 处于 [Alpha](components-stability.md) 阶段。
+Kotlin/Wasm 处于 [Alpha](components-stability) 阶段。
 它可能随时更改。你可以在生产之前的场景中使用它。我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492) 中提供的反馈。
 
 [加入 Kotlin/Wasm 社区](https://slack-chats.kotlinlang.org/c/webassembly)。
@@ -36,11 +36,11 @@ roadmap](https://webassembly.org/roadmap/)。
 
 :::
 
-此外，你可以直接在 Kotlin/Wasm 中使用最流行的 Kotlin 库。与其他 Kotlin 和 Multiplatform 项目一样，你可以在构建脚本中包含依赖项声明。有关更多信息，请参阅 [添加对多平台库的依赖项](multiplatform-add-dependencies.md)。
+此外，你可以直接在 Kotlin/Wasm 中使用最流行的 Kotlin 库。与其他 Kotlin 和 Multiplatform 项目一样，你可以在构建脚本中包含依赖项声明。有关更多信息，请参阅 [添加对多平台库的依赖项](multiplatform-add-dependencies)。
 
 你想自己尝试一下吗？
 
-<a href="wasm-get-started.md"><img src="/img/wasm-get-started-button.svg" width="600" alt="Get started with Kotlin/Wasm" /></a>
+<a href="wasm-get-started"><img src="/img/wasm-get-started-button.svg" width="600" alt="Get started with Kotlin/Wasm" /></a>
 
 ## Kotlin/Wasm 和 WASI
 
@@ -52,7 +52,7 @@ Kotlin/Wasm 利用 WASI 来抽象出特定于平台的细节，允许相同的 K
 WASI 为跨不同环境运行编译为 WebAssembly 的 Kotlin 应用程序提供了一个安全的标准接口。
 
 :::tip
-要了解 Kotlin/Wasm 和 WASI 的实际应用，请查看 [Kotlin/Wasm 和 WASI 入门教程](wasm-wasi.md)。
+要了解 Kotlin/Wasm 和 WASI 的实际应用，请查看 [Kotlin/Wasm 和 WASI 入门教程](wasm-wasi)。
 
 :::
 
@@ -70,8 +70,8 @@ Kotlin/Wasm 标准库提供了浏览器 API 的声明，包括 DOM API。
 通过这些声明，你可以直接使用 Kotlin API 来访问和利用各种浏览器功能。
 例如，在你的 Kotlin/Wasm 应用程序中，你可以使用 DOM 元素操作或获取 API，而无需从头开始定义这些声明。要了解更多信息，请参阅我们的 [Kotlin/Wasm 浏览器示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/browser-example)。
 
-浏览器 API 支持的声明是使用 JavaScript [互操作性功能](wasm-js-interop.md) 定义的。
-你可以使用相同的功能来定义你自己的声明。此外，Kotlin/Wasm-JavaScript 互操作性允许你从 JavaScript 中使用 Kotlin 代码。有关更多信息，请参阅 [在 JavaScript 中使用 Kotlin 代码](wasm-js-interop.md#use-kotlin-code-in-javascript)。
+浏览器 API 支持的声明是使用 JavaScript [互操作性功能](wasm-js-interop) 定义的。
+你可以使用相同的功能来定义你自己的声明。此外，Kotlin/Wasm-JavaScript 互操作性允许你从 JavaScript 中使用 Kotlin 代码。有关更多信息，请参阅 [在 JavaScript 中使用 Kotlin 代码](wasm-js-interop#use-kotlin-code-in-javascript)。
 
 ## 留下反馈
 

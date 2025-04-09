@@ -35,17 +35,17 @@ import platform.posix.*
 * [Windows (MinGW)](https://github.com/JetBrains/kotlin/tree/master/kotlin-native/platformLibs/src/platform/mingw/posix.def)
 * [Android](https://github.com/JetBrains/kotlin/tree/master/kotlin-native/platformLibs/src/platform/android/posix.def)
 
-POSIX 平台库不适用于 [WebAssembly](wasm-overview.md) 目标平台。
+POSIX 平台库不适用于 [WebAssembly](wasm-overview) 目标平台。
 
 ## 流行的原生库
 
 Kotlin/Native 提供了对各种流行的原生库的绑定，这些原生库通常在不同的平台上使用，例如 OpenGL、zlib 和 Foundation。
 
-在 Apple 平台上，包含了 `objc` 库，以实现与 [Objective-C](native-objc-interop.md) API 的互操作性。
+在 Apple 平台上，包含了 `objc` 库，以实现与 [Objective-C](native-objc-interop) API 的互操作性。
 
 你可以在你的编译器发行版中浏览可用于 Kotlin/Native 目标平台的原生库，具体取决于你的设置：
 
-* 如果你[安装了独立的 Kotlin/Native 编译器](native-get-started.md#download-and-install-the-compiler)：
+* 如果你[安装了独立的 Kotlin/Native 编译器](native-get-started#download-and-install-the-compiler)：
 
   1. 进入解压缩后的编译器发行版存档，例如，`kotlin-native-prebuilt-macos-aarch64-2.1.0`。
   2. 导航到 `klib/platform` 目录。
@@ -83,4 +83,4 @@ Kotlin/Native 提供了对各种流行的原生库的绑定，这些原生库通
 
 ## 下一步
 
-[了解更多关于与 Swift/Objective-C 互操作性的信息](native-objc-interop.md)
+[了解更多关于与 Swift/Objective-C 互操作性的信息](native-objc-interop)

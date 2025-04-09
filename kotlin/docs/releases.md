@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
    最新 Kotlin 版本: <strong>2.1.20</strong>
 </p>
 <p>
-   查看 <a href="whatsnew2120.md">Kotlin 2.1.20 中的新特性</a> 了解详情
+   查看 <a href="whatsnew2120">Kotlin 2.1.20 中的新特性</a> 了解详情
 </p>
 
 :::
@@ -28,7 +28,7 @@ import TabItem from '@theme/TabItem';
 {style="tip"}
 -->
 
-对于每个语言版本和工具版本，我们还会发布多个预览版（_EAP_），以便您在发布之前尝试新功能。 有关详细信息，请参阅 [Early Access Preview](eap.md)。
+对于每个语言版本和工具版本，我们还会发布多个预览版（_EAP_），以便您在发布之前尝试新功能。 有关详细信息，请参阅 [Early Access Preview](eap)。
 
 :::note
 如果您想收到有关新 Kotlin 版本的通知，请订阅 [Kotlin newsletter](https://lp.jetbrains.com/subscribe-to-kotlin-news/)，
@@ -87,18 +87,18 @@ plugins {
 <img src="/img/k2-mode.png" alt="Enable K2 mode" width="200" style={{verticalAlign: 'middle'}}/>
 
 启用 K2 模式后，由于编译器行为的更改，您可能会注意到 IDE 分析的差异。
-在 [迁移指南](k2-compiler-migration-guide.md) 中了解新的 K2 编译器与之前的编译器的区别。
+在 [迁移指南](k2-compiler-migration-guide) 中了解新的 K2 编译器与之前的编译器的区别。
 
 ## Kotlin 版本兼容性
 
-了解更多关于 [Kotlin 版本的类型及其兼容性](kotlin-evolution-principles.md#language-and-tooling-releases)
+了解更多关于 [Kotlin 版本的类型及其兼容性](kotlin-evolution-principles#language-and-tooling-releases)
 
 ## 版本详情
 
 下表列出了最新 Kotlin 版本的详细信息：
 
 :::tip
-您还可以尝试 [Kotlin 的 Early Access Preview (EAP) 版本](eap.md#build-details)。
+您还可以尝试 [Kotlin 的 Early Access Preview (EAP) 版本](eap#build-details)。
 
 :::
 <table>
@@ -122,7 +122,7 @@ plugins {
    Kotlin 2.1.0 的工具版本，包含新的实验性功能、性能改进和错误修复。
 </p>
 <p>
-   在 <a href="whatsnew2120.md" target="_blank">Kotlin 2.1.20 中的新特性</a> 中了解更多关于 Kotlin 2.1.20 的信息。
+   在 <a href="whatsnew2120" target="_blank">Kotlin 2.1.20 中的新特性</a> 中了解更多关于 Kotlin 2.1.20 的信息。
 </p>
 </td>
 </tr>
@@ -162,7 +162,7 @@ plugins {
    引入新语言功能的语言版本。
 </p>
 <p>
-   在 <a href="whatsnew21.md" target="_blank">Kotlin 2.1.0 中的新特性</a> 中了解更多关于 Kotlin 2.1.0 的信息。
+   在 <a href="whatsnew21" target="_blank">Kotlin 2.1.0 中的新特性</a> 中了解更多关于 Kotlin 2.1.0 的信息。
 </p>
 </td>
 </tr>
@@ -202,7 +202,7 @@ plugins {
    Kotlin 2.0.0 的工具版本，包含性能改进和错误修复。 功能还包括 Kotlin/Native 垃圾回收器中的并发标记、Kotlin 通用标准库中的 UUID 支持、Compose 编译器更新以及对 Gradle 8.8 的支持。
 </p>
 <p>
-   在 <a href="whatsnew2020.md" target="_blank">Kotlin 2.0.20 中的新特性</a> 中了解更多关于 Kotlin 2.0.20 的信息。
+   在 <a href="whatsnew2020" target="_blank">Kotlin 2.0.20 中的新特性</a> 中了解更多关于 Kotlin 2.0.20 的信息。
 </p>
 </td>
 </tr>
@@ -222,7 +222,7 @@ plugins {
    Kotlin 2.0.0 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew20.md" target="_blank">Kotlin 2.0.0 中的新特性</a> 中了解更多关于 Kotlin 2.0.0 的信息。
+   在 <a href="whatsnew20" target="_blank">Kotlin 2.0.0 中的新特性</a> 中了解更多关于 Kotlin 2.0.0 的信息。
 </p>
 </td>
 </tr>
@@ -242,7 +242,7 @@ plugins {
    具有稳定 Kotlin K2 编译器的语言版本。
 </p>
 <p>
-   在 <a href="whatsnew20.md" target="_blank">Kotlin 2.0.0 中的新特性</a> 中了解更多关于 Kotlin 2.0.0 的信息。
+   在 <a href="whatsnew20" target="_blank">Kotlin 2.0.0 中的新特性</a> 中了解更多关于 Kotlin 2.0.0 的信息。
 </p>
 </td>
 </tr>
@@ -262,7 +262,7 @@ plugins {
    Kotlin 1.9.20、1.9.21、1.9.22、1.9.23 和 1.9.24 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
+   在 <a href="whatsnew1920" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
 </p>
 </td>
 </tr>
@@ -282,7 +282,7 @@ plugins {
    Kotlin 1.9.20、1.9.21、1.9.22 和 1.9.23 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
+   在 <a href="whatsnew1920" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
 </p>
 </td>
 </tr>
@@ -302,7 +302,7 @@ plugins {
    Kotlin 1.9.20、1.9.21 和 1.9.22 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
+   在 <a href="whatsnew1920" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
 </p>
 </td>
 </tr>
@@ -322,7 +322,7 @@ plugins {
    Kotlin 1.9.20 和 1.9.21 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
+   在 <a href="whatsnew1920" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
 </p>
 </td>
 </tr>
@@ -342,7 +342,7 @@ plugins {
    Kotlin 1.9.20 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
+   在 <a href="whatsnew1920" target="_blank">Kotlin 1.9.20 中的新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。
 </p>
 </td>
 </tr>
@@ -365,7 +365,7 @@ plugins {
    了解更多：
 </p>
 <list>
-<li><a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 中的新特性</a></li>
+<li><a href="whatsnew1920" target="_blank">Kotlin 1.9.20 中的新特性</a></li>
 </list>
 </td>
 </tr>
@@ -385,7 +385,7 @@ plugins {
    Kotlin 1.9.0 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew19.md" target="_blank">Kotlin 1.9.0 中的新特性</a> 中了解更多关于 Kotlin 1.9.0 的信息。
+   在 <a href="whatsnew19" target="_blank">Kotlin 1.9.0 中的新特性</a> 中了解更多关于 Kotlin 1.9.0 的信息。
 </p>
             <note>对于 Android Studio Giraffe 和 Hedgehog，Kotlin 插件 1.9.10 将通过即将推出的 Android Studios 更新提供。</note>
 </td>
@@ -411,7 +411,7 @@ plugins {
    了解更多：
 </p>
 <list>
-<li><a href="whatsnew19.md" target="_blank">Kotlin 1.9.0 中的新特性</a></li>
+<li><a href="whatsnew19" target="_blank">Kotlin 1.9.0 中的新特性</a></li>
 <li><a href="https://www.youtube.com/embed/fvwTZc-dxsM" target="_blank">Kotlin YouTube 视频中的新特性</a></li>
 </list>
 </td>
@@ -432,7 +432,7 @@ plugins {
    Kotlin 1.8.20 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1820.md" target="_blank">Kotlin 1.8.20 中的新特性</a> 中了解更多关于 Kotlin 1.8.20 的信息。
+   在 <a href="whatsnew1820" target="_blank">Kotlin 1.8.20 中的新特性</a> 中了解更多关于 Kotlin 1.8.20 的信息。
 </p>
 </td>
 </tr>
@@ -452,7 +452,7 @@ plugins {
    Kotlin 1.8.20 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1820.md" target="_blank">Kotlin 1.8.20 中的新特性</a> 中了解更多关于 Kotlin 1.8.20 的信息。
+   在 <a href="whatsnew1820" target="_blank">Kotlin 1.8.20 中的新特性</a> 中了解更多关于 Kotlin 1.8.20 的信息。
 </p>
             <note>对于 Android Studio Flamingo 和 Giraffe，Kotlin 插件 1.8.21 将通过即将推出的 Android Studios 更新提供。</note>
 </td>
@@ -477,7 +477,7 @@ plugins {
    了解更多：
 </p>
 <list>
-<li><a href="whatsnew1820.md" target="_blank">Kotlin 1.8.20 中的新特性</a></li>
+<li><a href="whatsnew1820" target="_blank">Kotlin 1.8.20 中的新特性</a></li>
 <li><a href="https://youtu.be/R1JpkpPzyBU" target="_blank">Kotlin YouTube 视频中的新特性</a></li>
 </list>
 </td>
@@ -522,8 +522,8 @@ plugins {
    了解更多：
 </p>
 <list>
-<li><a href="whatsnew18.md" target="_blank">Kotlin 1.8.0 中的新特性</a></li>
-<li><a href="compatibility-guide-18.md" target="_blank">Kotlin 1.8.0 兼容性指南</a></li>
+<li><a href="whatsnew18" target="_blank">Kotlin 1.8.0 中的新特性</a></li>
+<li><a href="compatibility-guide-18" target="_blank">Kotlin 1.8.0 兼容性指南</a></li>
 </list>
 </td>
 </tr>
@@ -543,7 +543,7 @@ plugins {
    Kotlin 1.7.20 的错误修复版本。
 </p>
 <p>
-   在 <a href="whatsnew1720.md" target="_blank">Kotlin 1.7.20 中的新特性</a> 中了解更多关于 Kotlin 1.7.20 的信息。
+   在 <a href="whatsnew1720" target="_blank">Kotlin 1.7.20 中的新特性</a> 中了解更多关于 Kotlin 1.7.20 的信息。
 </p>
             <note>对于 Android Studio Dolphin、Electric Eel 和 Flamingo，Kotlin 插件 1.7.21 将通过即将推出的 Android Studios 更新提供。</note>
 </td>
@@ -568,9 +568,9 @@ plugins {
    了解更多：
 </p>
 <list>
-<li><a href="whatsnew1720.md" target="_blank">Kotlin 1.7.20 中的新特性</a></li>
+<li><a href="whatsnew1720" target="_blank">Kotlin 1.7.20 中的新特性</a></li>
 <li><a href="https://youtu.be/OG9npowJgE8" target="_blank">Kotlin YouTube 视频中的新特性</a></li>
-<li><a href="compatibility-guide-1720.md" target="_blank">Kotlin 1.7.20 兼容性指南</a></li>
+<li><a href="compatibility-guide-1720" target="_blank">Kotlin 1.7.20 兼容性指南</a></li>
 </list>
 <p>
    了解更多关于 <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.20" target="_blank">Kotlin 1.7.20</a>。
@@ -617,9 +617,9 @@ plugins {
    了解更多：
 </p>
 <list>
-<li><a href="whatsnew17.md" target="_blank">Kotlin 1.7.0 中的新特性</a></li>
+<li><a href="whatsnew17" target="_blank">Kotlin 1.7.0 中的新特性</a></li>
 <li><a href="https://youtu.be/54WEfLKtCGk" target="_blank">Kotlin YouTube 视频中的新特性</a></li>
-<li><a href="compatibility-guide-17.md" target="_blank">Kotlin 1.7.0 兼容性指南</a></li>
+<li><a href="compatibility-guide-17" target="_blank">Kotlin 1.7.0 兼容性指南</a></li>
 </list>
 </td>
 </tr>
@@ -639,7 +639,7 @@ plugins {
    Kotlin 1.6.20 的错误修复版本。
 </p>
 <p>
-   了解更多关于 <a href="whatsnew1620.md" target="_blank">Kotlin 1.6.20</a>。
+   了解更多关于 <a href="whatsnew1620" target="_blank">Kotlin 1.6.20</a>。
 </p>
 </td>
 </tr>
@@ -667,7 +667,7 @@ plugins {
 <li>Gradle：编译器执行策略</li>
 </list>
 <p>
-   了解更多关于 <a href="whatsnew1620.md" target="_blank">Kotlin 1.6.20</a>。
+   了解更多关于 <a href="whatsnew1620" target="_blank">Kotlin 1.6.20</a>。
 </p>
 </td>
 </tr>
@@ -711,8 +711,8 @@ plugins {
 </p>
 <list>
 <li><a href="https://blog.jetbrains.com/kotlin/2021/11/kotlin-1-6-0-is-released/" target="_blank">发布博客文章</a></li>
-<li><a href="whatsnew16.md" target="_blank">Kotlin 1.6.0 中的新特性</a></li>
-<li><a href="compatibility-guide-16.md" target="_blank">兼容性指南</a></li>
+<li><a href="whatsnew16" target="_blank">Kotlin 1.6.0 中的新特性</a></li>
+<li><a href="compatibility-guide-16" target="_blank">兼容性指南</a></li>
 </list>
 </td>
 </tr>
@@ -732,7 +732,7 @@ plugins {
    Kotlin 1.5.31 的错误修复版本。
 </p>
 <p>
-   了解更多关于 <a href="whatsnew1530.md" target="_blank">Kotlin 1.5.30</a>。
+   了解更多关于 <a href="whatsnew1530" target="_blank">Kotlin 1.5.30</a>。
 </p>
 </td>
 </tr>
@@ -752,7 +752,7 @@ plugins {
    Kotlin 1.5.30 的错误修复版本。
 </p>
 <p>
-   了解更多关于 <a href="whatsnew1530.md" target="_blank">Kotlin 1.5.30</a>。
+   了解更多关于 <a href="whatsnew1530" target="_blank">Kotlin 1.5.30</a>。
 </p>
 </td>
 </tr>
@@ -784,7 +784,7 @@ plugins {
 </p>
 <list>
 <li><a href="https://blog.jetbrains.com/kotlin/2021/08/kotlin-1-5-30-released/" target="_blank">发布博客文章</a></li>
-<li><a href="whatsnew1530.md" target="_blank">Kotlin 1.5.30 中的新特性</a></li>
+<li><a href="whatsnew1530" target="_blank">Kotlin 1.5.30 中的新特性</a></li>
 </list>
 </td>
 </tr>
@@ -804,7 +804,7 @@ plugins {
    Kotlin 1.5.20 的错误修复版本。
 </p>
 <p>
-   了解更多关于 <a href="whatsnew1520.md" target="_blank">Kotlin 1.5.20</a>。
+   了解更多关于 <a href="whatsnew1520" target="_blank">Kotlin 1.5.20</a>。
 </p>
 </td>
 </tr>
@@ -835,7 +835,7 @@ plugins {
 </p>
 <list>
 <li><a href="https://blog.jetbrains.com/kotlin/2021/06/kotlin-1-5-20-released/" target="_blank">发布博客文章</a></li>
-<li><a href="whatsnew1520.md" target="_blank">Kotlin 1.5.20 中的新特性</a></li>
+<li><a href="whatsnew1520" target="_blank">Kotlin 1.5.20 中的新特性</a></li>
 </list>
 </td>
 </tr>
@@ -879,4 +879,8 @@ plugins {
 </p>
 <list>
 <li><a href="https://blog.jetbrains.com/kotlin/2021/04/kotlin-1-5-0-released/" target="_blank">发布博客文章</a></li>
-<li><a href="whatsnew15.md" target="_blank">Kotlin
+<li><a href="whatsnew15" target="_blank">Kotlin 1.5.0 中的新特性</a></li>
+</list>
+</td>
+</tr>
+</table>

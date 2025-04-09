@@ -18,7 +18,7 @@ Apple SDK 的依赖项（例如 Foundation 或 Core Bluetooth）在 Kotlin Multi
 
 1. 下载你的依赖项。
 2. 构建它以获取其二进制文件。
-3. 创建一个特殊的 `.def` [定义文件](native-definition-file.md)，向 cinterop 描述此依赖项。
+3. 创建一个特殊的 `.def` [定义文件](native-definition-file)，向 cinterop 描述此依赖项。
 4. 调整你的构建脚本以在构建期间生成绑定。
 
 #### 添加库
@@ -192,11 +192,11 @@ import DateTools.*
 import MyFramework.*
 ```
 
-了解更多关于 [Objective-C 和 Swift 互操作](native-objc-interop.md)和 [从 Gradle 配置 cinterop](multiplatform-dsl-reference.md#cinterops)。
+了解更多关于 [Objective-C 和 Swift 互操作](native-objc-interop)和 [从 Gradle 配置 cinterop](multiplatform-dsl-reference#cinterops)。
 
 ### 使用 CocoaPods
 
-1. 执行 [初始 CocoaPods 集成设置](native-cocoapods.md#set-up-an-environment-to-work-with-cocoapods)。
+1. 执行 [初始 CocoaPods 集成设置](native-cocoapods#set-up-an-environment-to-work-with-cocoapods)。
 2. 通过在项目的 `build.gradle(.kts)` 中包含 `pod()` 函数调用，添加对你要使用的 CocoaPods 仓库中的 Pod 库的依赖。
 
     <Tabs groupId="build-script">
@@ -234,11 +234,11 @@ import MyFramework.*
 
    你可以添加以下对 Pod 库的依赖：
 
-   * [从 CocoaPods 仓库](native-cocoapods-libraries.md#from-the-cocoapods-repository)
-   * [在本地存储的库上](native-cocoapods-libraries.md#on-a-locally-stored-library)
-   * [从自定义 Git 仓库](native-cocoapods-libraries.md#from-a-custom-git-repository)
-   * [从自定义 Podspec 仓库](native-cocoapods-libraries.md#from-a-custom-podspec-repository)
-   * [使用自定义 cinterop 选项](native-cocoapods-libraries.md#with-custom-cinterop-options)
+   * [从 CocoaPods 仓库](native-cocoapods-libraries#from-the-cocoapods-repository)
+   * [在本地存储的库上](native-cocoapods-libraries#on-a-locally-stored-library)
+   * [从自定义 Git 仓库](native-cocoapods-libraries#from-a-custom-git-repository)
+   * [从自定义 Podspec 仓库](native-cocoapods-libraries#from-a-custom-podspec-repository)
+   * [使用自定义 cinterop 选项](native-cocoapods-libraries#with-custom-cinterop-options)
 
 3. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）以重新导入项目。
 
@@ -252,6 +252,6 @@ import cocoapods.SDWebImage.*
 
 查看有关在多平台项目中添加依赖项的其他资源，并了解更多信息：
 
-* [连接平台库](native-platform-libs.md)
-* [添加对多平台库或其他多平台项目的依赖项](multiplatform-add-dependencies.md)
-* [添加 Android 依赖项](multiplatform-android-dependencies.md)
+* [连接平台库](native-platform-libs)
+* [添加对多平台库或其他多平台项目的依赖项](multiplatform-add-dependencies)
+* [添加 Android 依赖项](multiplatform-android-dependencies)

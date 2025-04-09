@@ -79,13 +79,13 @@ fun main() {
 
 序列操作可以根据其状态要求分为以下几组：
 
-* _无状态 (Stateless)_ 操作不需要状态，并且独立处理每个元素，例如，[`map()`](collection-transformations.md#map) 或 [`filter()`](collection-filtering.md)。
-   无状态操作也可能需要少量的恒定状态来处理元素，例如，[`take()` 或 `drop()`](collection-parts.md)。
+* _无状态 (Stateless)_ 操作不需要状态，并且独立处理每个元素，例如，[`map()`](collection-transformations#map) 或 [`filter()`](collection-filtering)。
+   无状态操作也可能需要少量的恒定状态来处理元素，例如，[`take()` 或 `drop()`](collection-parts)。
 * _有状态 (Stateful)_ 操作需要大量的状态，通常与序列中的元素数量成正比。
 
 如果序列操作返回另一个序列（该序列是延迟生成的），则称为 _中间 (intermediate)_ 操作。
-否则，该操作是 _末端 (terminal)_ 操作。末端操作的示例包括 [`toList()`](constructing-collections.md#copy)
-或 [`sum()`](collection-aggregate.md)。序列元素只能通过末端操作检索。
+否则，该操作是 _末端 (terminal)_ 操作。末端操作的示例包括 [`toList()`](constructing-collections#copy)
+或 [`sum()`](collection-aggregate)。序列元素只能通过末端操作检索。
 
 序列可以迭代多次；但是，某些序列实现可能会将自身限制为仅迭代一次。这会在其文档中专门提及。
 

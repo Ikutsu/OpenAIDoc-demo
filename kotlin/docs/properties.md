@@ -143,11 +143,11 @@ public val table: Map<String, Int>
 如果一个只读属性的值在编译时是已知的，使用 `const` 修饰符将其标记为一个 *compile time constant*。
 这样的属性需要满足以下要求：
 
-* 它必须是一个顶层属性，或者是一个 [`object` 声明](object-declarations.md#object-declarations-overview)或者一个 [companion object](object-declarations.md#companion-objects) 的成员。
+* 它必须是一个顶层属性，或者是一个 [`object` 声明](object-declarations#object-declarations-overview)或者一个 [companion object](object-declarations#companion-objects) 的成员。
 * 它必须使用 `String` 类型或一个原始类型的值来初始化
 * 它不能是一个自定义的 getter
 
-编译器将内联使用该常量，将对该常量的引用替换为它的实际值。但是，该字段不会被删除，因此可以使用 [反射](reflection.md) 与之交互。
+编译器将内联使用该常量，将对该常量的引用替换为它的实际值。但是，该字段不会被删除，因此可以使用 [反射](reflection) 与之交互。
 
 这样的属性也可以在注解中使用：
 
@@ -186,7 +186,7 @@ public class MyTest {
 
 ### Checking whether a lateinit var is initialized (检查 lateinit var 是否已初始化)
 
-要检查一个 `lateinit var` 是否已经被初始化，在 [对该属性的引用](reflection.md#property-references) 上使用 `.isInitialized`：
+要检查一个 `lateinit var` 是否已经被初始化，在 [对该属性的引用](reflection#property-references) 上使用 `.isInitialized`：
 
 ```kotlin
 if (foo::bar.isInitialized) {
@@ -198,10 +198,10 @@ if (foo::bar.isInitialized) {
 
 ## Overriding properties (重写属性)
 
-参见 [重写属性](inheritance.md#overriding-properties)
+参见 [重写属性](inheritance#overriding-properties)
 
 ## Delegated properties (委托属性)
 
 最常见的属性只是从一个 backing field 读取（并且可能写入），但是自定义的 getter 和 setter 允许你使用属性，这样就可以实现属性的任何类型的行为。在第一种类型的简单性和第二种类型的多样性之间，存在一些属性可以做的常见模式。一些例子：延迟值，通过给定的 key 从 map 中读取，访问数据库，在访问时通知监听器。
 
-这些常见的行为可以使用 [委托属性](delegated-properties.md) 作为库来实现。
+这些常见的行为可以使用 [委托属性](delegated-properties) 作为库来实现。

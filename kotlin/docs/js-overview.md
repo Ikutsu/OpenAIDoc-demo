@@ -3,11 +3,11 @@ title: "Kotlin for JavaScript"
 ---
 Kotlin/JS 提供了将 Kotlin 代码、Kotlin 标准库和任何兼容的依赖项转换为 JavaScript 的能力。目前 Kotlin/JS 的实现目标是 [ES5](https://www.ecma-international.org/ecma-262/5.1/)。
 
-推荐使用 `kotlin.multiplatform` Gradle 插件来使用 Kotlin/JS。它让你能够在一个地方轻松设置和控制以 JavaScript 为目标的 Kotlin 项目。这包括基本功能，例如控制应用程序的打包、直接从 npm 添加 JavaScript 依赖项等等。要了解可用选项的概述，请查看 [设置 Kotlin/JS 项目](js-project-setup.md)。
+推荐使用 `kotlin.multiplatform` Gradle 插件来使用 Kotlin/JS。它让你能够在一个地方轻松设置和控制以 JavaScript 为目标的 Kotlin 项目。这包括基本功能，例如控制应用程序的打包、直接从 npm 添加 JavaScript 依赖项等等。要了解可用选项的概述，请查看 [设置 Kotlin/JS 项目](js-project-setup)。
 
 ## Kotlin/JS IR 编译器
 
-[Kotlin/JS IR 编译器](js-ir-compiler.md) 比旧的默认编译器有很多改进。例如，它通过消除无用代码来减小生成的执行文件的大小，并提供与 JavaScript 生态系统及其工具更顺畅的互操作性（interoperability）。
+[Kotlin/JS IR 编译器](js-ir-compiler) 比旧的默认编译器有很多改进。例如，它通过消除无用代码来减小生成的执行文件的大小，并提供与 JavaScript 生态系统及其工具更顺畅的互操作性（interoperability）。
 
 :::note
 旧的编译器自 Kotlin 1.8.0 版本起已被弃用。
@@ -16,7 +16,7 @@ Kotlin/JS 提供了将 Kotlin 代码、Kotlin 标准库和任何兼容的依赖�
 
 通过从 Kotlin 代码生成 TypeScript 声明文件（`d.ts`），IR 编译器可以更轻松地创建混合 TypeScript 和 Kotlin 代码的“混合”应用程序，并利用 Kotlin Multiplatform 使用代码共享功能。
 
-要了解有关 Kotlin/JS IR 编译器中可用功能的更多信息以及如何为你的项目尝试它，请访问 [Kotlin/JS IR 编译器文档页面](js-ir-compiler.md) 和 [迁移指南](js-ir-migration.md)。
+要了解有关 Kotlin/JS IR 编译器中可用功能的更多信息以及如何为你的项目尝试它，请访问 [Kotlin/JS IR 编译器文档页面](js-ir-compiler) 和 [迁移指南](js-ir-migration)。
 
 ## Kotlin/JS 框架
 
@@ -36,7 +36,7 @@ Kobweb 还支持站点导出，为 SEO 生成页面快照和自动搜索索引�
 
 ### KVision
 
-_KVision_ 是一个面向对象的 Web 框架，可以使用现成的组件在 Kotlin/JS 中编写应用程序，这些组件可以用作应用程序用户界面的构建块。你可以使用响应式和命令式编程模型来构建你的前端，使用 Ktor、Spring Boot 和其他框架的连接器将其与你的服务器端应用程序集成，并使用 [Kotlin Multiplatform](multiplatform-intro.md) 共享代码。
+_KVision_ 是一个面向对象的 Web 框架，可以使用现成的组件在 Kotlin/JS 中编写应用程序，这些组件可以用作应用程序用户界面的构建块。你可以使用响应式和命令式编程模型来构建你的前端，使用 Ktor、Spring Boot 和其他框架的连接器将其与你的服务器端应用程序集成，并使用 [Kotlin Multiplatform](multiplatform-intro) 共享代码。
 
 [访问 KVision 站点](https://kvision.io) 以获取文档、教程和示例。
 

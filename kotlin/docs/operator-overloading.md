@@ -1,7 +1,7 @@
 ---
 title: 运算符重载
 ---
-Kotlin 允许你为类型上预定义的一组运算符提供自定义实现。这些运算符具有预定义的符号表示形式（如 `+` 或 `*`）和优先级。要实现一个运算符，请为相应的类型提供具有特定名称的[成员函数](functions.md#member-functions)或[扩展函数](extensions.md)。对于二元运算，此类型将成为左侧类型；对于一元运算，此类型将成为参数类型。
+Kotlin 允许你为类型上预定义的一组运算符提供自定义实现。这些运算符具有预定义的符号表示形式（如 `+` 或 `*`）和优先级。要实现一个运算符，请为相应的类型提供具有特定名称的[成员函数](functions#member-functions)或[扩展函数](extensions)。对于二元运算，此类型将成为左侧类型；对于一元运算，此类型将成为参数类型。
 
 要重载运算符，请使用 `operator` 修饰符标记相应的函数：
 
@@ -10,7 +10,7 @@ interface IndexedContainer {
     operator fun get(index: Int)
 }
 ```
-当[重写](inheritance.md#overriding-methods)你的运算符重载时，你可以省略 `operator`：
+当[重写](inheritance#overriding-methods)你的运算符重载时，你可以省略 `operator`：
 
 ```kotlin
 class OrdersList: IndexedContainer {
@@ -36,7 +36,7 @@ class OrdersList: IndexedContainer {
 * 如果该函数存在并且其返回类型为 `R`，则表达式 `+a` 的类型为 `R`。
 
 :::note
-这些操作以及所有其他操作都针对[基本类型](basic-types.md)进行了优化，并且不会为它们引入函数调用的开销。
+这些操作以及所有其他操作都针对[基本类型](basic-types)进行了优化，并且不会为它们引入函数调用的开销。
 
 :::
 
@@ -193,8 +193,8 @@ data class Counter(val dayIndex: Int) {
 
 ### 属性委托运算符
 
-`provideDelegate`、`getValue` 和 `setValue` 运算符函数在[委托属性](delegated-properties.md)中描述。
+`provideDelegate`、`getValue` 和 `setValue` 运算符函数在[委托属性](delegated-properties)中描述。
 
 ## 命名函数的中缀调用
 
-你可以使用[中缀函数调用](functions.md#infix-notation)来模拟自定义中缀运算。
+你可以使用[中缀函数调用](functions#infix-notation)来模拟自定义中缀运算。

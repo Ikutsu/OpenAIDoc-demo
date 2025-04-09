@@ -4,7 +4,7 @@ title: "Kotlin 2.0.20 中的新增功能"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[发布时间：2024 年 8 月 22 日](releases.md#release-details)_
+_[发布时间：2024 年 8 月 22 日](releases#release-details)_
 
 Kotlin 2.0.20 版本已发布！此版本包含针对 Kotlin 2.0.0 的性能改进和错误修复，我们在该版本中宣布 Kotlin K2 编译器为稳定版。以下是此版本的一些其他亮点：
 
@@ -23,7 +23,7 @@ Kotlin 2.0.20 版本已发布！此版本包含针对 Kotlin 2.0.0 的性能改�
 你无需在 IDE 中更新 Kotlin 插件。
 你只需在你的构建脚本中将 Kotlin 版本更改为 2.0.20 即可。
 
-有关详细信息，请参阅[更新到新版本](releases.md#update-to-a-new-kotlin-version)。
+有关详细信息，请参阅[更新到新版本](releases#update-to-a-new-kotlin-version)。
 
 ## 语言
 
@@ -65,10 +65,10 @@ fun main() {
 
 ### 逐步替换上下文接收器为上下文参数
 
-在 Kotlin 1.6.20 中，我们引入了[上下文接收器](whatsnew1620.md#prototype-of-context-receivers-for-kotlin-jvm)作为
-[Experimental](components-stability.md#stability-levels-explained) 功能。在听取了社区的反馈后，我们决定不再继续使用此方法，而是采取不同的方向。
+在 Kotlin 1.6.20 中，我们引入了[上下文接收器](whatsnew1620#prototype-of-context-receivers-for-kotlin-jvm)作为
+[Experimental](components-stability#stability-levels-explained) 功能。在听取了社区的反馈后，我们决定不再继续使用此方法，而是采取不同的方向。
 
-在未来的 Kotlin 版本中，上下文接收器将被上下文参数替换。上下文参数仍在设计阶段，你可以在 [KEEP](https://github.com/Kotlin/KEEP/blob/context-parameters/proposals/context-parameters.md) 中找到该提案。
+在未来的 Kotlin 版本中，上下文接收器将被上下文参数替换。上下文参数仍在设计阶段，你可以在 [KEEP](https://github.com/Kotlin/KEEP/blob/context-parameters/proposals/context-parameters) 中找到该提案。
 
 由于上下文参数的实现需要对编译器进行重大更改，因此我们决定不同时支持上下文接收器和上下文参数。此决定大大简化了实现，并最大限度地降低了不稳定行为的风险。
 
@@ -165,7 +165,7 @@ Kotlin 2.0.20 改进了多平台项目中的源集管理，并由于 Gradle 中�
 
 ### 从默认目标层级结构访问源集的静态访问器
 
-自 Kotlin 1.9.20 以来，[默认层级结构模板](multiplatform-hierarchy.md#default-hierarchy-template)
+自 Kotlin 1.9.20 以来，[默认层级结构模板](multiplatform-hierarchy#default-hierarchy-template)
 已自动应用于所有 Kotlin 多平台项目。
 对于默认层级结构模板中的所有源集，Kotlin Gradle 插件提供了类型安全的访问器。
 这样，你最终可以访问所有指定目标的源集，而无需使用 `by getting` 或 `by creating` 构造。
@@ -198,7 +198,7 @@ kotlin {
 
 <img src="/img/accessing-sourse-sets.png" alt="按名称访问源集" width="700" style={{verticalAlign: 'middle'}}/>
 
-了解更多关于 [Kotlin 多平台中的层级项目结构](multiplatform-hierarchy.md) 的信息。
+了解更多关于 [Kotlin 多平台中的层级项目结构](multiplatform-hierarchy) 的信息。
 
 ### 弃用 Kotlin 多平台 Gradle 插件与 Gradle Java 插件的兼容性
 
@@ -312,7 +312,7 @@ Kotlin/Native 在垃圾回收器方面进行了改进，并支持从 Swift/Objec
 
 #### 如何启用
 
-此功能目前是 [Experimental](components-stability.md#stability-levels-explained)。
+此功能目前是 [Experimental](components-stability#stability-levels-explained)。
 要启用它，请在你的 `gradle.properties` 文件中设置以下选项：
 
 ```none
@@ -345,7 +345,7 @@ Kotlin 2.0.0 使得可以通过 Xcode Instruments 监视 Kotlin/Native 垃圾回
 -Xbinary=enableSafepointSignposts=true
 ```
 
-在[文档](native-memory-manager.md#monitor-gc-performance)中了解有关 GC 性能分析的更多信息。
+在[文档](native-memory-manager#monitor-gc-performance)中了解有关 GC 性能分析的更多信息。
 
 ### 能够在非主线程上从 Swift/Objective-C 调用 Kotlin 挂起函数
 
@@ -411,7 +411,7 @@ Kotlin/JS 引入了一些 Experimental 功能来支持 JavaScript 中的静态�
 
 ### 支持在 JavaScript 中使用 Kotlin 静态成员
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。它可能会随时删除或更改。
+此功能是 [Experimental](components-stability#stability-levels-explained)。它可能会随时删除或更改。
 仅将其用于评估目的。我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-18891/JS-provide-a-way-to-declare-static-members-JsStatic) 上提供的反馈。
 
 从 Kotlin 2.0.20 开始，你可以使用 `@JsStatic` 注解。它的工作方式类似于 [@JvmStatic](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/)
@@ -442,7 +442,7 @@ C.Companion.callNonStatic(); // 唯一有效的方式
 
 ### 能够在 JavaScript 中创建 Kotlin 集合
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。它可能会随时删除或更改。
+此功能是 [Experimental](components-stability#stability-levels-explained)。它可能会随时删除或更改。
 仅将其用于评估目的。我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-69133/Kotlin-JS-Add-support-for-collection-instantiation-in-JavaScript) 上提供的反馈。
 
 Kotlin 2.0.0 引入了将 Kotlin 集合导出到 JavaScript（和 TypeScript）的能力。现在，JetBrains 团队
@@ -500,7 +500,7 @@ Kotlin 2.0.20 完全兼容 Gradle 6.8.3 到 8.6。Gradle 8.7 和 8.8 也受支�
 
 ### 用于将 JVM 构件作为类文件在项目之间共享的选项
 
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。
+此功能是 [Experimental](components-stability#stability-levels-explained)。
 它可能会随时删除或更改。仅将其用于评估目的。
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-61861/Gradle-Kotlin-compilations-depend-on-packed-artifacts) 上提供的反馈。
 需要选择加入（请参阅下面的详细信息）。
@@ -668,7 +668,7 @@ abstract class Composables {
 ### 通用 Kotlin 标准库中对 UUID 的支持
 
 :::caution
-此功能是 [Experimental](components-stability.md#stability-levels-explained)。
+此功能是 [Experimental](components-stability#stability-levels-explained)。
 要选择加入，请使用 `@ExperimentalUuidApi` 注解或编译器选项 `-opt-in=kotlin.uuid.ExperimentalUuidApi`。
 
 :::

@@ -354,7 +354,7 @@ fun handleStrings(list: MutableList<String>) {
 相同的语法，但省略了类型实参，可用于不考虑类型实参的转换：`list as ArrayList`。
 
 泛型函数调用的类型实参也仅在编译时检查。 在函数体内部，类型参数不能用于类型检查，并且到类型参数的类型转换（`foo as T`）是未经检查的。
-唯一的例外是具有 [具体化类型参数](inline-functions.md#reified-type-parameters) 的内联函数，
+唯一的例外是具有 [具体化类型参数](inline-functions#reified-type-parameters) 的内联函数，
 它们在每个调用点都内联了它们的实际类型实参。 这使得可以对类型参数进行类型检查和转换。
 但是，上述限制仍然适用于在检查或转换中使用的泛型类型的实例。
 例如，在类型检查 `arg is T` 中，如果 `arg` 本身是泛型类型的实例，则其类型实参仍然会被擦除。
@@ -406,9 +406,9 @@ val intsDictionary: Map<String, Int> = readDictionary(intsFile) as Map<String, I
 你可以引入合理的抽象，将未经检查的转换从调用点移到实现细节。
 正确使用 [泛型型变](#variance) 也有帮助。
 
-对于泛型函数，使用 [具体化类型参数](inline-functions.md#reified-type-parameters) 使像 `arg as T` 这样的转换被检查，除非 `arg` 的类型有 *自己的* 被擦除的类型实参。
+对于泛型函数，使用 [具体化类型参数](inline-functions#reified-type-parameters) 使像 `arg as T` 这样的转换被检查，除非 `arg` 的类型有 *自己的* 被擦除的类型实参。
 
-可以使用 `@Suppress("UNCHECKED_CAST")` [注解](annotations.md) 语句或发生声明以禁止显示未经检查的转换警告：
+可以使用 `@Suppress("UNCHECKED_CAST")` [注解](annotations) 语句或发生声明以禁止显示未经检查的转换警告：
 
 ```kotlin
 inline fun <reified T> List<*>.asListOfType(): List<T>? =
@@ -419,7 +419,7 @@ inline fun <reified T> List<*>.asListOfType(): List<T>? =
 ```
 
 :::note
-**在 JVM 上**：[数组类型](arrays.md) (`Array<Foo>`) 保留有关其元素擦除类型的信息，并且对数组类型的类型转换会进行部分检查：元素类型的可空性和实际类型实参仍会被擦除。
+**在 JVM 上**：[数组类型](arrays) (`Array<Foo>`) 保留有关其元素擦除类型的信息，并且对数组类型的类型转换会进行部分检查：元素类型的可空性和实际类型实参仍会被擦除。
 例如，如果 `foo` 是一个包含任何 `List<*>` 的数组，无论是否可空，则转换 `foo as Array<List<String>?>` 都将成功。
 
 :::

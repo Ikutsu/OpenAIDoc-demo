@@ -4,7 +4,7 @@ title: "Kotlin 2.0.0 中的新特性"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[发布日期：2024年5月21日](releases.md#release-details)_
+_[发布日期：2024年5月21日](releases#release-details)_
 
 Kotlin 2.0.0 版本已发布，并且 [新的 Kotlin K2 编译器](#kotlin-k2-compiler) 已经稳定！ 此外，以下是一些其他的亮点：
 
@@ -28,21 +28,21 @@ Kotlin 2.0 是 JetBrains 团队的一个重大里程碑。这个版本是 Kotlin
 
 支持 Kotlin 2.0.0 的 Kotlin 插件已捆绑在最新的 IntelliJ IDEA 和 Android Studio 中。
 你无需在 IDE 中更新 Kotlin 插件。
-你只需要在你的构建脚本中[更改 Kotlin 版本](releases.md#update-to-a-new-kotlin-version)到 Kotlin 2.0.0。
+你只需要在你的构建脚本中[更改 Kotlin 版本](releases#update-to-a-new-kotlin-version)到 Kotlin 2.0.0。
 
 * 有关 IntelliJ IDEA 对 Kotlin K2 编译器的支持的详细信息，请参阅 [IDE 中的支持](#support-in-ides)。
-* 有关 IntelliJ IDEA 对 Kotlin 的支持的更多详细信息，请参阅 [Kotlin 版本](releases.md#ide-support)。
+* 有关 IntelliJ IDEA 对 Kotlin 的支持的更多详细信息，请参阅 [Kotlin 版本](releases#ide-support)。
 
 ## Kotlin K2 编译器
 
 通往 K2 编译器的道路漫长，但现在 JetBrains 团队终于准备好宣布其稳定。
-在 Kotlin 2.0.0 中，默认使用新的 Kotlin K2 编译器，并且它对所有目标平台（JVM、Native、Wasm 和 JS）都是[稳定的](components-stability.md)。
+在 Kotlin 2.0.0 中，默认使用新的 Kotlin K2 编译器，并且它对所有目标平台（JVM、Native、Wasm 和 JS）都是[稳定的](components-stability)。
 新的编译器带来了重大的性能改进，加速了新语言特性的开发，统一了 Kotlin 支持的所有平台，并为多平台项目提供了更好的架构。
 
 JetBrains 团队通过成功编译来自选定的用户和内部项目的 1000 万行代码，确保了新编译器的质量。
 18,000 名开发人员参与了稳定过程，测试了总共 80,000 个项目中的新 K2 编译器，并报告了他们发现的任何问题。
 
-为了帮助尽可能顺利地完成向新编译器的迁移过程，我们创建了一个 [K2 编译器迁移指南](k2-compiler-migration-guide.md)。
+为了帮助尽可能顺利地完成向新编译器的迁移过程，我们创建了一个 [K2 编译器迁移指南](k2-compiler-migration-guide)。
 本指南解释了编译器的许多优点，强调了你可能遇到的任何更改，并描述了如何在必要时回滚到以前的版本。
 
 在一篇 [博客文章](https://blog.jetbrains.com/kotlin/2024/04/k2-compiler-performance-benchmarks-and-how-to-measure-them-on-your-projects/) 中，
@@ -82,7 +82,7 @@ JetBrains 团队通过成功编译来自选定的用户和内部项目的 1000 �
 
 ### 智能类型转换 (smart cast) 改进
 
-在特定情况下，Kotlin 编译器可以自动将对象转换为类型，从而省去你必须显式转换它的麻烦。 这被称为 [智能类型转换](typecasts.md#smart-casts)。
+在特定情况下，Kotlin 编译器可以自动将对象转换为类型，从而省去你必须显式转换它的麻烦。 这被称为 [智能类型转换](typecasts#smart-casts)。
 与之前相比，Kotlin K2 编译器现在在更多场景中执行智能类型转换。
 
 在 Kotlin 2.0.0 中，我们对以下领域的智能类型转换进行了改进：
@@ -349,7 +349,7 @@ fun main(input: Rho) {
 此外，来自通用代码的一些编译器设置和依赖项过去会泄漏到平台代码中。
 
 在 Kotlin 2.0.0 中，我们对新的 Kotlin K2 编译器的实现包括对编译方案的重新设计，以确保通用和平台源集之间严格分离。
-当你使用 [expected 和 actual 函数](multiplatform-expect-actual.md#expected-and-actual-functions) 时，此更改最为明显。
+当你使用 [expected 和 actual 函数](multiplatform-expect-actual#expected-and-actual-functions) 时，此更改最为明显。
 以前，你的通用代码中的函数调用可能会解析为平台代码中的函数。 例如：
 <table>
 <tr>
@@ -391,7 +391,7 @@ fun foo(x: Int) = println("platform foo")
 
 在 Kotlin 2.0.0 中，通用代码无法访问平台代码，因此两个平台都成功将 `foo()` 函数解析为通用代码中的 `foo()` 函数：`common foo`。
 
-除了提高跨平台行为的一致性之外，我们还努力修复 IntelliJ IDEA 或 Android Studio 和编译器之间存在冲突行为的情况。 例如，当你使用 [expected 和 actual 类](multiplatform-expect-actual.md#expected-and-actual-classes) 时，会发生以下情况：
+除了提高跨平台行为的一致性之外，我们还努力修复 IntelliJ IDEA 或 Android Studio 和编译器之间存在冲突行为的情况。 例如，当你使用 [expected 和 actual 类](multiplatform-expect-actual#expected-and-actual-classes) 时，会发生以下情况：
 <table>
 <tr>
 <td>
@@ -489,7 +489,7 @@ fun whichFun(x: Int) = println("platform function")
 
 #### expected 和 actual 声明的不同可见性级别
 
-在 Kotlin 2.0.0 之前，如果在你的 Kotlin 多平台项目中使用 [expected 和 actual 声明](multiplatform-expect-actual.md)，它们必须具有相同的 [可见性级别](visibility-modifiers.md)。
+在 Kotlin 2.0.0 之前，如果在你的 Kotlin 多平台项目中使用 [expected 和 actual 声明](multiplatform-expect-actual)，它们必须具有相同的 [可见性级别](visibility-modifiers)。
 Kotlin 2.0.0 现在还支持不同的可见性级别，但**仅当**实际声明比预期声明 _更_ 宽松时。 例如：
 
 ```kotlin
@@ -498,7 +498,7 @@ actual class Attribute          // 可见性默认为 public，
                                 // 这更宽松
 ```
 
-同样，如果在你的实际声明中使用 [类型别名](type-aliases.md)，则**底层类型**的可见性应与预期声明相同或更宽松。 例如：
+同样，如果在你的实际声明中使用 [类型别名](type-aliases)，则**底层类型**的可见性应与预期声明相同或更宽松。 例如：
 
 ```kotlin
 expect internal class Attribute                 // 可见性为 internal
@@ -512,29 +512,29 @@ class Expanded                                  // 可见性默认为 public，
 
 目前，Kotlin K2 编译器支持以下 Kotlin 编译器插件：
 
-* [`all-open`](all-open-plugin.md)
+* [`all-open`](all-open-plugin)
 * [AtomicFU](https://github.com/Kotlin/kotlinx-atomicfu)
 * [`jvm-abi-gen`](https://github.com/JetBrains/kotlin/tree/master/plugins/jvm-abi-gen)
 * [`js-plain-objects`](https://github.com/JetBrains/kotlin/tree/master/plugins/js-plain-objects)
-* [kapt](whatsnew1920.md#preview-kapt-compiler-plugin-with-k2)
-* [Lombok](lombok.md)
-* [`no-arg`](no-arg-plugin.md)
+* [kapt](whatsnew1920#preview-kapt-compiler-plugin-with-k2)
+* [Lombok](lombok)
+* [`no-arg`](no-arg-plugin)
 * [Parcelize](https://plugins.gradle.org/plugin/org.jetbrains.kotlin.plugin.parcelize)
-* [SAM with receiver](sam-with-receiver-plugin.md)
-* [serialization](serialization.md)
-* [Power-assert](power-assert.md)
+* [SAM with receiver](sam-with-receiver-plugin)
+* [serialization](serialization)
+* [Power-assert](power-assert)
 
 此外，Kotlin K2 编译器还支持：
 
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) 编译器插件 2.0.0，该插件已[移至 Kotlin 存储库](https://android-developers.googleblog.com/2024/04/jetpack-compose-compiler-moving-to-kotlin-repository.html)。
-* [Kotlin 符号处理 (KSP) 插件](ksp-overview.md)，因为 [KSP2](https://android-developers.googleblog.com/2023/12/ksp2-preview-kotlin-k2-standalone.html)。
+* [Kotlin 符号处理 (KSP) 插件](ksp-overview)，因为 [KSP2](https://android-developers.googleblog.com/2023/12/ksp2-preview-kotlin-k2-standalone.html)。
 
 :::note
 如果你使用任何其他编译器插件，请查看其文档以查看它们是否与 K2 兼容。
 
 ### 实验性的 Kotlin Power-assert 编译器插件
 
-Kotlin Power-assert 插件是 [实验性的](components-stability.md#stability-levels-explained)。
+Kotlin Power-assert 插件是 [实验性的](components-stability#stability-levels-explained)。
 它可能随时更改。
 
 Kotlin 2.0.0 引入了一个实验性的 Power-assert 编译器插件。此插件通过在失败消息中包含上下文信息来改善编写测试的体验，从而使调试更容易、更有效。
@@ -576,7 +576,7 @@ powerAssert {
 </TabItem>
 </Tabs>
 
-在 [文档](power-assert.md) 中了解更多关于 Kotlin Power-assert 插件的信息。
+在 [文档](power-assert) 中了解更多关于 Kotlin Power-assert 插件的信息。
 
 ### 如何启用 Kotlin K2 编译器
 
@@ -594,7 +594,7 @@ Kotlin Playground 支持 2.0.0 版本。 [快来看看！](https://pl.kotl.in/cz
 
 <img src="/img/k2-mode.png" alt="启用 K2 模式" width="200" style={{verticalAlign: 'middle'}}/>
 
-启用 K2 模式后，由于编译器行为的更改，你可能会注意到 IDE 分析中的差异。 在我们的 [迁移指南](k2-compiler-migration-guide.md) 中了解新的 K2 编译器与以前的编译器有何不同。
+启用 K2 模式后，由于编译器行为的更改，你可能会注意到 IDE 分析中的差异。 在我们的 [迁移指南](k2-compiler-migration-guide) 中了解新的 K2 编译器与以前的编译器有何不同。
 
 * 在 [我们的博客](https://blog.jetbrains.com/idea/2024/11/k2-mode-becomes-stable/) 中了解更多关于 K2 模式的信息。
 * 我们正在积极收集关于 K2 模式的反馈，请在我们的 [公共 Slack 频道](https://kotlinlang.slack.com/archives/C0B8H786P) 中分享你的想法。
@@ -618,7 +618,7 @@ Kotlin Playground 支持 2.0.0 版本。 [快来看看！](https://pl.kotl.in/cz
 
 Kotlin 2.0.0 引入了一种新的默认方法，用于使用 `invokedynamic` 生成 lambda 函数。 与传统的匿名类生成相比，此更改减少了应用程序的二进制大小。
 
-自第一个版本以来，Kotlin 一直将 lambda 生成为匿名类。 但是，从 [Kotlin 1.5.0](whatsnew15.md#lambdas-via-invokedynamic) 开始，
+自第一个版本以来，Kotlin 一直将 lambda 生成为匿名类。 但是，从 [Kotlin 1.5.0](whatsnew15#lambdas-via-invokedynamic) 开始，
 可以通过使用 `-Xlambdas=indy` 编译器选项来使用 `invokedynamic` 生成的选项。 在 Kotlin 2.0.0 中，`invokedynamic` 已成为 lambda 生成的默认方法。
 此方法产生更轻的二进制文件，并使 Kotlin 与 JVM 优化保持一致，从而确保应用程序受益于 JVM 性能的持续和未来的改进。
 
@@ -647,13 +647,13 @@ fun main() {
 
 ### kotlinx-metadata-jvm 库现在已稳定
 
-在 Kotlin 2.0.0 中，`kotlinx-metadata-jvm` 库已变为 [稳定](components-stability.md#stability-levels-explained)。 既然该库已更改为 `kotlin` 包和坐标，你可以将其查找为 `kotlin-metadata-jvm`（没有“x”）。
+在 Kotlin 2.0.0 中，`kotlinx-metadata-jvm` 库已变为 [稳定](components-stability#stability-levels-explained)。 既然该库已更改为 `kotlin` 包和坐标，你可以将其查找为 `kotlin-metadata-jvm`（没有“x”）。
 
 以前，`kotlinx-metadata-jvm` 库有自己的发布方案和版本。 现在，我们将构建和发布 `kotlin-metadata-jvm` 更新作为 Kotlin 发布周期的一部分，并具有与 Kotlin 标准库相同的向后兼容性保证。
 
 `kotlin-metadata-jvm` 库提供了一个 API 来读取和修改 Kotlin/JVM 编译器生成的二进制文件的元数据。
 
-<!-- Learn more about the `kotlinx-metadata-jvm` library in the [documentation](kotlin-metadata-jvm.md). -->
+<!-- Learn more about the `kotlinx-metadata-jvm` library in the [documentation](kotlin-metadata-jvm). -->
 
 ## Kotlin/Native
 
@@ -673,7 +673,7 @@ fun main() {
 自 Kotlin 2.0.0 以来，GC 使用 Instruments 中可用的信标 (signpost) 报告暂停。
 信标允许在你的应用中进行自定义日志记录，因此现在，当调试 iOS 应用性能时，你可以检查 GC 暂停是否对应于应用冻结。
 
-在 [文档](native-memory-manager.md#monitor-gc-performance) 中了解更多关于 GC 性能分析的信息。
+在 [文档](native-memory-manager#monitor-gc-performance) 中了解更多关于 GC 性能分析的信息。
 
 ### 解决与 Objective-C 方法的冲突
 
@@ -698,7 +698,7 @@ Objective-C 方法可以有不同的名称，但具有相同数量和类型的�
 
 以前，Kotlin/Native 编译器隐式地解析标准库和平台依赖项，这导致 Kotlin Gradle 插件在 Kotlin 目标中的工作方式不一致。
 
-现在，每个 Kotlin/Native Gradle 编译都通过 `compileDependencyFiles` [编译参数](multiplatform-dsl-reference.md#compilation-parameters) 显式地在其编译时库路径中包含标准库和平台依赖项。
+现在，每个 Kotlin/Native Gradle 编译都通过 `compileDependencyFiles` [编译参数](multiplatform-dsl-reference#compilation-parameters) 显式地在其编译时库路径中包含标准库和平台依赖项。
 
 ### Gradle 配置缓存中的任务错误
 

@@ -6,14 +6,14 @@ title: "创建你的第一个 Kotlin Notebook"
    这是 <strong>Kotlin Notebook 入门</strong>教程的第二部分。在继续之前，请确保已完成上一步。
 </p>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="kotlin-notebook-set-up-env.md">配置环境</a><br/>
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="kotlin-notebook-set-up-env">配置环境</a><br/>
       <img src="/img/icon-2.svg" width="20" alt="Second step"/> <strong>创建 Kotlin Notebook</strong><br/>
       <img src="/img/icon-3-todo.svg" width="20" alt="Third step"/> 向 Kotlin Notebook 添加依赖项<br/>
 </p>
 
 :::
 
-在这里，你将学习如何创建你的第一个 [Kotlin Notebook](kotlin-notebook-overview.md)，执行简单的操作，并运行代码单元（code cell）。
+在这里，你将学习如何创建你的第一个 [Kotlin Notebook](kotlin-notebook-overview)，执行简单的操作，并运行代码单元（code cell）。
 
 ## 创建一个空项目
 
@@ -87,4 +87,4 @@ title: "创建你的第一个 Kotlin Notebook"
 
 在本教程的下一部分中，你将学习如何向 Kotlin Notebook 添加依赖项。
 
-**[进入下一章](kotlin-notebook-add-dependencies.md)**
+**[进入下一章](kotlin-notebook-add-dependencies)**

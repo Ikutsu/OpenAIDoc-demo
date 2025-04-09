@@ -6,25 +6,25 @@ description: "开始使用 Spring Boot 和 Kotlin。创建一个使用 Kotlin �
 
 通过以下四个步骤，你将学习 Kotlin 语言的许多基本特性：
 
-<img src="/img/icon-1.svg" alt="First step" width="25" style={{verticalAlign: 'middle'}}/>  [创建一个 Spring Boot 项目](jvm-create-project-with-spring-boot.md)
+<img src="/img/icon-1.svg" alt="First step" width="25" style={{verticalAlign: 'middle'}}/>  [创建一个 Spring Boot 项目](jvm-create-project-with-spring-boot)
 
-<img src="/img/icon-2.svg" alt="Second step" width="25" style={{verticalAlign: 'middle'}}/> [向 Spring Boot 项目添加数据类 (data class)](jvm-spring-boot-add-data-class.md)
+<img src="/img/icon-2.svg" alt="Second step" width="25" style={{verticalAlign: 'middle'}}/> [向 Spring Boot 项目添加数据类 (data class)](jvm-spring-boot-add-data-class)
 
-<img src="/img/icon-3.svg" alt="Third step" width="25" style={{verticalAlign: 'middle'}}/>  [为 Spring Boot 项目添加数据库支持](jvm-spring-boot-add-db-support.md)
+<img src="/img/icon-3.svg" alt="Third step" width="25" style={{verticalAlign: 'middle'}}/>  [为 Spring Boot 项目添加数据库支持](jvm-spring-boot-add-db-support)
 
-<img src="/img/icon-4.svg" alt="Fourth step" width="25" style={{verticalAlign: 'middle'}}/> [使用 Spring Data CrudRepository 进行数据库访问](jvm-spring-boot-using-crudrepository.md)
+<img src="/img/icon-4.svg" alt="Fourth step" width="25" style={{verticalAlign: 'middle'}}/> [使用 Spring Data CrudRepository 进行数据库访问](jvm-spring-boot-using-crudrepository)
 
 ## 下一步
 
-首先使用 IntelliJ IDEA [创建一个 Spring Boot 项目](jvm-create-project-with-spring-boot.md)。
+首先使用 IntelliJ IDEA [创建一个 Spring Boot 项目](jvm-create-project-with-spring-boot)。
 
 ### 参见
 
 浏览我们的 Java 到 Kotlin (J2K) 互操作和迁移指南：
 
-* [从 Kotlin 调用 Java](java-interop.md) 和 [从 Java 调用 Kotlin](java-to-kotlin-interop.md)
-* [Java 和 Kotlin 中的集合 (Collections)](java-to-kotlin-collections-guide.md)
-* [Java 和 Kotlin 中的字符串 (Strings)](java-to-kotlin-idioms-strings.md)
+* [从 Kotlin 调用 Java](java-interop) 和 [从 Java 调用 Kotlin](java-to-kotlin-interop)
+* [Java 和 Kotlin 中的集合 (Collections)](java-to-kotlin-collections-guide)
+* [Java 和 Kotlin 中的字符串 (Strings)](java-to-kotlin-idioms-strings)
 
 ## 加入社区
 

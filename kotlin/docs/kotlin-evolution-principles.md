@@ -24,7 +24,7 @@ Kotlin 被设计成程序员的实用工具。在语言演进方面，其务实�
 
 **舒适的更新**。如果不加以适当的注意，不兼容的更改（例如从语言中删除内容）可能会导致从一个版本到下一个版本的痛苦迁移。我们始终会在更改发生之前提前宣布此类更改，将相关内容标记为已弃用，并提供自动迁移工具。当语言发生更改时，我们希望世界上大多数代码都已更新，因此在迁移到新版本时不会出现任何问题。
 
-**反馈循环**。经历弃用周期需要付出巨大的努力，因此我们希望尽量减少将来会做出的不兼容更改的数量。除了运用我们最好的判断之外，我们认为在现实生活中尝试才是验证设计的最佳方法。在将事物铸成定局之前，我们希望它们经过实战检验。这就是为什么我们利用一切机会在语言的生产版本中提供早期版本的设计，但处于_预稳定_状态之一：[Experimental（实验性）, Alpha, 或 Beta](components-stability.md)。这些功能不稳定，随时可能更改，选择使用它们的用户明确表示他们已准备好处理未来的迁移问题。这些用户提供了宝贵的反馈，我们收集这些反馈以迭代设计并使其坚如磐石。
+**反馈循环**。经历弃用周期需要付出巨大的努力，因此我们希望尽量减少将来会做出的不兼容更改的数量。除了运用我们最好的判断之外，我们认为在现实生活中尝试才是验证设计的最佳方法。在将事物铸成定局之前，我们希望它们经过实战检验。这就是为什么我们利用一切机会在语言的生产版本中提供早期版本的设计，但处于_预稳定_状态之一：[Experimental（实验性）, Alpha, 或 Beta](components-stability)。这些功能不稳定，随时可能更改，选择使用它们的用户明确表示他们已准备好处理未来的迁移问题。这些用户提供了宝贵的反馈，我们收集这些反馈以迭代设计并使其坚如磐石。
 
 ## 不兼容的更改
 
@@ -87,17 +87,17 @@ Kotlin 语言功能可以具有以下状态之一：
 
 *   **KEEP 讨论**。我们非常确定应将该功能添加到该语言中。我们的目标是在名为_KEEP_的文档中提供动机、用例、设计和其他重要细节。我们希望用户提供的反馈侧重于讨论 KEEP 中提供的所有信息。
 
-*   **预览中**。功能原型已准备就绪，您可以使用特定于功能的编译器选项来启用它。我们寻求有关您使用该功能的体验的反馈，包括它如何轻松地集成到您的代码库中、它如何与现有代码交互以及任何 IDE 支持问题或建议。该功能的设计可能会发生重大变化，或者可能会根据反馈完全撤销。当一个功能处于_预览中_时，它具有[稳定性级别](components-stability.md#stability-levels-explained)。
+*   **预览中**。功能原型已准备就绪，您可以使用特定于功能的编译器选项来启用它。我们寻求有关您使用该功能的体验的反馈，包括它如何轻松地集成到您的代码库中、它如何与现有代码交互以及任何 IDE 支持问题或建议。该功能的设计可能会发生重大变化，或者可能会根据反馈完全撤销。当一个功能处于_预览中_时，它具有[稳定性级别](components-stability#stability-levels-explained)。
 
 *   **稳定**。该语言功能现在是 Kotlin 语言中的一等公民。我们保证其向后兼容性，并且我们将提供工具支持。
 
 *   **已撤销**。我们已撤销该提案，并且不会在 Kotlin 语言中实现该功能。如果一个功能不适合 Kotlin，我们可能会撤销它（该功能处于_预览中_）。
 
-[查看 Kotlin 语言提案及其状态的完整列表](kotlin-language-features-and-proposals.md)。
+[查看 Kotlin 语言提案及其状态的完整列表](kotlin-language-features-and-proposals)。
 
 ### 不同组件的状态
 
-了解有关 [Kotlin 中不同组件的稳定性状态](components-stability.md) 的更多信息，例如 Kotlin/JVM、JS 和 Native 编译器以及各种库。
+了解有关 [Kotlin 中不同组件的稳定性状态](components-stability) 的更多信息，例如 Kotlin/JVM、JS 和 Native 编译器以及各种库。
 
 ## 库
 
@@ -112,7 +112,7 @@ Kotlin 语言功能可以具有以下状态之一：
 *   库代码应始终显式指定公共/受保护函数和属性的返回类型，因此永远不要依赖于公共 API 的类型推断。类型推断中的细微更改可能会导致返回类型在不知不觉中更改，从而导致二进制兼容性问题。
 *   同一库提供的重载函数和属性应执行基本相同的事情。类型推断中的更改可能会导致在调用站点已知更精确的静态类型，从而导致重载解析中的更改。
 
-库作者可以使用 `@Deprecated` 和 [`@RequiresOptIn`](opt-in-requirements.md) 注解来控制其 API 表面的演变。请注意，`@Deprecated(level=HIDDEN)` 可用于保留二进制兼容性，即使对于从 API 中删除的声明也是如此。
+库作者可以使用 `@Deprecated` 和 [`@RequiresOptIn`](opt-in-requirements) 注解来控制其 API 表面的演变。请注意，`@Deprecated(level=HIDDEN)` 可用于保留二进制兼容性，即使对于从 API 中删除的声明也是如此。
 
 此外，按照惯例，名为“internal”的包不被视为公共 API。所有位于名为“experimental”的包中的 API 都被认为是预稳定的，并且可以随时更改。
 
@@ -128,11 +128,11 @@ Kotlin 语言功能可以具有以下状态之一：
 
 ### 兼容性选项
 
-我们提供 `-language-version X.Y` 和 `-api-version X.Y` 选项，这些选项使新版本模拟旧版本的行为以实现兼容性。为了给您更多的时间进行迁移，我们[支持](compatibility-modes.md) 最新的稳定版本之外的三个以前的语言和 API 版本。
+我们提供 `-language-version X.Y` 和 `-api-version X.Y` 选项，这些选项使新版本模拟旧版本的行为以实现兼容性。为了给您更多的时间进行迁移，我们[支持](compatibility-modes) 最新的稳定版本之外的三个以前的语言和 API 版本。
 
 积极维护的代码库可以受益于尽快获得错误修复，而无需等待完整的弃用周期完成。目前，此类项目可以启用 `-progressive` 选项，即使在工具版本中也可以启用此类修复。
 
-所有选项都可以在命令行以及 [Gradle](gradle-compiler-options.md) 和 [Maven](maven.md#specify-compiler-options) 中使用。
+所有选项都可以在命令行以及 [Gradle](gradle-compiler-options) 和 [Maven](maven#specify-compiler-options) 中使用。
 
 ### 演变二进制格式
 
@@ -150,11 +150,11 @@ Kotlin 语言功能可以具有以下状态之一：
 
 #### Kotlin klib 二进制文件
 
-Kotlin klib 二进制文件已在 Kotlin 1.9.20 中达到 [稳定](components-stability.md#stability-levels-explained) 级别。但是，您需要牢记一些兼容性细节：
+Kotlin klib 二进制文件已在 Kotlin 1.9.20 中达到 [稳定](components-stability#stability-levels-explained) 级别。但是，您需要牢记一些兼容性细节：
 
 *   从 Kotlin 1.9.20 开始，klib 二进制文件是向后兼容的。例如，2.0.x 编译器可以读取由 1.9.2x 编译器生成的二进制文件。
 *   不保证向前兼容性。例如，不保证 2.0.x 编译器可以读取由 2.1.x 编译器生成的二进制文件。
 
-Kotlin cinterop klib 二进制文件仍处于 [Beta](components-stability.md#stability-levels-explained) 阶段。目前，我们无法为 cinterop klib 二进制文件的不同 Kotlin 版本之间提供具体的兼容性保证。
+Kotlin cinterop klib 二进制文件仍处于 [Beta](components-stability#stability-levels-explained) 阶段。目前，我们无法为 cinterop klib 二进制文件的不同 Kotlin 版本之间提供具体的兼容性保证。
 
 :::

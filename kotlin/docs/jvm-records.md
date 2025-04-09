@@ -14,11 +14,11 @@ public record Person (String name, int age) {}
 * 一组用于实现结构相等性的方法：`equals()`, `hashCode()`, `toString()`
 * 一个用于读取每个 record (记录) 组件的公共方法
 
-Record (记录) 与 Kotlin 的 [data class (数据类)](data-classes.md) 非常相似。
+Record (记录) 与 Kotlin 的 [data class (数据类)](data-classes) 非常相似。
 
 ## 在 Kotlin 代码中使用 Java record (记录)
 
-你可以像在 Kotlin 中使用带有 property (属性) 的类一样，使用在 Java 中声明的带有组件的 record (记录) 类。要访问 record (记录) 组件，只需像使用 [Kotlin property (属性)](properties.md) 一样使用它的名称：
+你可以像在 Kotlin 中使用带有 property (属性) 的类一样，使用在 Java 中声明的带有组件的 record (记录) 类。要访问 record (记录) 组件，只需像使用 [Kotlin property (属性)](properties) 一样使用它的名称：
 
 ```kotlin
 val newPerson = Person("Kotlin", 10)
@@ -63,8 +63,8 @@ data class (数据类) 提供了 `equals()`, `hashCode()`, 和 `toString()` 方�
 
 JVM record (记录) 需要生成的 JVM 字节码的 `16` 目标版本或更高版本。
 
-要显式指定它，请在 [Gradle](gradle-compiler-options.md#attributes-specific-to-jvm) 或 [Maven](maven.md#attributes-specific-to-jvm) 中使用 `jvmTarget` 编译器选项。
+要显式指定它，请在 [Gradle](gradle-compiler-options#attributes-specific-to-jvm) 或 [Maven](maven#attributes-specific-to-jvm) 中使用 `jvmTarget` 编译器选项。
 
 ## 进一步讨论
 
-有关更多技术细节和讨论，请参阅此 [JVM record (记录) 的语言提案](https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-records.md)。
+有关更多技术细节和讨论，请参阅此 [JVM record (记录) 的语言提案](https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-records)。

@@ -70,7 +70,7 @@ fun main() {
 ```
 
 默认情况下，所有 enum class 都实现 [Comparable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html)
-接口。enum class 中的常量按自然顺序定义。有关更多信息，请参见 [排序](collection-ordering.md)。
+接口。enum class 中的常量按自然顺序定义。有关更多信息，请参见 [排序](collection-ordering)。
 
 ## 使用 enum 常量
 
@@ -133,6 +133,6 @@ inline fun <reified T : Enum<T>> printAllValues() {
 printAllValues<RGB>() 
 // RED, GREEN, BLUE
 ```
-> 有关内联函数和具体化类型参数的更多信息，请参见 [内联函数](inline-functions.md)。
+> 有关内联函数和具体化类型参数的更多信息，请参见 [内联函数](inline-functions)。
 >
 >

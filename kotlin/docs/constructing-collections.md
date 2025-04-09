@@ -23,7 +23,7 @@ val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key4" to 1)
 ```
 
 请注意，`to` 符号会创建一个短生命周期的 `Pair` 对象，因此建议仅在性能不重要时使用它。为了避免过多的内存使用，请使用其他方法。例如，你可以创建一个可变映射（mutable map）并
-使用写入操作填充它。 [`apply()`](scope-functions.md#apply) 函数可以帮助保持此处的初始化流畅。
+使用写入操作填充它。 [`apply()`](scope-functions#apply) 函数可以帮助保持此处的初始化流畅。
 
 ```kotlin
 val numbersMap = mutableMapOf<String, String>().apply { this["one"] = "1"; this["two"] = "2" }
@@ -34,7 +34,7 @@ val numbersMap = mutableMapOf<String, String>().apply { this["one"] = "1"; this[
 创建集合的另一种方法是调用构建器函数 –
 [`buildList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html), [`buildSet()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-set.html),
 或 [`buildMap()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-map.html)。它们创建一个新的、
-可变的相应类型的集合，使用[写入操作](collection-write.md)填充它，
+可变的相应类型的集合，使用[写入操作](collection-write)填充它，
 并返回一个具有相同元素的只读集合：
 
 ```kotlin
@@ -151,7 +151,7 @@ fun main() {
 
 ## 在其他集合上调用函数
 
-可以通过对其他集合的各种操作来创建集合。例如，[过滤](collection-filtering.md)
+可以通过对其他集合的各种操作来创建集合。例如，[过滤](collection-filtering)
 列表会创建一个与过滤器匹配的元素的新列表：
 
 ```kotlin
@@ -164,7 +164,7 @@ fun main() {
 }
 ```
 
-[映射](collection-transformations.md#map) 从转换的结果中生成一个列表：
+[映射](collection-transformations#map) 从转换的结果中生成一个列表：
 
 ```kotlin
 fun main() {
@@ -176,7 +176,7 @@ fun main() {
 }
 ```
 
-[关联](collection-transformations.md#associate) 生成映射：
+[关联](collection-transformations#associate) 生成映射：
 
 ```kotlin
 fun main() {
@@ -187,4 +187,4 @@ fun main() {
 }
 ```
 
-有关 Kotlin 中集合操作的更多信息，请参见 [集合操作概述](collection-operations.md)。
+有关 Kotlin 中集合操作的更多信息，请参见 [集合操作概述](collection-operations)。

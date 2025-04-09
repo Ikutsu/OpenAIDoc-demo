@@ -1,7 +1,7 @@
 ---
 title: "分享你的 Kotlin Notebook"
 ---
-要共享 [Kotlin Notebook](kotlin-notebook-overview.md)，你可以直接将其上传到任何 notebook Web 查看器，因为 [Kotlin notebook](data-analysis-overview.md#notebooks) 遵循通用的 Jupyter 格式。
+要共享 [Kotlin Notebook](kotlin-notebook-overview)，你可以直接将其上传到任何 notebook Web 查看器，因为 [Kotlin notebook](data-analysis-overview#notebooks) 遵循通用的 Jupyter 格式。
 
 我们推荐以下平台来共享 Kotlin notebook：
 
@@ -12,6 +12,6 @@ title: "分享你的 Kotlin Notebook"
 
 ## 接下来做什么
 
-* 使用 [Kandy 库](data-analysis-visualization.md) 探索数据可视化
-* 在 [使用数据源](data-analysis-work-with-data-sources.md) 中了解如何从文件、Web 源或数据库检索数据
-* 有关 Kotlin 中可用于数据科学和分析的工具和资源的全面概述，请参阅 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries.md)
+* 使用 [Kandy 库](data-analysis-visualization) 探索数据可视化
+* 在 [使用数据源](data-analysis-work-with-data-sources) 中了解如何从文件、Web 源或数据库检索数据
+* 有关 Kotlin 中可用于数据科学和分析的工具和资源的全面概述，请参阅 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries)

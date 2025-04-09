@@ -27,7 +27,7 @@ class Bar { ... }
 * `protected` 修饰符不适用于顶层声明。
 
 :::note
-要使用来自另一个包的可见顶层声明，你应该[导入](packages.md#imports)它。
+要使用来自另一个包的可见顶层声明，你应该[导入](packages#imports)它。
 
 :::
 
@@ -106,7 +106,7 @@ class C private constructor(a: Int) { ... }
 
 这里构造函数是 `private` 的。默认情况下，所有构造函数都是 `public`，这实际上相当于它们在类可见的任何地方都可见（这意味着 `internal` 类的构造函数仅在同一模块内可见）。
 
-对于密封类（sealed classes），构造函数默认为 `protected`。有关更多信息，请参阅[密封类](sealed-classes.md#constructors)。
+对于密封类（sealed classes），构造函数默认为 `protected`。有关更多信息，请参阅[密封类](sealed-classes#constructors)。
 
 ### 局部声明（Local declarations）
 

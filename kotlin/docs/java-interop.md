@@ -49,7 +49,7 @@ fun calendarDemo() {
 ## Java 合成属性引用
 
 :::note
-此功能是 [实验性的](components-stability.md#stability-levels-explained)。它可能随时被删除或更改。
+此功能是 [实验性的](components-stability#stability-levels-explained)。它可能随时被删除或更改。
 我们建议您仅将其用于评估目的。
 
 从 Kotlin 1.8.20 开始，您可以创建对 Java 合成属性的引用。 考虑以下 Java 代码：
@@ -243,7 +243,7 @@ fun main() {
 
 `Derived` 的上限设置为 `Base<String?>`，这与 `Base<String>` 不同。
 
-了解更多关于 [Kotlin 中的 Java 泛型](java-interop.md#java-generics-in-kotlin)。
+了解更多关于 [Kotlin 中的 Java 泛型](java-interop#java-generics-in-kotlin)。
 
 #### 类型形参
 
@@ -291,7 +291,7 @@ class BaseWithBound<T : Number> {}
 
 一个库可以针对 JSR-305 注解进行编译，但没有必要使注解构件（例如 `jsr305.jar`）成为库使用者的编译依赖项。 Kotlin 编译器可以从库中读取 JSR-305 注解，而无需在类路径上提供注解。
 
-[自定义可空性限定符 (KEEP-79)](https://github.com/Kotlin/KEEP/blob/master/proposals/jsr-305-custom-nullability-qualifiers.md) 也受支持（见下文）。
+[自定义可空性限定符 (KEEP-79)](https://github.com/Kotlin/KEEP/blob/master/proposals/jsr-305-custom-nullability-qualifiers) 也受支持（见下文）。
 
 #### 类型限定符昵称
 
@@ -502,21 +502,21 @@ Java 的装箱基本类型映射到可空的 Kotlin 类型：
 | `Map<K, V>`          | `Map<K, V>`          | `MutableMap<K, V>`              | `(Mutable)Map<K, V>!`              |
 | `Map.Entry<K, V>`    | `Map.Entry<K, V>`    | `MutableMap.MutableEntry<K,V>` | `(Mutable)Map.(Mutable)Entry<K, V>!` |
 
-Java 的数组如 [下文](java-interop.md#java-arrays) 所述进行映射：
+Java 的数组如 [下文](java-interop#java-arrays) 所述进行映射：
 
 | **Java 类型** | **Kotlin 类型**                |
 |---------------|--------------------------------|
 | `int[]`       | `kotlin.IntArray!`             |
 | `String[]`    | `kotlin.Array<(out) String!>!` |
 :::note
-Kotlin 类型的 [伴生对象](object-declarations.md#companion-objects) 上无法直接访问这些 Java 类型的静态成员。
+Kotlin 类型的 [伴生对象](object-declarations#companion-objects) 上无法直接访问这些 Java 类型的静态成员。
 要调用它们，请使用 Java 类型的完全限定名称，例如 `java.lang.Integer.toHexString(foo)`。
 
 :::
 
 ## Kotlin 中的 Java 泛型
 
-Kotlin 的泛型与 Java 的泛型略有不同（请参阅 [泛型](generics.md)）。
+Kotlin 的泛型与 Java 的泛型略有不同（请参阅 [泛型](generics)）。
 将 Java 类型导入 Kotlin 时，会执行以下转换：
 
 * Java 的通配符转换为类型投影：
@@ -619,7 +619,7 @@ javaObj.removeIndicesVarArg(*array)
 
 ## 受检异常
 
-在 Kotlin 中，所有 [异常都是未受检的](exceptions.md)，这意味着编译器不会强制您捕获任何异常。
+在 Kotlin 中，所有 [异常都是未受检的](exceptions)，这意味着编译器不会强制您捕获任何异常。
 因此，当您调用声明了受检异常的 Java 方法时，Kotlin 不会强制您执行任何操作：
 
 ```kotlin
@@ -634,7 +634,7 @@ fun render(list: List<*>, to: Appendable) {
 
 当 Java 类型导入到 Kotlin 中时，类型 `java.lang.Object` 的所有引用都将转换为 `Any`。
 由于 `Any` 不是平台特定的，因此它仅声明 `toString()`、`hashCode()` 和 `equals()` 作为其成员，
-因此为了使 `java.lang.Object` 的其他成员可用，Kotlin 使用 [扩展函数](extensions.md)。
+因此为了使 `java.lang.Object` 的其他成员可用，Kotlin 使用 [扩展函数](extensions)。
 
 ### wait()/notify()
 
@@ -647,13 +647,13 @@ fun render(list: List<*>, to: Appendable) {
 
 ### getClass()
 
-要检索对象的 Java 类，请在 [类引用](reflection.md#class-references) 上使用 `java` 扩展属性：
+要检索对象的 Java 类，请在 [类引用](reflection#class-references) 上使用 `java` 扩展属性：
 
 ```kotlin
 val fooClass = foo::class.java
 ```
 
-上面的代码使用 [绑定类引用](reflection.md#bound-class-references)。您也可以使用 `javaClass` 扩展属性：
+上面的代码使用 [绑定类引用](reflection#bound-class-references)。您也可以使用 `javaClass` 扩展属性：
 
 ```kotlin
 val fooClass = foo.javaClass
@@ -716,7 +716,7 @@ Java 反射适用于 Kotlin 类，反之亦然。如上所述，您可以使用 
 
 ## SAM 转换
 
-Kotlin 支持 Java 和 [Kotlin 接口](fun-interfaces.md) 的 SAM 转换。
+Kotlin 支持 Java 和 [Kotlin 接口](fun-interfaces) 的 SAM 转换。
 对 Java 的这种支持意味着 Kotlin 函数字面量可以自动转换为
 具有单个非默认方法的 Java 接口的实现，只要接口方法的参数类型
 与 Kotlin 函数的参数类型匹配即可。

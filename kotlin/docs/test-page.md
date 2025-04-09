@@ -11,8 +11,8 @@ import TabItem from '@theme/TabItem';
    这是一个包含图片的块（取自 <strong>Getting started with Compose Multiplatform</strong> 教程）。
 </p>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot.md">使用 Kotlin 创建一个 Spring Boot 项目</a><br/>
-      <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class.md">向 Spring Boot 项目添加一个数据类</a><br/>
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot">使用 Kotlin 创建一个 Spring Boot 项目</a><br/>
+      <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class">向 Spring Boot 项目添加一个数据类</a><br/>
       <img src="/img/icon-3.svg" width="20" alt="Third step"/> <strong>为 Spring Boot 项目添加数据库支持</strong><br/>
       <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> 使用 Spring Data CrudRepository 进行数据库访问><br/>
 </p>
@@ -336,7 +336,7 @@ jvmTest<Scope>
 ### 定义列表
 <h3>可折叠项目 #1</h3>
 <p>
-   `CrudRepository` 接口中 `findById()` 函数的返回类型是 `Optional` 类的实例。 但是，为了保持一致性，返回包含单个消息的 `List` 会很方便。 因此，如果 `Optional` 值存在，你需要解包该值，并返回包含该值的列表。 这可以实现为 `Optional` 类型的 <a href="extensions.md#extension-functions">扩展函数 (extension function)</a>。
+   `CrudRepository` 接口中 `findById()` 函数的返回类型是 `Optional` 类的实例。 但是，为了保持一致性，返回包含单个消息的 `List` 会很方便。 因此，如果 `Optional` 值存在，你需要解包该值，并返回包含该值的列表。 这可以实现为 `Optional` 类型的 <a href="extensions#extension-functions">扩展函数 (extension function)</a>。
 </p>
 <p>
    在代码 `Optional&lt;out T&gt;.toList()` 中，`.toList()` 是 `Optional` 的扩展函数。 扩展函数允许你为任何类编写附加函数，这在你要扩展某些库类的功能时特别有用。
@@ -357,7 +357,7 @@ jvmTest<Scope>
 * _斜体文本_
 * `行内代码 (inline code)`
 * [内部锚点](#lists)
-* [内部链接](roadmap.md)
+* [内部链接](roadmap)
 * [外部链接](https://jetbrains.com)
 * 表情符号 ❌✅🆕
 
@@ -399,7 +399,7 @@ jvmTest<Scope>
 警告：
 
 :::note
-kapt 编译器插件中对 K2 的支持是 [Experimental](components-stability.md)。
+kapt 编译器插件中对 K2 的支持是 [Experimental](components-stability)。
 需要选择启用（请参阅下面的详细信息），并且您应该仅将其用于评估目的。
 
 注意：

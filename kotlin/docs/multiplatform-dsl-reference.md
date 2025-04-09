@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Kotlin Multiplatform Gradle 插件是一个用于创建 Kotlin Multiplatform 项目的工具。
-在此，我们提供了其内容的参考；在为 Kotlin Multiplatform 项目编写 Gradle 构建脚本时，可将其用作提醒。 了解 [Kotlin Multiplatform 项目的概念，如何创建和配置它们](multiplatform-intro.md)。
+在此，我们提供了其内容的参考；在为 Kotlin Multiplatform 项目编写 Gradle 构建脚本时，可将其用作提醒。 了解 [Kotlin Multiplatform 项目的概念，如何创建和配置它们](multiplatform-intro)。
 
 ## ID 和版本
 
@@ -48,9 +48,9 @@ plugins {
 
 ## Target
 
-_target_ 是构建的一部分，负责编译、测试和打包面向受支持平台之一的软件。 Kotlin 为每个平台提供 target，因此可以指示 Kotlin 为该特定 target 编译代码。 了解有关 [设置 target](multiplatform-discover-project.md#targets) 的更多信息。
+_target_ 是构建的一部分，负责编译、测试和打包面向受支持平台之一的软件。 Kotlin 为每个平台提供 target，因此可以指示 Kotlin 为该特定 target 编译代码。 了解有关 [设置 target](multiplatform-discover-project#targets) 的更多信息。
 
-每个 target 可以有一个或多个 [编译 (compilation)](#compilations)。 除了用于测试和生产目的的默认编译外，还可以 [创建自定义编译](multiplatform-configure-compilations.md#create-a-custom-compilation)。
+每个 target 可以有一个或多个 [编译 (compilation)](#compilations)。 除了用于测试和生产目的的默认编译外，还可以 [创建自定义编译](multiplatform-configure-compilations#create-a-custom-compilation)。
 
 多平台项目的 target 在 `kotlin {}` 内部的相应块中描述，例如 `jvm`、`androidTarget`、`iosArm64`。
 可用 target 的完整列表如下：
@@ -106,7 +106,7 @@ Kotlin/JS
 <li>`nodejs {}` 用于在 Node.js 上运行的应用程序。</li>
 </list>
 <p>
-   在 <a href="js-project-setup.md#execution-environments">设置 Kotlin/JS 项目</a> 中了解更多信息。
+   在 <a href="js-project-setup#execution-environments">设置 Kotlin/JS 项目</a> 中了解更多信息。
 </p>
 </td>
 </tr>
@@ -119,7 +119,7 @@ Kotlin/Native
 <td>
 
 <p>
-   在 <a href="native-target-support.md">Kotlin/Native target 支持</a> 中了解有关 macOS、Linux 和 Windows 主机当前支持的 target。
+   在 <a href="native-target-support">Kotlin/Native target 支持</a> 中了解有关 macOS、Linux 和 Windows 主机当前支持的 target。
 </p>
 </td>
 </tr>
@@ -171,7 +171,7 @@ target 的配置可以包括两部分：
 | `platformType`      | 此 target 的 Kotlin 平台。 可用值：`jvm`、`androidJvm`、`js`、`wasm`、`native`、`common`。                                                                              |
 | `artifactsTaskName` | 构建此 target 的结果产物的任务名称。                                                                                                                   |
 | `components`        | 用于设置 Gradle 发布 (publication) 的组件。                                                                                                                                             |
-| `compilerOptions`   | 用于 target 的 [compiler option](#compiler-options)。 此声明将覆盖在 [顶层](multiplatform-dsl-reference.md#top-level-blocks) 配置的任何 `compilerOptions {}`。 |
+| `compilerOptions`   | 用于 target 的 [compiler option](#compiler-options)。 此声明将覆盖在 [顶层](multiplatform-dsl-reference#top-level-blocks) 配置的任何 `compilerOptions {}`。 |
 
 ### Web Target
 
@@ -182,7 +182,7 @@ target 的配置可以包括两部分：
 | [`browser`](#browser) | 浏览器 target 的配置。 |
 | [`nodejs`](#node-js)  | Node.js target 的配置。 |
 
-了解有关 [配置 Kotlin/JS 项目](js-project-setup.md) 的更多信息。
+了解有关 [配置 Kotlin/JS 项目](js-project-setup) 的更多信息。
 
 单独的 `wasmWasi {}` 块描述了支持 WASI 系统接口的 Kotlin/Wasm target 的配置。
 在这里，只有 [`nodejs`](#node-js) 执行环境可用：
@@ -196,7 +196,7 @@ kotlin {
 }
 ```
 
-所有 Web target（`js`、`wasmJs` 和 `wasmWasi`）也都支持 `binaries.executable()` 调用。 它显式指示 Kotlin 编译器发出可执行文件。 有关更多信息，请参见 Kotlin/JS 文档中的 [执行环境](js-project-setup.md#execution-environments)。
+所有 Web target（`js`、`wasmJs` 和 `wasmWasi`）也都支持 `binaries.executable()` 调用。 它显式指示 Kotlin 编译器发出可执行文件。 有关更多信息，请参见 Kotlin/JS 文档中的 [执行环境](js-project-setup#execution-environments)。
 
 #### Browser
 
@@ -360,7 +360,7 @@ binaries {
 </TabItem>
 </Tabs>
 
-了解有关 [构建 Native 二进制文件](multiplatform-build-native-binaries.md) 的更多信息。
+了解有关 [构建 Native 二进制文件](multiplatform-build-native-binaries) 的更多信息。
 
 #### CInterops
 
@@ -451,7 +451,7 @@ kotlin {
 </TabItem>
 </Tabs>
 
-有关更多 cinterop 属性，请参见 [定义文件](native-definition-file.md#properties)。
+有关更多 cinterop 属性，请参见 [定义文件](native-definition-file#properties)。
 
 ### Android Target
 
@@ -460,7 +460,7 @@ Kotlin Multiplatform 插件包含两个用于 Android target 的特定函数。
 
 | **名称**                      | **描述**                                                                                                                                | 
 |-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `publishLibraryVariants()`    | 指定要发布的构建变体 (build variant)。 了解有关 [发布 Android 库](multiplatform-publish-lib.md#publish-an-android-library) 的更多信息。 |
+| `publishLibraryVariants()`    | 指定要发布的构建变体 (build variant)。 了解有关 [发布 Android 库](multiplatform-publish-lib#publish-an-android-library) 的更多信息。 |
 | `publishAllLibraryVariants()` | 发布所有构建变体 (build variant)。                                                                                                                  |
 
 ```kotlin
@@ -471,7 +471,7 @@ kotlin {
 }
 ```
 
-了解有关 [Android 编译](multiplatform-configure-compilations.md#compilation-for-android) 的更多信息。
+了解有关 [Android 编译](multiplatform-configure-compilations#compilation-for-android) 的更多信息。
 
 :::note
 `kotlin {}` 块中的 `androidTarget` 配置不会替换任何 Android 项目的构建配置。
@@ -524,7 +524,7 @@ kotlin {
 </TabItem>
 </Tabs>
 
-了解有关 [source set](multiplatform-discover-project.md#source-sets) 的更多信息。
+了解有关 [source set](multiplatform-discover-project#source-sets) 的更多信息。
 
 ### 自定义的 Source Set
 
@@ -558,7 +558,7 @@ kotlin {
 </Tabs>
 
 请注意，新创建的 source set 未与其他 source set 连接。 要在项目的编译中使用它，
-[将其与其他 source set 连接](multiplatform-hierarchy.md#manual-configuration)。
+[将其与其他 source set 连接](multiplatform-hierarchy#manual-configuration)。
 
 ### Source Set 参数
 
@@ -568,7 +568,7 @@ source set 的配置存储在 `sourceSets {}` 的相应块中。 source set 具�
 |--------------------|----------------------------------------------------------------------------------------|
 | `kotlin.srcDir`    | source set 目录中 Kotlin 源文件的位置。                       |
 | `resources.srcDir` | source set 目录中资源的位置。                                 |
-| `dependsOn`        | 与另一个 [source set 的连接](multiplatform-hierarchy.md#manual-configuration)。 |
+| `dependsOn`        | 与另一个 [source set 的连接](multiplatform-hierarchy#manual-configuration)。 |
 | `dependencies`     | source set 的 [依赖项](#dependencies)。                                       |
 | `languageSettings` | 应用于 source set 的 [语言设置](#language-settings)。 |
 
@@ -619,7 +619,7 @@ kotlin {
 要引用 target 的所有或某些特定编译 (compilation)，请使用 `compilations` 对象集合。
 从 `compilations`，可以通过其名称引用编译 (compilation)。
 
-了解有关 [配置编译](multiplatform-configure-compilations.md) 的更多信息。
+了解有关 [配置编译](multiplatform-configure-compilations) 的更多信息。
 
 ### 预定义的编译 (Compilations)
 
@@ -667,7 +667,7 @@ kotlin {
 要创建自定义编译 (compilation)，请将新项添加到 `compilations` 集合中。
 如果使用 Kotlin Gradle DSL，请将自定义编译 (compilation) 标记为 `by creating`。
 
-了解有关创建 [自定义编译](multiplatform-configure-compilations.md#create-a-custom-compilation) 的更多信息。
+了解有关创建 [自定义编译](multiplatform-configure-compilations#create-a-custom-compilation) 的更多信息。
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>
@@ -727,7 +727,7 @@ kotlin {
 | `defaultSourceSet`       | 编译的默认 source set。                                                                                                                                     |
 | `kotlinSourceSets`       | 参与编译的 source set。                                                                                                                             |
 | `allKotlinSourceSets`    | 通过 `dependsOn()` 参与编译及其连接的 source set。                                                                                     |
-| `compilerOptions`        | 应用于编译的编译器选项。 有关可用选项的列表，请参见 [编译器选项](gradle-compiler-options.md)。                                       |
+| `compilerOptions`        | 应用于编译的编译器选项。 有关可用选项的列表，请参见 [编译器选项](gradle-compiler-options)。                                       |
 | `compileKotlinTask`      | 用于编译 Kotlin 源的 Gradle 任务。                                                                                                                                 |
 | `compileKotlinTaskName`  | `compileKotlinTask` 的名称。                                                                                                                                              |
 | `compileAllTaskName`     | 用于编译编译所有源的 Gradle 任务的名称。                                                                                                       |
@@ -813,7 +813,7 @@ kotlin {
 * 任务级别的编译器选项 (compiler option) 会覆盖 target 级别或扩展级别的类似设置。
 * Target 级别的编译器选项 (compiler option) 会覆盖扩展级别的类似设置。
 
-有关可能的编译器选项 (compiler option) 列表，请参见 [所有编译器选项](gradle-compiler-options.md#all-compiler-options)。
+有关可能的编译器选项 (compiler option) 列表，请参见 [所有编译器选项](gradle-compiler-options#all-compiler-options)。
 
 ### 扩展级别
 
@@ -955,7 +955,7 @@ kotlin {
 
 source set 声明的 `dependencies {}` 块包含此 source set 的依赖项。
 
-了解有关 [配置依赖项](gradle-configure-project.md) 的更多信息。
+了解有关 [配置依赖项](gradle-configure-project) 的更多信息。
 
 有四种类型的依赖项：
 

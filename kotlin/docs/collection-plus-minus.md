@@ -20,4 +20,4 @@ fun main() {
 }
 ```
 
-有关 map 的 `plus` 和 `minus` 操作符的详细信息，请参见 [Map specific operations](map-operations.md)。[增广赋值操作符](operator-overloading.md#augmented-assignments) [`plusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/plus-assign.html) (`+=`) 和 [`minusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/minus-assign.html) (`-=`) 也为集合定义。但是，对于只读集合，它们实际上使用 `plus` 或 `minus` 操作符，并尝试将结果分配给同一个变量。因此，它们仅在 `var` 只读集合上可用。对于可变集合，如果它是 `val`，它们会修改集合。有关更多详细信息，请参见 [Collection write operations](collection-write.md)。
+有关 map 的 `plus` 和 `minus` 操作符的详细信息，请参见 [Map specific operations](map-operations)。[增广赋值操作符](operator-overloading#augmented-assignments) [`plusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/plus-assign.html) (`+=`) 和 [`minusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/minus-assign.html) (`-=`) 也为集合定义。但是，对于只读集合，它们实际上使用 `plus` 或 `minus` 操作符，并尝试将结果分配给同一个变量。因此，它们仅在 `var` 只读集合上可用。对于可变集合，如果它是 `val`，它们会修改集合。有关更多详细信息，请参见 [Collection write operations](collection-write)。

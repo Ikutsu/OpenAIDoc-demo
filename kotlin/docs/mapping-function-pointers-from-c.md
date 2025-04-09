@@ -6,22 +6,22 @@ title: "C 语言中的映射函数指针 – 教程"
    这是 <strong>Kotlin 与 C 互操作</strong> 教程系列的第三部分。在继续之前，请确保您已完成之前的步骤。
 </p>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="mapping-primitive-data-types-from-c.md">映射 C 语言中的基本数据类型</a><br/>
-        <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="mapping-struct-union-types-from-c.md">映射 C 语言中的结构体和联合体类型</a><br/>
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="mapping-primitive-data-types-from-c">映射 C 语言中的基本数据类型</a><br/>
+        <img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="mapping-struct-union-types-from-c">映射 C 语言中的结构体和联合体类型</a><br/>
         <img src="/img/icon-3.svg" width="20" alt="Third step"/> <strong>映射函数指针</strong><br/>
-        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> <a href="mapping-strings-from-c.md">映射 C 语言中的字符串</a><br/>
+        <img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> <a href="mapping-strings-from-c">映射 C 语言中的字符串</a><br/>
 </p>
 
 :::
 
 :::caution
-C 语言库导入是 [Experimental（实验性的）](components-stability.md#stability-levels-explained)。由 `cinterop` 工具从 C 语言库生成的所有 Kotlin 声明都应带有 `@ExperimentalForeignApi` 注解。
+C 语言库导入是 [Experimental（实验性的）](components-stability#stability-levels-explained)。由 `cinterop` 工具从 C 语言库生成的所有 Kotlin 声明都应带有 `@ExperimentalForeignApi` 注解。
 
 Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）仅对某些 API 需要选择加入（opt-in）。
 
 :::
 
-让我们来探索哪些 C 语言函数指针在 Kotlin 中是可见的，并研究 Kotlin/Native 和 [multiplatform（多平台）](gradle-configure-project.md#targeting-multiple-platforms) Gradle 构建中与 C 语言互操作相关的高级用例。
+让我们来探索哪些 C 语言函数指针在 Kotlin 中是可见的，并研究 Kotlin/Native 和 [multiplatform（多平台）](gradle-configure-project#targeting-multiple-platforms) Gradle 构建中与 C 语言互操作相关的高级用例。
 
 在本教程中，您将：
 
@@ -32,7 +32,7 @@ Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）�
 
 为了理解 Kotlin 和 C 语言之间的映射，让我们声明两个函数：一个接受函数指针作为参数，另一个返回函数指针。
 
-在本系列的[第一部分](mapping-primitive-data-types-from-c.md)中，您已经创建了一个包含必要文件的 C 语言库。对于此步骤，请在 `interop.def` 文件中更新 `---` 分隔符后的声明：
+在本系列的[第一部分](mapping-primitive-data-types-from-c)中，您已经创建了一个包含必要文件的 C 语言库。对于此步骤，请在 `interop.def` 文件中更新 `---` 分隔符后的声明：
 
 ```c 
 
@@ -59,7 +59,7 @@ MyFun supply_fun() {
 
 让我们看看 C 语言函数指针是如何映射到 Kotlin/Native 中的，并更新您的项目：
 
-1. 在 `src/nativeMain/kotlin` 中，使用以下内容更新[之前教程](mapping-struct-union-types-from-c.md)中的 `hello.kt` 文件：
+1. 在 `src/nativeMain/kotlin` 中，使用以下内容更新[之前教程](mapping-struct-union-types-from-c)中的 `hello.kt` 文件：
 
    ```kotlin
    import interop.*
@@ -123,7 +123,7 @@ fun myFun2() {
 }
 ```
 
-Kotlin 将函数指针返回类型转换为可空的 `CPointer<CFunction<>` 对象。您需要首先显式检查 `null`，这就是为什么在上面的代码中使用了 [Elvis 运算符](null-safety.md)。`cinterop` 工具允许您像调用常规 Kotlin 函数一样调用 C 语言函数指针：`functionFromC(42)`。
+Kotlin 将函数指针返回类型转换为可空的 `CPointer<CFunction<>` 对象。您需要首先显式检查 `null`，这就是为什么在上面的代码中使用了 [Elvis 运算符](null-safety)。`cinterop` 工具允许您像调用常规 Kotlin 函数一样调用 C 语言函数指针：`functionFromC(42)`。
 
 ## 更新 Kotlin 代码
 
@@ -148,7 +148,7 @@ fun main() {
 }
 ```
 
-要验证一切是否按预期工作，请[在 IDE 中](native-get-started.md#build-and-run-the-application)运行 `runDebugExecutableNative` Gradle 任务，或使用以下命令运行代码：
+要验证一切是否按预期工作，请[在 IDE 中](native-get-started#build-and-run-the-application)运行 `runDebugExecutableNative` Gradle 任务，或使用以下命令运行代码：
 
 ```bash
 ./gradlew runDebugExecutableNative
@@ -158,8 +158,8 @@ fun main() {
 
 在本系列的下一部分中，您将学习如何在 Kotlin 和 C 语言之间映射字符串：
 
-**[进入下一部分](mapping-strings-from-c.md)**
+**[进入下一部分](mapping-strings-from-c)**
 
 ### 参见
 
-在 [与 C 语言的互操作性](native-c-interop.md) 文档中了解更多信息，该文档涵盖了更高级的场景。
+在 [与 C 语言的互操作性](native-c-interop) 文档中了解更多信息，该文档涵盖了更高级的场景。

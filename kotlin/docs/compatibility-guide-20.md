@@ -1,12 +1,12 @@
 ---
 title: "Kotlin 2.0 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构，后者指出，应事先充分沟通移除情况，以尽可能顺利地进行代码迁移。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的根本原则。前者指出，应移除阻碍语言发展的结构，后者指出，应事先充分沟通移除情况，以尽可能顺利地进行代码迁移。
 
 虽然大多数语言更改已通过其他渠道（如更新的变更日志或编译器警告）宣布，但本文档提供了从 Kotlin 1.9 迁移到 Kotlin 2.0 的完整参考。
 
 :::note
-Kotlin K2 编译器作为 Kotlin 2.0 的一部分引入。 有关新编译器的优势、迁移期间可能遇到的更改以及如何回滚到之前的编译器的信息，请参阅 [K2 编译器迁移指南](k2-compiler-migration-guide.md)。
+Kotlin K2 编译器作为 Kotlin 2.0 的一部分引入。 有关新编译器的优势、迁移期间可能遇到的更改以及如何回滚到之前的编译器的信息，请参阅 [K2 编译器迁移指南](k2-compiler-migration-guide)。
 
 :::
 

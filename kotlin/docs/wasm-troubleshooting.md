@@ -2,7 +2,7 @@
 title: 问题排查
 ---
 :::note
-Kotlin/Wasm 处于 [Alpha 阶段](components-stability.md)。它可能随时更改。请在生产环境前使用。
+Kotlin/Wasm 处于 [Alpha 阶段](components-stability)。它可能随时更改。请在生产环境前使用。
 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492) 中提供的反馈。
 
 :::
@@ -89,9 +89,9 @@ Kotlin/Wasm 的改进基于 [WebAssembly 提案](https://webassembly.org/roadmap
 
 ### 异常处理提案
 
-Kotlin 工具链默认使用 [旧版异常处理提案](https://github.com/WebAssembly/exception-handling/blob/master/proposals/exception-handling/legacy/Exceptions.md)，这允许在更广泛的环境中运行生成的 Wasm 二进制文件。
+Kotlin 工具链默认使用 [旧版异常处理提案](https://github.com/WebAssembly/exception-handling/blob/master/proposals/exception-handling/legacy/Exceptions)，这允许在更广泛的环境中运行生成的 Wasm 二进制文件。
 
-自 Kotlin 2.0.0 以来，我们已经在 Kotlin/Wasm 中引入了对新版本的 Wasm [异常处理提案](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) 的支持。
+自 Kotlin 2.0.0 以来，我们已经在 Kotlin/Wasm 中引入了对新版本的 Wasm [异常处理提案](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions) 的支持。
 
 此更新确保新的异常处理提案与 Kotlin 要求保持一致，从而可以在仅支持最新版本提案的虚拟机上使用 Kotlin/Wasm。
 
@@ -104,7 +104,7 @@ Kotlin 工具链默认使用 [旧版异常处理提案](https://github.com/WebAs
 
 ## 使用默认导入
 
-[将 Kotlin/Wasm 代码导入到 Javascript 中](wasm-js-interop.md) 已转移到命名导出，从而摆脱了默认导出。
+[将 Kotlin/Wasm 代码导入到 Javascript 中](wasm-js-interop) 已转移到命名导出，从而摆脱了默认导出。
 
 如果您仍然想使用默认导入，请生成一个新的 JavaScript 包装器模块。 创建一个 `.mjs` 文件，其中包含以下代码段：
 

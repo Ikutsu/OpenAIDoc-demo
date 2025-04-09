@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 
 每个程序都需要一组库才能成功运行。一个 Kotlin Multiplatform 项目可以依赖于：适用于所有目标平台的多平台库、平台特定库和其他多平台项目。
 
-要添加对库的依赖，请更新包含共享代码的项目的目录中的 `build.gradle(.kts)` 文件。在 [`dependencies {}`](multiplatform-dsl-reference.md#dependencies) 代码块中，设置所需[类型](gradle-configure-project.md#dependency-types)（例如，`implementation`）的依赖项：
+要添加对库的依赖，请更新包含共享代码的项目的目录中的 `build.gradle(.kts)` 文件。在 [`dependencies {}`](multiplatform-dsl-reference#dependencies) 代码块中，设置所需[类型](gradle-configure-project#dependency-types)（例如，`implementation`）的依赖项：
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>
@@ -39,7 +39,7 @@ kotlin {
 </TabItem>
 </Tabs>
 
-或者，你可以[在顶层设置依赖项](gradle-configure-project.md#set-dependencies-at-top-level)。
+或者，你可以[在顶层设置依赖项](gradle-configure-project#set-dependencies-at-top-level)。
 
 ## 依赖 Kotlin 库
 
@@ -47,9 +47,9 @@ kotlin {
 
 会自动添加每个源集中对标准库（`stdlib`）的依赖项。标准库的版本与 `kotlin-multiplatform` 插件的版本相同。
 
-对于特定于平台的源集，将使用该库的相应于特定平台的变体，而通用标准库将添加到其余源集中。Kotlin Gradle 插件将根据 Gradle 构建脚本的 `compilerOptions.jvmTarget` [编译器选项](gradle-compiler-options.md)选择合适的 JVM 标准库。
+对于特定于平台的源集，将使用该库的相应于特定平台的变体，而通用标准库将添加到其余源集中。Kotlin Gradle 插件将根据 Gradle 构建脚本的 `compilerOptions.jvmTarget` [编译器选项](gradle-compiler-options)选择合适的 JVM 标准库。
 
-了解如何[更改默认行为](gradle-configure-project.md#dependency-on-the-standard-library)。
+了解如何[更改默认行为](gradle-configure-project#dependency-on-the-standard-library)。
 
 ### 测试库
 
@@ -310,5 +310,5 @@ kotlin {
 
 查看有关在多平台项目中添加依赖项的其他资源，并了解更多信息：
 
-* [添加 Android 依赖项](multiplatform-android-dependencies.md)
-* [添加 iOS 依赖项](multiplatform-ios-dependencies.md)
+* [添加 Android 依赖项](multiplatform-android-dependencies)
+* [添加 iOS 依赖项](multiplatform-ios-dependencies)

@@ -3,7 +3,7 @@ title: "使用 Kotlin 的 Lets-Plot 进行数据可视化"
 ---
 [适用于 Kotlin 的 Lets-Plot (LPK)](https://lets-plot.org/kotlin/get-started.html) 是一个多平台绘图库，它将 [R 语言的 ggplot2 库](https://ggplot2.tidyverse.org/) 移植到 Kotlin。LPK 将功能丰富的 ggplot2 API 带到 Kotlin 生态系统中，使其适用于需要复杂数据可视化功能的科学家和统计学家。
 
-LPK 适用于各种平台，包括 [Kotlin Notebooks](data-analysis-overview.md#notebooks)、[Kotlin/JS](js-overview.md)、[JVM 的 Swing](https://docs.oracle.com/javase/8/docs/technotes/guides/swing/)、[JavaFX](https://openjfx.io/) 和 [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)。此外，LPK 还与 [IntelliJ](https://www.jetbrains.com/idea/)、[DataGrip](https://www.jetbrains.com/datagrip/)、[DataSpell](https://www.jetbrains.com/dataspell/) 和 [PyCharm](https://www.jetbrains.com/pycharm/) 无缝集成。
+LPK 适用于各种平台，包括 [Kotlin Notebooks](data-analysis-overview#notebooks)、[Kotlin/JS](js-overview)、[JVM 的 Swing](https://docs.oracle.com/javase/8/docs/technotes/guides/swing/)、[JavaFX](https://openjfx.io/) 和 [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)。此外，LPK 还与 [IntelliJ](https://www.jetbrains.com/idea/)、[DataGrip](https://www.jetbrains.com/datagrip/)、[DataSpell](https://www.jetbrains.com/dataspell/) 和 [PyCharm](https://www.jetbrains.com/pycharm/) 无缝集成。
 
 <img src="/img/lets-plot-overview.png" alt="Lets-Plot" width="700" style={{verticalAlign: 'middle'}}/>
 

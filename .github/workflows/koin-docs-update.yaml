@@ -1,9 +1,9 @@
 name: Koin docs update
 
 on:
-#  schedule:
-#    - cron: '0 0 * * 0'  # 每周日 UTC 时间 0:00 运行
-  workflow_dispatch:  # 允许手动触发
+  schedule:
+    - cron: '0 0 * * 0'  # Run every Sunday at 0:00 UTC
+  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   check-external-docs:
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout main repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取完整历史以进行差异比较
+          fetch-depth: 0  # Get complete history for diff comparison
 
       - name: Checkout Koin repository
         uses: actions/checkout@v4
@@ -69,7 +69,7 @@ jobs:
       - name: Check if commits have changed
         id: check-commits
         run: |
-          # 检查 Koin 仓库的 commit 是否变化
+          # Check if Koin repository's commit has changed
           if [ "${{ steps.last-run-koin.outputs.first_run }}" == "true" ]; then
             echo "koin_changed=true" >> $GITHUB_OUTPUT
           elif [ "${{ steps.last-run-koin.outputs.last_commit }}" != "${{ steps.current-commit-koin.outputs.current_commit }}" ]; then
@@ -78,7 +78,7 @@ jobs:
             echo "koin_changed=false" >> $GITHUB_OUTPUT
           fi
           
-          # 检查 Koin-Annotations 仓库的 commit 是否变化
+          # Check if Koin-Annotations repository's commit has changed
           if [ "${{ steps.last-run-annotations.outputs.first_run }}" == "true" ]; then
             echo "annotations_changed=true" >> $GITHUB_OUTPUT
           elif [ "${{ steps.last-run-annotations.outputs.last_commit }}" != "${{ steps.current-commit-annotations.outputs.current_commit }}" ]; then
@@ -87,16 +87,16 @@ jobs:
             echo "annotations_changed=false" >> $GITHUB_OUTPUT
           fi
           
-          # 任一仓库有变化
+          # Any repository has changed
           if [[ "${{ steps.check-commits.outputs.koin_changed }}" == "true" || "${{ steps.check-commits.outputs.annotations_changed }}" == "true" ]]; then
             echo "any_changed=true" >> $GITHUB_OUTPUT
           else
             echo "any_changed=false" >> $GITHUB_OUTPUT
           fi
           
-          echo "Koin 仓库变化: ${{ steps.check-commits.outputs.koin_changed }}"
-          echo "Koin-Annotations 仓库变化: ${{ steps.check-commits.outputs.annotations_changed }}"
-          echo "任一仓库变化: ${{ steps.check-commits.outputs.any_changed }}"
+          echo "Koin repository changed: ${{ steps.check-commits.outputs.koin_changed }}"
+          echo "Koin-Annotations repository changed: ${{ steps.check-commits.outputs.annotations_changed }}"
+          echo "Any repository changed: ${{ steps.check-commits.outputs.any_changed }}"
 
       - name: Get changed markdown files for Koin
         id: changed-files-koin
@@ -137,13 +137,13 @@ jobs:
       - name: Prepare files for translation
         id: prepare-translation
         run: |
-          # 处理 Koin 仓库文件
+          # Process Koin repository files
           if [ "${{ steps.last-run-koin.outputs.first_run }}" == "true" ]; then
-            # 首次运行 - 使用所有文件
+            # First run - use all files
             echo "KOIN_CHANGED_FILES=${{ steps.all-files-koin.outputs.all_changed_files }}" >> $GITHUB_ENV
             echo "koin_any_changed=true" >> $GITHUB_OUTPUT
           else
-            # 后续运行 - 使用变更的文件
+            # Subsequent runs - use changed files
             echo "KOIN_CHANGED_FILES=${{ steps.changed-files-koin.outputs.all_changed_files }}" >> $GITHUB_ENV
           
             if [ -n "${{ steps.changed-files-koin.outputs.all_changed_files }}" ]; then
@@ -153,13 +153,13 @@ jobs:
             fi
           fi
           
-          # 处理 Koin-Annotations 仓库文件
+          # Process Koin-Annotations repository files
           if [ "${{ steps.last-run-annotations.outputs.first_run }}" == "true" ]; then
-            # 首次运行 - 使用所有文件
+            # First run - use all files
             echo "ANNOTATIONS_CHANGED_FILES=${{ steps.all-files-annotations.outputs.all_changed_files }}" >> $GITHUB_ENV
             echo "annotations_any_changed=true" >> $GITHUB_OUTPUT
           else
-            # 后续运行 - 使用变更的文件
+            # Subsequent runs - use changed files
             echo "ANNOTATIONS_CHANGED_FILES=${{ steps.changed-files-annotations.outputs.all_changed_files }}" >> $GITHUB_ENV
           
             if [ -n "${{ steps.changed-files-annotations.outputs.all_changed_files }}" ]; then
@@ -169,14 +169,14 @@ jobs:
             fi
           fi
           
-          # 任一仓库有变更
+          # Any repository has changes
           if [[ "${{ steps.last-run-koin.outputs.first_run }}" == "true" || "${{ steps.last-run-annotations.outputs.first_run }}" == "true" || -n "${{ steps.changed-files-koin.outputs.all_changed_files }}" || -n "${{ steps.changed-files-annotations.outputs.all_changed_files }}" ]]; then
             echo "any_changed=true" >> $GITHUB_OUTPUT
           else
             echo "any_changed=false" >> $GITHUB_OUTPUT
           fi
           
-          # 保存当前提交的SHA以便后续更新
+          # Save current commit SHA for future updates
           cd koin-repo
           echo "KOIN_CURRENT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
           
@@ -205,65 +205,65 @@ jobs:
       - name: Update last check timestamps
         if: success() && steps.prepare-translation.outputs.any_changed == 'true'
         run: |
-          # 只有在前面所有步骤都成功时才更新最后检查的提交
+          # Only update the last checked commit if all previous steps were successful
           echo "${{ env.KOIN_CURRENT_COMMIT }}" > .github/last_check_koin.txt
           echo "${{ env.ANNOTATIONS_CURRENT_COMMIT }}" > .github/last_check_koin_annotations.txt
-          echo "已更新检查记录时间戳"
+          echo "Updated check record timestamps"
 
       - name: Commit and push changes
         if: steps.prepare-translation.outputs.any_changed == 'true'
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          # 排除不需要提交的文件和目录
+          # Exclude files and directories that don't need to be committed
           git add . ':!package.json' ':!package-lock.json' ':!koin-repo' ':!koin-repo/**' ':!koin-annotations-repo' ':!koin-annotations-repo/**'
-          git commit -m '添加翻译文件并更新检查记录'
+          git commit -m 'Add translated files and update check record'
           git push origin main
 
       - name: Create summary
         if: always()
         run: |
-          echo "## 文档更新检测" >> $GITHUB_STEP_SUMMARY
+          echo "## Documentation Update Detection" >> $GITHUB_STEP_SUMMARY
           
-          # 检查 commit 是否变化
-          echo "### Commit 变化检测" >> $GITHUB_STEP_SUMMARY
-          echo "- Koin 仓库: ${{ steps.check-commits.outputs.koin_changed }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Koin-Annotations 仓库: ${{ steps.check-commits.outputs.annotations_changed }}" >> $GITHUB_STEP_SUMMARY
+          # Check if commit changed
+          echo "### Commit Change Detection" >> $GITHUB_STEP_SUMMARY
+          echo "- Koin repository: ${{ steps.check-commits.outputs.koin_changed }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Koin-Annotations repository: ${{ steps.check-commits.outputs.annotations_changed }}" >> $GITHUB_STEP_SUMMARY
           
-          # Koin 仓库摘要
-          echo "### Koin 仓库" >> $GITHUB_STEP_SUMMARY
+          # Koin repository summary
+          echo "### Koin Repository" >> $GITHUB_STEP_SUMMARY
           if [ "${{ steps.last-run-koin.outputs.first_run }}" == "true" ]; then
-            echo "首次运行 - 已处理所有文档文件" >> $GITHUB_STEP_SUMMARY
+            echo "First run - processed all documentation files" >> $GITHUB_STEP_SUMMARY
             FILES="${{ steps.all-files-koin.outputs.all_changed_files }}"
             COUNT=$(echo "$FILES" | wc -w)
-            echo "共处理 $COUNT 个文件" >> $GITHUB_STEP_SUMMARY
+            echo "Processed $COUNT files in total" >> $GITHUB_STEP_SUMMARY
           else
             if [ -z "${{ steps.changed-files-koin.outputs.all_changed_files }}" ]; then
-              echo "没有检测到文档变更" >> $GITHUB_STEP_SUMMARY
+              echo "No document changes detected" >> $GITHUB_STEP_SUMMARY
             else
               CHANGED_FILES="${{ steps.changed-files-koin.outputs.all_changed_files }}"
               COUNT=$(echo "$CHANGED_FILES" | wc -w)
-              echo "检测到 $COUNT 个文件变更:" >> $GITHUB_STEP_SUMMARY
+              echo "Detected $COUNT file changes:" >> $GITHUB_STEP_SUMMARY
               echo '```' >> $GITHUB_STEP_SUMMARY
               echo "$CHANGED_FILES" | tr ' ' '\n' >> $GITHUB_STEP_SUMMARY
               echo '```' >> $GITHUB_STEP_SUMMARY
             fi
           fi
           
-          # Koin-Annotations 仓库摘要
-          echo "### Koin-Annotations 仓库" >> $GITHUB_STEP_SUMMARY
+          # Koin-Annotations repository summary
+          echo "### Koin-Annotations Repository" >> $GITHUB_STEP_SUMMARY
           if [ "${{ steps.last-run-annotations.outputs.first_run }}" == "true" ]; then
-            echo "首次运行 - 已处理所有文档文件" >> $GITHUB_STEP_SUMMARY
+            echo "First run - processed all documentation files" >> $GITHUB_STEP_SUMMARY
             FILES="${{ steps.all-files-annotations.outputs.all_changed_files }}"
             COUNT=$(echo "$FILES" | wc -w)
-            echo "共处理 $COUNT 个文件" >> $GITHUB_STEP_SUMMARY
+            echo "Processed $COUNT files in total" >> $GITHUB_STEP_SUMMARY
           else
             if [ -z "${{ steps.changed-files-annotations.outputs.all_changed_files }}" ]; then
-              echo "没有检测到文档变更" >> $GITHUB_STEP_SUMMARY
+              echo "No document changes detected" >> $GITHUB_STEP_SUMMARY
             else
               CHANGED_FILES="${{ steps.changed-files-annotations.outputs.all_changed_files }}"
               COUNT=$(echo "$CHANGED_FILES" | wc -w)
-              echo "检测到 $COUNT 个文件变更:" >> $GITHUB_STEP_SUMMARY
+              echo "Detected $COUNT file changes:" >> $GITHUB_STEP_SUMMARY
               echo '```' >> $GITHUB_STEP_SUMMARY
               echo "$CHANGED_FILES" | tr ' ' '\n' >> $GITHUB_STEP_SUMMARY
               echo '```' >> $GITHUB_STEP_SUMMARY

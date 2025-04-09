@@ -79,13 +79,13 @@ Kotlin 代码。
 
 <img src="/img/playground-completion.png" alt="Playground: code completion" width="700" style={{verticalAlign: 'middle'}}/>
 
-Playground 会突出显示代码，并在你键入时显示代码完成选项。它会自动导入标准库和 [`kotlinx.coroutines`](coroutines-overview.md) 中的声明。
+Playground 会突出显示代码，并在你键入时显示代码完成选项。它会自动导入标准库和 [`kotlinx.coroutines`](coroutines-overview) 中的声明。
 
 ### 选择执行环境
 
 Playground 提供了自定义执行环境的方式：
-* 多个 Kotlin 版本，包括可用的 [未来版本的预览](eap.md)。
-* 多个后端来运行代码：JVM、JS（旧版或 [IR compiler](js-ir-compiler.md)，或 Canvas）或 JUnit。
+* 多个 Kotlin 版本，包括可用的 [未来版本的预览](eap)。
+* 多个后端来运行代码：JVM、JS（旧版或 [IR compiler](js-ir-compiler)，或 Canvas）或 JUnit。
 
 <img src="/img/playground-env-setup.png" alt="Playground: environment setup" width="700" style={{verticalAlign: 'middle'}}/>
 

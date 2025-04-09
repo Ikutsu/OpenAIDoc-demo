@@ -1,7 +1,7 @@
 ---
 title: "Kotlin Multiplatform 简介"
 ---
-多平台编程的支持是 Kotlin 的主要优势之一。它减少了为[不同平台](multiplatform-dsl-reference.md#targets)编写和维护相同代码所花费的时间，同时保留了原生编程的灵活性和优势。
+多平台编程的支持是 Kotlin 的主要优势之一。它减少了为[不同平台](multiplatform-dsl-reference#targets)编写和维护相同代码所花费的时间，同时保留了原生编程的灵活性和优势。
 
 <img src="/img/kotlin-multiplatform.svg" alt="Kotlin Multiplatform" width="700" style={{verticalAlign: 'middle'}}/>
 
@@ -17,8 +17,8 @@ Kotlin Multiplatform 允许你在不同的平台（无论是移动端、Web 端�
 
 有关此主题的更多详细信息，请参阅：
 
-* [Kotlin Multiplatform 项目结构的基础知识](multiplatform-discover-project.md)
-* [多平台项目结构的高级概念](multiplatform-advanced-project-structure.md)
+* [Kotlin Multiplatform 项目结构的基础知识](multiplatform-discover-project)
+* [多平台项目结构的高级概念](multiplatform-advanced-project-structure)
 
 ## 使用代码共享机制
 
@@ -28,9 +28,9 @@ Kotlin Multiplatform 允许你在不同的平台（无论是移动端、Web 端�
 
 有关此主题的更多详细信息，请参阅：
 
-* [在平台上共享代码](multiplatform-share-on-platforms.md)
-* [预期和实际声明](multiplatform-expect-actual.md)
-* [分层项目结构](multiplatform-hierarchy.md)
+* [在平台上共享代码](multiplatform-share-on-platforms)
+* [预期和实际声明](multiplatform-expect-actual)
+* [分层项目结构](multiplatform-hierarchy)
 
 ## 添加依赖项
 
@@ -40,9 +40,9 @@ Kotlin Multiplatform 项目可以依赖于外部库和其他多平台项目。�
 
 有关此主题的更多详细信息，请参阅：
 
-* [添加对多平台库的依赖项](multiplatform-add-dependencies.md)
-* [添加对 Android 库的依赖项](multiplatform-android-dependencies.md)
-* [添加对 iOS 库的依赖项](multiplatform-ios-dependencies.md)
+* [添加对多平台库的依赖项](multiplatform-add-dependencies)
+* [添加对 Android 库的依赖项](multiplatform-android-dependencies)
+* [添加对 iOS 库的依赖项](multiplatform-ios-dependencies)
 
 ## 设置与 iOS 的集成
 
@@ -53,7 +53,7 @@ Kotlin Multiplatform 项目可以依赖于外部库和其他多平台项目。�
 * **Local integration**（本地集成）：使用特殊脚本直接连接你的多平台项目和 Xcode 项目，或者使用 CocoaPods 依赖管理工具进行涉及本地 Pod 依赖项的设置。
 * **Remote integration**（远程集成）：使用 XCFramework 设置 SPM 依赖项，或者通过 CocoaPods 分发共享模块。
 
-有关此主题的更多详细信息，请参阅 [iOS 集成方法](multiplatform-ios-integration-overview.md)。
+有关此主题的更多详细信息，请参阅 [iOS 集成方法](multiplatform-ios-integration-overview)。
 
 ## 配置编译
 
@@ -61,7 +61,7 @@ Kotlin Multiplatform 项目可以依赖于外部库和其他多平台项目。�
 
 使用 Kotlin Multiplatform，你可以配置项目中的所有编译，在目标平台内设置特定的编译，甚至创建单独的编译。在配置编译时，你可以修改编译器选项、管理依赖项或配置与原生语言的互操作性。
 
-有关此主题的更多详细信息，请参阅 [配置编译](multiplatform-configure-compilations.md)。
+有关此主题的更多详细信息，请参阅 [配置编译](multiplatform-configure-compilations)。
 
 ## 构建最终二进制文件
 
@@ -69,7 +69,7 @@ Kotlin Multiplatform 项目可以依赖于外部库和其他多平台项目。�
 
 你可以创建可执行二进制文件、共享库和静态库或 Objective-C 框架，每个都可以为不同的构建类型进行配置。Kotlin 还提供了一种构建用于 iOS 集成的通用（胖）框架和 XCFramework 的方法。
 
-有关此主题的更多详细信息，请参阅 [构建原生二进制文件](multiplatform-build-native-binaries.md)。
+有关此主题的更多详细信息，请参阅 [构建原生二进制文件](multiplatform-build-native-binaries)。
 
 ## 创建多平台库
 
@@ -77,9 +77,9 @@ Kotlin Multiplatform 项目可以依赖于外部库和其他多平台项目。�
 
 发布 Kotlin Multiplatform 库需要在你的 Gradle 构建脚本中进行特定的配置。你可以使用 Maven 仓库和 `maven-publish` 插件进行发布。发布后，多平台库可以在其他跨平台项目中用作依赖项。
 
-有关此主题的更多详细信息，请参阅 [发布多平台库](multiplatform-publish-lib.md)。
+有关此主题的更多详细信息，请参阅 [发布多平台库](multiplatform-publish-lib)。
 
 ## 参考
 
-* [Kotlin Multiplatform Gradle 插件的 DSL 参考](multiplatform-dsl-reference.md)
-* [Kotlin Multiplatform 兼容性指南](multiplatform-compatibility-guide.md)
+* [Kotlin Multiplatform Gradle 插件的 DSL 参考](multiplatform-dsl-reference)
+* [Kotlin Multiplatform 兼容性指南](multiplatform-compatibility-guide)

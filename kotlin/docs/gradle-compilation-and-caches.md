@@ -233,12 +233,12 @@ Kotlin 守护进程的默认 JVM 参数列表可能因版本而异。 您可以�
 
 要从 Kotlin 2.0.0 开始使用之前的编译器，请执行以下任一操作：
 
-* 在 `build.gradle.kts` 文件中，[将语言版本设置为](gradle-compiler-options.md#example-of-setting-languageversion) `1.9`。
+* 在 `build.gradle.kts` 文件中，[将语言版本设置为](gradle-compiler-options#example-of-setting-languageversion) `1.9`。
 
   或
 * 使用以下编译器选项：`-language-version 1.9`。
 
-要了解更多关于 K2 编译器的优势，请参阅 [K2 编译器迁移指南](k2-compiler-migration-guide.md)。
+要了解更多关于 K2 编译器的优势，请参阅 [K2 编译器迁移指南](k2-compiler-migration-guide)。
 
 ## 定义 Kotlin 编译器执行策略
 
@@ -482,4 +482,4 @@ JetBrains 不会收集这些统计信息。 您可以选择一个地方 [在哪�
 
 了解更多关于：
 * [Gradle 基础知识和具体细节](https://docs.gradle.org/current/userguide/userguide.html)。
-* [对 Gradle 插件变体的支持](gradle-plugin-variants.md)。
+* [对 Gradle 插件变体的支持](gradle-plugin-variants)。

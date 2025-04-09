@@ -7,7 +7,7 @@ description: "在用 Kotlin 编写的 Spring Boot 项目中使用 Spring Data �
    这是 <strong>Spring Boot 与 Kotlin 入门</strong>教程的最后一部分。在继续之前，请确保您已完成之前的步骤：
 </p><br/>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot.md">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class.md">向 Spring Boot 项目添加一个数据类</a><br/><img src="/img/icon-3-done.svg" width="20" alt="Third step"/> <a href="jvm-spring-boot-add-db-support.md">为 Spring Boot 项目添加数据库支持</a><br/><img src="/img/icon-4.svg" width="20" alt="Fourth step"/> <strong>使用 Spring Data CrudRepository 进行数据库访问</strong>
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class">向 Spring Boot 项目添加一个数据类</a><br/><img src="/img/icon-3-done.svg" width="20" alt="Third step"/> <a href="jvm-spring-boot-add-db-support">为 Spring Boot 项目添加数据库支持</a><br/><img src="/img/icon-4.svg" width="20" alt="Fourth step"/> <strong>使用 Spring Data CrudRepository 进行数据库访问</strong>
 </p>
 
 :::
@@ -84,7 +84,7 @@ _CrudRepository_ 是 Spring Data 的一个接口，用于对特定类型的存�
     ```
 <h3>扩展函数（Extension functions）</h3>
 <p>
-   `findByIdOrNull()` 函数是 Spring Data JDBC 中 `CrudRepository` 接口的 <a href="extensions.md#extension-functions">扩展函数</a>。
+   `findByIdOrNull()` 函数是 Spring Data JDBC 中 `CrudRepository` 接口的 <a href="extensions#extension-functions">扩展函数</a>。
 </p>
 <h3>CrudRepository save() 函数</h3>
 <p>
@@ -222,11 +222,11 @@ class MessageController(private val service: MessageService) {
    <img src="/img/get-kotlin-language-map.png" width="700" alt="Get the Kotlin language map" />
 </a>
 
-* 了解更多关于 [从 Kotlin 代码调用 Java](java-interop.md) 和 [从 Java 代码调用 Kotlin](java-to-kotlin-interop.md) 的信息。
-* 了解如何使用 [Java-to-Kotlin 转换器](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
+* 了解更多关于 [从 Kotlin 代码调用 Java](java-interop) 和 [从 Java 代码调用 Kotlin](java-to-kotlin-interop) 的信息。
+* 了解如何使用 [Java-to-Kotlin 转换器](mixing-java-kotlin-intellij#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
 * 查看我们的 Java 到 Kotlin 迁移指南：
-  * [Java 和 Kotlin 中的字符串](java-to-kotlin-idioms-strings.md)。
-  * [Java 和 Kotlin 中的集合](java-to-kotlin-collections-guide.md)。
-  * [Java 和 Kotlin 中的可空性](java-to-kotlin-nullability-guide.md)。
+  * [Java 和 Kotlin 中的字符串](java-to-kotlin-idioms-strings)。
+  * [Java 和 Kotlin 中的集合](java-to-kotlin-collections-guide)。
+  * [Java 和 Kotlin 中的可空性](java-to-kotlin-nullability-guide)。
 
   ```

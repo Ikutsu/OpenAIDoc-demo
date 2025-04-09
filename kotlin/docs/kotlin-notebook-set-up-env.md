@@ -13,7 +13,7 @@ title: 设置环境
 
 :::
 
-在创建您的第一个 [Kotlin Notebook](kotlin-notebook-overview.md) 之前，您需要设置一个环境。
+在创建您的第一个 [Kotlin Notebook](kotlin-notebook-overview) 之前，您需要设置一个环境。
 
 ## 设置环境
 
@@ -34,4 +34,4 @@ title: 设置环境
 
 在本教程的下一部分，您将学习如何创建一个 Kotlin Notebook。
 
-**[进入下一章节](kotlin-notebook-create.md)**
+**[进入下一章节](kotlin-notebook-create)**

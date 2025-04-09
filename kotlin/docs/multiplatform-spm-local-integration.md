@@ -9,7 +9,7 @@ title: "从本地 Swift 包中使用 Kotlin"
    * 你已经在本地机器上设置了一个以 iOS 为目标的 Kotlin Multiplatform 项目。
    * 你现有的 iOS 项目具有静态链接类型。<br/>
 
-   [选择最适合你的集成方法](multiplatform-ios-integration-overview.md)
+   [选择最适合你的集成方法](multiplatform-ios-integration-overview)
 
 :::
 
@@ -32,7 +32,7 @@ title: "从本地 Swift 包中使用 Kotlin"
 
 或者，检查 `gradle/libs.versions.toml` 文件中的版本目录。
 
-本教程假定你的项目正在使用[直接集成](multiplatform-direct-integration.md)方法，并在项目的构建阶段使用 `embedAndSignAppleFrameworkForXcode` 任务。如果你的项目是通过 CocoaPods 插件或带有 `binaryTarget` 的 Swift 包连接 Kotlin 框架，请先进行迁移。
+本教程假定你的项目正在使用[直接集成](multiplatform-direct-integration)方法，并在项目的构建阶段使用 `embedAndSignAppleFrameworkForXcode` 任务。如果你的项目是通过 CocoaPods 插件或带有 `binaryTarget` 的 Swift 包连接 Kotlin 框架，请先进行迁移。
 
 ### 从 SPM binaryTarget 集成迁移
 
@@ -133,5 +133,5 @@ title: "从本地 Swift 包中使用 Kotlin"
 
 ## 接下来做什么
 
-* [选择你的集成方法](multiplatform-ios-integration-overview.md)
-* [学习如何设置 Swift 包导出](native-spm.md)
+* [选择你的集成方法](multiplatform-ios-integration-overview)
+* [学习如何设置 Swift 包导出](native-spm)

@@ -12,7 +12,7 @@ data class User(val name: String, val age: Int)
 
 * `equals()`/`hashCode()` 对。
 * `toString()` 形式为 `"User(name=John, age=42)"`。
-* 与属性声明顺序相对应的 [`componentN()` 函数](destructuring-declarations.md)。
+* 与属性声明顺序相对应的 [`componentN()` 函数](destructuring-declarations)。
 * `copy()` 函数 (见下文)。
 
 为了确保生成代码的一致性和有意义的行为，数据类必须满足以下要求：
@@ -27,10 +27,10 @@ data class User(val name: String, val age: Int)
 * 如果超类型具有 `open` 并且返回兼容类型的 `componentN()` 函数，则会为数据类生成相应的函数并覆盖超类型的函数。 如果由于签名不兼容或由于它们是 final 而无法覆盖超类型的函数，则会报告错误。
 * 不允许为 `componentN()` 和 `copy()` 函数提供显式实现。
 
-数据类可以扩展其他类（有关示例，请参见 [Sealed classes（密封类）](sealed-classes.md)）。
+数据类可以扩展其他类（有关示例，请参见 [Sealed classes（密封类）](sealed-classes)）。
 
 :::note
-在 JVM 上，如果生成的类需要具有无参数构造函数，则必须为属性指定默认值（请参阅 [Constructors（构造函数）](classes.md#constructors)）：
+在 JVM 上，如果生成的类需要具有无参数构造函数，则必须为属性指定默认值（请参阅 [Constructors（构造函数）](classes#constructors)）：
 
 ```kotlin
 data class User(val name: String = "", val age: Int = 0)
@@ -92,7 +92,7 @@ val olderJack = jack.copy(age = 2)
 
 ## Data classes and destructuring declarations（数据类和解构声明）
 
-为数据类生成的 _Component Functions（组件函数）_ 使它们可以在 [destructuring declarations（解构声明）](destructuring-declarations.md) 中使用：
+为数据类生成的 _Component Functions（组件函数）_ 使它们可以在 [destructuring declarations（解构声明）](destructuring-declarations) 中使用：
 
 ```kotlin
 val jane = User("Jane", 35)

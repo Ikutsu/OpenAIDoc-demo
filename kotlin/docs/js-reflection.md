@@ -1,9 +1,9 @@
 ---
 title: "Kotlin/JS 反射"
 ---
-Kotlin/JS 为 Kotlin [反射 API](reflection.md) 提供了有限的支持。唯一支持的 API 部分有：
+Kotlin/JS 为 Kotlin [反射 API](reflection) 提供了有限的支持。唯一支持的 API 部分有：
 
-* [类引用](reflection.md#class-references) (`::class`)
+* [类引用](reflection#class-references) (`::class`)
 * [`KType` 和 `typeof()`](#ktype-and-typeof)
 * [`KClass` 和 `createInstance()`](#kclass-and-createinstance)
 

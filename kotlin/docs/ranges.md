@@ -120,7 +120,7 @@ fun main() {
 }
 ```
 
-数列实现了 `Iterable<N>`，其中 `N` 分别是 `Int`、`Long` 或 `Char`，因此你可以在各种[集合函数](collection-operations.md)中使用它们，例如 `map`、`filter` 等。
+数列实现了 `Iterable<N>`，其中 `N` 分别是 `Int`、`Long` 或 `Char`，因此你可以在各种[集合函数](collection-operations)中使用它们，例如 `map`、`filter` 等。
 
 ```kotlin
 

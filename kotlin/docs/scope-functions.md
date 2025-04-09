@@ -1,7 +1,7 @@
 ---
 title: 作用域函数
 ---
-Kotlin 标准库包含几个函数，它们的唯一目的是在对象的上下文中执行代码块。当你使用提供的 [lambda 表达式](lambdas.md) 在对象上调用此类函数时，它会形成一个临时作用域。在此作用域中，你可以访问该对象而无需使用其名称。这些函数称为_作用域函数_。有五个这样的函数：[`let`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/let.html)、[`run`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run.html)、[`with`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/with.html)、[`apply`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/apply.html) 和 [`also`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/also.html)。
+Kotlin 标准库包含几个函数，它们的唯一目的是在对象的上下文中执行代码块。当你使用提供的 [lambda 表达式](lambdas) 在对象上调用此类函数时，它会形成一个临时作用域。在此作用域中，你可以访问该对象而无需使用其名称。这些函数称为_作用域函数_。有五个这样的函数：[`let`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/let.html)、[`run`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run.html)、[`with`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/with.html)、[`apply`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/apply.html) 和 [`also`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/also.html)。
 
 基本上，这些函数都执行相同的操作：在对象上执行代码块。不同之处在于此对象如何在代码块内可用，以及整个表达式的结果是什么。
 
@@ -85,7 +85,7 @@ fun main() {
 
 ### 上下文对象：this 或 it
 
-在传递给作用域函数的 lambda 内部，上下文对象通过简短的引用而不是其实际名称来访问。每个作用域函数使用两种方式之一来引用上下文对象：作为 lambda [接收者](lambdas.md#function-literals-with-receiver) (`this`) 或作为 lambda 参数 (`it`)。两者都提供相同的功能，因此我们描述了每种方式在不同用例中的优缺点，并提供了使用建议。
+在传递给作用域函数的 lambda 内部，上下文对象通过简短的引用而不是其实际名称来访问。每个作用域函数使用两种方式之一来引用上下文对象：作为 lambda [接收者](lambdas#function-literals-with-receiver) (`this`) 或作为 lambda 参数 (`it`)。两者都提供相同的功能，因此我们描述了每种方式在不同用例中的优缺点，并提供了使用建议。
 
 ```kotlin
 fun main() {
@@ -105,7 +105,7 @@ fun main() {
 
 #### this
 
-`run`、`with` 和 `apply` 将上下文对象引用为 lambda [接收者](lambdas.md#function-literals-with-receiver) - 通过关键字 `this`。因此，在它们的 lambda 中，该对象就像在普通的类函数中一样可用。
+`run`、`with` 和 `apply` 将上下文对象引用为 lambda [接收者](lambdas#function-literals-with-receiver) - 通过关键字 `this`。因此，在它们的 lambda 中，该对象就像在普通的类函数中一样可用。
 
 在大多数情况下，你可以在访问接收者对象的成员时省略 `this`，从而使代码更短。另一方面，如果省略 `this`，则可能难以区分接收者成员和外部对象或函数。因此，建议将上下文对象作为接收者 (`this`) 用于主要通过调用其函数或将值分配给属性来操作对象成员的 lambda。
 
@@ -125,7 +125,7 @@ fun main() {
 
 #### it
 
-反过来，`let` 和 `also` 将上下文对象引用为 lambda [参数](lambdas.md#lambda-expression-syntax)。如果未指定参数名称，则通过隐式默认名称 `it` 访问该对象。 `it` 比 `this` 短，并且带有 `it` 的表达式通常更容易阅读。
+反过来，`let` 和 `also` 将上下文对象引用为 lambda [参数](lambdas#lambda-expression-syntax)。如果未指定参数名称，则通过隐式默认名称 `it` 访问该对象。 `it` 比 `this` 短，并且带有 `it` 的表达式通常更容易阅读。
 
 但是，在调用对象的函数或属性时，你没有像 `this` 那样隐式可用的对象。因此，当对象主要用作函数调用中的参数时，最好通过 `it` 访问上下文对象。如果你在代码块中使用多个变量，`it` 也会更好。
 
@@ -303,7 +303,7 @@ fun main() {
 }
 ```
 
-`let` 通常用于执行包含非空值的代码块。要在非空对象上执行操作，请对其使用 [安全调用运算符 `?.`](null-safety.md#safe-call-operator) 并在其 lambda 中调用带有操作的 `let`。
+`let` 通常用于执行包含非空值的代码块。要在非空对象上执行操作，请对其使用 [安全调用运算符 `?.`](null-safety#safe-call-operator) 并在其 lambda 中调用带有操作的 `let`。
 
 ```kotlin
 fun processNonNullString(str: String) {}

@@ -19,7 +19,7 @@ import kotlin.text.*
 
 目录和包不是必须匹配的：源文件可以任意放置在文件系统中。
 
-参见 [包 (Packages)](packages.md)。
+参见 [包 (Packages)](packages)。
 
 ## 程序入口点
 
@@ -82,7 +82,7 @@ print(yourWord)
 // You entered the word: Happiness
 ```
 
-更多信息请参考 [读取标准输入 (Read standard input)](read-standard-input.md)。
+更多信息请参考 [读取标准输入 (Read standard input)](read-standard-input)。
 
 ## 函数
 
@@ -137,7 +137,7 @@ fun main() {
 }
 ```
 
-参见 [函数 (Functions)](functions.md)。
+参见 [函数 (Functions)](functions)。
 
 ## 变量
 
@@ -226,7 +226,7 @@ fun main() {
 }
 ```
 
-有关声明属性的信息，请参见 [属性 (Properties)](properties.md)。
+有关声明属性的信息，请参见 [属性 (Properties)](properties)。
 
 ## 创建类和实例
 
@@ -265,7 +265,7 @@ class Rectangle(val height: Double, val length: Double): Shape() {
 }
 ```
 
-有关构造函数和继承的更多信息，请参见 [类 (Classes)](classes.md) 和 [对象和实例 (Objects and instances)](object-declarations.md)。
+有关构造函数和继承的更多信息，请参见 [类 (Classes)](classes) 和 [对象和实例 (Objects and instances)](object-declarations)。
 
 ## 注释
 
@@ -286,7 +286,7 @@ Kotlin 中的块注释可以嵌套：
 到这里结束。 */
 ```
 
-有关文档注释语法的信息，请参见 [Kotlin 代码文档 (Documenting Kotlin Code)](kotlin-doc.md)。
+有关文档注释语法的信息，请参见 [Kotlin 代码文档 (Documenting Kotlin Code)](kotlin-doc)。
 
 ## 字符串模板
 
@@ -305,7 +305,7 @@ fun main() {
 }
 ```
 
-有关详细信息，请参见 [字符串模板 (String templates)](strings.md#string-templates)。
+有关详细信息，请参见 [字符串模板 (String templates)](strings#string-templates)。
 
 ## 条件表达式
 
@@ -335,7 +335,7 @@ fun main() {
 }
 ```
 
-参见 [`if`-表达式](control-flow.md#if-expression)。
+参见 [`if`-表达式](control-flow#if-expression)。
 
 ## for 循环
 
@@ -363,7 +363,7 @@ fun main() {
 }
 ```
 
-参见 [for 循环](control-flow.md#for-loops)。
+参见 [for 循环](control-flow#for-loops)。
 
 ## while 循环
 
@@ -380,7 +380,7 @@ fun main() {
 }
 ```
 
-参见 [while 循环](control-flow.md#while-loops)。
+参见 [while 循环](control-flow#while-loops)。
 
 ## when 表达式
 
@@ -404,7 +404,7 @@ fun main() {
 }
 ```
 
-参见 [when 表达式和语句](control-flow.md#when-expressions-and-statements)。
+参见 [when 表达式和语句](control-flow#when-expressions-and-statements)。
 
 ## 区间
 
@@ -467,7 +467,7 @@ fun main() {
 }
 ```
 
-参见 [区间和数列 (Ranges and progressions)](ranges.md)。
+参见 [区间和数列 (Ranges and progressions)](ranges)。
 
 ## 集合
 
@@ -498,7 +498,7 @@ fun main() {
 }
 ```
 
-使用 [Lambda 表达式 (lambda expressions)](lambdas.md)来过滤和映射集合：
+使用 [Lambda 表达式 (lambda expressions)](lambdas)来过滤和映射集合：
 
 ```kotlin
 fun main() {
@@ -513,7 +513,7 @@ fun main() {
 }
 ```
 
-参见 [集合概述 (Collections overview)](collections-overview.md)。
+参见 [集合概述 (Collections overview)](collections-overview)。
 
 ## 可空值和空值检查
 
@@ -588,7 +588,7 @@ fun main() {
 }
 ```
 
-参见 [空安全 (Null-safety)](null-safety.md)。
+参见 [空安全 (Null-safety)](null-safety)。
 
 ## 类型检查和自动转换
 
@@ -661,4 +661,4 @@ fun main() {
 }
 ```
 
-参见 [类 (Classes)](classes.md) 和 [类型转换 (Type casts)](typecasts.md)。
+参见 [类 (Classes)](classes) 和 [类型转换 (Type casts)](typecasts)。

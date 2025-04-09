@@ -5,8 +5,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::tip
-kapt 处于维护模式。我们会使其与最新的 Kotlin 和 Java 版本保持同步，但没有计划实现新功能。请使用 [Kotlin 符号处理 API (KSP)](ksp-overview.md) 进行注解处理。
-[查看 KSP 支持的库的列表](ksp-overview.md#supported-libraries)。
+kapt 处于维护模式。我们会使其与最新的 Kotlin 和 Java 版本保持同步，但没有计划实现新功能。请使用 [Kotlin 符号处理 API (KSP)](ksp-overview) 进行注解处理。
+[查看 KSP 支持的库的列表](ksp-overview#supported-libraries)。
 
 Kotlin 通过 _kapt_ 编译器插件支持注解处理器（参见 [JSR 269](https://jcp.org/en/jsr/detail?id=269)）。
 
@@ -73,7 +73,7 @@ Kotlin 通过 _kapt_ 编译器插件支持注解处理器（参见 [JSR 269](htt
 
 ## 尝试 Kotlin K2 编译器
 
-kapt 编译器插件中对 K2 的支持是 [实验性的](components-stability.md)。 需要选择启用（参见下面的详细信息），
+kapt 编译器插件中对 K2 的支持是 [实验性的](components-stability)。 需要选择启用（参见下面的详细信息），
 并且你应该仅将其用于评估目的。
 
 从 Kotlin 1.9.20 开始，你可以尝试将 kapt 编译器插件与 [K2 编译器](https://blog.jetbrains.com/kotlin/2021/10/the-road-to-the-k2-compiler/) 一起使用，
@@ -136,7 +136,7 @@ kapt {
 使用 Worker API 允许 Gradle 并行运行来自单个项目的独立注解处理任务，
 在某些情况下，这会显着减少执行时间。
 
-当你在 Kotlin Gradle 插件中使用 [自定义 JDK home](gradle-configure-project.md#gradle-java-toolchains-support) 功能时，
+当你在 Kotlin Gradle 插件中使用 [自定义 JDK home](gradle-configure-project#gradle-java-toolchains-support) 功能时，
 kapt 任务 worker 仅使用 [进程隔离模式](https://docs.gradle.org/current/userguide/worker_api.html#changing_the_isolation_mode)。
 请注意，`kapt.workers.isolation` 属性将被忽略。
 
@@ -168,7 +168,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.internal.KaptWithoutKotlincTask.class
 ### 缓存注解处理器的类加载器
 
 :::caution
-kapt 中注解处理器类加载器的缓存是 [实验性的](components-stability.md)。
+kapt 中注解处理器类加载器的缓存是 [实验性的](components-stability)。
 它可能随时被删除或更改。 仅将其用于评估目的。
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-28901) 上对此的反馈。
 
@@ -289,7 +289,7 @@ kapt 支持默认启用的增量注解处理。
 kapt.incremental.apt=false
 ```
 
-请注意，增量注解处理还需要启用 [增量编译](gradle-compilation-and-caches.md#incremental-compilation)。
+请注意，增量注解处理还需要启用 [增量编译](gradle-compilation-and-caches#incremental-compilation)。
 
 ## 从超配置继承注解处理器
 
@@ -483,4 +483,4 @@ kapt {
 ```
 
 如果你使用 Maven，则需要指定具体的插件设置。
-请参阅此 [Lombok 编译器插件的设置示例](lombok.md#using-with-kapt)。
+请参阅此 [Lombok 编译器插件的设置示例](lombok#using-with-kapt)。

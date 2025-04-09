@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::note
-Lombok 编译器插件是 [实验性的](components-stability.md)。
+Lombok 编译器插件是 [实验性的](components-stability)。
 它可能随时被删除或更改。 仅用于评估目的。
 我们欢迎您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-7112) 中提供反馈。
 
@@ -130,7 +130,7 @@ kotlinLombok {
 
 ## 结合 kapt 使用
 
-默认情况下，[kapt](kapt.md) 编译器插件运行所有注解处理器 (annotation processors)，并禁用 javac 的注解处理。
+默认情况下，[kapt](kapt) 编译器插件运行所有注解处理器 (annotation processors)，并禁用 javac 的注解处理。
 要将 [Lombok](https://projectlombok.org/) 与 kapt 一起运行，请设置 kapt 以保持 javac 的注解处理器正常工作。
 
 如果你使用 Gradle，请将选项添加到 `build.gradle(.kts)` 文件中：
@@ -162,7 +162,7 @@ kapt {
 </plugin>    
 ```
 
-如果注解处理器不依赖于 Lombok 生成的代码，则 Lombok 编译器插件可以与 [kapt](kapt.md) 正常工作。
+如果注解处理器不依赖于 Lombok 生成的代码，则 Lombok 编译器插件可以与 [kapt](kapt) 正常工作。
 
 查看 kapt 和 Lombok 编译器插件使用中的测试项目示例：
 * 使用 [Gradle](https://github.com/JetBrains/kotlin/tree/master/libraries/tools/kotlin-gradle-plugin-integration-tests/src/test/resources/testProject/lombokProject/yeskapt)。

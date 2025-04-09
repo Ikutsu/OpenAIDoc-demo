@@ -3,7 +3,7 @@ title: 标准输入
 ---
 :::note
 Java Scanner 是一个比较慢的工具。只有在需要它提供的特定功能时才使用它。
-否则，通常最好使用 Kotlin 的 `readln()` 函数来[读取标准输入](basic-syntax.md#read-from-the-standard-input)。
+否则，通常最好使用 Kotlin 的 `readln()` 函数来[读取标准输入](basic-syntax#read-from-the-standard-input)。
 
 :::
 
@@ -106,4 +106,4 @@ println("Hello, $name! You are $age years old.")
 // Hello, Charlotte! You are 43 years old.
 ```
 
-更多信息，请参考 [读取标准输入](read-standard-input.md)。
+更多信息，请参考 [读取标准输入](read-standard-input)。

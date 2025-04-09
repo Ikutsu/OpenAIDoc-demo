@@ -42,4 +42,4 @@ false
 
 由于 JavaScript 生态系统有多种在包中公开函数的方式（例如，通过命名导出或默认导出），因此其他 npm 包可能需要对其外部声明进行稍微修改的结构。
 
-要了解有关如何编写声明的更多信息，请参阅 [从 Kotlin 调用 JavaScript](js-interop.md)。
+要了解有关如何编写声明的更多信息，请参阅 [从 Kotlin 调用 JavaScript](js-interop)。

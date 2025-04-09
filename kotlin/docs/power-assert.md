@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::tip
-Power-assert 编译器插件是[实验性的](components-stability.md)。
+Power-assert 编译器插件是[实验性的](components-stability)。
 它可能随时更改。仅用于评估目的。
 我们欢迎您在 [YouTrack](https://kotl.in/issue) 中提供反馈。
 

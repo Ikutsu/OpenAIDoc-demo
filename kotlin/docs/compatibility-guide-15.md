@@ -4,7 +4,7 @@ title: "Kotlin 1.5 兼容性指南"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[便捷的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的基本原则。前者表示应该移除那些会阻碍语言发展的结构，后者表示应该提前充分沟通这种移除，以尽可能平滑地进行代码迁移。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[便捷的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的基本原则。前者表示应该移除那些会阻碍语言发展的结构，后者表示应该提前充分沟通这种移除，以尽可能平滑地进行代码迁移。
 
 虽然大多数语言变更已经通过其他渠道宣布，例如更新日志或编译器警告，但本文档对它们进行了总结，为从 Kotlin 1.4 迁移到 Kotlin 1.5 提供了完整的参考。
 

@@ -12,7 +12,7 @@ Kotlin Multiplatform Gradle 插件会自动为项目构建生成源码映射，�
 要在浏览器中调试 Kotlin/JS：
 
 1. 通过调用可用的 _run_ Gradle 任务之一来运行项目，例如，多平台项目中的 `browserDevelopmentRun` 或 `jsBrowserDevelopmentRun`。
-   了解更多关于[运行 Kotlin/JS](running-kotlin-js.md#run-the-browser-target)。
+   了解更多关于[运行 Kotlin/JS](running-kotlin-js#run-the-browser-target)。
 2. 在浏览器中导航到该页面并启动其开发者工具（例如，右键单击并选择 **Inspect** 操作）。 了解如何在流行的浏览器中[查找开发者工具](https://balsamiq.com/support/faqs/browserconsole/)。
 3. 如果您的程序正在将信息记录到控制台，请导航到 **Console** 选项卡以查看此输出。 根据您的浏览器，这些日志可以引用它们来自的 Kotlin 源文件和行：
 
@@ -43,7 +43,7 @@ Kotlin Multiplatform Gradle 插件会自动为项目构建生成源码映射，�
 现在您已准备好调试您的项目！
 
 1. 通过调用可用的 _run_ Gradle 任务之一来运行项目，例如，多平台项目中的 `browserDevelopmentRun` 或 `jsBrowserDevelopmentRun`。
-   了解更多关于[运行 Kotlin/JS](running-kotlin-js.md#run-the-browser-target)。
+   了解更多关于[运行 Kotlin/JS](running-kotlin-js#run-the-browser-target)。
 2. 通过运行您之前创建的 JavaScript 调试配置来启动调试会话：
 
 <img src="/img/debug-config-run.png" alt="JavaScript debug configuration" width="700" style={{verticalAlign: 'middle'}}/>

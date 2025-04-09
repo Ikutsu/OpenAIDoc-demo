@@ -1,7 +1,7 @@
 ---
 title: 异常
 ---
-异常能够帮助你的代码更可预测地运行，即使在发生可能中断程序执行的运行时错误时也是如此。默认情况下，Kotlin 将所有异常视为_未检查的_（unchecked）。未检查的异常简化了异常处理流程：你可以捕获异常，但不需要显式地处理或[声明](java-to-kotlin-interop.md#checked-exceptions)它们。
+异常能够帮助你的代码更可预测地运行，即使在发生可能中断程序执行的运行时错误时也是如此。默认情况下，Kotlin 将所有异常视为_未检查的_（unchecked）。未检查的异常简化了异常处理流程：你可以捕获异常，但不需要显式地处理或[声明](java-to-kotlin-interop#checked-exceptions)它们。
 
 :::note
 请在[与 Java、Swift 和 Objective-C 的异常互操作性](#exception-interoperability-with-java-swift-and-objective-c)部分中，了解更多关于 Kotlin 在与 Java、Swift 和 Objective-C 交互时如何处理异常的信息。
@@ -11,11 +11,11 @@ title: 异常
 * **抛出异常（Throwing exceptions）：** 指示何时发生问题。
 * **捕获异常（Catching exceptions）：** 通过解决问题或通知开发者或应用程序用户，手动处理意外的异常。
 
-异常由 [`Exception`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/) 类的子类表示，`Exception` 类又是 [`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/) 类的子类。有关层级的更多信息，请参阅 [异常层级结构](#exception-hierarchy) 部分。由于 `Exception` 是一个 [`open class`](inheritance.md)，你可以创建[自定义异常](#create-custom-exceptions)来满足应用程序的特定需求。
+异常由 [`Exception`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/) 类的子类表示，`Exception` 类又是 [`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/) 类的子类。有关层级的更多信息，请参阅 [异常层级结构](#exception-hierarchy) 部分。由于 `Exception` 是一个 [`open class`](inheritance)，你可以创建[自定义异常](#create-custom-exceptions)来满足应用程序的特定需求。
 
 ## 抛出异常
 
-你可以使用 `throw` 关键字手动抛出异常。抛出异常表示代码中发生了意外的运行时错误。异常是 [对象](classes.md#creating-instances-of-classes)，抛出一个异常会创建一个异常类的实例。
+你可以使用 `throw` 关键字手动抛出异常。抛出异常表示代码中发生了意外的运行时错误。异常是 [对象](classes#creating-instances-of-classes)，抛出一个异常会创建一个异常类的实例。
 
 你可以不带任何参数地抛出一个异常：
 
@@ -71,7 +71,7 @@ fun main() {
 }
 ```
 
-`require()` 函数允许编译器执行[智能类型转换](typecasts.md#smart-casts)。在成功检查后，变量会自动转换为非空类型。这些函数通常用于可空性检查，以确保变量在继续之前不为空。例如：
+`require()` 函数允许编译器执行[智能类型转换](typecasts#smart-casts)。在成功检查后，变量会自动转换为非空类型。这些函数通常用于可空性检查，以确保变量在继续之前不为空。例如：
 
 ```kotlin
 fun printNonNullString(str: String?) {
@@ -115,7 +115,7 @@ fun main() {
 ```
 
 :::note
-`check()` 函数允许编译器执行[智能类型转换](typecasts.md#smart-casts)。在成功检查后，变量会自动转换为非空类型。这些函数通常用于可空性检查，以确保变量在继续之前不为空。例如：
+`check()` 函数允许编译器执行[智能类型转换](typecasts#smart-casts)。在成功检查后，变量会自动转换为非空类型。这些函数通常用于可空性检查，以确保变量在继续之前不为空。例如：
 
 ```kotlin
 fun printNonNullString(str: String?) {
@@ -160,7 +160,7 @@ fun main() {
 
 ## 使用 try-catch 块处理异常
 
-当抛出异常时，它会中断程序的正常执行。你可以使用 `try` 和 `catch` 关键字优雅地处理异常，以保持程序的稳定。`try` 块包含可能抛出异常的代码，而 `catch` 块捕获并处理异常（如果发生）。异常由第一个与其特定类型或异常的[超类](inheritance.md)匹配的 `catch` 块捕获。
+当抛出异常时，它会中断程序的正常执行。你可以使用 `try` 和 `catch` 关键字优雅地处理异常，以保持程序的稳定。`try` 块包含可能抛出异常的代码，而 `catch` 块捕获并处理异常（如果发生）。异常由第一个与其特定类型或异常的[超类](inheritance)匹配的 `catch` 块捕获。
 
 以下是如何一起使用 `try` 和 `catch` 关键字：
 
@@ -356,7 +356,7 @@ class MyException: Exception("My message")
 在这个例子中，有一个默认的错误消息 "My message"，但如果你愿意，你可以将其留空。
 
 :::note
-Kotlin 中的异常是有状态的对象，携带特定于其创建上下文的信息，称为[堆栈跟踪](#stack-trace)。避免使用[对象声明](object-declarations.md#object-declarations-overview)创建异常。相反，每次需要时都创建一个异常的新实例。这样，你可以确保异常的状态准确地反映了特定的上下文。
+Kotlin 中的异常是有状态的对象，携带特定于其创建上下文的信息，称为[堆栈跟踪](#stack-trace)。避免使用[对象声明](object-declarations#object-declarations-overview)创建异常。相反，每次需要时都创建一个异常的新实例。这样，你可以确保异常的状态准确地反映了特定的上下文。
 
 自定义异常也可以是任何预先存在的异常子类的子类，例如 `ArithmeticException` 子类：
 
@@ -364,7 +364,7 @@ Kotlin 中的异常是有状态的对象，携带特定于其创建上下文的�
 class NumberTooLargeException: ArithmeticException("My message")
 ```
 
-如果要创建自定义异常的子类，则必须将父类声明为 `open`，因为[类默认是 final 的](inheritance.md)，否则不能被继承。
+如果要创建自定义异常的子类，则必须将父类声明为 `open`，因为[类默认是 final 的](inheritance)，否则不能被继承。
 
 例如：
 
@@ -396,7 +396,7 @@ fun main() {
 }
 ```
 
-在具有多样化错误场景的应用程序中，创建异常的层次结构可以帮助使代码更清晰和更具体。你可以通过使用[抽象类](classes.md#abstract-classes)或[密封类](sealed-classes.md#constructors)作为公共异常特性的基础，并为详细的异常类型创建特定的子类来实现这一点。此外，带有可选参数的自定义异常提供了灵活性，允许使用不同的消息进行初始化，从而实现更细粒度的错误处理。
+在具有多样化错误场景的应用程序中，创建异常的层次结构可以帮助使代码更清晰和更具体。你可以通过使用[抽象类](classes#abstract-classes)或[密封类](sealed-classes#constructors)作为公共异常特性的基础，并为详细的异常类型创建特定的子类来实现这一点。此外，带有可选参数的自定义异常提供了灵活性，允许使用不同的消息进行初始化，从而实现更细粒度的错误处理。
 
 让我们看一个使用密封类 `AccountException` 作为异常层次结构的基础的例子，以及类 `APIKeyExpiredException`，一个子类，展示了使用可选参数来改进异常细节的用法：
 
@@ -603,4 +603,4 @@ Exception in thread "main" java.lang.ArithmeticException: This is an arithmetic 
 
 ## 与 Java、Swift 和 Objective-C 的异常互操作性
 
-由于 Kotlin 将所有异常视为未检查的，因此当从区分已检查和未检查异常的语言调用这些异常时，可能会导致复杂情况。为了解决 Kotlin 和 Java、Swift 和 Objective-C 等语言之间异常处理的差异，你可以使用 [`@Throws`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throws/) 注解。此注解会提醒调用者可能发生的异常。有关更多信息，请参阅 [从 Java 调用 Kotlin](java-to-kotlin-interop.md#checked-exceptions) 和 [与 Swift/Objective-C 的互操作性](native-objc-interop.md#errors-and-exceptions)。
+由于 Kotlin 将所有异常视为未检查的，因此当从区分已检查和未检查异常的语言调用这些异常时，可能会导致复杂情况。为了解决 Kotlin 和 Java、Swift 和 Objective-C 等语言之间异常处理的差异，你可以使用 [`@Throws`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throws/) 注解。此注解会提醒调用者可能发生的异常。有关更多信息，请参阅 [从 Java 调用 Kotlin](java-to-kotlin-interop#checked-exceptions) 和 [与 Swift/Objective-C 的互操作性](native-objc-interop#errors-and-exceptions)。

@@ -4,7 +4,7 @@ title: "Kotlin 1.5.20 中的新增功能"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[发布时间：2021 年 6 月 24 日](releases.md#release-details)_
+_[发布时间：2021 年 6 月 24 日](releases#release-details)_
 
 Kotlin 1.5.20 修复了在 1.5.0 新特性中发现的问题，并且还包含各种工具改进。
 
@@ -25,11 +25,11 @@ Kotlin 1.5.20 将字符串连接编译为 JVM 9+ 目标上的[动态调用](http
 
 要切换回通过以前版本中使用的 [`StringBuilder.append()`](https://docs.oracle.com/javase/9/docs/api/java/lang/StringBuilder.html#append-java.lang.String-) 进行的连接，请添加编译器选项 `-Xstring-concat=inline`。
 
-了解如何在 [Gradle](gradle-compiler-options.md)、[Maven](maven.md#specify-compiler-options) 和[命令行编译器](compiler-reference.md#compiler-options)中添加编译器选项。
+了解如何在 [Gradle](gradle-compiler-options)、[Maven](maven#specify-compiler-options) 和[命令行编译器](compiler-reference#compiler-options)中添加编译器选项。
 
 ### 支持 JSpecify 空值注解
 
-Kotlin 编译器可以读取各种类型的[可空性注解](java-interop.md#nullability-annotations)，以将可空性信息从 Java 传递到 Kotlin。1.5.20 版本引入了对 [JSpecify 项目](https://jspecify.dev/)的支持，其中包括 Java 空值注解的标准统一集。
+Kotlin 编译器可以读取各种类型的[可空性注解](java-interop#nullability-annotations)，以将可空性信息从 Java 传递到 Kotlin。1.5.20 版本引入了对 [JSpecify 项目](https://jspecify.dev/)的支持，其中包括 Java 空值注解的标准统一集。
 
 借助 JSpecify，你可以提供更详细的可空性信息，以帮助 Kotlin 保持与 Java 的空安全互操作。你可以为声明、包或模块范围设置默认可空性，指定参数化可空性等等。你可以在 [JSpecify 用户指南](https://jspecify.dev/docs/user-guide) 中找到有关此的更多详细信息。
 
@@ -56,18 +56,18 @@ fun kotlinFun() = with(JavaClass()) {
 
 在 1.5.20 中，根据 JSpecify 提供的可空性信息，所有可空性不匹配都报告为警告。使用 `-Xjspecify-annotations=strict` 和 `-Xtype-enhancement-improvements-strict-mode` 编译器选项在使用 JSpecify 时启用严格模式（带有错误报告）。请注意，JSpecify 项目正在积极开发中。其 API 和实现可能随时发生重大变化。
 
-[了解有关空安全和平台类型的更多信息](java-interop.md#null-safety-and-platform-types)。
+[了解有关空安全和平台类型的更多信息](java-interop#null-safety-and-platform-types)。
 
 ### 支持在具有 Kotlin 和 Java 代码的模块中调用 Java 的 Lombok 生成方法
 
 :::caution
-Lombok 编译器插件是 [Experimental（实验性的）](components-stability.md)。
+Lombok 编译器插件是 [Experimental（实验性的）](components-stability)。
 它可能随时被删除或更改。 仅将其用于评估目的。
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-7112) 中对此的反馈。
 
 :::
 
-Kotlin 1.5.20 引入了一个实验性的 [Lombok 编译器插件](lombok.md)。 此插件使生成和使用 Java 的 [Lombok](https://projectlombok.org/) 声明成为可能，这些声明位于具有 Kotlin 和 Java 代码的模块中。 Lombok 注解仅在 Java 源代码中有效，如果在 Kotlin 代码中使用它们，则会被忽略。
+Kotlin 1.5.20 引入了一个实验性的 [Lombok 编译器插件](lombok)。 此插件使生成和使用 Java 的 [Lombok](https://projectlombok.org/) 声明成为可能，这些声明位于具有 Kotlin 和 Java 代码的模块中。 Lombok 注解仅在 Java 源代码中有效，如果在 Kotlin 代码中使用它们，则会被忽略。
 
 该插件支持以下注解：
 * `@Getter`, `@Setter`
@@ -80,7 +80,7 @@ Kotlin 1.5.20 引入了一个实验性的 [Lombok 编译器插件](lombok.md)。
 
 目前，我们没有计划支持 `@Builder` 注解。 但是，如果你在 [YouTrack 中为 `@Builder`](https://youtrack.jetbrains.com/issue/KT-46959) 投票，我们可以考虑这一点。
 
-[了解如何配置 Lombok 编译器插件](lombok.md#gradle)。
+[了解如何配置 Lombok 编译器插件](lombok#gradle)。
 
 ## Kotlin/Native
 
@@ -93,14 +93,14 @@ Kotlin/Native 1.5.20 提供了新特性和工具改进的预览：
 ### 选择性导出 KDoc 注释到生成的 Objective-C 标头
 
 :::caution
-将 KDoc 注释导出到生成的 Objective-C 标头的功能是 [Experimental（实验性的）](components-stability.md)。
+将 KDoc 注释导出到生成的 Objective-C 标头的功能是 [Experimental（实验性的）](components-stability)。
 它可能随时被删除或更改。
 需要选择加入（请参阅下面的详细信息），并且你应仅将其用于评估目的。
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-38600) 中对此的反馈。
 
 :::
 
-你现在可以设置 Kotlin/Native 编译器以将 [文档注释 (KDoc)](kotlin-doc.md) 从 Kotlin 代码导出到从中生成的 Objective-C 框架，从而使框架的使用者可以看到它们。
+你现在可以设置 Kotlin/Native 编译器以将 [文档注释 (KDoc)](kotlin-doc) 从 Kotlin 代码导出到从中生成的 Objective-C 框架，从而使框架的使用者可以看到它们。
 
 例如，以下带有 KDoc 的 Kotlin 代码：
 
@@ -165,11 +165,11 @@ Kotlin/Native 编译器在 1.5.20 中收到了多个错误修复。 你可以在
 
 ## Kotlin/JS
 
-使用 1.5.20，我们发布了一个指南，该指南将帮助你将项目迁移到 Kotlin/JS 的新 [基于 IR 的后端](js-ir-compiler.md)。
+使用 1.5.20，我们发布了一个指南，该指南将帮助你将项目迁移到 Kotlin/JS 的新 [基于 IR 的后端](js-ir-compiler)。
 
 ### JS IR 后端的迁移指南
 
-新的 [JS IR 后端的迁移指南](js-ir-migration.md) 确定了你在迁移过程中可能遇到的问题，并提供了解决方案。 如果你发现指南中未涵盖的任何问题，请将其报告给我们的 [问题跟踪器](http://kotl.in/issue)。
+新的 [JS IR 后端的迁移指南](js-ir-migration) 确定了你在迁移过程中可能遇到的问题，并提供了解决方案。 如果你发现指南中未涵盖的任何问题，请将其报告给我们的 [问题跟踪器](http://kotl.in/issue)。
 
 ## Gradle
 
@@ -181,13 +181,13 @@ Kotlin 1.5.20 引入了以下可以改善 Gradle 体验的功能：
 ### kapt 中注解处理器类加载器的缓存
 
 :::caution
-kapt 中注解处理器类加载器的缓存是 [Experimental（实验性的）](components-stability.md)。
+kapt 中注解处理器类加载器的缓存是 [Experimental（实验性的）](components-stability)。
 它可能随时被删除或更改。 仅将其用于评估目的。
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-28901) 中对此的反馈。
 
 :::
 
-现在有一个新的实验性功能，可以缓存 [kapt](kapt.md) 中注解处理器的类加载器。 此功能可以提高 kapt 对于连续 Gradle 运行的速度。
+现在有一个新的实验性功能，可以缓存 [kapt](kapt) 中注解处理器的类加载器。 此功能可以提高 kapt 对于连续 Gradle 运行的速度。
 
 要启用此功能，请在你的 `gradle.properties` 文件中使用以下属性：
 
@@ -200,7 +200,7 @@ kapt.classloaders.cache.size=5
 kapt.include.compile.classpath=false
 ```
 
-了解有关 [kapt](kapt.md) 的更多信息。
+了解有关 [kapt](kapt) 的更多信息。
 
 ### kotlin.parallel.tasks.in.project 构建属性的弃用
 

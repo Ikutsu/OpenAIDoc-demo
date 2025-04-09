@@ -21,7 +21,7 @@ title: "iOS 集成方法"
 
 如果你在 Android Studio 中创建一个项目，请选择 **Regular framework (常规框架)** 选项以自动生成此设置。如果你使用 [Kotlin Multiplatform web wizard](https://kmp.jetbrains.com/)，则默认应用直接集成。
 
-有关更多信息，请参见 [Direct integration (直接集成)](multiplatform-direct-integration.md)。
+有关更多信息，请参见 [Direct integration (直接集成)](multiplatform-direct-integration)。
 
 ### 使用本地 podspec 的 CocoaPods 集成
 
@@ -34,7 +34,7 @@ title: "iOS 集成方法"
 
 要设置具有本地 CocoaPods 依赖项的工作流程，你可以手动编辑脚本，也可以使用 Android Studio 中的向导生成项目。
 
-有关更多信息，请参见 [CocoaPods overview and setup (CocoaPods 概述和设置)](native-cocoapods.md)。
+有关更多信息，请参见 [CocoaPods overview and setup (CocoaPods 概述和设置)](native-cocoapods)。
 
 ## 远程集成
 
@@ -44,10 +44,10 @@ title: "iOS 集成方法"
 
 你可以使用带有 XCFrameworks 的 Swift package manager (SPM) 依赖项来连接 Kotlin Multiplatform 项目中的 iOS 框架。
 
-有关更多信息，请参见 [Swift package export setup (Swift 包导出设置)](native-spm.md)。
+有关更多信息，请参见 [Swift package export setup (Swift 包导出设置)](native-spm)。
 
 ### 带有 XCFrameworks 的 CocoaPods 集成
 
 你可以使用 Kotlin CocoaPods Gradle 插件构建 XCFrameworks，然后通过 CocoaPods 将项目的共享部分与移动应用程序分开分发。
 
-有关更多信息，请参见 [Build final native binaries (构建最终原生二进制文件)](multiplatform-build-native-binaries.md#build-frameworks)。
+有关更多信息，请参见 [Build final native binaries (构建最终原生二进制文件)](multiplatform-build-native-binaries#build-frameworks)。

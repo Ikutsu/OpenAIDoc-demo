@@ -51,7 +51,7 @@ println(doubles)
 ```
 
 :::note
-有关在 Kotlin/JVM 中读取用户输入的另一种方法，请参阅 [Standard input with Java Scanner](standard-input.md)。
+有关在 Kotlin/JVM 中读取用户输入的另一种方法，请参阅 [Standard input with Java Scanner](standard-input)。
 
 :::
 

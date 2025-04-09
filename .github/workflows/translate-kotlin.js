@@ -2,21 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const { GoogleGenAI } = require("@google/genai");
 
-// 从配置文件加载配置项
+// Load configuration from config file
 const configPath = path.resolve(__dirname, './translate-config.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 // Google LLM API
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
-// 从环境变量获取配置
-const baseDir = process.env.BASE_DIR || './kotlin';
-const repoPath = process.env.REPO_PATH || 'kotlin-repo';
-
-console.log(`基础目录: ${baseDir}`);
-console.log(`仓库路径: ${repoPath}`);
-
-// 加载术语库
+// Load terminology database
 let terminology = {};
 
 try {
@@ -25,7 +18,7 @@ try {
     terminology = { terms: {} };
 }
 
-// 提取 frontmatter 和内容
+// Extract frontmatter and content
 function extractFrontmatterAndContent(content) {
     const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
     const match = content.match(frontmatterRegex);
@@ -39,14 +32,14 @@ function extractFrontmatterAndContent(content) {
     return { frontmatter: '', mainContent: content };
 }
 
-// 解析和修改 frontmatter
+// Parse and modify frontmatter
 function parseFrontmatter(frontmatter) {
     if (!frontmatter) return { frontmatterObj: {}, rawFrontmatter: '' };
 
-    // 去掉 frontmatter 的分隔符
+    // Remove frontmatter delimiters
     const contentOnly = frontmatter.replace(/^---\n/, '').replace(/\n---\n$/, '');
 
-    // 解析 frontmatter 内容为对象
+    // Parse frontmatter content as object
     const frontmatterObj = {};
     const lines = contentOnly.split('\n');
 
@@ -56,7 +49,7 @@ function parseFrontmatter(frontmatter) {
             const key = line.substring(0, colonIndex).trim();
             let value = line.substring(colonIndex + 1).trim();
 
-            // 处理带引号的值
+            // Handle quoted values
             if ((value.startsWith('"') && value.endsWith('"')) ||
                 (value.startsWith("'") && value.endsWith("'"))) {
                 value = value.substring(1, value.length - 1);
@@ -69,12 +62,12 @@ function parseFrontmatter(frontmatter) {
     return { frontmatterObj, rawFrontmatter: contentOnly };
 }
 
-// 生成 frontmatter 字符串
+// Generate frontmatter string
 function generateFrontmatter(frontmatterObj) {
     let result = '---\n';
 
     for (const [key, value] of Object.entries(frontmatterObj)) {
-        // 如果值包含特殊字符或空格，用引号括起来
+        // Wrap value in quotes if it contains special characters or spaces
         const needsQuotes = /[:"\s]/.test(value);
         result += `${key}: ${needsQuotes ? `"${value.replace(/"/g, '\\"')}"` : value}\n`;
   }
@@ -83,22 +76,22 @@ function generateFrontmatter(frontmatterObj) {
   return result;
 }
 
-// 翻译 frontmatter 中的标题
+// Translate title in frontmatter
 async function translateFrontmatter(frontmatter, targetLang, filePath) {
   if (!frontmatter) return '';
   
   const { frontmatterObj, rawFrontmatter } = parseFrontmatter(frontmatter);
   
-  // 检查是否有需要翻译的字段
+  // Check if there are fields to translate
   const fieldsToTranslate = ['title', 'description', 'sidebar_label'];
   const hasFieldsToTranslate = fieldsToTranslate.some(field => frontmatterObj[field]);
   
   if (!hasFieldsToTranslate) {
-      // 即使没有需要翻译的字段，仍需要生成新的 frontmatter 以包含可能添加的 slug
+      // Even if there are no fields to translate, still need to generate new frontmatter to include possible added slug
       return generateFrontmatter(frontmatterObj);
   }
   
-  // 准备要翻译的文本
+  // Prepare text to translate
   const textsToTranslate = [];
   for (const field of fieldsToTranslate) {
       if (frontmatterObj[field]) {
@@ -110,12 +103,12 @@ async function translateFrontmatter(frontmatter, targetLang, filePath) {
       return generateFrontmatter(frontmatterObj);
   }
   
-  // 将字段拼接成文本进行翻译
+  // Join fields into text for translation
   const textToTranslate = textsToTranslate.join('\n');
   const translatedText = await translateWithLLM(textToTranslate, targetLang, filePath);
   const cleanedTranslatedText = cleanupTranslation(translatedText);
   
-  // 将翻译结果解析回对象
+  // Parse translation results back to object
   const translatedLines = cleanedTranslatedText.split('\n');
   for (const line of translatedLines) {
       const colonIndex = line.indexOf(':');
@@ -123,26 +116,26 @@ async function translateFrontmatter(frontmatter, targetLang, filePath) {
           const key = line.substring(0, colonIndex).trim();
           let value = line.substring(colonIndex + 1).trim();
           
-          // 如果是我们要翻译的字段，更新值
+          // If it's a field we want to translate, update the value
           if (fieldsToTranslate.includes(key) && frontmatterObj[key]) {
               frontmatterObj[key] = value;
           }
       }
   }
   
-  // 生成新的 frontmatter
+  // Generate new frontmatter
   return generateFrontmatter(frontmatterObj);
 }
 
-// 计算目标文件路径
+// Calculate target file path
 function getTargetPath(filePath, targetLang) {
-  // 如果是简体中文，直接存在 baseDir/docs 下
+  // For Simplified Chinese, store directly in baseDir/docs
   if (targetLang === 'zh-Hans') {
       const baseDir = process.env.BASE_DIR || '.';
       const relativePath = path.relative(config.sourceDir, filePath);
       return path.join(baseDir, 'docs', relativePath);
   } 
-  // 其他语言存在 i18n/[语言]/content-docs/current 下
+  // Other languages go in i18n/[language]/content-docs/current
   else {
       const baseDir = process.env.BASE_DIR || '.';
       const relativePath = path.relative(config.sourceDir, filePath);
@@ -150,23 +143,23 @@ function getTargetPath(filePath, targetLang) {
   }
 }
 
-// 加载之前翻译过的相关文件作为参考
+// Load previously translated related files as reference
 function loadPreviousTranslations(targetLang, currentFilePath) {
   try {
-      // 计算对应翻译文件的路径
+      // Calculate path for the corresponding translation file
       const targetPath = getTargetPath(currentFilePath, targetLang);
       
-      console.log(`尝试加载参考翻译: ${targetPath}`);
+      console.log(`Trying to load reference translation: ${targetPath}`);
       
-      // 检查是否存在对应的翻译文件
+      // Check if corresponding translation file exists
       if (!fs.existsSync(targetPath)) {
-          console.log(`参考翻译文件不存在: ${targetPath}`);
+          console.log(`Reference translation file does not exist: ${targetPath}`);
           return [];
       }
       
-      // 读取之前的翻译内容
+      // Read previous translation content
       const content = fs.readFileSync(targetPath, 'utf8');
-      console.log(`成功加载参考翻译文件: ${targetPath}`);
+      console.log(`Successfully loaded reference translation file: ${targetPath}`);
       
       return [{
           file: targetPath,
@@ -179,28 +172,81 @@ function loadPreviousTranslations(targetLang, currentFilePath) {
   }
 }
 
-// 准备翻译提示词
+// Prepare translation prompt
 function prepareTranslationPrompt(sourceText, targetLang, currentFilePath) {
-  // 获取相关术语
+  // Get relevant terminology
   const relevantTerms = Object.entries(terminology.terms)
       .filter(([term]) => sourceText.includes(term))
       .map(([term, translations]) => `"${term}" → "${translations[targetLang]}"`)
       .join('\n');
   
-  // 获取同名的之前翻译文件作为参考
+  // Get previously translated file with the same name as reference
   const previousTranslations = loadPreviousTranslations(targetLang, currentFilePath);
   
-  // 构建参考翻译部分
+  // Build reference translation section
   let translationReferences = '';
   if (previousTranslations.length > 0) {
-      translationReferences = '\n## 参考翻译（参考以下之前翻译过的文档，保持风格和术语一致性）\n';
-      translationReferences += `### 之前的翻译版本\n\`\`\`\n${previousTranslations[0].content}\n\`\`\`\n\n`;
+      // Choose English or Chinese based on target language
+      if (targetLang === 'ja' || targetLang === 'ko') {
+          translationReferences = '\n## Reference Translations (Reference previously translated documents to maintain consistent style and terminology)\n';
+          translationReferences += `### Previous Translation Version\n\`\`\`\n${previousTranslations[0].content}\n\`\`\`\n\n`;
+      } else {
+          translationReferences = '\n## 参考翻译（参考以下之前翻译过的文档，保持风格和术语一致性）\n';
+          translationReferences += `### 之前的翻译版本\n\`\`\`\n${previousTranslations[0].content}\n\`\`\`\n\n`;
+      }
   }
 
-  return `你是一位精通技术文档翻译的专业翻译人员，负责将英文技术文档准确翻译为${getLangDisplayName(targetLang)}。请严格遵循以下要求：
+  // Choose appropriate prompt template based on target language
+  const promptTemplate = getPromptTemplate(targetLang, getLangDisplayName(targetLang));
+
+  // Insert variables into template
+  return promptTemplate
+    .replace('{RELEVANT_TERMS}', relevantTerms || (targetLang === 'ja' || targetLang === 'ko' ? 'No relevant terms' : '无相关术语'))
+    .replace('{TRANSLATION_REFERENCES}', translationReferences || (targetLang === 'ja' || targetLang === 'ko' ? 'No reference translations' : '无参考翻译'))
+    .replace('{SOURCE_TEXT}', sourceText);
+}
+
+// Get appropriate prompt template based on target language
+function getPromptTemplate(targetLang, langDisplayName) {
+  // Japanese and Korean use English prompts
+  if (targetLang === 'ja' || targetLang === 'ko') {
+    return `You are a professional translator specializing in technical documentation translation from English to ${langDisplayName}. Please follow these requirements strictly:
+  
+  ## Translation Style and Quality Requirements
+  1. Ensure the translation fits the internet usage context of ${langDisplayName}, correctly handle inversions and different language word orders, and properly retain brackets and English notes for professional terms
+  2. Use terminology consistently and accurately, naturally integrating them into sentences based on context
+
+  ## Technical Requirements
+  1. Maintain all Markdown formatting, code blocks, and links unchanged
+  2. DO NOT translate the code inside code examples
+  3. Terms in the terminology list must be translated as specified
+  4. For proprietary nouns that cannot be determined, keep the original English
+  5. Reference previously translated documents provided to maintain consistency in translation style and terminology usage
+
+  ## Output Requirements
+  - Output only the translation result, without adding explanations or comments
+  - Maintain all original Markdown syntax and formatting
+  - Keep all code blocks, variable names, and function names unchanged
+  - Ensure all links and references remain unchanged
+  
+  ## Terminology List
+  {RELEVANT_TERMS}
+
+  ## Reference Translations
+  {TRANSLATION_REFERENCES}
+
+  ## Content to Translate
+  \`\`\`markdown
+  {SOURCE_TEXT}
+  \`\`\`
+  `;
+  }
+  
+  // Other languages use Chinese prompts
+  return `你是一位精通技术文档翻译的专业翻译人员，负责将英文技术文档准确翻译为${langDisplayName}。请严格遵循以下要求：
   
   ## 翻译风格和质量要求
-  1. 尽量符合${getLangDisplayName(targetLang)}互联网的使用语境，并正确处理倒装和不同语言的语序，给专业的名词适当保留括号以及英文注释
+  1. 尽量符合${langDisplayName}互联网的使用语境，并正确处理倒装和不同语言的语序，给专业的名词适当保留括号以及英文注释
   2. 术语使用统一、准确，并根据上下文自然融入语句
 
   ## 技术要求
@@ -219,19 +265,19 @@ function prepareTranslationPrompt(sourceText, targetLang, currentFilePath) {
   - 确保所有链接和引用保持不变
   
   ## 术语表
-  ${relevantTerms || '无相关术语'}
+  {RELEVANT_TERMS}
 
   ## 参考翻译
-  ${translationReferences || '无参考翻译'}
+  {TRANSLATION_REFERENCES}
 
   ## 待翻译内容
   \`\`\`markdown
-  ${sourceText}
+  {SOURCE_TEXT}
   \`\`\`
   `;
 }
 
-// 调用LLM API进行翻译
+// Call LLM API for translation
 async function translateWithLLM(text, targetLang, filePath) {
   const modelConfig = config.modelConfigs[targetLang];
   const prompt = prepareTranslationPrompt(text, targetLang, filePath);
@@ -245,8 +291,8 @@ async function translateWithLLM(text, targetLang, filePath) {
   throw new Error(`Unsupported provider: ${modelConfig.provider}`);
 }
 
-// 调用Gemini API
-async function callGemini(prompt, model) {
+// Call Gemini API
+async function callGemini(prompt, model, retryCount = 0, maxRetries = 3, initialDelay = 2000) {
   try {
       const response = await genAI.models.generateContent({
           model: model,
@@ -258,24 +304,47 @@ async function callGemini(prompt, model) {
 
       return response.text;
   } catch (error) {
-      console.error('Gemini API error:', error);
+      console.error(`Gemini API error (attempt ${retryCount + 1}/${maxRetries + 1}):`, error);
+      
+      // Check if it's a retryable error (503 Service Unavailable or other temporary errors)
+      const isRetryableError = 
+          error.message.includes('503') || 
+          error.message.includes('overloaded') || 
+          error.message.includes('unavailable') ||
+          error.message.includes('timeout') ||
+          error.message.includes('rate limit');
+      
+      // If it's a retryable error and we have retry attempts left
+      if (isRetryableError && retryCount < maxRetries) {
+          // Calculate exponential backoff time, doubling wait time with each retry
+          const delay = initialDelay * Math.pow(2, retryCount);
+          console.log(`Retrying in ${delay / 1000} seconds...`);
+          
+          // Wait for a period before retrying
+          await new Promise(resolve => setTimeout(resolve, delay));
+          
+          // Recursively call itself to retry, increasing retry count
+          return callGemini(prompt, model, retryCount + 1, maxRetries, initialDelay);
+      }
+      
+      // If it's not a retryable error or max retries reached, throw the error
       throw error;
   }
 }
 
-// 翻译文件
+// Translate file
 async function translateFile(filePath) {
   console.log(`Translating file: ${filePath}`);
   
   if (!filePath) {
-      console.error('无效的文件路径');
+      console.error('Invalid file path');
       return;
   }
   
-  // 修正文件路径，需要从REPO_PATH中读取源文件
+  // Fix file path, need to read source file from REPO_PATH
   const absoluteFilePath = path.resolve(process.env.REPO_PATH, filePath);
   
-  // 检查文件是否存在
+  // Check if file exists
   if (!fs.existsSync(absoluteFilePath)) {
       console.error(`File not found: ${absoluteFilePath}`);
       return;
@@ -288,42 +357,42 @@ async function translateFile(filePath) {
 
       for (const targetLang of config.targetLanguages) {
           try {
-              // 使用新的路径计算函数
+              // Use new path calculation function
               const targetPath = getTargetPath(filePath, targetLang);
               
               if (!targetPath) {
-                  console.error(`无法获取目标路径: ${filePath} -> ${targetLang}`);
+                  console.error(`Unable to get target path: ${filePath} -> ${targetLang}`);
                   continue;
               }
 
-              // 创建目标目录
+              // Create target directory
               fs.mkdirSync(path.dirname(targetPath), { recursive: true });
 
-              // 翻译 frontmatter
+              // Translate frontmatter
               const translatedFrontmatter = await translateFrontmatter(frontmatter, targetLang, filePath);
 
-              // 翻译内容
+              // Translate content
               let translatedContent;
               if (mainContent && mainContent.trim()) {
                   translatedContent = await translateWithLLM(mainContent, targetLang, filePath);
 
-                  // 检查翻译结果
+                  // Check translation result
                   if (!translatedContent) {
-                      console.error(`翻译结果为空: ${filePath} -> ${targetLang}`);
+                      console.error(`Translation result is empty: ${filePath} -> ${targetLang}`);
                       continue;
                   }
 
-                  // 清理翻译结果中的多余内容
+                  // Clean up extra content in translation result
                   translatedContent = cleanupTranslation(translatedContent);
 
-                  // 完整文档 = 翻译后的 frontmatter + 翻译后的内容
+                  // Complete document = translated frontmatter + translated content
                   translatedContent = translatedFrontmatter + translatedContent;
               } else {
-                  // 只有 frontmatter 的情况，使用翻译后的 frontmatter
+                  // In case of only frontmatter, use translated frontmatter
                   translatedContent = translatedFrontmatter;
               }
 
-              // 写入翻译后的文件
+              // Write translated file
               fs.writeFileSync(targetPath, translatedContent);
               console.log(`Translated to ${targetLang}: ${targetPath}`);
           } catch (langError) {
@@ -335,9 +404,9 @@ async function translateFile(filePath) {
   }
 }
 
-// 清理翻译结果中的多余内容
+// Clean up extra content in translation results
 function cleanupTranslation(text) {
-  // 移除开头的 markdown 代码块标记
+  // Remove markdown code block markers at beginning
   if (text.startsWith('```markdown')) {
       text = text.replace(/^```markdown\n/, '');
   } else if (text.startsWith('```md')) {
@@ -346,39 +415,39 @@ function cleanupTranslation(text) {
       text = text.replace(/^```\n/, '');
   }
   
-  // 移除结尾的 markdown 代码块标记
+  // Remove markdown code block markers at end
   if (text.endsWith('```')) {
       text = text.replace(/```$/, '');
   }
   
-  // 移除多余的 'n' 字符（通常出现在翻译API的错误输出中）
-  text = text.replace(/([^\\])\\n/g, '$1\n'); // 将不是转义字符的 \n 替换为实际换行
-  text = text.replace(/^\\n/g, '\n'); // 处理行首的 \n
+  // Remove extra 'n' characters (commonly appear in translation API error outputs)
+  text = text.replace(/([^\\])\\n/g, '$1\n'); // Replace \n that isn't escaped with actual newline
+  text = text.replace(/^\\n/g, '\n'); // Handle \n at beginning of line
   
-  // 移除多余的空行
+  // Remove extra empty lines
   text = text.replace(/\n{3,}/g, '\n\n');
   
-  // 移除可能的多余空格
+  // Remove possible extra spaces
   text = text.trim();
   
   return text;
 }
 
-// 获取语言显示名称
+// Get language display name
 function getLangDisplayName(langCode) {
   return config.languageNames[langCode] || langCode;
 }
 
-// 主函数
+// Main function
 async function main() {
   const changedFilesInput = process.env.CHANGED_FILES || '';
-  console.log(`环境变量 CHANGED_FILES: ${changedFilesInput}`);
+  console.log(`Environment variable CHANGED_FILES: ${changedFilesInput}`);
   
   const changedFiles = changedFilesInput.split(/[\s,]+/).filter(file => file.trim());
   console.log(`Found ${changedFiles.length} changed files`);
 
   if (changedFiles.length === 0) {
-      console.log('没有找到需要翻译的文件，如果需要指定文件，请设置 CHANGED_FILES 环境变量');
+      console.log('No files found for translation. If you need to specify files, set the CHANGED_FILES environment variable');
       return;
   }
 
@@ -387,7 +456,7 @@ async function main() {
           await translateFile(file);
       } catch (error) {
           console.error(`Error translating ${file}:`, error);
-          // 继续处理下一个文件
+          // Continue processing next file
       }
   }
 

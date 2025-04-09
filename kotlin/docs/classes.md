@@ -72,7 +72,7 @@ class Person(val firstName: String, val lastName: String, var age: Int)
 class Person(val firstName: String, val lastName: String, var isEmployed: Boolean = true)
 ```
 
-在声明类属性时，可以使用[尾随逗号](coding-conventions.md#trailing-commas)：
+在声明类属性时，可以使用[尾随逗号](coding-conventions#trailing-commas)：
 
 ```kotlin
 class Person(
@@ -90,7 +90,7 @@ class Person(
 class Customer public @Inject constructor(name: String) { /*...*/ }
 ```
 
-了解更多关于[可见性修饰符](visibility-modifiers.md#constructors)的信息。
+了解更多关于[可见性修饰符](visibility-modifiers#constructors)的信息。
 
 ### 二级构造函数 (Secondary constructors)
 
@@ -157,7 +157,7 @@ class Customer(val customerName: String = "")
 
 ## 创建类实例 (Creating instances of classes)
 
-要创建类的实例，请像调用常规函数一样调用构造函数。您可以将创建的实例分配给[变量](basic-syntax.md#variables)：
+要创建类的实例，请像调用常规函数一样调用构造函数。您可以将创建的实例分配给[变量](basic-syntax#variables)：
 
 ```kotlin
 val invoice = Invoice()
@@ -170,22 +170,22 @@ Kotlin 没有 `new` 关键字。
 
 :::
 
-创建嵌套类、内部类和匿名内部类的过程在[嵌套类](nested-classes.md)中描述。
+创建嵌套类、内部类和匿名内部类的过程在[嵌套类](nested-classes)中描述。
 
 ## 类成员 (Class members)
 
 类可以包含：
 
-* [构造函数和初始化块](classes.md#constructors)
-* [函数](functions.md)
-* [属性](properties.md)
-* [嵌套类和内部类](nested-classes.md)
-* [对象声明](object-declarations.md)
+* [构造函数和初始化块](classes#constructors)
+* [函数](functions)
+* [属性](properties)
+* [嵌套类和内部类](nested-classes)
+* [对象声明](object-declarations)
 
 ## 继承 (Inheritance)
 
 类可以从彼此派生并形成继承层次结构。
-[了解更多关于 Kotlin 中的继承](inheritance.md)。
+[了解更多关于 Kotlin 中的继承](inheritance)。
 
 ## 抽象类 (Abstract classes)
 
@@ -223,6 +223,6 @@ abstract class WildShape : Polygon() {
 
 ## 伴生对象 (Companion objects)
 
-如果您需要编写一个可以不用类实例就能调用的函数，但又需要访问类的内部结构（例如工厂方法），您可以将其编写为该类内部[对象声明](object-declarations.md)的成员。
+如果您需要编写一个可以不用类实例就能调用的函数，但又需要访问类的内部结构（例如工厂方法），您可以将其编写为该类内部[对象声明](object-declarations)的成员。
 
-更具体地说，如果在您的类中声明一个[伴生对象](object-declarations.md#companion-objects)，您可以使用类名作为限定符来访问其成员。
+更具体地说，如果在您的类中声明一个[伴生对象](object-declarations#companion-objects)，您可以使用类名作为限定符来访问其成员。

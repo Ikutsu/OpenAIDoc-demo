@@ -199,7 +199,7 @@ title: "使用惯用的 Kotlin 解决 Advent of Code 谜题"
 
 ### Day 1: 报告修复 (Report repair)
 
-探索输入处理、遍历列表、构建映射的不同方法，以及使用 [`let`](scope-functions.md#let)
+探索输入处理、遍历列表、构建映射的不同方法，以及使用 [`let`](scope-functions#let)
 函数来简化你的代码。
 
 * 阅读 [Advent of Code](https://adventofcode.com/2020/day/1) 上的谜题描述
@@ -210,7 +210,7 @@ title: "使用惯用的 Kotlin 解决 Advent of Code 谜题"
 
 ### Day 2: 密码哲学 (Password philosophy)
 
-探索字符串实用程序函数、正则表达式、集合上的操作，以及 [`let`](scope-functions.md#let)
+探索字符串实用程序函数、正则表达式、集合上的操作，以及 [`let`](scope-functions#let)
 函数如何帮助转换你的表达式。
 
 * 阅读 [Advent of Code](https://adventofcode.com/2020/day/2) 上的谜题描述
@@ -232,7 +232,7 @@ title: "使用惯用的 Kotlin 解决 Advent of Code 谜题"
 
 ### Day 4: 护照处理 (Passport processing)
 
-应用 [`when`](control-flow.md#when-expressions-and-statements) 表达式并探索验证输入的不同方法：
+应用 [`when`](control-flow#when-expressions-and-statements) 表达式并探索验证输入的不同方法：
 实用程序函数、处理范围、检查集合成员资格以及匹配特定正则表达式。
 
 * 阅读 [Advent of Code](https://adventofcode.com/2020/day/4) 上的谜题描述
@@ -300,5 +300,5 @@ title: "使用惯用的 Kotlin 解决 Advent of Code 谜题"
 
 ## 接下来是什么？
 
-* 通过 [Kotlin Koans](koans.md) 完成更多任务
+* 通过 [Kotlin Koans](koans) 完成更多任务
 * 通过 JetBrains Academy 免费的 [Kotlin Core 课程](https://hyperskill.org/tracks?category=4&utm_source=jbkotlin_hs&utm_medium=referral&utm_campaign=kotlinlang-docs&utm_content=button_1&utm_term=22.03.23) 创建可工作的应用程序

@@ -179,14 +179,14 @@ fun main(args: Array<String>) {
 </p>
 <h3>程序入口点 – main()</h3>
 <p>
-   <a href="basic-syntax.md#program-entry-point">`main()（主函数）`</a> 函数是应用程序的入口点。
+   <a href="basic-syntax#program-entry-point">`main()（主函数）`</a> 函数是应用程序的入口点。
 </p>
 <p>
-   它被声明为 `DemoApplication` 类之外的 <a href="functions.md#function-scope">top-level function（顶层函数）</a>。 `main()` 函数调用 Spring 的 `runApplication(*args)` 函数来启动带有 Spring Framework 的应用程序。
+   它被声明为 `DemoApplication` 类之外的 <a href="functions#function-scope">top-level function（顶层函数）</a>。 `main()` 函数调用 Spring 的 `runApplication(*args)` 函数来启动带有 Spring Framework 的应用程序。
 </p>
 <h3>可变参数 – args: Array&lt;String&gt;</h3>
 <p>
-   如果你检查 `runApplication()` 函数的声明，你将看到该函数的参数用 <a href="functions.md#variable-number-of-arguments-varargs">`vararg modifier（vararg 修饰符）`</a> 标记：`vararg args: String`。
+   如果你检查 `runApplication()` 函数的声明，你将看到该函数的参数用 <a href="functions#variable-number-of-arguments-varargs">`vararg modifier（vararg 修饰符）`</a> 标记：`vararg args: String`。
         这意味着你可以将可变数量的 String 参数传递给函数。
 </p>
 <h3>扩展运算符 – (*args)</h3>
@@ -242,7 +242,7 @@ class MessageController {
 </p>
 <h3>单表达式函数 – index()</h3>
 <p>
-   由于 `index()` 函数仅包含一个语句，因此你可以将其声明为 <a href="functions.md#single-expression-functions">single-expression function（单表达式函数）</a>。
+   由于 `index()` 函数仅包含一个语句，因此你可以将其声明为 <a href="functions#single-expression-functions">single-expression function（单表达式函数）</a>。
 </p>
 <p>
    这意味着可以省略花括号，并且在等号 `=` 之后指定函数体。
@@ -256,7 +256,7 @@ class MessageController {
 </p>
 <h3>字符串模板 – $name</h3>
 <p>
-   `Hello, $name!` 表达式在 Kotlin 中称为 <a href="strings.md#string-templates"><i>String template（字符串模板）</i></a>。
+   `Hello, $name!` 表达式在 Kotlin 中称为 <a href="strings#string-templates"><i>String template（字符串模板）</i></a>。
 </p>
 <p>
    字符串模板是包含嵌入式表达式的字符串字面量。
@@ -294,4 +294,4 @@ Spring 应用程序现在可以运行：
 
 在本教程的下一部分中，你将了解 Kotlin 数据类以及如何在应用程序中使用它们。
 
-**[前往下一章节](jvm-spring-boot-add-data-class.md)**
+**[前往下一章节](jvm-spring-boot-add-data-class)**

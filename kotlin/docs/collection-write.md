@@ -1,9 +1,9 @@
 ---
 title: 集合写操作
 ---
-[可变集合](collections-overview.md#collection-types) 支持更改集合内容的操作，例如，添加或删除元素。
+[可变集合](collections-overview#collection-types) 支持更改集合内容的操作，例如，添加或删除元素。
 在此页面上，我们将介绍所有 `MutableCollection` 实现可用的写入操作。
-有关 `List` 和 `Map` 的更具体操作，请分别参见 [List-specific Operations](list-operations.md) 和 [Map Specific Operations](map-operations.md)。
+有关 `List` 和 `Map` 的更具体操作，请分别参见 [List-specific Operations](list-operations) 和 [Map Specific Operations](map-operations)。
 
 ## 添加元素
 
@@ -41,7 +41,7 @@ fun main() {
 }
 ```
 
-你还可以使用 [`plus` 运算符](collection-plus-minus.md) 的原地版本（`in-place version`）[`plusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/plus-assign.html) (`+=`) 添加元素。
+你还可以使用 [`plus` 运算符](collection-plus-minus) 的原地版本（`in-place version`）[`plusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/plus-assign.html) (`+=`) 添加元素。
 当应用于可变集合时，`+=` 将第二个操作数（一个元素或另一个集合）追加到集合的末尾。
 
 ```kotlin
@@ -101,7 +101,7 @@ fun main() {
 }
 ```
 
-从集合中移除元素的另一种方法是使用 [`minusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/minus-assign.html) (`-=`) 运算符 – [`minus`](collection-plus-minus.md) 的原地版本。
+从集合中移除元素的另一种方法是使用 [`minusAssign`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/minus-assign.html) (`-=`) 运算符 – [`minus`](collection-plus-minus) 的原地版本。
 第二个参数可以是元素类型的单个实例或另一个集合。
 如果右侧是单个元素，则 `-=` 移除它的_第一次_出现。
 反过来，如果它是一个集合，则会移除其元素的_所有_出现。
@@ -125,5 +125,5 @@ fun main() {
 ## 更新元素
 
 列表和映射还提供了用于更新元素的操作。
-它们在 [List-specific Operations](list-operations.md) 和 [Map Specific Operations](map-operations.md) 中进行了描述。
+它们在 [List-specific Operations](list-operations) 和 [Map Specific Operations](map-operations) 中进行了描述。
 对于集合，更新没有意义，因为它实际上是移除一个元素并添加另一个元素。

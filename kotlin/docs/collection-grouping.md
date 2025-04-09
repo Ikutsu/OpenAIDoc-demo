@@ -42,7 +42,7 @@ fun main() {
 
 * [`eachCount()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/each-count.html) 计算每个组中的元素。
 * [`fold()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/fold.html) 和 [`reduce()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/reduce.html)
-  对每个组作为单独的集合执行 [fold 和 reduce](collection-aggregate.md#fold-and-reduce) 操作，并返回结果。
+  对每个组作为单独的集合执行 [fold 和 reduce](collection-aggregate#fold-and-reduce) 操作，并返回结果。
 * [`aggregate()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/aggregate.html) 将给定的操作
   连续应用于每个组中的所有元素，并返回结果。
   这是对 `Grouping` 执行任何操作的通用方法。 当 fold 或 reduce 不够用时，可以使用它来实现自定义操作。

@@ -219,7 +219,7 @@ fun main() {
 }
 ```
 
-在此示例中，lambda 表达式具有 `hours` 和 `minutes` 作为函数参数，未使用下划线 (`_`) 作为未使用的 `seconds` 和 `nanoseconds` 参数。 该表达式使用[字符串模板](strings.md#string-templates)返回一个连接的字符串，以获得所需的 `hours` 和 `minutes` 输出格式。
+在此示例中，lambda 表达式具有 `hours` 和 `minutes` 作为函数参数，未使用下划线 (`_`) 作为未使用的 `seconds` 和 `nanoseconds` 参数。 该表达式使用[字符串模板](strings#string-templates)返回一个连接的字符串，以获得所需的 `hours` 和 `minutes` 输出格式。
 
 ## 测量时间
 

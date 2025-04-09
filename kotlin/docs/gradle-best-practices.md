@@ -74,15 +74,15 @@ dependencies {
 
 如果你正在积极开发和测试特定平台，请运行相应的 `linkDebug*` 任务。
 
-有关更多信息，请参阅 [提高编译时间的技巧](native-improving-compilation-time.md#gradle-configuration)。
+有关更多信息，请参阅 [提高编译时间的技巧](native-improving-compilation-time#gradle-configuration)。
 
 ### 从 kapt 迁移到 KSP
 
-如果你正在使用依赖于 [kapt](kapt.md) 编译器插件的库，请检查是否可以切换到使用 [Kotlin 符号处理 (KSP) API](ksp-overview.md) 代替。 KSP API 通过减少注解处理时间来提高构建性能。 KSP 比 kapt 更快更有效，因为它直接处理源代码，而无需生成中间 Java 存根。
+如果你正在使用依赖于 [kapt](kapt) 编译器插件的库，请检查是否可以切换到使用 [Kotlin 符号处理 (KSP) API](ksp-overview) 代替。 KSP API 通过减少注解处理时间来提高构建性能。 KSP 比 kapt 更快更有效，因为它直接处理源代码，而无需生成中间 Java 存根。
 
 有关迁移步骤的指导，请参阅 Google 的 [迁移指南](https://developer.android.com/build/migrate-to-ksp)。
 
-要了解更多关于 KSP 与 kapt 的比较，请查看 [为什么选择 KSP](ksp-why-ksp.md)。
+要了解更多关于 KSP 与 kapt 的比较，请查看 [为什么选择 KSP](ksp-why-ksp)。
 
 ### 使用模块化 (modularization)
 

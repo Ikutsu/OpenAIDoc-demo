@@ -40,7 +40,7 @@ fun main() {
 如果字符变量的值是一个数字，你可以使用 [`digitToInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/digit-to-int.html) 函数显式地将其转换为 `Int` 数字。
 
 :::note
-在 JVM 上，当需要可空引用时，字符会被装箱到 Java 类中，就像[数字](numbers.md#boxing-and-caching-numbers-on-the-java-virtual-machine)一样。
+在 JVM 上，当需要可空引用时，字符会被装箱到 Java 类中，就像[数字](numbers#boxing-and-caching-numbers-on-the-java-virtual-machine)一样。
 装箱操作不会保留标识。
 
 :::

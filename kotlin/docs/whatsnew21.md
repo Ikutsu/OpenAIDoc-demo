@@ -4,7 +4,7 @@ title: "Kotlin 2.1.0 中的新增功能"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[已发布：2024 年 11 月 27 日](releases.md#release-details)_
+_[已发布：2024 年 11 月 27 日](releases#release-details)_
 
 Kotlin 2.1.0 版本已发布！以下是主要亮点：
 
@@ -25,7 +25,7 @@ Kotlin 2.1.0 版本已发布！以下是主要亮点：
 你无需在 IDE 中更新 Kotlin 插件。
 你只需在构建脚本中将 Kotlin 版本更改为 2.1.0 即可。
 
-有关详细信息，请参见 [更新到新的 Kotlin 版本](releases.md#update-to-a-new-kotlin-version)。
+有关详细信息，请参见 [更新到新的 Kotlin 版本](releases#update-to-a-new-kotlin-version)。
 
 ## 语言
 
@@ -43,7 +43,7 @@ Kotlin 2.1.0 版本已发布！以下是主要亮点：
 
 在 [IntelliJ IDEA 2024.3 博客文章](https://blog.jetbrains.com/idea/2024/11/intellij-idea-2024-3/) 中了解更多信息。
 
-[查看 Kotlin 语言设计特性和提案的完整列表](kotlin-language-features-and-proposals.md)。
+[查看 Kotlin 语言设计特性和提案的完整列表](kotlin-language-features-and-proposals)。
 
 此版本还带来了以下语言更新：
 
@@ -53,7 +53,7 @@ Kotlin 2.1.0 版本已发布！以下是主要亮点：
 
 ### 带有主语的 when 表达式中的守卫条件
 
-此特性为 [预览版](kotlin-evolution-principles.md#pre-stable-features)，
+此特性为 [预览版](kotlin-evolution-principles#pre-stable-features)，
 并且需要选择启用（请参见以下详细信息）。
 
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-71140) 中提供的反馈。
@@ -112,7 +112,7 @@ kotlin {
 
 ### 非局部 break 和 continue
 
-此特性为 [预览版](kotlin-evolution-principles.md#pre-stable-features)，
+此特性为 [预览版](kotlin-evolution-principles#pre-stable-features)，
 并且需要选择启用（请参见以下详细信息）。
 
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-1436) 中提供的反馈。
@@ -121,7 +121,7 @@ Kotlin 2.1.0 添加了另一个期待已久的特性的预览版，即使用非�
 此特性扩展了你可以在内联函数范围内使用的工具集，并减少了项目中的样板代码。
 
 以前，你只能使用非局部返回。
-现在，Kotlin 还支持非局部的 `break` 和 `continue` [跳转表达式](returns.md)。
+现在，Kotlin 还支持非局部的 `break` 和 `continue` [跳转表达式](returns)。
 这意味着你可以在作为参数传递给包含循环的内联函数的 lambda 表达式中使用它们：
 
 ```kotlin
@@ -160,7 +160,7 @@ kotlin {
 
 ### 多美元字符串插值
 
-此特性为 [预览版](kotlin-evolution-principles.md#pre-stable-features)，
+此特性为 [预览版](kotlin-evolution-principles#pre-stable-features)，
 并且需要选择启用（请参见以下详细信息）。
 
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-2425) 中提供的反馈。
@@ -246,7 +246,7 @@ interface MyImplementation: CoreLibraryApi
 ```
 
 当你使用 `@SubclassOptInRequired` 注解来要求选择启用时，
-该要求不会传播到任何 [内部或嵌套类](nested-classes.md)。
+该要求不会传播到任何 [内部或嵌套类](nested-classes)。
 
 :::
 
@@ -362,7 +362,7 @@ kotlin {
 ```
 
 有关如何定义和使用编译器选项的更多信息，
-请参见 [Kotlin Gradle 插件中的编译器选项](gradle-compiler-options.md)。
+请参见 [Kotlin Gradle 插件中的编译器选项](gradle-compiler-options)。
 
 ### 全局警告抑制
 
@@ -386,7 +386,7 @@ kotlin {
 
 <img src="/img/warning-name-intention.png" alt="警告名称意图" width="500" style={{verticalAlign: 'middle'}}/>
 
-新的编译器选项目前是 [实验性的](components-stability.md#stability-levels-explained)。
+新的编译器选项目前是 [实验性的](components-stability#stability-levels-explained)。
 以下细节也值得注意：
 
 * 不允许抑制错误。
@@ -423,12 +423,12 @@ kotlin {
 ### 改进的 K2 kapt 实现
 
 :::note
-用于 K2 编译器的 kapt 插件（K2 kapt）处于 [Alpha](components-stability.md#stability-levels-explained) 阶段。
+用于 K2 编译器的 kapt 插件（K2 kapt）处于 [Alpha](components-stability#stability-levels-explained) 阶段。
 它可能随时更改。
 
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-71439/K2-kapt-feedback) 中提供的反馈。
 
-目前，使用 [kapt](kapt.md) 插件的项目默认使用 K1 编译器，
+目前，使用 [kapt](kapt) 插件的项目默认使用 K1 编译器，
 支持 Kotlin 版本最高到 1.9。
 
 在 Kotlin 1.9.20 中，我们启动了 K2 编译器的 kapt 插件（K2 kapt）的实验性实现。
@@ -543,7 +543,7 @@ fun test(sjc: SomeJavaClass) {
 * `warning`：报告可空性不匹配的警告。
 * `strict`：报告可空性不匹配的错误（默认模式）。
 
-有关更多信息，请参见 [可空性注解](java-interop.md#nullability-annotations)。
+有关更多信息，请参见 [可空性注解](java-interop#nullability-annotations)。
 
 ## Kotlin 多平台（Kotlin Multiplatform）
 
@@ -554,7 +554,7 @@ Kotlin 2.1.0 引入了 [对 Swift 的基本导出支持](#basic-support-for-swif
 
 ### 用于配置多平台项目中编译器选项的新 Gradle DSL 升级为 Stable
 
-在 Kotlin 2.0.0 中，[我们引入了一个新的实验性 Gradle DSL](whatsnew20.md#new-gradle-dsl-for-compiler-options-in-multiplatform-projects)，
+在 Kotlin 2.0.0 中，[我们引入了一个新的实验性 Gradle DSL](whatsnew20#new-gradle-dsl-for-compiler-options-in-multiplatform-projects)，
 以简化跨多平台项目的编译器选项配置。
 在 Kotlin 2.1.0 中，此 DSL 已升级为 Stable。
 
@@ -564,11 +564,11 @@ Kotlin 2.1.0 引入了 [对 Swift 的基本导出支持](#basic-support-for-swif
 <img src="/img/compiler-options-levels.svg" alt="Kotlin 编译器选项级别" width="700" style={{verticalAlign: 'middle'}}/>
 
 要了解有关不同级别以及如何在它们之间配置编译器选项的更多信息，
-请参见 [编译器选项](multiplatform-dsl-reference.md#compiler-options)。
+请参见 [编译器选项](multiplatform-dsl-reference#compiler-options)。
 
 ### 在 Kotlin 多平台（Kotlin Multiplatform）中预览 Gradle 的隔离项目
 
-此特性是 [实验性的](components-stability.md#stability-levels-explained)，并且目前处于 Gradle 的 pre-Alpha 状态。
+此特性是 [实验性的](components-stability#stability-levels-explained)，并且目前处于 Gradle 的 pre-Alpha 状态。
 仅应将其与 Gradle 8.10 版本一起用于评估目的。该特性可能随时被删除或更改。
 
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-57279/Support-Gradle-Project-Isolation-Feature-for-Kotlin-Multiplatform) 中提供的反馈。
@@ -658,7 +658,7 @@ kotlin {
 请记住，该特性目前仅处于开发的早期阶段。
 
 Swift 导出目前适用于使用
-[直接集成](multiplatform-direct-integration.md) 将 iOS 框架连接到 Xcode 项目的项目。
+[直接集成](multiplatform-direct-integration) 将 iOS 框架连接到 Xcode 项目的项目。
 这是在 Android Studio 中或通过 [Web 向导](https://kmp.jetbrains.com/) 创建的 Kotlin 多平台项目的标准配置。
 
 要尝试在你的项目中进行 Swift 导出：
@@ -687,7 +687,7 @@ Swift 导出目前适用于使用
 
 ### 能够从任何主机发布 Kotlin 库
 
-此特性目前是 [实验性的](components-stability.md#stability-levels-explained)。
+此特性目前是 [实验性的](components-stability#stability-levels-explained)。
 需要选择启用（请参见以下详细信息），并且你应仅将其用于评估目的。
 我们感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-71290) 中提供的反馈。
 
@@ -710,16 +710,16 @@ kotlin.native.enableKlibsCrossCompilation=true
 
 此特性目前是实验性的，并且有一些限制。如果出现以下情况，你仍然需要使用 Mac 机器：
 
-* 你的库具有 [cinterop 依赖项](native-c-interop.md)。
-* 你在项目中设置了 [CocoaPods 集成](native-cocoapods.md)。
-* 你需要为 Apple 目标构建或测试 [最终二进制文件](multiplatform-build-native-binaries.md)。
+* 你的库具有 [cinterop 依赖项](native-c-interop)。
+* 你在项目中设置了 [CocoaPods 集成](native-cocoapods)。
+* 你需要为 Apple 目标构建或测试 [最终二进制文件](multiplatform-build-native-binaries)。
 
 #### 留下有关从任何主机发布库的反馈
 
 我们计划稳定此特性并在未来的 Kotlin 版本中进一步改进库发布。
 请在我们的问题跟踪器 [YouTrack](https://youtrack.jetbrains.com/issue/KT-71290) 中留下你的反馈。
 
-有关更多信息，请参见 [发布多平台库](multiplatform-publish-lib.md)。
+有关更多信息，请参见 [发布多平台库](multiplatform-publish-lib)。
 
 ### 支持非打包 klib
 

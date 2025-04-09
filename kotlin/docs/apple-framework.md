@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::note
-Objective-C 库导入是 [实验性的](components-stability.md#stability-levels-explained)。
+Objective-C 库导入是 [实验性的](components-stability#stability-levels-explained)。
 所有由 cinterop 工具从 Objective-C 库生成的 Kotlin 声明都应该带有 `@ExperimentalForeignApi` 注解。
 
 Kotlin/Native 附带的 Native 平台库（例如 Foundation、UIKit 和 POSIX）仅对某些 API 需要选择加入（opt-in）。
@@ -24,7 +24,7 @@ Kotlin/Native 附带了一组预导入的系统框架；也可以导入现有的
 你可以使用命令行直接或通过脚本文件（例如 `.sh` 或 `.bat` 文件）生成 Kotlin 框架。
 但是，对于具有数百个文件和库的较大型项目，此方法的可扩展性不佳。
 使用构建系统可以简化该过程，它可以通过传递依赖来下载和缓存 Kotlin/Native 编译器二进制文件和库，以及运行编译器和测试。
-Kotlin/Native 可以通过 [Kotlin Multiplatform 插件](gradle-configure-project.md#targeting-multiple-platforms) 使用 [Gradle](https://gradle.org) 构建系统。
+Kotlin/Native 可以通过 [Kotlin Multiplatform 插件](gradle-configure-project#targeting-multiple-platforms) 使用 [Gradle](https://gradle.org) 构建系统。
 
 如果你使用 Mac 并且想要为 iOS 或其他 Apple 目标创建和运行应用程序，还需要
 安装 [Xcode 命令行工具](https://developer.apple.com/download/)，启动它，并首先接受许可条款。
@@ -34,7 +34,7 @@ Kotlin/Native 可以通过 [Kotlin Multiplatform 插件](gradle-configure-projec
 ## 创建一个 Kotlin 库
 
 :::tip
-有关详细的入门步骤以及如何创建新的 Kotlin/Native 项目并在 IntelliJ IDEA 中打开它的说明，请参阅 [Kotlin/Native 入门](native-get-started.md#using-gradle) 教程。
+有关详细的入门步骤以及如何创建新的 Kotlin/Native 项目并在 IntelliJ IDEA 中打开它的说明，请参阅 [Kotlin/Native 入门](native-get-started#using-gradle) 教程。
 
 :::
 
@@ -143,7 +143,7 @@ Kotlin/Native 编译器可以从 Kotlin 代码生成用于 macOS 和 iOS 的框�
     | iOS Simulator (x86_64) | `iosX64()`            |
     | iOS Simulator (ARM64)  | `iosSimulatorArm64()` |
 
-    有关其他受支持的 Apple 目标的信息，请参阅 [Kotlin/Native 目标支持](native-target-support.md)。
+    有关其他受支持的 Apple 目标的信息，请参阅 [Kotlin/Native 目标支持](native-target-support)。
 
 3. 在 IDE 中运行 `linkDebugFrameworkNative` Gradle 任务，或在终端中使用以下控制台命令来构建框架：
 
@@ -308,12 +308,12 @@ Kotlin `String` 和 Objective-C `NSString*` 是透明映射的。类似地，Kot
 可空基本类型映射到 `Kotlin<TYPE>*` 类型，如[表](#kotlin-numbers-and-nsnumber)所示。
 高阶函数 `acceptFunF` 和 `supplyFun` 都包含在内，并接受 Objective-C 块。
 
-你可以在 [与 Swift/Objective-C 的互操作性](native-objc-interop.md#mappings) 中找到有关类型映射的更多信息。
+你可以在 [与 Swift/Objective-C 的互操作性](native-objc-interop#mappings) 中找到有关类型映射的更多信息。
 
 ## 垃圾回收和引用计数
 
-Swift 和 Objective-C 使用自动引用计数 (ARC)。Kotlin/Native 有自己的[垃圾回收器](native-memory-manager.md#garbage-collector)，
-它也[与 Objective-C/Swift ARC 集成](native-arc-integration.md)。
+Swift 和 Objective-C 使用自动引用计数 (ARC)。Kotlin/Native 有自己的[垃圾回收器](native-memory-manager#garbage-collector)，
+它也[与 Objective-C/Swift ARC 集成](native-arc-integration)。
 
 未使用的 Kotlin 对象会自动删除。你无需采取其他步骤来控制 Swift 或 Objective-C 中 Kotlin/Native 实例的生命周期。
 
@@ -391,18 +391,18 @@ if (ret != nil) {
 Kotlin 函数和属性名称按原样翻译。Kotlin 的 `String` 转换为 Swift 的 `String`。Swift
 也隐藏了 `NSNumber*` 装箱。你还可以将 Swift 闭包传递给 Kotlin，并从 Swift 调用 Kotlin lambda 函数。
 
-你可以在 [与 Swift/Objective-C 的互操作性](native-objc-interop.md#mappings) 中找到有关类型映射的更多信息。
+你可以在 [与 Swift/Objective-C 的互操作性](native-objc-interop#mappings) 中找到有关类型映射的更多信息。
 
 ## 将框架连接到你的 iOS 项目
 
 现在你可以将生成的框架作为依赖项连接到你的 iOS 项目。有多种方法可以设置它
 并自动化该过程，选择最适合你的方法：
 
-<a href="multiplatform-ios-integration-overview.md"><img src="/img/choose-ios-integration.svg" width="700" alt="选择 iOS 集成方法" /></a>
+<a href="multiplatform-ios-integration-overview"><img src="/img/choose-ios-integration.svg" width="700" alt="选择 iOS 集成方法" /></a>
 
 ## 接下来是什么
 
-* [了解有关与 Objective-C 互操作性的更多信息](native-objc-interop.md)
-* [了解如何在 Kotlin 中实现与 C 的互操作性](native-c-interop.md)
-* [查看 Kotlin/Native 作为动态库的教程](native-dynamic-libraries.md)
+* [了解有关与 Objective-C 互操作性的更多信息](native-objc-interop)
+* [了解如何在 Kotlin 中实现与 C 的互操作性](native-c-interop)
+* [查看 Kotlin/Native 作为动态库的教程](native-dynamic-libraries)
   ```

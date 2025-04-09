@@ -10,7 +10,7 @@ _集合(Collections)_ 是指一组可变数量的条目（可能为零），这�
 它分为[相同的操作](#operations-that-are-the-same-in-java-and-kotlin)和[仅在 Kotlin 中存在的操作](#operations-that-don-t-exist-in-java-s-standard-library)两个部分。
 本指南的第二部分，从 [可变性(Mutability)](#mutability)开始，通过查看具体案例来解释一些差异。
 
-有关集合的介绍，请参阅 [集合概述](collections-overview.md) 或观看 Kotlin 开发倡导者 Sebastian Aigner 的 [视频](https://www.youtube.com/watch?v=F8jj7e-_jFA)。
+有关集合的介绍，请参阅 [集合概述](collections-overview) 或观看 Kotlin 开发倡导者 Sebastian Aigner 的 [视频](https://www.youtube.com/watch?v=F8jj7e-_jFA)。
 
 :::note
 以下所有示例仅使用 Java 和 Kotlin 标准库 API。
@@ -25,25 +25,25 @@ _集合(Collections)_ 是指一组可变数量的条目（可能为零），这�
 
 | 描述 | 常用操作 | 更多 Kotlin 替代方案 |
 |-------------|-----------|---------------------|
-| 添加一个或多个元素 | `add()`, `addAll()` | 使用 [`plusAssign`(`+=`) 运算符](collection-plus-minus.md)：`collection += element`, `collection += anotherCollection`。 |
-| 检查集合是否包含一个或多个元素 | `contains()`, `containsAll()` | 使用 [`in` 关键字](collection-elements.md#check-element-existence) 以运算符形式调用 `contains()`：`element in collection`。 |
+| 添加一个或多个元素 | `add()`, `addAll()` | 使用 [`plusAssign`(`+=`) 运算符](collection-plus-minus)：`collection += element`, `collection += anotherCollection`。 |
+| 检查集合是否包含一个或多个元素 | `contains()`, `containsAll()` | 使用 [`in` 关键字](collection-elements#check-element-existence) 以运算符形式调用 `contains()`：`element in collection`。 |
 | 检查集合是否为空 | `isEmpty()` | 使用 [`isNotEmpty()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/is-not-empty.html) 检查集合是否不为空。 |
 | 在特定条件下移除 | `removeIf()` | |
 | 仅保留选定的元素 | `retainAll()` | |
 | 从集合中移除所有元素 | `clear()` | |
-| 从集合中获取流 | `stream()` | Kotlin 有自己的处理流的方式：[序列](#sequences)和诸如 [`map()`](collection-filtering.md) 和 [`filter()`](#filter-elements) 之类的方法。 |
+| 从集合中获取流 | `stream()` | Kotlin 有自己的处理流的方式：[序列](#sequences)和诸如 [`map()`](collection-filtering) 和 [`filter()`](#filter-elements) 之类的方法。 |
 | 从集合中获取迭代器 | `iterator()` | |
 
 ### 映射上的操作
 
 | 描述 | 常用操作 | 更多 Kotlin 替代方案 |
 |-------------|-----------|---------------------|
-| 添加一个或多个元素 | `put()`, `putAll()`, `putIfAbsent()`| 在 Kotlin 中，赋值 `map[key] = value` 的行为与 `put(key, value)` 相同。此外，你可以使用 [`plusAssign`(`+=`) 运算符](collection-plus-minus.md)：`map += Pair(key, value)` 或 `map += anotherMap`。 |
+| 添加一个或多个元素 | `put()`, `putAll()`, `putIfAbsent()`| 在 Kotlin 中，赋值 `map[key] = value` 的行为与 `put(key, value)` 相同。此外，你可以使用 [`plusAssign`(`+=`) 运算符](collection-plus-minus)：`map += Pair(key, value)` 或 `map += anotherMap`。 |
 | 替换一个或多个元素 | `put()`, `replace()`, `replaceAll()` | 使用索引运算符 `map[key] = value` 而不是 `put()` 和 `replace()`。 |
 | 获取一个元素 | `get()` | 使用索引运算符来获取元素：`map[index]`。 |
-| 检查映射是否包含一个或多个元素 | `containsKey()`, `containsValue()` | 使用 [`in` 关键字](collection-elements.md#check-element-existence) 以运算符形式调用 `contains()`：`element in map`。 |
+| 检查映射是否包含一个或多个元素 | `containsKey()`, `containsValue()` | 使用 [`in` 关键字](collection-elements#check-element-existence) 以运算符形式调用 `contains()`：`element in map`。 |
 | 检查映射是否为空 |  `isEmpty()` | 使用 [`isNotEmpty()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/is-not-empty.html) 检查映射是否不为空。 |
-| 移除一个元素 | `remove(key)`, `remove(key, value)` | 使用 [`minusAssign`(`-=`) 运算符](collection-plus-minus.md)：`map -= key`。 |
+| 移除一个元素 | `remove(key)`, `remove(key, value)` | 使用 [`minusAssign`(`-=`) 运算符](collection-plus-minus)：`map -= key`。 |
 | 从映射中移除所有元素 | `clear()` | |
 | 从映射中获取流 | 在条目、键或值上使用 `stream()` | |
 
@@ -64,18 +64,18 @@ _集合(Collections)_ 是指一组可变数量的条目（可能为零），这�
 | 描述 | Java | Kotlin |
 |-------------|------|--------|
 | 获取集合的大小 | `size()` | `count()`, `size` |
-| 获取对嵌套集合元素的扁平访问 | `collectionOfCollections.forEach(flatCollection::addAll)` 或 `collectionOfCollections.stream().flatMap().collect()` | [`flatten()`](collection-transformations.md#flatten) 或 [`flatMap()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/flat-map.html) |
-| 将给定的函数应用于每个元素 | `stream().map().collect()` | [`map()`](collection-filtering.md) |
-| 将提供的操作顺序应用于集合元素，并返回累积的结果 | `stream().reduce()` | [`reduce()`, `fold()`](collection-aggregate.md#fold-and-reduce) |
-| 按分类器对元素进行分组并计数 | `stream().collect(Collectors.groupingBy(classifier, counting()))` | [`eachCount()`](collection-grouping.md) |
+| 获取对嵌套集合元素的扁平访问 | `collectionOfCollections.forEach(flatCollection::addAll)` 或 `collectionOfCollections.stream().flatMap().collect()` | [`flatten()`](collection-transformations#flatten) 或 [`flatMap()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/flat-map.html) |
+| 将给定的函数应用于每个元素 | `stream().map().collect()` | [`map()`](collection-filtering) |
+| 将提供的操作顺序应用于集合元素，并返回累积的结果 | `stream().reduce()` | [`reduce()`, `fold()`](collection-aggregate#fold-and-reduce) |
+| 按分类器对元素进行分组并计数 | `stream().collect(Collectors.groupingBy(classifier, counting()))` | [`eachCount()`](collection-grouping) |
 | 按条件过滤 | `stream().filter().collect()` | [`filter()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/filter.html) |
-| 检查集合元素是否满足条件 | `stream().noneMatch()`, `stream().anyMatch()`, `stream().allMatch()` | [`none()`, `any()`, `all()`](collection-filtering.md) |
-| 排序元素 | `stream().sorted().collect()` | [`sorted()`](collection-ordering.md#natural-order) |
-| 获取前 N 个元素 | `stream().limit(N).collect()` | [`take(N)`](collection-parts.md#take-and-drop) |
-| 获取带有谓词的元素 | `stream().takeWhile().collect()` | [`takeWhile()`](collection-parts.md#take-and-drop) |
-| 跳过前 N 个元素 | `stream().skip(N).collect()` | [`drop(N)`](collection-parts.md#take-and-drop) |
-| 跳过带有谓词的元素 | `stream().dropWhile().collect()` | [`dropWhile()`](collection-parts.md#take-and-drop) |
-| 从集合元素和与其关联的某些值构建映射 | `stream().collect(toMap(keyMapper, valueMapper))` | [`associate()`](collection-transformations.md#associate) |
+| 检查集合元素是否满足条件 | `stream().noneMatch()`, `stream().anyMatch()`, `stream().allMatch()` | [`none()`, `any()`, `all()`](collection-filtering) |
+| 排序元素 | `stream().sorted().collect()` | [`sorted()`](collection-ordering#natural-order) |
+| 获取前 N 个元素 | `stream().limit(N).collect()` | [`take(N)`](collection-parts#take-and-drop) |
+| 获取带有谓词的元素 | `stream().takeWhile().collect()` | [`takeWhile()`](collection-parts#take-and-drop) |
+| 跳过前 N 个元素 | `stream().skip(N).collect()` | [`drop(N)`](collection-parts#take-and-drop) |
+| 跳过带有谓词的元素 | `stream().dropWhile().collect()` | [`dropWhile()`](collection-parts#take-and-drop) |
+| 从集合元素和与其关联的某些值构建映射 | `stream().collect(toMap(keyMapper, valueMapper))` | [`associate()`](collection-transformations#associate) |
 
 要在映射上执行上面列出的所有操作，首先需要获取映射的 `entrySet`。
 
@@ -85,17 +85,17 @@ _集合(Collections)_ 是指一组可变数量的条目（可能为零），这�
 |-------------|------|--------|
 | 将列表排序为自然顺序 | `sort(null)` | `sort()` |
 | 将列表排序为降序 | `sort(comparator)` | `sortDescending()` |
-| 从列表中移除一个元素 | `remove(index)`, `remove(element)`| `removeAt(index)`, `remove(element)` or [`collection -= element`](collection-plus-minus.md) |
+| 从列表中移除一个元素 | `remove(index)`, `remove(element)`| `removeAt(index)`, `remove(element)` or [`collection -= element`](collection-plus-minus) |
 | 使用某个值填充列表的所有元素 | `Collections.fill()` | [`fill()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/fill.html) |
 | 从列表中获取唯一元素 | `stream().distinct().toList()` | [`distinct()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/distinct.html) |
 
 ## Java 标准库中不存在的操作
 
-* [`zip()`, `unzip()`](collection-transformations.md) – 转换集合。
-* [`aggregate()`](collection-grouping.md) – 按条件分组。
-* [`takeLast()`, `takeLastWhile()`, `dropLast()`, `dropLastWhile()`](collection-parts.md#take-and-drop) – 按谓词获取或删除元素。
-* [`slice()`, `chunked()`, `windowed()`](collection-parts.md) – 检索集合部分。
-* [加号 (`+`) 和减号 (`-`) 运算符](collection-plus-minus.md) – 添加或移除元素。
+* [`zip()`, `unzip()`](collection-transformations) – 转换集合。
+* [`aggregate()`](collection-grouping) – 按条件分组。
+* [`takeLast()`, `takeLastWhile()`, `dropLast()`, `dropLastWhile()`](collection-parts#take-and-drop) – 按谓词获取或删除元素。
+* [`slice()`, `chunked()`, `windowed()`](collection-parts) – 检索集合部分。
+* [加号 (`+`) 和减号 (`-`) 运算符](collection-plus-minus) – 添加或移除元素。
 
 如果你想深入了解 `zip()`、`chunked()`、`windowed()` 和其他一些操作，请观看 Sebastian Aigner 关于 Kotlin 中高级集合操作的视频：
 
@@ -143,7 +143,7 @@ val immutableNumbers = listOf("one", "two")
 //immutableNumbers.add("five") // 编译错误 - 找不到引用：add
 ```
 
-在 [Kotlin 编码规范](coding-conventions.md#immutability) 页面上阅读有关不变性的更多信息。
+在 [Kotlin 编码规范](coding-conventions#immutability) 页面上阅读有关不变性的更多信息。
 
 ## 协变(Covariance)
 
@@ -167,7 +167,7 @@ public void main() {
 }
 ```
 
-在 Kotlin 中，只读集合类型是[协变的](generics.md#variance)。这意味着如果 `Rectangle` 类继承自 `Shape` 类，
+在 Kotlin 中，只读集合类型是[协变的](generics#variance)。这意味着如果 `Rectangle` 类继承自 `Shape` 类，
 则可以在任何需要 `List<Shape>` 类型的地方使用 `List<Rectangle>` 类型。
 换句话说，集合类型与元素类型具有相同的子类型关系。映射在值类型上是协变的，但在键类型上不是。
 可变集合不是协变的 – 这将导致运行时失败。
@@ -188,11 +188,11 @@ fun main() {
 }
 ```
 
-在此处阅读有关[集合类型](collections-overview.md#collection-types)的更多信息。
+在此处阅读有关[集合类型](collections-overview#collection-types)的更多信息。
 
 ## 范围(Ranges)和数列(progressions)
 
-在 Kotlin 中，你可以使用[范围](ranges.md)创建间隔。例如，`Version(1, 11)..Version(1, 30)` 包括从 `1.11` 到 `1.30` 的所有版本。
+在 Kotlin 中，你可以使用[范围](ranges)创建间隔。例如，`Version(1, 11)..Version(1, 30)` 包括从 `1.11` 到 `1.30` 的所有版本。
 你可以使用 `in` 运算符检查你的版本是否在范围内：`Version(0, 9) in versionRange`。
 
 在 Java 中，你需要手动检查 `Version` 是否适合两个边界：
@@ -324,7 +324,7 @@ int sum = IntStream.iterate(1, e `->` e + 3)
 System.out.println(sum); // 打印 145
 ```
 
-在 Kotlin 中，使用_[序列](sequences.md)_。序列的多步骤处理在可能的情况下会延迟执行——
+在 Kotlin 中，使用_[序列](sequences)_。序列的多步骤处理在可能的情况下会延迟执行——
 只有在请求整个处理链的结果时才会发生实际计算。
 
 ```kotlin
@@ -340,7 +340,7 @@ fun main() {
 ```
 
 序列可以减少执行某些过滤操作所需的步骤数。
-请参阅[序列处理示例](sequences.md#sequence-processing-example)，其中显示了 `Iterable` 和 `Sequence` 之间的差异。
+请参阅[序列处理示例](sequences#sequence-processing-example)，其中显示了 `Iterable` 和 `Sequence` 之间的差异。
 
 ## 从列表中移除元素
 
@@ -431,7 +431,7 @@ if (deque.size() > 0) {
 在 Kotlin 中，有特殊的
 函数 [`firstOrNull()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first-or-null.html)
 和 [`lastOrNull()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last-or-null.html)。
-使用 [`Elvis 运算符`](null-safety.md#elvis-operator)，你可以根据函数的结果立即执行进一步的操作。例如，`firstOrNull()`：
+使用 [`Elvis 运算符`](null-safety#elvis-operator)，你可以根据函数的结果立即执行进一步的操作。例如，`firstOrNull()`：
 
 ```kotlin
 // Kotlin
@@ -540,7 +540,7 @@ fun main() {
 }
 ```
 
-在此处了解有关 [筛选映射](map-operations.md#filter) 的更多信息。
+在此处了解有关 [筛选映射](map-operations#filter) 的更多信息。
 
 ### 按类型筛选元素
 
@@ -563,7 +563,7 @@ public void objectIsInstance() {
 ```
 
 在 Kotlin 中，你只需在集合上调用 [`filterIsInstance<NEEDED_TYPE>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/filter-is-instance.html)，
-并且类型转换由 [智能转换](typecasts.md#smart-casts) 完成：
+并且类型转换由 [智能转换](typecasts#smart-casts) 完成：
 
 ```kotlin
 // Kotlin
@@ -597,7 +597,7 @@ public void testPredicates() {
 }
 ```
 
-在 Kotlin 中，[扩展函数](extensions.md) `none()`、`any()` 和 `all()`
+在 Kotlin 中，[扩展函数](extensions) `none()`、`any()` 和 `all()`
 可用于每个 [Iterable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/#kotlin.collections.Iterable) 对象：
 
 ```kotlin
@@ -612,7 +612,7 @@ fun main() {
 }
 ```
 
-了解有关 [测试谓词](collection-filtering.md#test-predicates)的更多信息。
+了解有关 [测试谓词](collection-filtering#test-predicates)的更多信息。
 
 ## 集合转换操作
 
@@ -638,7 +638,7 @@ public void zip() {
 你可以使用 [Records](https://blogs.oracle.com/javamagazine/post/records-come-to-java)。
 在上面的示例中，记录将是 `record AnimalDescription(String animal, String color) {}`。
 
-在 Kotlin 中，使用 [`zip()`](collection-transformations.md#zip) 函数来执行相同的操作：
+在 Kotlin 中，使用 [`zip()`](collection-transformations#zip) 函数来执行相同的操作：
 
 ```kotlin
 fun main() {
@@ -675,7 +675,7 @@ public void associate() {
 }
 ```
 
-在 Kotlin 中，使用 [`associate()`](collection-transformations.md#associate) 函数：
+在 Kotlin 中，使用 [`associate()`](collection-transformations#associate) 函数：
 
 ```kotlin
 fun main() {
@@ -689,9 +689,9 @@ fun main() {
 
 ## 接下来做什么？
 
-* 访问 [Kotlin Koans](koans.md) – 完成练习以学习 Kotlin 语法。每个练习都创建为一个失败的单元测试，你的工作是使其通过。
-* 查看其他 [Kotlin 惯用语法](idioms.md)。
-* 了解如何使用 [Java 到 Kotlin 转换器](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
-* 探索 [Kotlin 中的集合](collections-overview.md)。
+* 访问 [Kotlin Koans](koans) – 完成练习以学习 Kotlin 语法。每个练习都创建为一个失败的单元测试，你的工作是使其通过。
+* 查看其他 [Kotlin 惯用语法](idioms)。
+* 了解如何使用 [Java 到 Kotlin 转换器](mixing-java-kotlin-intellij#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
+* 探索 [Kotlin 中的集合](collections-overview)。
 
 如果你有喜欢的惯用语法，我们邀请你通过发送拉取请求来分享它。

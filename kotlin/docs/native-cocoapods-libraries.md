@@ -1,11 +1,11 @@
 ---
 title: "添加对 Pod 库的依赖"
 ---
-要在 Kotlin 项目和 Pod 库之间添加依赖项，请[完成初始配置](native-cocoapods.md#set-up-an-environment-to-work-with-cocoapods)。然后，您可以添加对不同类型的 Pod 库的依赖项。
+要在 Kotlin 项目和 Pod 库之间添加依赖项，请[完成初始配置](native-cocoapods#set-up-an-environment-to-work-with-cocoapods)。然后，您可以添加对不同类型的 Pod 库的依赖项。
 
 当您添加新的依赖项并在 IDE 中重新导入项目时，新的依赖项将自动添加。无需其他步骤。
 
-要将 Kotlin 项目与 Xcode 结合使用，您应该[在项目的 Podfile 中进行更改](native-cocoapods.md#update-podfile-for-xcode)。
+要将 Kotlin 项目与 Xcode 结合使用，您应该[在项目的 Podfile 中进行更改](native-cocoapods#update-podfile-for-xcode)。
 
 Kotlin 项目需要在 `build.gradle(.kts)` 中调用 `pod()` 函数来添加 Pod 依赖项。每个依赖项都需要单独的函数调用。您可以在该函数的配置块中指定依赖项的参数。
 
@@ -266,7 +266,7 @@ import FirebaseAuthWrapper.User
 ### 支持带有 @import 指令的 Objective-C 头文件
 
 :::caution
-此功能为 [Experimental (实验性)](components-stability.md#stability-levels-explained)。
+此功能为 [Experimental (实验性)](components-stability#stability-levels-explained)。
 它可能随时被删除或更改。 仅用于评估目的。
 我们欢迎您在 [YouTrack](https://kotl.in/issue) 中提供有关它的反馈。
 

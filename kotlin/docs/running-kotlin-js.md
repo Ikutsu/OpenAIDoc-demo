@@ -63,4 +63,4 @@ fun main() {
 <img src="/img/browser-console-output.png" alt="浏览器开发者工具中的控制台输出" width="700" style={{verticalAlign: 'middle'}}/>
 
 通过此设置，你可以在每次代码更改后重新编译你的项目以查看你的更改。Kotlin/JS 还支持一种更方便的方式，即在你开发应用程序时自动重建应用程序。
-要了解如何设置此 _continuous mode_（持续模式），请查看 [corresponding tutorial](dev-server-continuous-compilation.md)（相应的教程）。
+要了解如何设置此 _continuous mode_（持续模式），请查看 [corresponding tutorial](dev-server-continuous-compilation)（相应的教程）。

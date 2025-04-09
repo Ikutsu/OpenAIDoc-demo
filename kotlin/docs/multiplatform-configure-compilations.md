@@ -21,7 +21,7 @@ Kotlin 多平台项目使用编译 (compilation) 来生成产物 (artifact)。�
 * [一个目标的编译](#configure-compilations-for-one-target)，因为一个目标可以有多个编译。
 * [一个特定的编译](#configure-one-compilation)。
 
-查看可用于所有或特定目标的[编译参数列表](multiplatform-dsl-reference.md#compilation-parameters)和[编译器选项](gradle-compiler-options.md)。
+查看可用于所有或特定目标的[编译参数列表](multiplatform-dsl-reference#compilation-parameters)和[编译器选项](gradle-compiler-options)。
 
 ## 配置所有编译
 
@@ -223,7 +223,7 @@ Java 源码文件放置在 Kotlin 源码根目录的子目录中。例如，路�
 
 ## 配置与原生语言的互操作性
 
-Kotlin 提供了[与原生语言的互操作性](native-c-interop.md)和 DSL 来为特定编译配置它。
+Kotlin 提供了[与原生语言的互操作性](native-c-interop)和 DSL 来为特定编译配置它。
 
 | 原生语言 (Native language)       | 支持的平台 (Supported platforms)                         | 注释 (Comments)                                                                  |
 |-----------------------|---------------------------------------------|---------------------------------------------------------------------------|
@@ -231,7 +231,7 @@ Kotlin 提供了[与原生语言的互操作性](native-c-interop.md)和 DSL 来
 | Objective-C           | Apple 平台 (macOS, iOS, watchOS, tvOS) |                                                                           |
 | Swift via Objective-C | Apple 平台 (macOS, iOS, watchOS, tvOS) | Kotlin 只能使用标有 `@objc` 属性的 Swift 声明。 |
 
-一个编译可以与多个原生库交互。使用[定义文件](native-definition-file.md)或构建文件的 [`cinterops` 块](multiplatform-dsl-reference.md#cinterops)中的可用属性配置互操作性：
+一个编译可以与多个原生库交互。使用[定义文件](native-definition-file)或构建文件的 [`cinterops` 块](multiplatform-dsl-reference#cinterops)中的可用属性配置互操作性：
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>
@@ -318,7 +318,7 @@ kotlin {
 
 默认源集 `commonMain` 会添加到每个生产（应用程序或库）变体的编译中。`commonTest` 源集也会以类似的方式添加到单元测试和插桩测试变体的编译中。
 
-[`kapt`](kapt.md) 的注解处理也受支持，但由于当前的限制，它要求在配置 `kapt` 依赖项之前创建 Android 目标，这需要在顶层的 `dependencies {}` 块中完成，而不是在 Kotlin 源集依赖项中完成。
+[`kapt`](kapt) 的注解处理也受支持，但由于当前的限制，它要求在配置 `kapt` 依赖项之前创建 Android 目标，这需要在顶层的 `dependencies {}` 块中完成，而不是在 Kotlin 源集依赖项中完成。
 
 ```kotlin
 kotlin {
@@ -332,17 +332,17 @@ dependencies {
 
 ## 源集层次结构的编译
 
-Kotlin 可以使用 `dependsOn` 关系构建[源集层次结构](multiplatform-share-on-platforms.md#share-code-on-similar-platforms)。
+Kotlin 可以使用 `dependsOn` 关系构建[源集层次结构](multiplatform-share-on-platforms#share-code-on-similar-platforms)。
 
 <img src="/img/jvm-js-main.svg" alt="Source set hierarchy" style={{verticalAlign: 'middle'}}/>
 
 如果源集 `jvmMain` 依赖于源集 `commonMain`，则：
 
 * 只要为特定目标编译 `jvmMain`，`commonMain` 也会参与该编译，并被编译为相同的目标二进制形式，例如 JVM 类文件。
-* `jvmMain` 的源文件“看到”`commonMain` 的声明，包括内部声明，并且还看到 `commonMain` 的 [依赖项](multiplatform-add-dependencies.md)，即使那些被指定为 `implementation` 依赖项。
-* `jvmMain` 可以包含 `commonMain` 的 [expected 声明](multiplatform-expect-actual.md) 的平台特定实现。
+* `jvmMain` 的源文件“看到”`commonMain` 的声明，包括内部声明，并且还看到 `commonMain` 的 [依赖项](multiplatform-add-dependencies)，即使那些被指定为 `implementation` 依赖项。
+* `jvmMain` 可以包含 `commonMain` 的 [expected 声明](multiplatform-expect-actual) 的平台特定实现。
 * `commonMain` 的资源始终与 `jvmMain` 的资源一起处理和复制。
-* `jvmMain` 和 `commonMain` 的 [语言设置](multiplatform-dsl-reference.md#language-settings) 应该一致。
+* `jvmMain` 和 `commonMain` 的 [语言设置](multiplatform-dsl-reference#language-settings) 应该一致。
 
 语言设置的一致性检查方式如下：
 * `jvmMain` 应设置大于或等于 `commonMain` 的 `languageVersion`。
@@ -353,7 +353,7 @@ Kotlin 可以使用 `dependsOn` 关系构建[源集层次结构](multiplatform-s
 ## 在 Gradle 中配置 Isolated Projects 功能
 
 :::caution
-此功能是 [Experimental](components-stability.md#stability-levels-explained) 的，目前处于 Gradle 的 pre-alpha 状态。
+此功能是 [Experimental](components-stability#stability-levels-explained) 的，目前处于 Gradle 的 pre-alpha 状态。
 仅将其与 Gradle 8.10 或更高版本一起使用，并且仅用于评估目的。该功能可能随时被删除或更改。
 我们欢迎您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-57279/Support-Gradle-Project-Isolation-Feature-for-Kotlin-Multiplatform) 中提供有关此功能的反馈。
 需要选择加入（请参阅下面的详细信息）。

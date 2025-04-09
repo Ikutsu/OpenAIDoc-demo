@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
    * 您有一个使用 CocoaPods 的 iOS 项目的单体仓库 (mono repository) 设置。
    * 您的 Kotlin Multiplatform 项目具有 CocoaPods 依赖项。<br/>
 
-   [选择最适合您的集成方法](multiplatform-ios-integration-overview.md)
+   [选择最适合您的集成方法](multiplatform-ios-integration-overview)
 
 :::
 
@@ -21,7 +21,7 @@ Kotlin/Native 提供了与 [CocoaPods 依赖管理器](https://cocoapods.org/)�
 
 只有当您想更改 Swift/Objective-C 代码或在 Apple 模拟器或设备上运行您的应用程序时，才需要 Xcode。为了与 Xcode 正确协同工作，您应该[更新您的 Podfile](#update-podfile-for-xcode)。
 
-根据您的项目和目的，您可以在 [Kotlin 项目和 Pod 库](native-cocoapods-libraries.md)以及[Kotlin Gradle 项目和 Xcode 项目](native-cocoapods-xcode.md)之间添加依赖关系。
+根据您的项目和目的，您可以在 [Kotlin 项目和 Pod 库](native-cocoapods-libraries)以及[Kotlin Gradle 项目和 Xcode 项目](native-cocoapods-xcode)之间添加依赖关系。
 
 ## 设置使用 CocoaPods 的环境
 
@@ -295,7 +295,7 @@ CocoaPods 安装的一些变体可能会导致 Xcode 中出现构建错误。
 
 ### 找不到模块
 
-您可能会遇到与 [C 互操作](native-c-interop.md) 问题相关的 `module 'SomeSDK' not found` 错误。
+您可能会遇到与 [C 互操作](native-c-interop) 问题相关的 `module 'SomeSDK' not found` 错误。
 尝试以下解决方法以避免此错误：
 
 #### 指定框架名称

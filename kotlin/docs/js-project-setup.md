@@ -82,11 +82,11 @@ Kotlin Multiplatform 插件会自动配置其任务以使用所选环境。
 
 ## 对 ES2015 特性的支持
 
-Kotlin 提供了对以下 ES2015 功能的 [Experimental](components-stability.md#stability-levels-explained) 支持：
+Kotlin 提供了对以下 ES2015 功能的 [Experimental](components-stability#stability-levels-explained) 支持：
 
 * 简化代码库并提高可维护性的模块。
 * 允许结合 OOP 原则的类，从而产生更清晰、更直观的代码。
-* 用于编译 [挂起函数](composing-suspending-functions.md) 的生成器，可提高最终包的大小并有助于调试。
+* 用于编译 [挂起函数](composing-suspending-functions) 的生成器，可提高最终包的大小并有助于调试。
 
 你可以通过将 `es2015` 编译目标添加到 `build.gradle(.kts)` 文件中来一次性启用所有受支持的 ES2015 功能：
 
@@ -251,7 +251,7 @@ kotlin.js.yarn=false
 * [optionalDependencies](https://docs.npmjs.com/files/package.json#optionaldependencies) 通过 `optionalNpm(...)`，以及
 * [peerDependencies](https://docs.npmjs.com/files/package.json#peerdependencies) 通过 `peerNpm(...)`。
 
-安装 npm 依赖项后，你可以按照 [从 Kotlin 调用 JS](js-interop.md) 中的描述在代码中使用其 API。
+安装 npm 依赖项后，你可以按照 [从 Kotlin 调用 JS](js-interop) 中的描述在代码中使用其 API。
 
 ## run 任务
 
@@ -292,7 +292,7 @@ Kotlin Multiplatform Gradle 插件会自动为项目设置测试基础结构。�
 * 测试报告生成
 * 控制台中的测试运行结果
 
-对于运行浏览器测试，该插件默认使用 [Headless Chrome](https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md)。你还可以选择另一个浏览器来运行测试，方法是在构建脚本的 `useKarma {}` 块中添加相应的条目：
+对于运行浏览器测试，该插件默认使用 [Headless Chrome](https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README)。你还可以选择另一个浏览器来运行测试，方法是在构建脚本的 `useKarma {}` 块中添加相应的条目：
 
 ```groovy
 kotlin {
@@ -388,7 +388,7 @@ kotlin.js.webpack.major.version=4
 
 最常见的 webpack 调整可以直接通过 Gradle 构建文件中的 `kotlin.js.browser.webpackTask {}` 配置块进行：
 * `outputFileName` - webpacked 输出文件的名称。在执行 webpack 任务后，它将在 `<projectDir>/build/dist/<targetName>` 中生成。默认值为项目名称。
-* `output.libraryTarget` - webpacked 输出的模块系统。了解有关 [Kotlin/JS 项目的可用模块系统](js-modules.md) 的更多信息。默认值为 `umd`。
+* `output.libraryTarget` - webpacked 输出的模块系统。了解有关 [Kotlin/JS 项目的可用模块系统](js-modules) 的更多信息。默认值为 `umd`。
   
 ```groovy
 webpackTask {

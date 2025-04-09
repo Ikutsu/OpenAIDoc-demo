@@ -7,7 +7,7 @@ Kotlin 由 JetBrains 开发，但我们一直在寻找更多人来帮助我们�
 
 ## 参与 Early Access Preview（抢先体验预览版）
 
-你可以通过[参与 Kotlin Early Access Preview (EAP)](eap.md) 并向我们提供宝贵的反馈，来帮助我们改进 Kotlin。
+你可以通过[参与 Kotlin Early Access Preview (EAP)](eap) 并向我们提供宝贵的反馈，来帮助我们改进 Kotlin。
 
 对于每个版本，Kotlin 都会发布一些预览构建版本，你可以在这些版本中尝试最新的功能，然后再投入生产环境。
 你可以将你发现的任何 Bug 报告到我们的问题跟踪器 [YouTrack](https://kotl.in/issue)，
@@ -16,7 +16,7 @@ Kotlin 由 JetBrains 开发，但我们一直在寻找更多人来帮助我们�
 ## 贡献编译器和标准库
 
 如果你想为 Kotlin 编译器和标准库做贡献，请访问 [JetBrains/Kotlin GitHub](https://github.com/jetbrains/kotlin)，
-检出最新的 Kotlin 版本，并按照[有关如何贡献的说明](https://github.com/JetBrains/kotlin/blob/master/docs/contributing.md) 进行操作。
+检出最新的 Kotlin 版本，并按照[有关如何贡献的说明](https://github.com/JetBrains/kotlin/blob/master/docs/contributing) 进行操作。
 
 你可以通过完成 [开放任务](https://youtrack.jetbrains.com/issues/KT?q=tag:%20%7BUp%20For%20Grabs%7D%20and%20State:%20Open) 来帮助我们。
 请与我们保持开放的沟通，因为我们可能对你的更改有疑问和意见。
@@ -27,7 +27,7 @@ Kotlin 由 JetBrains 开发，但我们一直在寻找更多人来帮助我们�
 Kotlin IDE 插件是 [IntelliJ IDEA 仓库](https://github.com/JetBrains/intellij-community/tree/master/plugins/kotlin) 的一部分。
 
 要为 Kotlin IDE 插件做贡献，请克隆 [IntelliJ IDEA 仓库](https://github.com/JetBrains/intellij-community/)
-并按照[有关如何贡献的说明](https://github.com/JetBrains/intellij-community/blob/master/plugins/kotlin/CONTRIBUTING.md) 进行操作。
+并按照[有关如何贡献的说明](https://github.com/JetBrains/intellij-community/blob/master/plugins/kotlin/CONTRIBUTING) 进行操作。
 
 ## 贡献其他 Kotlin 库和工具
 
@@ -39,8 +39,8 @@ Kotlin IDE 插件是 [IntelliJ IDEA 仓库](https://github.com/JetBrains/intelli
 选择你感兴趣的仓库并克隆它。
 
 按照为每个库和工具描述的贡献流程进行操作，例如
-[kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/CONTRIBUTING.md),
-[ktor](https://github.com/ktorio/ktor/blob/master/CONTRIBUTING.md) 以及其他。
+[kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/CONTRIBUTING),
+[ktor](https://github.com/ktorio/ktor/blob/master/CONTRIBUTING) 以及其他。
 
 如果你有一个对其他 Kotlin 开发人员有用的库，请通过 `<feedback@kotlinlang.org>` 告知我们。
 

@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::note
-Objective-C 库的导入是 [实验性的](components-stability.md#stability-levels-explained)。
+Objective-C 库的导入是 [实验性的](components-stability#stability-levels-explained)。
 所有由 cinterop 工具从 Objective-C 库生成的 Kotlin 声明都应该带有 `@ExperimentalForeignApi` 注解。
 
 Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）仅对某些 API 需要选择加入。
@@ -15,15 +15,15 @@ Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）�
 您可能会发现一些其他有用的资源：
 
 * [Kotlin-Swift interopedia](https://github.com/kotlin-hands-on/kotlin-swift-interopedia)，其中包含如何在 Swift 代码中使用 Kotlin 声明的示例集合。
-* [与 Swift/Objective-C ARC 集成](native-arc-integration.md) 部分，涵盖了 Kotlin 的追踪 GC 和 Objective-C 的 ARC 之间集成的细节。
+* [与 Swift/Objective-C ARC 集成](native-arc-integration) 部分，涵盖了 Kotlin 的追踪 GC 和 Objective-C 的 ARC 之间集成的细节。
 
 ## 将 Swift/Objective-C 库导入 Kotlin
 
 如果正确导入到构建中，Objective-C 框架和库可以在 Kotlin 代码中使用（默认情况下会导入系统框架）。
 有关更多详细信息，请参见：
 
-* [创建和配置库定义文件](native-definition-file.md)
-* [配置 Native 库的编译](multiplatform-configure-compilations.md#configure-interop-with-native-languages)
+* [创建和配置库定义文件](native-definition-file)
+* [配置 Native 库的编译](multiplatform-configure-compilations#configure-interop-with-native-languages)
 
 如果 Swift 库的 API 使用 `@objc` 导出到 Objective-C，则可以在 Kotlin 代码中使用 Swift 库。
 目前尚不支持纯 Swift 模块。
@@ -32,12 +32,12 @@ Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）�
 
 如果将 Kotlin 模块编译为框架，则可以在 Swift/Objective-C 代码中使用：
 
-* 请参阅[构建最终 Native 二进制文件](multiplatform-build-native-binaries.md#declare-binaries) 以了解如何声明二进制文件。
+* 请参阅[构建最终 Native 二进制文件](multiplatform-build-native-binaries#declare-binaries) 以了解如何声明二进制文件。
 * 查看 [Kotlin Multiplatform 示例项目](https://github.com/Kotlin/kmm-basic-sample) 以获取示例。
 
 ### 从 Objective-C 和 Swift 中隐藏 Kotlin 声明
 
-`@HiddenFromObjC` 注解是 [实验性的](components-stability.md#stability-levels-explained) 并且需要 [选择加入](opt-in-requirements.md)。
+`@HiddenFromObjC` 注解是 [实验性的](components-stability#stability-levels-explained) 并且需要 [选择加入](opt-in-requirements)。
 
 为了使您的 Kotlin 代码对 Objective-C/Swift 更加友好，您可以使用 `@HiddenFromObjC` 从 Objective-C 和 Swift 中隐藏 Kotlin 声明。
 该注解禁用将函数或属性导出到 Objective-C。
@@ -45,11 +45,11 @@ Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）�
 或者，您可以使用 `internal` 修饰符标记 Kotlin 声明，以限制其在编译模块中的可见性。
 如果您只想从 Objective-C 和 Swift 中隐藏 Kotlin 声明，但仍然希望它对其他 Kotlin 模块可见，请选择 `@HiddenFromObjC`。
 
-[请参阅 Kotlin-Swift interopedia 中的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/HiddenFromObjC.md)。
+[请参阅 Kotlin-Swift interopedia 中的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/HiddenFromObjC)。
 
 ### 在 Swift 中使用 refining
 
-`@ShouldRefineInSwift` 注解是 [实验性的](components-stability.md#stability-levels-explained) 并且需要 [选择加入](opt-in-requirements.md)。
+`@ShouldRefineInSwift` 注解是 [实验性的](components-stability#stability-levels-explained) 并且需要 [选择加入](opt-in-requirements)。
 
 `@ShouldRefineInSwift` 有助于用 Swift 编写的包装器替换 Kotlin 声明。
 该注解将函数或属性标记为生成的 Objective-C API 中的 `swift_private`。
@@ -58,11 +58,11 @@ Kotlin/Native 附带的 Native 平台库（如 Foundation、UIKit 和 POSIX）�
 您仍然可以在 Swift 代码中使用这些声明来创建 Swift 友好的 API，但它们不会在 Xcode 自动完成中建议。
 
 * 有关在 Swift 中 refining Objective-C 声明的更多信息，请参见 [Apple 官方文档](https://developer.apple.com/documentation/swift/improving-objective-c-api-declarations-for-swift)。
-* 有关如何使用 `@ShouldRefineInSwift` 注解的示例，请参见 [Kotlin-Swift interopedia](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/ShouldRefineInSwift.md)。
+* 有关如何使用 `@ShouldRefineInSwift` 注解的示例，请参见 [Kotlin-Swift interopedia](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/ShouldRefineInSwift)。
 
 ### 更改声明名称
 
-`@ObjCName` 注解是 [实验性的](components-stability.md#stability-levels-explained) 并且需要 [选择加入](opt-in-requirements.md)。
+`@ObjCName` 注解是 [实验性的](components-stability#stability-levels-explained) 并且需要 [选择加入](opt-in-requirements)。
 
 要避免重命名 Kotlin 声明，请使用 `@ObjCName` 注解。
 它指示 Kotlin 编译器对带注解的类、接口或其他 Kotlin 实体使用自定义的 Objective-C 和 Swift 名称：
@@ -79,14 +79,14 @@ let array = MySwiftArray()
 let index = array.index(of: "element")
 ```
 
-[请参阅 Kotlin-Swift interopedia 中的另一个示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/ObjCName.md)。
+[请参阅 Kotlin-Swift interopedia 中的另一个示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/ObjCName)。
 
 ### 使用 KDoc 注释提供文档
 
 文档对于理解任何 API 至关重要。
 为共享的 Kotlin API 提供文档使您能够就用法、注意事项等问题与其用户进行交流。
 
-默认情况下，生成 Objective-C 标头时，[KDocs](kotlin-doc.md) 注释不会转换为相应的注释。
+默认情况下，生成 Objective-C 标头时，[KDocs](kotlin-doc) 注释不会转换为相应的注释。
 例如，以下带有 KDoc 的 Kotlin 代码：
 
 ```kotlin
@@ -145,7 +145,7 @@ kotlin {
 
 已知限制：
 
-将 KDoc 注释导出到生成的 Objective-C 标头的功能是 [实验性的](components-stability.md)。
+将 KDoc 注释导出到生成的 Objective-C 标头的功能是 [实验性的](components-stability)。
 它可能随时被删除或更改。
 需要选择加入（请参阅下面的详细信息），您应该仅将其用于评估目的。
 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-38600) 中提供有关它的反馈。
@@ -247,9 +247,9 @@ MyLibraryUtilsKt.foo()
 
 请参阅 Kotlin-Swift interopedia 中访问顶层 Kotlin 声明的示例集合：
 
-* [顶层函数](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/Top-level%20functions.md)
-* [顶层只读属性](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/functionsandproperties/Top-level%20val%20properties.md)
-* [顶层可变属性](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/functionsandproperties/Top-level%20mutable%20var%20properties.md)
+* [顶层函数](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/Top-level%20functions)
+* [顶层只读属性](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/functionsandproperties/Top-level%20val%20properties)
+* [顶层可变属性](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/functionsandproperties/Top-level%20mutable%20var%20properties)
 
 ### 方法名称转换
 
@@ -277,7 +277,7 @@ player.moveTo(UP, byInches = 42)
 | `hashCode()` | `hash`         | `hash`        |
 | `toString()` | `description`  | `description` |
 
-[请参阅 Kotlin-Swift interopedia 中数据类的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Data%20classes.md)。
+[请参阅 Kotlin-Swift interopedia 中数据类的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Data%20classes)。
 
 您可以在 Swift 或 Objective-C 中指定更符合语言习惯的名称，而不是使用 [`@ObjCName` 注解](#change-declaration-names) 重命名 Kotlin 声明。
 
@@ -298,7 +298,7 @@ player.moveTo(UP, byInches = 42)
 
 请注意，尚未实现相反的反向转换：Swift/Objective-C 抛出错误的方法不会作为抛出异常导入到 Kotlin。
 
-[请参阅 Kotlin-Swift interopedia 中的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/Exceptions.md)。
+[请参阅 Kotlin-Swift interopedia 中的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/Exceptions)。
 
 ### 枚举 (Enums)
 
@@ -332,21 +332,21 @@ switch color {
 }
 ```
 
-[请参阅 Kotlin-Swift interopedia 中的另一个示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Enum%20classes.md)。
+[请参阅 Kotlin-Swift interopedia 中的另一个示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Enum%20classes)。
 
 ### 挂起函数 (Suspending functions)
 
-从 Swift 代码调用 `suspend` 函数作为 `async` 的支持是 [实验性的](components-stability.md)。
+从 Swift 代码调用 `suspend` 函数作为 `async` 的支持是 [实验性的](components-stability)。
 它可能随时被删除或更改。
 仅将其用于评估目的。我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-47610) 中提供有关它的反馈。
 
-Kotlin 的[挂起函数](coroutines-basics.md) (`suspend`) 在生成的 Objective-C 标头中表示为带有回调的函数，或者在 Swift/Objective-C 术语中表示为 [completion handlers](https://developer.apple.com/documentation/swift/calling_objective-c_apis_asynchronously)。
+Kotlin 的[挂起函数](coroutines-basics) (`suspend`) 在生成的 Objective-C 标头中表示为带有回调的函数，或者在 Swift/Objective-C 术语中表示为 [completion handlers](https://developer.apple.com/documentation/swift/calling_objective-c_apis_asynchronously)。
 
 从 Swift 5.5 开始，Kotlin 的 `suspend` 函数也可用于从 Swift 调用，作为不使用 completion handlers 的 `async` 函数。
 当前，此功能是高度实验性的，并且具有某些限制。有关详细信息，请参见 [此 YouTrack 问题](https://youtrack.jetbrains.com/issue/KT-47610)。
 
 * 在 [Swift 文档](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html) 中了解有关 [`async`/`await` 机制的更多信息。
-* 请参阅 [Kotlin-Swift interopedia](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/coroutines/Suspend%20functions.md) 中实现相同功能的第三方库的示例和建议。
+* 请参阅 [Kotlin-Swift interopedia](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/coroutines/Suspend%20functions) 中实现相同功能的第三方库的示例和建议。
 
 ### 扩展和类别成员 (Extensions and category members)
 
@@ -406,8 +406,8 @@ MyClass.Companion.shared
 
 请参阅 Kotlin-Swift interopedia 中的更多示例：
 
-* [如何使用 `shared` 访问 Kotlin 对象](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Objects.md)
-* [如何从 Swift 访问 Kotlin 伴生对象的成员](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Companion%20objects.md)。
+* [如何使用 `shared` 访问 Kotlin 对象](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Objects)
+* [如何从 Swift 访问 Kotlin 伴生对象的成员](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/classesandinterfaces/Companion%20objects)。
 
 ### NSNumber
 
@@ -432,12 +432,12 @@ Swift/Objective-C 集合以相同的方式映射到 Kotlin，除了 `NSMutableSe
 为此，请使用例如 Kotlin 中的 `mutableSetOf()` 函数或 Swift 中的 `KotlinMutableSet` 类以及 Objective-C 中的 `${prefix}MutableSet`（`prefix` 是框架名称前缀）。
 对于 `MutableMap` 也是如此。
 
-[请参阅 Kotlin-Swift interopedia 中的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/Collections.md)。
+[请参阅 Kotlin-Swift interopedia 中的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/Collections)。
 
 ### 函数类型
 
 Kotlin 函数类型对象（例如，lambdas）转换为 Swift 中的函数和 Objective-C 中的块。
-[请参阅 Kotlin-Swift interopedia 中带有 lambda 的 Kotlin 函数的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/functionsandproperties/Functions%20returning%20function%20type.md)。
+[请参阅 Kotlin-Swift interopedia 中带有 lambda 的 Kotlin 函数的示例](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/functionsandproperties/Functions%20returning%20function%20type)。
 
 但是，在翻译函数和函数类型时，参数和返回值类型的映射方式存在差异。
 在后一种情况下，原始类型映射到其盒装表示形式。Kotlin `Unit` 返回值在 Swift/Objective-C 中表示为相应的 `Unit` 单例。
@@ -470,7 +470,7 @@ Objective-C 支持在类上定义的“轻量级泛型”，其功能集相对�
 
 Objective-C 和 Swift 的泛型功能支持与 Kotlin 不同，因此转换不可避免地会丢失一些信息，但是支持的功能保留了有意义的信息。
 
-有关如何在 Swift 中使用 Kotlin 泛型的具体示例，请参见 [Kotlin-Swift interopedia](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/ShouldRefineInSwift.md)。
+有关如何在 Swift 中使用 Kotlin 泛型的具体示例，请参见 [Kotlin-Swift interopedia](https://github.com/kotlin-hands-on/kotlin-swift-interopedia/blob/main/docs/overview/ShouldRefineInSwift)。
 
 #### 限制
 
@@ -622,11 +622,11 @@ class ViewController : UIViewController {
 该注解指示 Kotlin 编译器忽略冲突的重载，以防从 Objective-C 类继承了多个具有相同参数类型但参数名称不同的函数。
 
 默认情况下，Kotlin/Native 编译器不允许调用非指定的 Objective-C 初始值设定项作为 `super()` 构造函数。
-如果指定的初始值设定项未在 Objective-C 库中正确标记，则此行为可能不方便。要禁用这些编译器检查，请将 `disableDesignatedInitializerChecks = true` 添加到库的 [`.def` 文件](native-definition-file.md)。
+如果指定的初始值设定项未在 Objective-C 库中正确标记，则此行为可能不方便。要禁用这些编译器检查，请将 `disableDesignatedInitializerChecks = true` 添加到库的 [`.def` 文件](native-definition-file)。
 
 ## C 特性 (C features)
 
-有关库使用一些普通 C 特性（例如，不安全指针、结构等）的示例案例，请参见 [与 C 的互操作性](native-c-interop.md)。
+有关库使用一些普通 C 特性（例如，不安全指针、结构等）的示例案例，请参见 [与 C 的互操作性](native-c-interop)。
 
 ## 不支持 (Unsupported)
 

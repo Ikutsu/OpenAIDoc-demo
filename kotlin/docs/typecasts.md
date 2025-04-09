@@ -4,7 +4,7 @@ title: 类型检查与转换
 在 Kotlin 中，你可以执行类型检查，以在运行时检查对象的类型。类型转换使你可以将对象转换为不同的类型。
 
 :::note
-要专门了解关于 **泛型（generics）** 类型检查和转换，例如 `List<T>`、`Map<K,V>`，请参阅 [泛型类型检查和转换(Generics type checks and casts)](generics.md#generics-type-checks-and-casts)。
+要专门了解关于 **泛型（generics）** 类型检查和转换，例如 `List<T>`、`Map<K,V>`，请参阅 [泛型类型检查和转换(Generics type checks and casts)](generics#generics-type-checks-and-casts)。
 
 ## is 和 !is 操作符
 
@@ -44,7 +44,7 @@ print(x.length) // x is automatically cast to String
 
 ### 控制流（Control flow）
 
-智能转换不仅适用于 `if` 条件表达式，还适用于 [`when` 表达式](control-flow.md#when-expressions-and-statements) 和 [`while` 循环](control-flow.md#while-loops)：
+智能转换不仅适用于 `if` 条件表达式，还适用于 [`when` 表达式](control-flow#when-expressions-and-statements) 和 [`while` 循环](control-flow#while-loops)：
 
 ```kotlin
 when (x) {
@@ -122,7 +122,7 @@ fun signalCheck(signalStatus: Any) {
 
 ### 内联函数（Inline functions）
 
-编译器可以对捕获在传递给[内联函数](inline-functions.md)的 lambda 函数中的变量执行智能转换。
+编译器可以对捕获在传递给[内联函数](inline-functions)的 lambda 函数中的变量执行智能转换。
 
 内联函数被视为具有隐式的 [`callsInPlace`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.contracts/-contract-builder/calls-in-place.html) 契约（contract）。这意味着传递给内联函数的任何 lambda 函数都会在原地调用。由于 lambda 函数是在原地调用的，因此编译器知道 lambda 函数无法泄漏对其函数体中包含的任何变量的引用。
 
@@ -210,7 +210,7 @@ fun main() {
 </td>
 <td>
 
-            总是，除了 <a href="delegated-properties.md">局部委托属性（local delegated properties）</a>。
+            总是，除了 <a href="delegated-properties">局部委托属性（local delegated properties）</a>。
 </td>
 </tr>
 <tr>
@@ -220,7 +220,7 @@ fun main() {
 </td>
 <td>
 
-            如果属性是 `private`、`internal`，或者检查在声明属性的同一<a href="visibility-modifiers.md#modules">模块（module）</a>中执行。智能转换不能用于 `open` 属性或具有自定义 getter 的属性。
+            如果属性是 `private`、`internal`，或者检查在声明属性的同一<a href="visibility-modifiers#modules">模块（module）</a>中执行。智能转换不能用于 `open` 属性或具有自定义 getter 的属性。
 </td>
 </tr>
 <tr>
@@ -255,7 +255,7 @@ val x: String = y as String
 
 如果无法进行转换，编译器将抛出异常。这就是它被称为_不安全_的原因。
 
-在前面的示例中，如果 `y` 是 `null`，则上面的代码也会抛出异常。这是因为 `null` 不能转换为 `String`，因为 `String` 不是[可空的（nullable）](null-safety.md)。要使该示例适用于可能为 null 的值，请在转换的右侧使用可空类型：
+在前面的示例中，如果 `y` 是 `null`，则上面的代码也会抛出异常。这是因为 `null` 不能转换为 `String`，因为 `String` 不是[可空的（nullable）](null-safety)。要使该示例适用于可能为 null 的值，请在转换的右侧使用可空类型：
 
 ```kotlin
 val x: String? = y as String?

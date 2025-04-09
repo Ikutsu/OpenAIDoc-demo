@@ -8,7 +8,7 @@ title: "Direct integration"
    * 您已经在本地机器上设置了一个以 iOS 为目标的 Kotlin Multiplatform 项目。
    * 您的 Kotlin Multiplatform 项目没有 CocoaPods 依赖项。<br/>
 
-   [选择最适合您的集成方法](multiplatform-ios-integration-overview.md)
+   [选择最适合您的集成方法](multiplatform-ios-integration-overview)
 
 :::
 
@@ -92,4 +92,4 @@ title: "Direct integration"
 
 ## 接下来做什么？
 
-当使用 Swift Package Manager 时，您还可以利用本地集成。[了解如何在本地 package 中添加对 Kotlin framework 的依赖](multiplatform-spm-local-integration.md)。
+当使用 Swift Package Manager 时，您还可以利用本地集成。[了解如何在本地 package 中添加对 Kotlin framework 的依赖](multiplatform-spm-local-integration)。

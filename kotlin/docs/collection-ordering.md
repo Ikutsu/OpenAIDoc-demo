@@ -108,9 +108,9 @@ fun main() {
 ```
 
 Kotlin 集合包提供了用于以自然顺序、自定义顺序甚至随机顺序对集合进行排序的函数。
-在本页中，我们将介绍适用于[只读](collections-overview.md#collection-types)集合的排序函数。
+在本页中，我们将介绍适用于[只读](collections-overview#collection-types)集合的排序函数。
 这些函数将其结果作为新集合返回，该集合包含原始集合的元素，并按请求的顺序排列。
-要了解有关对[可变](collections-overview.md#collection-types)集合进行原地排序的函数，请参阅[特定于列表的操作](list-operations.md#sort)。
+要了解有关对[可变](collections-overview#collection-types)集合进行原地排序的函数，请参阅[特定于列表的操作](list-operations#sort)。
 
 ## 自然顺序
 

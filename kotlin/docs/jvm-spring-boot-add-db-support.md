@@ -7,7 +7,7 @@ description: "使用 JDBC 模板为 Kotlin 编写的 Spring Boot 项目添加数
    这是 <strong>Spring Boot 和 Kotlin 入门</strong>教程的第三部分。在继续之前，请确保你已完成之前的步骤：
 </p><br/>
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot.md">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class.md">向 Spring Boot 项目添加数据类</a><br/><img src="/img/icon-3.svg" width="20" alt="Third step"/> <strong>为 Spring Boot 项目添加数据库支持</strong><br/><img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> 使用 Spring Data CrudRepository 进行数据库访问
+   <img src="/img/icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="/img/icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class">向 Spring Boot 项目添加数据类</a><br/><img src="/img/icon-3.svg" width="20" alt="Third step"/> <strong>为 Spring Boot 项目添加数据库支持</strong><br/><img src="/img/icon-4-todo.svg" width="20" alt="Fourth step"/> 使用 Spring Data CrudRepository 进行数据库访问
 </p>
 
 :::
@@ -48,7 +48,7 @@ class MessageService(private val db: JdbcTemplate) {
 ```
 <h3>构造函数参数和依赖注入 – (private val db: JdbcTemplate)</h3>
 <p>
-   Kotlin 中的类有一个主构造函数（primary constructor）。它也可以有一个或多个 <a href="classes.md#secondary-constructors">二级构造函数（secondary constructor）</a>。
+   Kotlin 中的类有一个主构造函数（primary constructor）。它也可以有一个或多个 <a href="classes#secondary-constructors">二级构造函数（secondary constructor）</a>。
       <i>主构造函数</i> 是类头的一部分，它位于类名和可选的类型参数之后。在我们的例子中，构造函数是 `(val db: JdbcTemplate)`。
 </p>
 <p>
@@ -66,13 +66,13 @@ class MessageService(private val db: JdbcTemplate) {
 db.query("...", RowMapper { ... } )
 ```<br/>
 <p>
-   `RowMapper` 接口只声明了一个方法，因此可以通过 lambda 表达式来实现它，省略接口的名称。Kotlin 编译器知道 lambda 表达式需要转换为哪个接口，因为你将其用作函数调用的参数。这被称为 <a href="java-interop.md#sam-conversions">Kotlin 中的 SAM 转换</a>：
+   `RowMapper` 接口只声明了一个方法，因此可以通过 lambda 表达式来实现它，省略接口的名称。Kotlin 编译器知道 lambda 表达式需要转换为哪个接口，因为你将其用作函数调用的参数。这被称为 <a href="java-interop#sam-conversions">Kotlin 中的 SAM 转换</a>：
 </p>
       ```sql
 db.query("...", { ... } )
 ```<br/>
 <p>
-   在 SAM 转换之后，query 函数最终得到两个参数：第一个位置是一个字符串，最后一个位置是一个 lambda 表达式。根据 Kotlin 的约定，如果函数的最后一个参数是一个函数，那么作为相应参数传递的 lambda 表达式可以放在圆括号之外。这种语法也称为<a href="lambdas.md#passing-trailing-lambdas">尾随 Lambda（trailing lambda）</a>：
+   在 SAM 转换之后，query 函数最终得到两个参数：第一个位置是一个字符串，最后一个位置是一个 lambda 表达式。根据 Kotlin 的约定，如果函数的最后一个参数是一个函数，那么作为相应参数传递的 lambda 表达式可以放在圆括号之外。这种语法也称为<a href="lambdas#passing-trailing-lambdas">尾随 Lambda（trailing lambda）</a>：
 </p>
       ```sql
 db.query("...") { ... }
@@ -172,7 +172,7 @@ class MessageService(private val db: JdbcTemplate) {
 ```
 <h3>Elvis 运算符 – ?:</h3>
 <p>
-   代码 `message.id ?: UUID.randomUUID().toString()` 使用 <a href="null-safety.md#elvis-operator">Elvis 运算符（if-not-null-else 简写）`?:`</a>。如果 `?:` 左侧的表达式不是 `null`，则 Elvis 运算符返回它；否则，它返回右侧的表达式。请注意，只有当左侧为 `null` 时，才会计算右侧的表达式。
+   代码 `message.id ?: UUID.randomUUID().toString()` 使用 <a href="null-safety#elvis-operator">Elvis 运算符（if-not-null-else 简写）`?:`</a>。如果 `?:` 左侧的表达式不是 `null`，则 Elvis 运算符返回它；否则，它返回右侧的表达式。请注意，只有当左侧为 `null` 时，才会计算右侧的表达式。
 </p>
    
 
@@ -312,7 +312,7 @@ curl -X GET --location "http://localhost:8080"
     }
     ```
    
-    > 用于通过其 ID 获取消息的 `.query()` 函数是由 Spring Framework 提供的 [Kotlin 扩展函数](extensions.md#extension-functions)。
+    > 用于通过其 ID 获取消息的 `.query()` 函数是由 Spring Framework 提供的 [Kotlin 扩展函数](extensions#extension-functions)。
     > 它需要额外的导入 `import org.springframework.jdbc.core.query`，如上面的代码所示。
     >
     
@@ -508,4 +508,4 @@ Spring 应用程序已准备好运行：
 
 最后一步向你展示了如何使用 Spring Data 连接到更流行的数据库。
 
-**[前往下一章](jvm-spring-boot-using-crudrepository.md)**
+**[前往下一章](jvm-spring-boot-using-crudrepository)**

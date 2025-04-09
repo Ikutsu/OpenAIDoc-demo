@@ -864,7 +864,7 @@ typealias MouseClickHandler = (Any, MouseEvent) `->` Unit
 typealias PersonIndex = Map<String, Person>
 ```
 
-如果你使用私有或内部类型别名来避免名称冲突，则首选 [包和导入](packages.md) 中提到的 `import ... as ...`。
+如果你使用私有或内部类型别名来避免名称冲突，则首选 [包和导入](packages) 中提到的 `import ... as ...`。
 
 ### Lambda 表达式参数
 
@@ -938,7 +938,7 @@ when (x) {
 
 ### when 表达式中的守卫条件
 
-在带有[守卫条件](control-flow.md#guard-conditions-in-when-expressions)的 `when` 表达式或语句中组合多个布尔表达式时，使用括号：
+在带有[守卫条件](control-flow#guard-conditions-in-when-expressions)的 `when` 表达式或语句中组合多个布尔表达式时，使用括号：
 
 ```kotlin
 when (status) {
@@ -1010,7 +1010,7 @@ fun main() {
 }
 ```
 
-了解 [Java 和 Kotlin 多行字符串之间的区别](java-to-kotlin-idioms-strings.md#use-multiline-strings)。
+了解 [Java 和 Kotlin 多行字符串之间的区别](java-to-kotlin-idioms-strings#use-multiline-strings)。
 
 ### 函数 vs 属性
 

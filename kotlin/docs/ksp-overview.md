@@ -3,10 +3,10 @@ title: "Kotlin 符号处理 API"
 ---
 Kotlin 符号处理 (_KSP_) 是一个你可以用来开发轻量级编译器插件的 API。
 
-KSP 提供了一个简化的编译器插件 API，它利用了 Kotlin 的强大功能，同时将学习曲线降至最低。与 [kapt](kapt.md) 相比，使用 KSP 的注解处理器可以运行速度提高两倍。
+KSP 提供了一个简化的编译器插件 API，它利用了 Kotlin 的强大功能，同时将学习曲线降至最低。与 [kapt](kapt) 相比，使用 KSP 的注解处理器可以运行速度提高两倍。
 
-* 要了解更多关于 KSP 与 kapt 的比较，请查看 [为什么选择 KSP](ksp-why-ksp.md)。
-* 要开始编写 KSP 处理器，请查看 [KSP 快速入门](ksp-quickstart.md)。
+* 要了解更多关于 KSP 与 kapt 的比较，请查看 [为什么选择 KSP](ksp-why-ksp)。
+* 要开始编写 KSP 处理器，请查看 [KSP 快速入门](ksp-quickstart)。
 
 ## 概述
 
@@ -132,16 +132,16 @@ class HelloFunctionFinderProcessor : SymbolProcessor() {
 
 ## 资源
 
-* [快速入门](ksp-quickstart.md)
-* [为什么要使用 KSP？](ksp-why-ksp.md)
-* [示例](ksp-examples.md)
-* [KSP 如何对 Kotlin 代码建模](ksp-additional-details.md)
-* [Java 注解处理器作者参考](ksp-reference.md)
-* [增量处理说明](ksp-incremental.md)
-* [多轮处理说明](ksp-multi-round.md)
-* [多平台项目上的 KSP](ksp-multiplatform.md)
-* [从命令行运行 KSP](ksp-command-line.md)
-* [常见问题解答](ksp-faq.md)
+* [快速入门](ksp-quickstart)
+* [为什么要使用 KSP？](ksp-why-ksp)
+* [示例](ksp-examples)
+* [KSP 如何对 Kotlin 代码建模](ksp-additional-details)
+* [Java 注解处理器作者参考](ksp-reference)
+* [增量处理说明](ksp-incremental)
+* [多轮处理说明](ksp-multi-round)
+* [多平台项目上的 KSP](ksp-multiplatform)
+* [从命令行运行 KSP](ksp-command-line)
+* [常见问题解答](ksp-faq)
 
 ## 支持的库
 

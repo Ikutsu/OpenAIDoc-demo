@@ -52,7 +52,7 @@ title: "Kotlin 路线图"
 <td>
 
 <p>
-   <a href="kotlin-language-features-and-proposals.md">查看 Kotlin 语言特性和提案的完整列表</a> 或关注 <a href="https://youtrack.jetbrains.com/issue/KT-54620">YouTrack issue 以获取即将推出的语言特性</a>
+   <a href="kotlin-language-features-and-proposals">查看 Kotlin 语言特性和提案的完整列表</a> 或关注 <a href="https://youtrack.jetbrains.com/issue/KT-54620">YouTrack issue 以获取即将推出的语言特性</a>
 </p>
 </td>
 </tr>

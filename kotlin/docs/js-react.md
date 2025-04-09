@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 本教程将教你如何使用 Kotlin/JS 和 [React](https://reactjs.org/) 框架构建浏览器应用程序。你将：
 
 *   完成与构建典型 React 应用程序相关的常见任务。
-*   探索如何使用 [Kotlin 的 DSL](type-safe-builders.md) 以简洁统一的方式表达概念，而不会牺牲可读性，从而允许你完全使用 Kotlin 编写一个功能完善的应用程序。
+*   探索如何使用 [Kotlin 的 DSL](type-safe-builders) 以简洁统一的方式表达概念，而不会牺牲可读性，从而允许你完全使用 Kotlin 编写一个功能完善的应用程序。
 *   学习如何使用现成的 npm 组件、使用外部库并发布最终应用程序。
 
 最终会得到一个 _KotlinConf Explorer_ Web 应用程序，它专门用于 [KotlinConf](https://kotlinconf.com/) 活动，其中包含指向会议讲座的链接。用户可以在一个页面上观看所有讲座，并将其标记为已观看或未观看。
@@ -94,7 +94,7 @@ import TabItem from '@theme/TabItem';
 
 ### 启用热重载 / 持续模式
 
-配置 _[continuous compilation](dev-server-continuous-compilation.md)_ 模式，这样你就不必每次更改时都手动编译和执行项目。在继续操作之前，请确保停止所有正在运行的开发服务器实例。
+配置 _[continuous compilation](dev-server-continuous-compilation)_ 模式，这样你就不必每次更改时都手动编译和执行项目。在继续操作之前，请确保停止所有正在运行的开发服务器实例。
 
 1.  编辑 IntelliJ IDEA 在首次运行 Gradle `run` 任务后自动生成的运行配置：
 
@@ -153,7 +153,7 @@ fun main() {
 
 *   `render()` 函数指示 [kotlin-react-dom](https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-react-dom) 将第一个 HTML 元素呈现到 [fragment (片段)](https://reactjs.org/docs/fragments.html) 内的 `root` 元素。 此元素是在 `src/jsMain/resources/index.html` 中定义的容器，已包含在模板中。
 *   内容是一个 `<h1>` 标题，并使用类型安全的 DSL 呈现 HTML。
-*   `h1` 是一个采用 lambda 参数的函数。 当你在字符串文字前面添加 `+` 符号时，实际上是使用 [运算符重载](operator-overloading.md) 调用 `unaryPlus()` 函数。 它将字符串附加到封闭的 HTML 元素。
+*   `h1` 是一个采用 lambda 参数的函数。 当你在字符串文字前面添加 `+` 符号时，实际上是使用 [运算符重载](operator-overloading) 调用 `unaryPlus()` 函数。 它将字符串附加到封闭的 HTML 元素。
 
 当项目重新编译时，浏览器将显示此 HTML 页面：
 
@@ -161,7 +161,7 @@ fun main() {
 
 ### 将 HTML 转换为 Kotlin 的类型安全 HTML DSL
 
-React 的 Kotlin [wrapper (封装器)](https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-react/README.md) 附带一个 [domain-specific language (DSL) (领域特定语言)](type-safe-builders.md)，可以让你用纯 Kotlin 代码编写 HTML。 这样，它类似于 JavaScript 中的 [JSX](https://reactjs.org/docs/introducing-jsx.html)。 但是，由于此标记是 Kotlin，因此你可以获得静态类型语言的所有好处，例如自动完成或类型检查。
+React 的 Kotlin [wrapper (封装器)](https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-react/README) 附带一个 [domain-specific language (DSL) (领域特定语言)](type-safe-builders)，可以让你用纯 Kotlin 代码编写 HTML。 这样，它类似于 JavaScript 中的 [JSX](https://reactjs.org/docs/introducing-jsx.html)。 但是，由于此标记是 Kotlin，因此你可以获得静态类型语言的所有好处，例如自动完成或类型检查。
 
 比较一下你的未来 Web 应用程序的经典 HTML 代码和 Kotlin 中类型安全的变体：
 
@@ -244,7 +244,7 @@ div {
 
 你现在可以将硬编码的视频列表替换为 Kotlin 对象列表：
 
-1.  在 `Main.kt` 中，创建一个 `Video` [data class (数据类)](data-classes.md) 以将所有视频属性保存在一个位置：
+1.  在 `Main.kt` 中，创建一个 `Video` [data class (数据类)](data-classes) 以将所有视频属性保存在一个位置：
 
     ```kotlin
     data class Video(
@@ -445,7 +445,7 @@ React 中的基本构建块称为 _[components (组件)](https://reactjs.org/doc
     }
     ```
 
-    [external (外部)](js-interop.md#external-modifier) 修饰符告诉编译器该接口的实现是在外部提供的，因此它不会尝试从该声明生成 JavaScript 代码。
+    [external (外部)](js-interop#external-modifier) 修饰符告诉编译器该接口的实现是在外部提供的，因此它不会尝试从该声明生成 JavaScript 代码。
 
 2.  调整 `VideoList` 的类定义，以使用作为参数传递到 `FC` 块中的 props：
 
@@ -522,7 +522,7 @@ p {
 
     *   `VideoList` 函数组件保持状态（独立于当前函数调用的值）。 状态是可空的，并且具有 `Video?` 类型。 其默认值为 `null`。
     *   React 中的 `useState()` 函数指示框架跨函数的多次调用跟踪状态。 例如，即使你指定了默认值，React 也会确保仅在开始时分配默认值。 当状态更改时，组件将基于新状态重新呈现。
-    *   `by` 关键字指示 `useState()` 充当 [delegated property (委托属性)](delegated-properties.md)。 与任何其他变量一样，你可以读取和写入值。 `useState()` 后面的实现负责使状态正常工作所需的机制。
+    *   `by` 关键字指示 `useState()` 充当 [delegated property (委托属性)](delegated-properties)。 与任何其他变量一样，你可以读取和写入值。 `useState()` 后面的实现负责使状态正常工作所需的机制。
 
     要了解有关 State Hook 的更多信息，请查看 [React 文档](https://reactjs.org/docs/hooks-state.html)。
 
@@ -603,7 +603,7 @@ React 确保 props 只能从父组件传递到其子组件。 这样可以防止
 
 目前，没有办法为 prop 分配一个值，因此 `onClick` 函数将无法按当前设置的方式工作。 要更改父组件的状态，你需要再次提升状态。
 
-在 React 中，状态始终从父组件流向子组件。 因此，要从其中一个子组件更改 _应用程序_ 状态，你需要将用于处理用户交互的逻辑移到父组件，然后将该逻辑作为 prop 传入。 请记住，在 Kotlin 中，变量可以具有 [函数的类型](lambdas.md#function-types)。
+在 React 中，状态始终从父组件流向子组件。 因此，要从其中一个子组件更改 _应用程序_ 状态，你需要将用于处理用户交互的逻辑移到父组件，然后将该逻辑作为 prop 传入。 请记住，在 Kotlin 中，变量可以具有 [函数的类型](lambdas#function-types)。
 
 1.  再次展开 `VideoListProps` 接口，使其包含一个变量 `onSelectVideo`，这是一个接受 `Video` 并返回 `Unit` 的函数：
 
@@ -690,7 +690,7 @@ React 确保 props 只能从父组件传递到其子组件。 这样可以防止
     }
     ```
 
-    [`let` 作用域函数](scope-functions.md#let) 确保仅当 `state.currentVideo` 不为 null 时才添加 `VideoPlayer` 组件。
+    [`let` 作用域函数](scope-functions#let) 确保仅当 `state.currentVideo` 不为 null 时才添加 `VideoPlayer` 组件。
 
 现在，单击列表中的条目将调出视频播放器，并使用单击的条目中的信息填充它。
 

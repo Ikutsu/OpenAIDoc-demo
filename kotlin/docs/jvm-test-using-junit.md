@@ -187,7 +187,7 @@ tasks.test {
 
 * 使用其他 [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/kotlin.test/) 函数编写更多测试。
    例如，使用 [`assertNotEquals()`](https://kotlinlang.org/api/latest/kotlin.test/kotlin.test/assert-not-equals.html) 函数。
-* 使用 [Kotlin Power-assert 编译器插件](power-assert.md) 改进你的测试输出。
+* 使用 [Kotlin Power-assert 编译器插件](power-assert) 改进你的测试输出。
    该插件使用上下文信息丰富测试输出。
-* 使用 Kotlin 和 Spring Boot [创建你的第一个服务器端应用程序](jvm-get-started-spring-boot.md)。
+* 使用 Kotlin 和 Spring Boot [创建你的第一个服务器端应用程序](jvm-get-started-spring-boot)。
   ```

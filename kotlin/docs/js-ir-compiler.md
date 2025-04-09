@@ -3,7 +3,7 @@ title: "Kotlin/JS IR 编译器"
 ---
 Kotlin/JS IR 编译器后端是 Kotlin/JS 领域创新的主要焦点，并为该技术的发展铺平了道路。
 
-Kotlin/JS IR 编译器后端没有直接从 Kotlin 源代码生成 JavaScript 代码，而是采用了一种新的方法。Kotlin 源代码首先被转换为 [Kotlin 中间表示 (IR)](whatsnew14.md#unified-backends-and-extensibility)，然后将其编译成 JavaScript。对于 Kotlin/JS 来说，这可以实现积极的优化，并改进以前编译器中存在的痛点，例如生成的代码大小（通过消除死代码）、JavaScript 和 TypeScript 生态系统的互操作性等等。
+Kotlin/JS IR 编译器后端没有直接从 Kotlin 源代码生成 JavaScript 代码，而是采用了一种新的方法。Kotlin 源代码首先被转换为 [Kotlin 中间表示 (IR)](whatsnew14#unified-backends-and-extensibility)，然后将其编译成 JavaScript。对于 Kotlin/JS 来说，这可以实现积极的优化，并改进以前编译器中存在的痛点，例如生成的代码大小（通过消除死代码）、JavaScript 和 TypeScript 生态系统的互操作性等等。
 
 IR 编译器后端从 Kotlin 1.4.0 开始通过 Kotlin Multiplatform Gradle 插件提供。要在您的项目中启用它，请在 Gradle 构建脚本中的 `js` 函数中传递一个编译器类型：
 
@@ -78,7 +78,7 @@ kotlin.incremental.js.ir=false // 默认为 true
      }
      ```
   
-     或者，您可以使用 `es2015` [编译目标](js-project-setup.md#support-for-es2015-features) 来支持项目中的 ES2015 功能。
+     或者，您可以使用 `es2015` [编译目标](js-project-setup#support-for-es2015-features) 来支持项目中的 ES2015 功能。
   
   2. 应用 `-Xir-per-file` 编译器选项或使用以下内容更新您的 `gradle.properties` 文件：
   
@@ -91,7 +91,7 @@ kotlin.incremental.js.ir=false // 默认为 true
 
 Kotlin/JS IR 编译器使用其关于 Kotlin 类和函数之间关系的内部信息来应用更有效的最小化，缩短函数、属性和类的名称。这减少了生成的捆绑应用程序的大小。
 
-当您在[生产](js-project-setup.md#building-executables)模式下构建 Kotlin/JS 应用程序时，会自动应用这种类型的最小化，并且默认情况下启用。要禁用成员名称最小化，请使用 `-Xir-minimized-member-names` 编译器选项：
+当您在[生产](js-project-setup#building-executables)模式下构建 Kotlin/JS 应用程序时，会自动应用这种类型的最小化，并且默认情况下启用。要禁用成员名称最小化，请使用 `-Xir-minimized-member-names` 编译器选项：
 
 ```kotlin
 kotlin {
@@ -108,15 +108,15 @@ kotlin {
 ## 预览：生成 TypeScript 声明文件 (d.ts)
 
 :::caution
-TypeScript 声明文件 (`d.ts`) 的生成是 [Experimental](components-stability.md) 的。它可能随时被删除或更改。需要选择加入（请参阅下面的详细信息），您应该仅将其用于评估目的。我们欢迎您在 [YouTrack](https://youtrack.jetbrains.com/issues?q=%23%7BKJS:%20d.ts%20generation%7D) 中提供有关它的反馈。
+TypeScript 声明文件 (`d.ts`) 的生成是 [Experimental](components-stability) 的。它可能随时被删除或更改。需要选择加入（请参阅下面的详细信息），您应该仅将其用于评估目的。我们欢迎您在 [YouTrack](https://youtrack.jetbrains.com/issues?q=%23%7BKJS:%20d.ts%20generation%7D) 中提供有关它的反馈。
 
 :::
 
 Kotlin/JS IR 编译器能够从您的 Kotlin 代码生成 TypeScript 定义。当在混合应用程序上工作时，JavaScript 工具和 IDE 可以使用这些定义来提供自动完成、支持静态分析器，并使其更容易在 JavaScript 和 TypeScript 项目中包含 Kotlin 代码。
 
-如果您的项目生成可执行文件 (`binaries.executable()`)，则 Kotlin/JS IR 编译器会收集任何标有 [`@JsExport`](js-to-kotlin-interop.md#jsexport-annotation) 的顶层声明，并在 `.d.ts` 文件中自动生成 TypeScript 定义。
+如果您的项目生成可执行文件 (`binaries.executable()`)，则 Kotlin/JS IR 编译器会收集任何标有 [`@JsExport`](js-to-kotlin-interop#jsexport-annotation) 的顶层声明，并在 `.d.ts` 文件中自动生成 TypeScript 定义。
 
-如果要生成 TypeScript 定义，则必须在 Gradle 构建文件中显式配置它。将 `generateTypeScriptDefinitions()` 添加到 [`js` 部分](js-project-setup.md#execution-environments)中的 `build.gradle.kts` 文件中。例如：
+如果要生成 TypeScript 定义，则必须在 Gradle 构建文件中显式配置它。将 `generateTypeScriptDefinitions()` 添加到 [`js` 部分](js-project-setup#execution-environments)中的 `build.gradle.kts` 文件中。例如：
 
 ```kotlin
 kotlin {
@@ -133,7 +133,7 @@ kotlin {
 
 ## IR 编译器当前的局限性
 
-新的 IR 编译器后端的一个主要变化是**与默认后端没有二进制兼容性**。使用新的 IR 编译器创建的库使用 [`klib` 格式](native-libraries.md#library-format)，不能从默认后端使用。同时，使用旧的编译器创建的库是一个带有 `js` 文件的 `jar`，不能从 IR 后端使用。
+新的 IR 编译器后端的一个主要变化是**与默认后端没有二进制兼容性**。使用新的 IR 编译器创建的库使用 [`klib` 格式](native-libraries#library-format)，不能从默认后端使用。同时，使用旧的编译器创建的库是一个带有 `js` 文件的 `jar`，不能从 IR 后端使用。
 
 如果要为您的项目使用 IR 编译器后端，则需要**将所有 Kotlin 依赖项更新为支持此新后端的版本**。JetBrains 发布的针对 Kotlin 1.4+ 的 Kotlin/JS 库已经包含了与新的 IR 编译器后端一起使用的所有必要构件。
 
@@ -142,11 +142,11 @@ kotlin {
 与默认后端相比，IR 编译器后端也存在一些差异。在尝试新的后端时，最好注意这些可能的陷阱。
 
 * 一些**依赖于默认后端特定特征的库**，例如 `kotlin-wrappers`，可能会显示出一些问题。您可以在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-40525) 上关注调查和进展。
-* 默认情况下，IR 后端**根本不会使 Kotlin 声明对 JavaScript 可用**。要使 Kotlin 声明对 JavaScript 可见，**必须**使用 [`@JsExport`](js-to-kotlin-interop.md#jsexport-annotation) 注解对其进行注解。
+* 默认情况下，IR 后端**根本不会使 Kotlin 声明对 JavaScript 可用**。要使 Kotlin 声明对 JavaScript 可见，**必须**使用 [`@JsExport`](js-to-kotlin-interop#jsexport-annotation) 注解对其进行注解。
 
 ## 将现有项目迁移到 IR 编译器
 
-由于两个 Kotlin/JS 编译器之间存在显着差异，因此使您的 Kotlin/JS 代码与 IR 编译器一起工作可能需要进行一些调整。了解如何在 [Kotlin/JS IR 编译器迁移指南](js-ir-migration.md) 中将现有的 Kotlin/JS 项目迁移到 IR 编译器。
+由于两个 Kotlin/JS 编译器之间存在显着差异，因此使您的 Kotlin/JS 代码与 IR 编译器一起工作可能需要进行一些调整。了解如何在 [Kotlin/JS IR 编译器迁移指南](js-ir-migration) 中将现有的 Kotlin/JS 项目迁移到 IR 编译器。
 
 ## 编写与向后兼容的 IR 编译器库
 

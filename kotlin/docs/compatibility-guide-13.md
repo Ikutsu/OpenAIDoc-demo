@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.3 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的基本原则之一。前者指出，应该移除那些阻碍语言发展的结构，而后者指出，应该事先充分沟通这些移除，以使代码迁移尽可能顺利。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的基本原则之一。前者指出，应该移除那些阻碍语言发展的结构，而后者指出，应该事先充分沟通这些移除，以使代码迁移尽可能顺利。
 
 虽然大多数语言变更已经通过其他渠道宣布，例如更新日志或编译器警告，但本文档总结了所有这些变更，为从 Kotlin 1.2 迁移到 Kotlin 1.3 提供了完整的参考。
 

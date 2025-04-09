@@ -2,13 +2,13 @@
 title: "Kotlin/Wasm 和 WASI 入门"
 ---
 :::note
-Kotlin/Wasm 处于 [Alpha](components-stability.md) 阶段。它可能随时更改。
+Kotlin/Wasm 处于 [Alpha](components-stability) 阶段。它可能随时更改。
 
 [加入 Kotlin/Wasm 社区](https://slack-chats.kotlinlang.org/c/webassembly)。
 
 :::
 
-本教程演示了如何在各种 WebAssembly 虚拟机中使用 [WebAssembly 系统接口 (WASI)](https://wasi.dev/) 运行一个简单的 [Kotlin/Wasm](wasm-overview.md) 应用程序。
+本教程演示了如何在各种 WebAssembly 虚拟机中使用 [WebAssembly 系统接口 (WASI)](https://wasi.dev/) 运行一个简单的 [Kotlin/Wasm](wasm-overview) 应用程序。
 
 你可以找到在 [Node.js](https://nodejs.org/en)、[Deno](https://deno.com/) 和 [WasmEdge](https://wasmedge.org/) 虚拟机上运行的应用程序示例。该输出是一个使用标准 WASI API 的简单应用程序。
 

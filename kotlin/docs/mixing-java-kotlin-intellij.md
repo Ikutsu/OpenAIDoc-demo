@@ -2,7 +2,7 @@
 title: "在一个项目中混合使用 Java 和 Kotlin – 教程"
 ---
 Kotlin 提供了与 Java 的一流互操作性，并且现代 IDE 使其更加出色。
-在本教程中，您将学习如何在 IntelliJ IDEA 的同一项目中使用 Kotlin 和 Java 源代码。要了解如何在 IntelliJ IDEA 中启动新的 Kotlin 项目，请参阅 [IntelliJ IDEA 入门](jvm-get-started.md)。
+在本教程中，您将学习如何在 IntelliJ IDEA 的同一项目中使用 Kotlin 和 Java 源代码。要了解如何在 IntelliJ IDEA 中启动新的 Kotlin 项目，请参阅 [IntelliJ IDEA 入门](jvm-get-started)。
 
 ## 将 Java 源代码添加到现有的 Kotlin 项目
 

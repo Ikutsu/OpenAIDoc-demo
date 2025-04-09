@@ -28,15 +28,15 @@ _Serialization_ (序列化) 是将应用程序使用的数据转换为可以通�
 
 `kotlinx.serialization` 包括适用于各种序列化格式的库：
 
-* [JSON](https://www.json.org/): [`kotlinx-serialization-json`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README.md#json)
-* [Protocol buffers](https://developers.google.com/protocol-buffers): [`kotlinx-serialization-protobuf`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README.md#protobuf)
-* [CBOR](https://cbor.io/): [`kotlinx-serialization-cbor`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README.md#cbor)
-* [Properties](https://en.wikipedia.org/wiki/.properties): [`kotlinx-serialization-properties`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README.md#properties)
-* [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md): [`kotlinx-serialization-hocon`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README.md#hocon) (仅在 JVM 上)
+* [JSON](https://www.json.org/): [`kotlinx-serialization-json`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README#json)
+* [Protocol buffers](https://developers.google.com/protocol-buffers): [`kotlinx-serialization-protobuf`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README#protobuf)
+* [CBOR](https://cbor.io/): [`kotlinx-serialization-cbor`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README#cbor)
+* [Properties](https://en.wikipedia.org/wiki/.properties): [`kotlinx-serialization-properties`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README#properties)
+* [HOCON](https://github.com/lightbend/config/blob/master/HOCON): [`kotlinx-serialization-hocon`](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README#hocon) (仅在 JVM 上)
 
-请注意，除了 JSON 序列化 (`kotlinx-serialization-json`) 之外的所有库都是 [Experimental](components-stability.md)，这意味着它们的 API 可能会在没有通知的情况下更改。
+请注意，除了 JSON 序列化 (`kotlinx-serialization-json`) 之外的所有库都是 [Experimental](components-stability)，这意味着它们的 API 可能会在没有通知的情况下更改。
 
-还有一些社区维护的库支持更多序列化格式，例如 [YAML](https://yaml.org/) 或 [Apache Avro](https://avro.apache.org/)。 有关可用序列化格式的详细信息，请参阅 [`kotlinx.serialization` documentation](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README.md)。
+还有一些社区维护的库支持更多序列化格式，例如 [YAML](https://yaml.org/) 或 [Apache Avro](https://avro.apache.org/)。 有关可用序列化格式的详细信息，请参阅 [`kotlinx.serialization` documentation](https://github.com/Kotlin/kotlinx.serialization/blob/master/formats/README)。
 
 ## Example: JSON serialization (示例：JSON 序列化)
 
@@ -153,13 +153,13 @@ fun main() {
 
 ## What's next (下一步)
 
-有关 Kotlin 中序列化的更多信息，请参阅 [Kotlin Serialization Guide](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serialization-guide.md)。
+有关 Kotlin 中序列化的更多信息，请参阅 [Kotlin Serialization Guide](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serialization-guide)。
 
 你可以在以下资源中浏览 Kotlin 序列化的不同方面：
 
-* [Learn more about Kotlin serialization and its core concepts](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/basic-serialization.md) (了解有关 Kotlin 序列化及其核心概念的更多信息)
-* [Explore the built-in serializable classes of Kotlin](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/builtin-classes.md) (探索 Kotlin 的内置可序列化类)
-* [Look at serializers in more detail and learn how to create custom serializers](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serializers.md) (更详细地了解 serializers (序列化器)，并学习如何创建自定义序列化器)
-* [Discover how polymorphic serialization is handled in Kotlin](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/polymorphism.md#open-polymorphism) (了解如何在 Kotlin 中处理 polymorphic serialization (多态序列化))
-* [Look into the various JSON features handling Kotlin serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/json.md#json-elements) (研究处理 Kotlin 序列化的各种 JSON 功能)
-* [Learn more about the experimental serialization formats supported by Kotlin](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/formats.md) (了解有关 Kotlin 支持的 experimental serialization formats (实验性序列化格式) 的更多信息)
+* [Learn more about Kotlin serialization and its core concepts](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/basic-serialization) (了解有关 Kotlin 序列化及其核心概念的更多信息)
+* [Explore the built-in serializable classes of Kotlin](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/builtin-classes) (探索 Kotlin 的内置可序列化类)
+* [Look at serializers in more detail and learn how to create custom serializers](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serializers) (更详细地了解 serializers (序列化器)，并学习如何创建自定义序列化器)
+* [Discover how polymorphic serialization is handled in Kotlin](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/polymorphism#open-polymorphism) (了解如何在 Kotlin 中处理 polymorphic serialization (多态序列化))
+* [Look into the various JSON features handling Kotlin serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/json#json-elements) (研究处理 Kotlin 序列化的各种 JSON 功能)
+* [Learn more about the experimental serialization formats supported by Kotlin](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/formats) (了解有关 Kotlin 支持的 experimental serialization formats (实验性序列化格式) 的更多信息)

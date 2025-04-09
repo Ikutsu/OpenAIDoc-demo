@@ -4,7 +4,7 @@ title: "Kotlin 1.5.30 中的新增功能"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_[发布时间: 2021年8月24日](releases.md#release-details)_
+_[发布时间: 2021年8月24日](releases#release-details)_
 
 Kotlin 1.5.30 提供了语言更新，包括未来变化的预览、平台支持和工具方面的各种改进，以及新的标准库函数。
 
@@ -31,10 +31,10 @@ Kotlin 1.5.30 提供了未来语言更改的预览，并改进了选择加入（
 ### 密封类和布尔类型主体的穷尽式 when 语句
 
 :::note
-对密封类（exhaustive）when 语句的支持是 [Experimental](components-stability.md)。它可能随时被删除或更改。
+对密封类（exhaustive）when 语句的支持是 [Experimental](components-stability)。它可能随时被删除或更改。
 需要选择加入（opt-in）（请参阅下面的详细信息），并且您应该仅将其用于评估目的。 我们将感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-12380) 中对此提供的反馈。
 
-_穷尽式_ [`when`](control-flow.md#when-expressions-and-statements) 语句包含其主体所有可能的类型或值的分支，或者包含某些类型的分支并包括 `else` 分支以覆盖任何剩余情况。
+_穷尽式_ [`when`](control-flow#when-expressions-and-statements) 语句包含其主体所有可能的类型或值的分支，或者包含某些类型的分支并包括 `else` 分支以覆盖任何剩余情况。
 
 我们计划很快禁止非穷尽式 `when` 语句，以使行为与 `when` 表达式保持一致。 为了确保平稳迁移，您可以配置编译器以报告有关带有密封类或布尔类型的非穷尽式 `when` 语句的警告。 默认情况下，此类警告将出现在 Kotlin 1.6 中，并在以后变为错误。
 
@@ -65,7 +65,7 @@ fun main() {
 }
 ```
 
-要在 Kotlin 1.5.30 中启用此功能，请使用语言版本 `1.6`。 您还可以通过启用[渐进模式](whatsnew13.md#progressive-mode)将警告更改为错误。
+要在 Kotlin 1.5.30 中启用此功能，请使用语言版本 `1.6`。 您还可以通过启用[渐进模式](whatsnew13#progressive-mode)将警告更改为错误。
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>
@@ -101,7 +101,7 @@ kotlin {
 ### 挂起函数作为超类型
 
 :::note
-对将挂起函数作为超类型的支持是 [Experimental](components-stability.md)。它可能随时被删除或更改。
+对将挂起函数作为超类型的支持是 [Experimental](components-stability)。它可能随时被删除或更改。
 需要选择加入（opt-in）（请参阅下面的详细信息），并且您应该仅将其用于评估目的。 我们将感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-18707) 中对此提供的反馈。
 
 Kotlin 1.5.30 提供了使用 `suspend` 函数类型作为超类型的预览，但有一些限制。
@@ -149,11 +149,11 @@ kotlin {
 
 ### 要求对实验性 API 的隐式使用选择加入
 
-选择加入（opt-in）要求机制是 [Experimental](components-stability.md)。
-它可能随时更改。 [查看如何选择加入（opt-in）](opt-in-requirements.md)。
+选择加入（opt-in）要求机制是 [Experimental](components-stability)。
+它可能随时更改。 [查看如何选择加入（opt-in）](opt-in-requirements)。
 仅将其用于评估目的。 我们将感谢您在 [YouTrack](https://youtrack.jetbrains.com/issues/KT) 中对此提供的反馈。
 
-库的作者可以将实验性 API 标记为[需要选择加入（opt-in）](opt-in-requirements.md#create-opt-in-requirement-annotations)以告知用户其试验状态。 当使用 API 时，编译器会引发警告或错误，并且需要[显式同意](opt-in-requirements.md#opt-in-to-api)才能禁止显示该警告或错误。
+库的作者可以将实验性 API 标记为[需要选择加入（opt-in）](opt-in-requirements#create-opt-in-requirement-annotations)以告知用户其试验状态。 当使用 API 时，编译器会引发警告或错误，并且需要[显式同意](opt-in-requirements#opt-in-to-api)才能禁止显示该警告或错误。
 
 在 Kotlin 1.5.30 中，编译器将签名中具有实验性类型的任何声明都视为实验性的。 也就是说，即使隐式使用实验性 API，它也需要选择加入（opt-in）。 例如，如果函数的返回类型被标记为实验性 API 元素，即使该声明未被显式标记为需要选择加入（opt-in），则对该函数的使用也需要您选择加入（opt-in）。
 
@@ -179,12 +179,12 @@ fun getDate(): Date {
 }
 ```
 
-了解有关[选择加入（opt-in）要求](opt-in-requirements.md)的更多信息。
+了解有关[选择加入（opt-in）要求](opt-in-requirements)的更多信息。
 
 ### 使用具有不同目标的 Opt-in requirement 注解的更改
 
-选择加入（opt-in）要求机制是 [Experimental](components-stability.md)。
-它可能随时更改。 [查看如何选择加入（opt-in）](opt-in-requirements.md)。
+选择加入（opt-in）要求机制是 [Experimental](components-stability)。
+它可能随时更改。 [查看如何选择加入（opt-in）](opt-in-requirements)。
 仅将其用于评估目的。 我们将感谢您在 [YouTrack](https://youtrack.jetbrains.com/issues/KT) 中对此提供的反馈。
 
 Kotlin 1.5.30 提出了有关在不同 [targets](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/) 上使用和声明选择加入（opt-in） requirement 注解的新规则。 现在，编译器会报告一些用例的错误，这些用例在编译时很难处理。 在 Kotlin 1.5.30 中：
@@ -193,7 +193,7 @@ Kotlin 1.5.30 提出了有关在不同 [targets](https://kotlinlang.org/api/late
 * 禁止标记后备字段和 getter。 您可以改为标记基本属性。
 * 禁止在 opt-in requirement 注解声明位置设置 `TYPE` 和 `TYPE_PARAMETER` 注解目标。
 
-了解有关[选择加入（opt-in）要求](opt-in-requirements.md)的更多信息。
+了解有关[选择加入（opt-in）要求](opt-in-requirements)的更多信息。
 
 ### 递归泛型类型类型推断的改进
 
@@ -258,10 +258,10 @@ Kotlin 1.5.30，Kotlin/JVM 接收以下功能：
 
 ### 注解类实例化
 
-注解类实例化是 [Experimental](components-stability.md)。它可能随时被删除或更改。
+注解类实例化是 [Experimental](components-stability)。它可能随时被删除或更改。
 需要选择加入（opt-in）（请参阅下面的详细信息），并且您应该仅将其用于评估目的。 我们将感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-45395) 中对此提供的反馈。
 
-使用 Kotlin 1.5.30，您现在可以在任意代码中调用[注解类](annotations.md)的构造函数，以获取结果实例。 此功能涵盖与 Java 约定相同的用例，该约定允许实现注解接口。
+使用 Kotlin 1.5.30，您现在可以在任意代码中调用[注解类](annotations)的构造函数，以获取结果实例。 此功能涵盖与 Java 约定相同的用例，该约定允许实现注解接口。
 
 ```kotlin
 annotation class InfoMarker(val info: String)
@@ -278,18 +278,18 @@ fun main(args: Array<String>) {
 
 使用 `-language-version 1.6` 编译器选项启用此功能。 请注意，当前所有注解类的限制（例如，限制定义非 `val` 参数或与辅助构造函数不同的成员）保持不变。
 
-在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/annotation-instantiation.md) 中了解有关注解类实例化的更多信息
+在 [此 KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/annotation-instantiation) 中了解有关注解类实例化的更多信息
 
 ### 改进的空值注解支持配置
 
-Kotlin 编译器可以读取各种类型的[空值注解](java-interop.md#nullability-annotations)以从 Java 获取空值信息。 此信息允许它在调用 Java 代码时报告 Kotlin 中的空值不匹配。
+Kotlin 编译器可以读取各种类型的[空值注解](java-interop#nullability-annotations)以从 Java 获取空值信息。 此信息允许它在调用 Java 代码时报告 Kotlin 中的空值不匹配。
 
 在 Kotlin 1.5.30 中，您可以指定编译器是否基于来自特定类型的空值注解的信息来报告空值不匹配。 只需使用编译器选项 `-Xnullability-annotations=@<package-name>:<report-level>`。 在参数中，指定完全限定的空值注解包和以下报告级别之一：
 * `ignore` 忽略空值不匹配
 * `warn` 报告警告
 * `strict` 报告错误。
 
-查看[支持的空值注解的完整列表](java-interop.md#nullability-annotations)及其完全限定的包名称。
+查看[支持的空值注解的完整列表](java-interop#nullability-annotations)及其完全限定的包名称。
 
 这是一个示例，显示如何为新支持的 [RxJava](https://github.com/ReactiveX/RxJava) 3 空值注解启用错误报告：`-Xnullability-annotations=@io.reactivex.rxjava3.annotations:strict`。 请注意，默认情况下，所有此类空值不匹配都是警告。
 
@@ -374,10 +374,10 @@ cocoapods {
 ### 与 Swift 5.5 async/await 的实验性互操作性
 
 :::note
-与 Swift async/await 的并发互操作性是 [Experimental](components-stability.md)。它可能随时被删除或更改。
+与 Swift async/await 的并发互操作性是 [Experimental](components-stability)。它可能随时被删除或更改。
 您应该仅将其用于评估目的。 我们将感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-47610) 中对此提供的反馈。
 
-我们在 [1.4.0 中添加了对从 Objective-C 和 Swift 调用 Kotlin 挂起函数的支持](whatsnew14.md#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)，现在我们正在对其进行改进，以跟上 Swift 5.5 新特性——[带有 `async` 和 `await` 修饰符的并发](https://github.com/apple/swift-evolution/blob/main/proposals/0296-async-await.md)。
+我们在 [1.4.0 中添加了对从 Objective-C 和 Swift 调用 Kotlin 挂起函数的支持](whatsnew14#support-for-kotlin-s-suspending-functions-in-swift-and-objective-c)，现在我们正在对其进行改进，以跟上 Swift 5.5 新特性——[带有 `async` 和 `await` 修饰符的并发](https://github.com/apple/swift-evolution/blob/main/proposals/0296-async-await)。
 
 Kotlin/Native 编译器现在在为具有可空返回类型的挂起函数生成的 Objective-C 标头中发出 `_Nullable_result` 属性。 这样就可以从 Swift 中将它们作为具有适当可空性的 `async` 函数调用。
 
@@ -408,7 +408,7 @@ MyClass.companion
 MyClass.Companion.shared
 ```
 
-了解更多关于 [Swift/Objective-C 互操作性](native-objc-interop.md)。
+了解更多关于 [Swift/Objective-C 互操作性](native-objc-interop)。
 
 ### 弃用针对 MinGW 目标的没有导入库的 DLL 的链接
 
@@ -427,7 +427,7 @@ MyClass.Companion.shared
 
 ### 能够在共享 native 代码中使用自定义 cinterop 库
 
-Kotlin Multiplatform 为您提供了一个[选项](multiplatform-share-on-platforms.md#connect-platform-specific-libraries) ，以在共享源集中使用平台相关的 interop 库。 在 1.5.30 之前，这仅适用于 Kotlin/Native 发行版附带的[平台库](native-platform-libs.md)。 从 1.5.30 开始，您可以将其与自定义 `cinterop` 库一起使用。 要启用此功能，请在 `gradle.properties` 中添加 `kotlin.mpp.enableCInteropCommonization=true` 属性：
+Kotlin Multiplatform 为您提供了一个[选项](multiplatform-share-on-platforms#connect-platform-specific-libraries) ，以在共享源集中使用平台相关的 interop 库。 在 1.5.30 之前，这仅适用于 Kotlin/Native 发行版附带的[平台库](native-platform-libs)。 从 1.5.30 开始，您可以将其与自定义 `cinterop` 库一起使用。 要启用此功能，请在 `gradle.properties` 中添加 `kotlin.mpp.enableCInteropCommonization=true` 属性：
 
 ```none
 kotlin.mpp.enableGranularSourceSetsMetadata=true
@@ -518,14 +518,14 @@ kotlin {
 
 声明 XCFrameworks 时，将注册以下新的 Gradle 任务：
 * `assembleXCFramework`
-* `assembleDebugXCFramework`（另外添加包含 [dSYMs](native-ios-symbolication.md) 的 debug 制品）
+* `assembleDebugXCFramework`（另外添加包含 [dSYMs](native-ios-symbolication) 的 debug 制品）
 * `assembleReleaseXCFramework`
 
 在 [此 WWDC 视频](https://developer.apple.com/videos/play/wwdc2019/416/) 中了解有关 XCFrameworks 的更多信息。
 
 ### Android 制品的新默认发布设置
 
-使用 `maven-publish` Gradle 插件，您可以通过在构建脚本中指定 [Android 变体](https://developer.android.com/studio/build/build-variants) 名称来[发布用于 Android target 的 multiplatform 库](multiplatform-publish-lib.md#publish-an-android-library)。 Kotlin Gradle 插件将自动生成 publications。
+使用 `maven-publish` Gradle 插件，您可以通过在构建脚本中指定 [Android 变体](https://developer.android.com/studio/build/build-variants) 名称来[发布用于 Android target 的 multiplatform 库](multiplatform-publish-lib#publish-an-android-library)。 Kotlin Gradle 插件将自动生成 publications。
 
 在 1.5.30 之前，生成的 publication [metadata](https://docs.gradle.org/current/userguide/publishing_gradle_module_metadata.html) 为每个发布的 Android 变体都包含构建类型属性，使其仅与库使用者使用的相同构建类型兼容。 Kotlin 1.5.30 引入了新的默认发布设置：
 * 如果项目发布的所有 Android 变体都具有相同的构建类型属性，则发布的变体将不具有构建类型属性，并且将与任何构建类型兼容。
@@ -541,15 +541,15 @@ Kotlin/JS 通过 1.5.30 带来了两项重大改进：
 
 ### JS IR 编译器后端达到 Beta 阶段
 
-用于 Kotlin/JS 的[基于 IR 的编译器后端](whatsnew14.md#unified-backends-and-extensibility)（在 1.4.0 中以 [Alpha](components-stability.md) 引入）已达到 Beta 阶段。
+用于 Kotlin/JS 的[基于 IR 的编译器后端](whatsnew14#unified-backends-and-extensibility)（在 1.4.0 中以 [Alpha](components-stability) 引入）已达到 Beta 阶段。
 
-之前，我们发布了 [JS IR 后端的迁移指南](js-ir-migration.md) 以帮助您将项目迁移到新的后端。 现在，我们想介绍 [Kotlin/JS Inspection Pack](https://plugins.jetbrains.com/plugin/17183-kotlin-js-inspection-pack/) IDE 插件，该插件直接在 IntelliJ IDEA 中显示所需的更改。
+之前，我们发布了 [JS IR 后端的迁移指南](js-ir-migration) 以帮助您将项目迁移到新的后端。 现在，我们想介绍 [Kotlin/JS Inspection Pack](https://plugins.jetbrains.com/plugin/17183-kotlin-js-inspection-pack/) IDE 插件，该插件直接在 IntelliJ IDEA 中显示所需的更改。
 
 ### 使用 Kotlin/JS IR 后端的应用程序具有更好的调试体验
 
 Kotlin 1.5.30 带来了用于 Kotlin/JS IR 后端的 JavaScript 源码映射生成。 当启用 IR 后端后，这将改善 Kotlin/JS 调试体验，并提供完整的调试支持，包括断点、单步执行以及带有适当源引用的可读堆栈跟踪。
 
-了解如何在 [浏览器或 IntelliJ IDEA Ultimate 中调试 Kotlin/JS](js-debugging.md)。
+了解如何在 [浏览器或 IntelliJ IDEA Ultimate 中调试 Kotlin/JS](js-debugging)。
 
 ## Gradle
 
@@ -564,17 +564,17 @@ Gradle 6.7 引入了 [“Java 工具链支持”](https://docs.gradle.org/curren
 * 使用与 Gradle 不同的 JDK 和 JRE 运行编译、测试和可执行文件。
 * 使用未发布的语言版本编译和测试代码。
 
-通过工具链支持，Gradle 可以自动检测本地 JDK 并安装 Gradle 构建所需的缺失 JDK。 现在 Gradle 本身可以在任何 JDK 上运行，并且仍然可以重用[构建缓存功能](gradle-compilation-and-caches.md#gradle-build-cache-support)。
+通过工具链支持，Gradle 可以自动检测本地 JDK 并安装 Gradle 构建所需的缺失 JDK。 现在 Gradle 本身可以在任何 JDK 上运行，并且仍然可以重用[构建缓存功能](gradle-compilation-and-caches#gradle-build-cache-support)。
 
 Kotlin Gradle 插件支持 Kotlin/JVM 编译任务的 Java 工具链。
 Java 工具链：
-* 设置 JVM target 可用的 [`jdkHome` 选项](gradle-compiler-options.md#attributes-specific-to-jvm)。
+* 设置 JVM target 可用的 [`jdkHome` 选项](gradle-compiler-options#attributes-specific-to-jvm)。
    [直接设置 `jdkHome` 选项的功能已被弃用](https://youtrack.jetbrains.com/issue/KT-46541)。
 
-* 如果用户未显式设置 `jvmTarget` 选项，则将 [`kotlinOptions.jvmTarget`](gradle-compiler-options.md#attributes-specific-to-jvm) 设置为工具链的 JDK 版本。
-  如果未配置工具链，则 `jvmTarget` 字段将使用默认值。 了解有关 [JVM target 兼容性](gradle-configure-project.md#check-for-jvm-target-compatibility-of-related-compile-tasks)的更多信息。
+* 如果用户未显式设置 `jvmTarget` 选项，则将 [`kotlinOptions.jvmTarget`](gradle-compiler-options#attributes-specific-to-jvm) 设置为工具链的 JDK 版本。
+  如果未配置工具链，则 `jvmTarget` 字段将使用默认值。 了解有关 [JVM target 兼容性](gradle-configure-project#check-for-jvm-target-compatibility-of-related-compile-tasks)的更多信息。
 
-* 影响 [`kapt` workers](kapt.md#run-kapt-tasks-in-parallel) 在哪个 JDK 上运行。
+* 影响 [`kapt` workers](kapt#run-kapt-tasks-in-parallel) 在哪个 JDK 上运行。
 
 使用以下代码设置工具链。 将占位符 `<MAJOR_JDK_VERSION>` 替换为您要使用的 JDK 版本：
 
@@ -615,13 +615,13 @@ java {
 }
 ```
 
-有关为 `KotlinCompile` 任务设置任何 JDK 版本的信息，请查看有关[使用 Task DSL 设置 JDK 版本](gradle-configure-project.md#set-jdk-version-with-the-task-dsl)的文档。
+有关为 `KotlinCompile` 任务设置任何 JDK 版本的信息，请查看有关[使用 Task DSL 设置 JDK 版本](gradle-configure-project#set-jdk-version-with-the-task-dsl)的文档。
 
 对于 Gradle 6.1 至 6.6 版本，[使用 `UsesKotlinJavaToolchain` 接口设置 JDK home](#ability-to-specify-jdk-home-with-useskotlinjavatoolchain-interface)。
 
 ### 能够使用 UsesKotlinJavaToolchain 接口指定 JDK home
 
-现在，所有支持通过 [`kotlinOptions`](gradle-compiler-options.md) 设置 JDK 的 Kotlin 任务都实现了 `UsesKotlinJavaToolchain` 接口。 要设置 JDK home，请放置到 JDK 的路径并替换 `<JDK_VERSION>` 占位符：
+现在，所有支持通过 [`kotlinOptions`](gradle-compiler-options) 设置 JDK 的 Kotlin 任务都实现了 `UsesKotlinJavaToolchain` 接口。 要设置 JDK home，请放置到 JDK 的路径并替换 `<JDK_VERSION>` 占位符：
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>
@@ -656,7 +656,7 @@ project.tasks
 
 对于 Gradle 6.1 至 6.6 版本，请使用 `UsesKotlinJavaToolchain` 接口。 从 Gradle 6.7 开始，请改用 [Java 工具链](#support-for-java-toolchains)。
 
-使用此功能时，请注意 [kapt 任务 workers](kapt.md#run-kapt-tasks-in-parallel) 将仅使用 [进程隔离模式](https://docs.gradle.org/current/userguide/worker_api.html#changing_the_isolation_mode)，并且将忽略 `kapt.workers.isolation` 属性。
+使用此功能时，请注意 [kapt 任务 workers](kapt#run-kapt-tasks-in-parallel) 将仅使用 [进程隔离模式](https://docs.gradle.org/current/userguide/worker_api.html#changing_the_isolation_mode)，并且将忽略 `kapt.workers.isolation` 属性。
 
 ### 一种更简单的方法来显式指定 Kotlin daemon JVM 参数
 

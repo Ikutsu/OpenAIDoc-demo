@@ -3,7 +3,7 @@ title: 返回值和跳转
 ---
 Kotlin 有三种结构跳转表达式：
 
-* `return` 默认从最近的封闭函数或[匿名函数](lambdas.md#anonymous-functions)返回。
+* `return` 默认从最近的封闭函数或[匿名函数](lambdas#anonymous-functions)返回。
 * `break` 终止最近的封闭循环。
 * `continue` 继续执行最近的封闭循环的下一次迭代。
 
@@ -13,7 +13,7 @@ Kotlin 有三种结构跳转表达式：
 val s = person.name ?: return
 ```
 
-这些表达式的类型是 [Nothing 类型](exceptions.md#the-nothing-type)。
+这些表达式的类型是 [Nothing 类型](exceptions#the-nothing-type)。
 
 ## Break 和 continue 标签
 
@@ -42,7 +42,7 @@ loop@ for (i in 1..100) {
 
 :::note
 在某些情况下，你可以 *非局部地（non-locally）* 应用 `break` 和 `continue`，而无需显式定义标签。
-这种非局部用法在封闭 [内联函数](inline-functions.md#break-and-continue) 中使用的 lambda 表达式中有效。
+这种非局部用法在封闭 [内联函数](inline-functions#break-and-continue) 中使用的 lambda 表达式中有效。
 
 :::
 
@@ -87,7 +87,7 @@ fun main() {
 }
 ```
 
-或者，你可以使用[匿名函数](lambdas.md#anonymous-functions)替换 lambda 表达式。
+或者，你可以使用[匿名函数](lambdas#anonymous-functions)替换 lambda 表达式。
 匿名函数中的 `return` 语句将从匿名函数本身返回。
 
 ```kotlin
@@ -136,6 +136,6 @@ return@a 1
 
 :::note
 在某些情况下，你可以在不使用标签的情况下从 lambda 表达式返回。这种 *非局部* 返回位于
-lambda 中，但会退出封闭的 [内联函数](inline-functions.md#returns)。
+lambda 中，但会退出封闭的 [内联函数](inline-functions#returns)。
 
 :::

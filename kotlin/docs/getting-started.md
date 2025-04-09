@@ -10,7 +10,7 @@ Kotlin 是一种现代但已经成熟的编程语言，旨在让开发者更快�
 
 首先，不妨来一次 Kotlin 之旅？ 本次旅程涵盖了 Kotlin 编程语言的基础知识，并且可以在浏览器中完全完成。
 
-<a href="kotlin-tour-welcome.md"><img src="/img/start-kotlin-tour.svg" width="700" alt="Start the Kotlin tour" /></a>
+<a href="kotlin-tour-welcome"><img src="/img/start-kotlin-tour.svg" width="700" alt="Start the Kotlin tour" /></a>
 
 ## 安装 Kotlin
 
@@ -25,9 +25,9 @@ Kotlin 是一种现代但已经成熟的编程语言，旨在让开发者更快�
 
 在这里，你将学习如何开发控制台应用程序并使用 Kotlin 创建单元测试。
 
-1. **[使用 IntelliJ IDEA 项目向导创建一个基本的 JVM 应用程序](jvm-get-started.md)。**
+1. **[使用 IntelliJ IDEA 项目向导创建一个基本的 JVM 应用程序](jvm-get-started)。**
 
-2. **[编写你的第一个单元测试](jvm-test-using-junit.md)。**
+2. **[编写你的第一个单元测试](jvm-test-using-junit)。**
 
 3. **加入 Kotlin 社区：**
 
@@ -50,10 +50,10 @@ Kotlin 是一种现代但已经成熟的编程语言，旨在让开发者更快�
 
 1. **创建你的第一个后端应用程序：**
 
-     * [使用 Spring Boot 创建 RESTful Web 服务](jvm-get-started-spring-boot.md)
+     * [使用 Spring Boot 创建 RESTful Web 服务](jvm-get-started-spring-boot)
      * [使用 Ktor 创建 HTTP API](https://ktor.io/docs/creating-http-apis.html)
 
-2. **[学习如何在你的应用程序中混合使用 Kotlin 和 Java 代码](mixing-java-kotlin-intellij.md)。**
+2. **[学习如何在你的应用程序中混合使用 Kotlin 和 Java 代码](mixing-java-kotlin-intellij)。**
 
 3. **加入 Kotlin 服务器端社区：**
 
@@ -73,7 +73,7 @@ Kotlin 是一种现代但已经成熟的编程语言，旨在让开发者更快�
 
 <TabItem value="cross-platform-mobile" label="Cross-platform">
 
-在这里，你将学习如何使用 [Kotlin Multiplatform](multiplatform-intro.md) 开发跨平台应用程序。
+在这里，你将学习如何使用 [Kotlin Multiplatform](multiplatform-intro) 开发跨平台应用程序。
 
 1. **[设置你的跨平台开发环境](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html)。**
 
@@ -119,7 +119,7 @@ Kotlin 是一种现代但已经成熟的编程语言，旨在让开发者更快�
 
 1. **在 IDE 中无缝创建和编辑 notebooks：**
 
-   * [Kotlin Notebook 入门](get-started-with-kotlin-notebooks.md)
+   * [Kotlin Notebook 入门](get-started-with-kotlin-notebooks)
 
 2. **探索和试验你的数据：**
 

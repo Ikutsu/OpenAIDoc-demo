@@ -12,14 +12,14 @@ Kotlin 用户组（Kotlin User Group，KUG）是一个致力于 Kotlin 的社区
 对于 KUG 聚会的组织形式没有任何限制。它们可以以最适合社区的任何方式进行，无论是演示、动手实验、讲座、黑客马拉松还是非正式的啤酒聚会。
 
 :::note
-有关 Kotlin 用户组品牌资产，请参阅 [Kotlin 品牌资产文档](kotlin-brand-assets.md#kotlin-user-group-brand-assets)。
+有关 Kotlin 用户组品牌资产，请参阅 [Kotlin 品牌资产文档](kotlin-brand-assets#kotlin-user-group-brand-assets)。
 
 :::
 
 ## 如何运营 KUG？
 
 * 为了促进群体凝聚力并防止沟通不畅，我们建议每个城市仅保留一个 KUG。查看 [KUG 列表](https://kotlinlang.org/community/user-groups/)，以查看您所在的地区是否已经有 KUG。
-* 使用官方的 KUG 徽标和品牌。查看 [品牌指南](kotlin-brand-assets.md#kotlin-user-group-brand-assets)。
+* 使用官方的 KUG 徽标和品牌。查看 [品牌指南](kotlin-brand-assets#kotlin-user-group-brand-assets)。
 * 保持您的用户组活跃。定期举行聚会，至少每 3 个月一次。
 * 至少提前 2 周宣布您的 KUG 聚会。该公告应包含演讲列表和演讲者的姓名，以及地点、时间和有关活动的任何其他重要信息。
 * KUG 活动应该是免费的，或者，如果您需要支付组织费用，则将价格限制在最高 10 美元。

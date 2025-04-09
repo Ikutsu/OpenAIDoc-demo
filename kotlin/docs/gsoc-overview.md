@@ -7,11 +7,11 @@ Kotlin 基金会为 Google Summer of Code (GSoC) 提供指导，这是一个全�
 
 ## GSoC 2025: 项目构想
 
-Kotlin 基金会发布了 Google Summer of Code 2025 的项目构想列表。如果您有兴趣参与贡献，请查看可用的项目和指南：[](gsoc-2025.md)。
+Kotlin 基金会发布了 Google Summer of Code 2025 的项目构想列表。如果您有兴趣参与贡献，请查看可用的项目和指南：[](gsoc-2025)。
 
 ## 以 Kotlin 参与的往届 GSoC 项目
 
 您可以浏览以往使用 Kotlin 参与的 Google Summer of Code 项目和构想：
 
-* [](gsoc-2024.md)
-* [](gsoc-2023.md)
+* [](gsoc-2024)
+* [](gsoc-2023)

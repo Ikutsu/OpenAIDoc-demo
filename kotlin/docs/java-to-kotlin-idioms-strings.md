@@ -30,7 +30,7 @@ fun main() {
 ```
 
 你可以通过用花括号将复杂表达式括起来来插入其值，例如 `${name.length}`。
-有关更多信息，请参见[字符串模板](strings.md#string-templates)。
+有关更多信息，请参见[字符串模板](strings#string-templates)。
 
 ## 构建字符串
 
@@ -48,7 +48,7 @@ System.out.println(countDown);
 ```
 
 在 Kotlin 中，使用 [buildString()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/build-string.html) ——
-一个[内联函数](inline-functions.md)，它接受构建字符串的逻辑作为 lambda 参数：
+一个[内联函数](inline-functions)，它接受构建字符串的逻辑作为 lambda 参数：
 
 ```kotlin
 fun main() {
@@ -66,9 +66,9 @@ fun main() {
 ```
 
 在底层，`buildString` 使用与 Java 中相同的 `StringBuilder` 类，你可以通过隐式的 `this` 访问它
-在 [lambda](lambdas.md#function-literals-with-receiver) 内部。
+在 [lambda](lambdas#function-literals-with-receiver) 内部。
 
-了解更多关于 [lambda 编码规范](coding-conventions.md#lambdas)的信息。
+了解更多关于 [lambda 编码规范](coding-conventions#lambdas)的信息。
 
 ## 从集合项创建字符串
 
@@ -108,7 +108,7 @@ fun main() {
 
 :::
 
-了解更多关于 [joinToString()](collection-transformations.md#string-representation) 的用法。
+了解更多关于 [joinToString()](collection-transformations#string-representation) 的用法。
 
 ## 如果字符串为空，则设置默认值
 
@@ -190,7 +190,7 @@ System.out.println("Anonymized input: '" + replacementResult + "'");
 
 在 Kotlin 中，你使用 [Regex](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-regex/) 类，
 它简化了正则表达式的使用。
-此外，使用 [多行字符串](strings.md#multiline-strings) 通过减少反斜杠的数量来简化正则表达式模式：
+此外，使用 [多行字符串](strings#multiline-strings) 通过减少反斜杠的数量来简化正则表达式模式：
 
 ```kotlin
 fun main() {
@@ -340,12 +340,12 @@ fun main() {
 }
 ```
 
-了解更多关于 [多行字符串](coding-conventions.md#strings)的信息。
+了解更多关于 [多行字符串](coding-conventions#strings)的信息。
 
 ## 接下来是什么？
 
-* 查看其他 [Kotlin 习语](idioms.md)。
+* 查看其他 [Kotlin 习语](idioms)。
 * 了解如何使用
-  [Java to Kotlin 转换器](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
+  [Java to Kotlin 转换器](mixing-java-kotlin-intellij#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
 
 如果你有喜欢的习语，我们邀请你通过发送 pull request 来分享它。

@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 要使用 [Gradle](https://docs.gradle.org/current/userguide/userguide.html) 构建 Kotlin 项目，你需要在构建脚本文件 `build.gradle(.kts)` 中 [添加 Kotlin Gradle 插件](#apply-the-plugin) 并在此处 [配置项目依赖项](#configure-dependencies)。
 
 :::note
-要了解有关构建脚本内容的更多信息，请访问 [浏览构建脚本](get-started-with-jvm-gradle-project.md#explore-the-build-script) 部分。
+要了解有关构建脚本内容的更多信息，请访问 [浏览构建脚本](get-started-with-jvm-gradle-project#explore-the-build-script) 部分。
 
 :::
 
@@ -66,7 +66,7 @@ Kotlin Gradle 插件（KGP）和 Kotlin 共享相同的版本编号。
 *Kotlin 2.0.20–2.0.21 和 Kotlin 2.1.0–2.1.10 完全兼容 Gradle 8.6 及以下版本。
 Gradle 8.7–8.10 版本也受支持，但只有一个例外：如果你使用 Kotlin Multiplatform Gradle 插件，
 你可能会在多平台项目中调用 JVM 目标中的 `withJava()` 函数时看到弃用警告。
-有关更多信息，请参阅 [默认创建的 Java 源代码集](multiplatform-compatibility-guide.md#java-source-sets-created-by-default)。
+有关更多信息，请参阅 [默认创建的 Java 源代码集](multiplatform-compatibility-guide#java-source-sets-created-by-default)。
 
 你也可以使用 Gradle 和 AGP 的最新版本，但如果你这样做，请记住你可能会遇到
 弃用警告或某些新功能可能无法正常工作。
@@ -173,7 +173,7 @@ sourceSets {
 
 :::
 
-对于像这样的相关任务，Kotlin Gradle 插件检查 JVM 目标兼容性。`kotlin` 扩展或任务中的 [`jvmTarget` 属性](gradle-compiler-options.md#attributes-specific-to-jvm) 和 `java` 扩展或任务中的 [`targetCompatibility`](https://docs.gradle.org/current/userguide/java_plugin.html#sec:java-extension) 的不同值会导致 JVM 目标不兼容。例如：
+对于像这样的相关任务，Kotlin Gradle 插件检查 JVM 目标兼容性。`kotlin` 扩展或任务中的 [`jvmTarget` 属性](gradle-compiler-options#attributes-specific-to-jvm) 和 `java` 扩展或任务中的 [`targetCompatibility`](https://docs.gradle.org/current/userguide/java_plugin.html#sec:java-extension) 的不同值会导致 JVM 目标不兼容。例如：
 `compileKotlin` 任务具有 `jvmTarget=1.8`，并且 `compileJava` 任务具有（或 [继承](https://docs.gradle.org/current/userguide/java_plugin.html#sec:java-extension)）`targetCompatibility=15`。
 
 通过在 `build.gradle(.kts)` 文件中将 `kotlin.jvm.target.validation.mode` 属性设置为以下值来配置此检查对整个项目的行为：
@@ -241,9 +241,9 @@ plugins {
 </Tabs>
 
 当构建脚本中没有关于 `jvmTarget` 值的显式信息时，其默认值为 `null`，并且编译器将其转换为默认值 `1.8`。`targetCompatibility` 等于
-当前的 Gradle 的 JDK 版本，该版本等于你的 JDK 版本（除非你使用 [Java 工具链方法](gradle-configure-project.md#gradle-java-toolchains-support)）。假设你的 JDK 版本是
+当前的 Gradle 的 JDK 版本，该版本等于你的 JDK 版本（除非你使用 [Java 工具链方法](gradle-configure-project#gradle-java-toolchains-support)）。假设你的 JDK 版本是
 `17`，你发布的库工件将 [声明自身与 JDK 17+ 兼容](https://docs.gradle.org/current/userguide/publishing_gradle_module_metadata.html)：`org.gradle.jvm.version=17`，这是错误的。
-在这种情况下，你必须在主项目中使用 Java 17 才能添加此库，即使字节码的版本是 `1.8`。[配置工具链](gradle-configure-project.md#gradle-java-toolchains-support)
+在这种情况下，你必须在主项目中使用 Java 17 才能添加此库，即使字节码的版本是 `1.8`。[配置工具链](gradle-configure-project#gradle-java-toolchains-support)
 以解决此问题。
 
 ### Gradle Java 工具链支持
@@ -274,17 +274,17 @@ Gradle 6.7 引入了 [Java 工具链支持](https://docs.gradle.org/current/user
 * 使用尚未发布的语言版本编译和测试代码。
 
 通过工具链支持，Gradle 可以自动检测本地 JDK 并安装 Gradle 构建所需的缺失 JDK。
-现在 Gradle 本身可以在任何 JDK 上运行，并且仍然可以为依赖于主要 JDK 版本的任务重用 [远程构建缓存功能](gradle-compilation-and-caches.md#gradle-build-cache-support)。
+现在 Gradle 本身可以在任何 JDK 上运行，并且仍然可以为依赖于主要 JDK 版本的任务重用 [远程构建缓存功能](gradle-compilation-and-caches#gradle-build-cache-support)。
 
 Kotlin Gradle 插件支持 Kotlin/JVM 编译任务的 Java 工具链。JS 和 Native 任务不使用工具链。
 Kotlin 编译器始终在 Gradle 守护程序运行的 JDK 上运行。
 Java 工具链：
-* 设置可用于 JVM 目标的 [`-jdk-home` 选项](compiler-reference.md#jdk-home-path)。
-* 如果用户未显式设置 `jvmTarget` 选项，则将 [`compilerOptions.jvmTarget`](gradle-compiler-options.md#attributes-specific-to-jvm) 设置为工具链的 JDK 版本。
+* 设置可用于 JVM 目标的 [`-jdk-home` 选项](compiler-reference#jdk-home-path)。
+* 如果用户未显式设置 `jvmTarget` 选项，则将 [`compilerOptions.jvmTarget`](gradle-compiler-options#attributes-specific-to-jvm) 设置为工具链的 JDK 版本。
   如果用户未配置工具链，则 `jvmTarget` 字段使用默认值。
   了解有关 [JVM 目标兼容性](#check-for-jvm-target-compatibility-of-related-compile-tasks) 的更多信息。
 * 设置要由任何 Java 编译、测试和 javadoc 任务使用的工具链。
-* 影响 [`kapt` workers](kapt.md#run-kapt-tasks-in-parallel) 在哪个 JDK 上运行。
+* 影响 [`kapt` workers](kapt#run-kapt-tasks-in-parallel) 在哪个 JDK 上运行。
 
 使用以下代码设置工具链。将占位符 `<MAJOR_JDK_VERSION>` 替换为你想要使用的 JDK 版本：
 
@@ -522,11 +522,11 @@ tasks.named("compileJava", JavaCompile.class) {
 了解更多关于：
 * [为 Java 模块系统构建模块](https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_modular)
 * [使用 Java 模块系统构建应用程序](https://docs.gradle.org/current/userguide/application_plugin.html#sec:application_modular)
-* [Kotlin 中“模块”的含义](visibility-modifiers.md#modules)
+* [Kotlin 中“模块”的含义](visibility-modifiers#modules)
 
 ### 其他细节
 
-了解有关 [Kotlin/JVM](jvm-get-started.md) 的更多信息。
+了解有关 [Kotlin/JVM](jvm-get-started) 的更多信息。
 
 #### 禁用在编译任务中使用工件
 
@@ -575,7 +575,7 @@ tasks.jar(type: Jar) {
 
 ## 以多个平台为目标
 
-以 [多个平台](multiplatform-dsl-reference.md#targets) 为目标的项目，称为 [多平台项目](multiplatform-intro.md)，
+以 [多个平台](multiplatform-dsl-reference#targets) 为目标的项目，称为 [多平台项目](multiplatform-intro)，
 需要 `kotlin-multiplatform` 插件。
 
 :::note
@@ -604,7 +604,7 @@ plugins {
 </TabItem>
 </Tabs>
 
-了解有关 [适用于不同平台的 Kotlin 多平台](multiplatform-intro.md) 和
+了解有关 [适用于不同平台的 Kotlin 多平台](multiplatform-intro) 和
 [适用于 iOS 和 Android 的 Kotlin 多平台](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html) 的更多信息。
 
 ## 以 Android 为目标
@@ -613,7 +613,7 @@ plugins {
 
 ## 以 JavaScript 为目标
 
-当以 JavaScript 为目标时，也使用 `kotlin-multiplatform` 插件。[了解有关设置 Kotlin/JS 项目的更多信息](js-project-setup.md)
+当以 JavaScript 为目标时，也使用 `kotlin-multiplatform` 插件。[了解有关设置 Kotlin/JS 项目的更多信息](js-project-setup)
 
 <Tabs groupId="build-script">
 <TabItem value="kotlin" label="Kotlin" default>
@@ -804,7 +804,7 @@ kotlin {
 
 对于特定于平台的源代码集，使用该库的相应于特定于平台的变体，而将通用的标准
 库添加到其余的库中。Kotlin Gradle 插件根据 Gradle 构建脚本的
-`compilerOptions.jvmTarget` [编译器选项](gradle-compiler-options.md) 选择适当的 JVM 标准库。
+`compilerOptions.jvmTarget` [编译器选项](gradle-compiler-options) 选择适当的 JVM 标准库。
 
 如果你显式声明标准库依赖项（例如，如果你需要不同的版本），则 Kotlin Gradle
 插件将不会覆盖它或添加第二个标准库。
@@ -822,7 +822,7 @@ kotlin.stdlib.default.dependency=false
 
 如果你为 1.8.0 – 1.9.10 之间的任何 Kotlin 标准库版本添加依赖项，例如：
 `implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.0")`，则 Kotlin Gradle 插件会将此 Kotlin 版本
-用于传递 `kotlin-stdlib-jdk7` 和 `kotlin-stdlib-jdk8` 依赖项。这避免了来自不同标准库版本的类重复。[了解有关将 `kotlin-stdlib-jdk7` 和 `kotlin-stdlib-jdk8` 合并到 `kotlin-stdlib` 中的更多信息](whatsnew18.md#updated-jvm-compilation-target)。
+用于传递 `kotlin-stdlib-jdk7` 和 `kotlin-stdlib-jdk8` 依赖项。这避免了来自不同标准库版本的类重复。[了解有关将 `kotlin-stdlib-jdk7` 和 `kotlin-stdlib-jdk8` 合并到 `kotlin-stdlib` 中的更多信息](whatsnew18#updated-jvm-compilation-target)。
 你可以使用 `gradle.properties` 文件中的 `kotlin.stdlib.jdk.variants.version.alignment` Gradle 属性禁用此行为：
 
 ```none
@@ -876,4 +876,4 @@ kotlin.stdlib.jdk.variants.version.alignment=false
   ```
 
   </TabItem>
-  <TabItem value="groovy" label="Groovy
+  </Tabs>

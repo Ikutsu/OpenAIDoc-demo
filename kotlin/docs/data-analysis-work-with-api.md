@@ -1,7 +1,7 @@
 ---
 title: "从 Web 源和 API 检索数据"
 ---
-[Kotlin Notebook](kotlin-notebook-overview.md) 提供了一个强大的平台，用于访问和操作来自各种 Web 资源和 API 的数据。它通过提供一个迭代环境来简化数据提取和分析任务，在该环境中，每个步骤都可以可视化以提高清晰度。这使得它在探索您不熟悉的 API 时特别有用。
+[Kotlin Notebook](kotlin-notebook-overview) 提供了一个强大的平台，用于访问和操作来自各种 Web 资源和 API 的数据。它通过提供一个迭代环境来简化数据提取和分析任务，在该环境中，每个步骤都可以可视化以提高清晰度。这使得它在探索您不熟悉的 API 时特别有用。
 
 当与 [Kotlin DataFrame 库](https://kotlin.github.io/dataframe/gettingstarted.html) 结合使用时，Kotlin Notebook 不仅使您能够连接到 API 并从中获取 JSON 数据，还有助于重塑这些数据以进行全面的分析和可视化。
 
@@ -28,7 +28,7 @@ title: "从 Web 源和 API 检索数据"
 
 ## 从 API 获取数据
 
-使用带有 Kotlin DataFrame 库的 Kotlin Notebook 从 API 获取数据，是通过 [`.read()`](https://kotlin.github.io/dataframe/read.html) 函数实现的，该函数类似于[从文件检索数据](data-analysis-work-with-data-sources.md#retrieve-data-from-a-file)，例如 CSV 或 JSON。但是，在处理基于 Web 的数据源时，您可能需要额外的格式化，才能将原始 API 数据转换为结构化格式。
+使用带有 Kotlin DataFrame 库的 Kotlin Notebook 从 API 获取数据，是通过 [`.read()`](https://kotlin.github.io/dataframe/read.html) 函数实现的，该函数类似于[从文件检索数据](data-analysis-work-with-data-sources#retrieve-data-from-a-file)，例如 CSV 或 JSON。但是，在处理基于 Web 的数据源时，您可能需要额外的格式化，才能将原始 API 数据转换为结构化格式。
 
 让我们看一个从 [YouTube Data API](https://console.cloud.google.com/apis/library/youtube.googleapis.com) 获取数据的示例：
 
@@ -189,5 +189,5 @@ title: "从 Web 源和 API 检索数据"
 ## 接下来做什么
 
 * 使用 [Kandy 库](https://kotlin.github.io/kandy/examples.html) 探索数据可视化
-* 在 [使用 Kandy 在 Kotlin Notebook 中进行数据可视化](data-analysis-visualization.md) 中查找有关数据可视化的其他信息
-* 有关可用于 Kotlin 中的数据科学和分析的工具和资源的广泛概述，请参见 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries.md)
+* 在 [使用 Kandy 在 Kotlin Notebook 中进行数据可视化](data-analysis-visualization) 中查找有关数据可视化的其他信息
+* 有关可用于 Kotlin 中的数据科学和分析的工具和资源的广泛概述，请参见 [用于数据分析的 Kotlin 和 Java 库](data-analysis-libraries)

@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Kotlin/Native 使用一种自动内存管理方案，类似于 Java 或 Swift 提供的方案。
 
-[了解 Kotlin/Native 内存管理器](native-memory-manager.md)
+[了解 Kotlin/Native 内存管理器](native-memory-manager)
 
 ## 如何创建一个共享库？
 
@@ -29,7 +29,7 @@ kotlin {
 
 这将生成一个平台特定的共享对象（Linux 上为 `.so`，macOS 上为 `.dylib`，Windows 目标上为 `.dll`）和一个 C 语言头文件，允许从 C/C++ 代码中使用 Kotlin/Native 程序中所有可用的公共 API (Application Programming Interface)。
 
-[完成 Kotlin/Native 作为动态库的教程](native-dynamic-libraries.md)
+[完成 Kotlin/Native 作为动态库的教程](native-dynamic-libraries)
 
 ## 如何创建一个静态库或目标文件？
 
@@ -109,7 +109,7 @@ Kotlin/Native 编译器自 Kotlin 2.0.20 起不支持 bitcode 嵌入。
 ## 为什么会看到 InvalidMutabilityException？
 
 :::note
-此问题仅与旧版内存管理器相关。 查看 [Kotlin/Native 内存管理](native-memory-manager.md) 以了解新的内存管理器，该管理器自 Kotlin 1.7.20 起已默认启用。
+此问题仅与旧版内存管理器相关。 查看 [Kotlin/Native 内存管理](native-memory-manager) 以了解新的内存管理器，该管理器自 Kotlin 1.7.20 起已默认启用。
 
 :::
 
@@ -118,7 +118,7 @@ Kotlin/Native 编译器自 Kotlin 2.0.20 起不支持 bitcode 嵌入。
 ## 如何使单例对象可变？
 
 :::note
-此问题仅与旧版内存管理器相关。 查看 [Kotlin/Native 内存管理](native-memory-manager.md) 以了解新的内存管理器，该管理器自 Kotlin 1.7.20 起已默认启用。
+此问题仅与旧版内存管理器相关。 查看 [Kotlin/Native 内存管理](native-memory-manager) 以了解新的内存管理器，该管理器自 Kotlin 1.7.20 起已默认启用。
 
 :::
 
@@ -126,7 +126,7 @@ Kotlin/Native 编译器自 Kotlin 2.0.20 起不支持 bitcode 嵌入。
 
 ## 如何使用未发布的 Kotlin/Native 版本编译我的项目？
 
-首先，请考虑尝试 [预览版本](eap.md)。
+首先，请考虑尝试 [预览版本](eap)。
 
-如果您需要更新的开发版本，可以从源代码构建 Kotlin/Native：克隆 [Kotlin 仓库](https://github.com/JetBrains/kotlin) 并按照 [这些步骤](https://github.com/JetBrains/kotlin/blob/master/kotlin-native/README.md#building-from-source) 操作。
+如果您需要更新的开发版本，可以从源代码构建 Kotlin/Native：克隆 [Kotlin 仓库](https://github.com/JetBrains/kotlin) 并按照 [这些步骤](https://github.com/JetBrains/kotlin/blob/master/kotlin-native/README#building-from-source) 操作。
   ```

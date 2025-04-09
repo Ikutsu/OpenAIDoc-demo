@@ -31,7 +31,7 @@ Stream().read() // 创建 Stream 类的实例并调用 read()
 fun powerOf(number: Int, exponent: Int): Int { /*...*/ }
 ```
 
-声明函数参数时，可以使用[尾随逗号](coding-conventions.md#trailing-commas)：
+声明函数参数时，可以使用[尾随逗号](coding-conventions#trailing-commas)：
 
 ```kotlin
 fun powerOf(
@@ -77,7 +77,7 @@ fun foo(
 foo(baz = 1) // 使用默认值 bar = 0
 ```
 
-如果默认参数之后的最后一个参数是 [lambda](lambdas.md#lambda-expression-syntax)，则可以将其作为命名参数传递，也可以[在括号外传递](lambdas.md#passing-trailing-lambdas)：
+如果默认参数之后的最后一个参数是 [lambda](lambdas#lambda-expression-syntax)，则可以将其作为命名参数传递，也可以[在括号外传递](lambdas#passing-trailing-lambdas)：
 
 ```kotlin
 fun foo(
@@ -216,7 +216,7 @@ val a = arrayOf(1, 2, 3)
 val list = asList(-1, 0, *a, 4)
 ```
 
-如果要将[原始类型数组](arrays.md#primitive-type-arrays)传递到 `vararg` 中，则需要使用 `toTypedArray()` 函数将其转换为常规（类型化）数组：
+如果要将[原始类型数组](arrays#primitive-type-arrays)传递到 `vararg` 中，则需要使用 `toTypedArray()` 函数将其转换为常规（类型化）数组：
 
 ```kotlin
 val a = intArrayOf(1, 2, 3) // IntArray 是原始类型数组
@@ -227,7 +227,7 @@ val list = asList(-1, 0, *a.toTypedArray(), 4)
 
 用 `infix` 关键字标记的函数也可以使用中缀表示法调用（省略调用的点和括号）。 中缀函数必须满足以下要求：
 
-* 它们必须是成员函数或[扩展函数](extensions.md)。
+* 它们必须是成员函数或[扩展函数](extensions)。
 * 它们必须只有一个参数。
 * 该参数不能[接受可变数量的参数](#variable-number-of-arguments-varargs)并且不能有[默认值](#default-arguments)。
 
@@ -319,7 +319,7 @@ class Sample {
 Sample().foo() // 创建 Sample 类的实例并调用 foo
 ```
 
-有关类和重写成员的更多信息，请参见[类](classes.md)和[继承](classes.md#inheritance)。
+有关类和重写成员的更多信息，请参见[类](classes)和[继承](classes#inheritance)。
 
 ## 泛型函数 (Generic functions)
 
@@ -329,7 +329,7 @@ Sample().foo() // 创建 Sample 类的实例并调用 foo
 fun <T> singletonList(item: T): List<T> { /*...*/ }
 ```
 
-有关泛型函数的更多信息，请参见[泛型](generics.md)。
+有关泛型函数的更多信息，请参见[泛型](generics)。
 
 ## 尾递归函数 (Tail recursive functions)
 
@@ -360,6 +360,6 @@ private fun findFixPoint(): Double {
 要符合 `tailrec` 修饰符的条件，函数必须调用自身作为其执行的最后一个操作。 当递归调用之后有更多代码，在 `try`/`catch`/`finally` 块中，或者在开放函数上时，您不能使用尾递归。 目前，Kotlin 对 JVM 和 Kotlin/Native 支持尾递归。
 
 **另请参见**:
-* [内联函数](inline-functions.md)
-* [扩展函数](extensions.md)
-* [高阶函数和 lambda](lambdas.md)
+* [内联函数](inline-functions)
+* [扩展函数](extensions)
+* [高阶函数和 lambda](lambdas)

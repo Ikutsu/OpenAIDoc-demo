@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 控制台编译可能看起来简单直接，但它不适用于具有数百个文件和库的大型项目。对于此类项目，我们建议使用 IDE 或构建系统。
 
-使用 Kotlin/Native，你可以为[不同的目标平台](native-target-support.md)进行编译，包括 Linux、macOS 和 Windows。虽然可以进行跨平台编译，这意味着使用一个平台为另一个平台进行编译，但在本教程中，你将以编译所在的平台为目标平台。
+使用 Kotlin/Native，你可以为[不同的目标平台](native-target-support)进行编译，包括 Linux、macOS 和 Windows。虽然可以进行跨平台编译，这意味着使用一个平台为另一个平台进行编译，但在本教程中，你将以编译所在的平台为目标平台。
 
 :::note
 如果你使用 Mac 并想为 macOS 或其他 Apple 目标创建和运行应用程序，你还需要首先安装 [Xcode Command Line Tools](https://developer.apple.com/download/)，启动它，并接受许可条款。
@@ -42,7 +42,7 @@ import TabItem from '@theme/TabItem';
 
    <img src="/img/load-gradle-changes.png" alt="Load Gradle changes button" width="295" style={{verticalAlign: 'middle'}}/>
 
-有关这些设置的更多信息，请参阅 [Multiplatform Gradle DSL 参考](multiplatform-dsl-reference.md)。
+有关这些设置的更多信息，请参阅 [Multiplatform Gradle DSL 参考](multiplatform-dsl-reference)。
 
 ### 构建并运行应用程序
 
@@ -113,8 +113,8 @@ IntelliJ IDEA Ultimate 用户可以安装
 
    * 使用 [`replace()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/replace.html) 函数删除名称中的
      空字符。
-   * 使用作用域函数 [`let`](scope-functions.md#let) 在对象上下文中运行该函数。
-   * 使用[字符串模板](strings.md#string-templates)通过添加美元符号 `$` 并将其括在花括号中`${it.length}`，将你的姓名长度插入到字符串中。 `it` 是[lambda 参数](coding-conventions.md#lambda-parameters)的默认名称。
+   * 使用作用域函数 [`let`](scope-functions#let) 在对象上下文中运行该函数。
+   * 使用[字符串模板](strings#string-templates)通过添加美元符号 `$` 并将其括在花括号中`${it.length}`，将你的姓名长度插入到字符串中。 `it` 是[lambda 参数](coding-conventions#lambda-parameters)的默认名称。
 
    ```kotlin
    fun main() {
@@ -135,7 +135,7 @@ IntelliJ IDEA Ultimate 用户可以安装
 
 现在让我们只计算你姓名中的唯一字母：
 
-1. 在 `Main.kt` 文件中，为 `String` 声明新的[扩展函数](extensions.md#extension-functions)
+1. 在 `Main.kt` 文件中，为 `String` 声明新的[扩展函数](extensions#extension-functions)
    `.countDistinctCharacters()`：
 
    * 使用 [`.lowercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/lowercase.html) 函数将名称转换为小写。
@@ -177,7 +177,7 @@ IntelliJ IDEA Ultimate 用户可以安装
 
 ### 创建项目文件
 
-1. 首先，安装兼容版本的 [Gradle](https://gradle.org/install/)。 请参阅[兼容性表](gradle-configure-project.md#apply-the-plugin)
+1. 首先，安装兼容版本的 [Gradle](https://gradle.org/install/)。 请参阅[兼容性表](gradle-configure-project#apply-the-plugin)
    以检查 Kotlin Gradle 插件 (KGP) 与可用 Gradle 版本的兼容性。
 2. 创建一个空项目目录。 在其中创建一个包含以下内容的 `build.gradle(.kts)` 文件：
 
@@ -242,7 +242,7 @@ IntelliJ IDEA Ultimate 用户可以安装
    </TabItem>
    </Tabs>
 
-   你可以使用不同的[目标名称](native-target-support.md)，例如 `macosArm64`、`iosArm64`、`linuxArm64`
+   你可以使用不同的[目标名称](native-target-support)，例如 `macosArm64`、`iosArm64`、`linuxArm64`
    和 `mingwX64` 来定义你正在编译代码的目标。
    这些目标名称可以选择将平台名称作为参数，在本例中为 `native`。
    平台名称用于在项目中生成源路径和任务名称。
@@ -335,7 +335,7 @@ kotlinc-native hello.kt -o hello
 `-o` 选项的值指定输出文件的名称，因此此调用将在 macOS 和 Linux 上生成 `hello.kexe` 二进制文件
 （在 Windows 上生成 `hello.exe`）。
 
-有关可用选项的完整列表，请参阅 [Kotlin 编译器选项](compiler-reference.md)。
+有关可用选项的完整列表，请参阅 [Kotlin 编译器选项](compiler-reference)。
 
 ### 运行程序
 
@@ -363,8 +363,8 @@ kotlinc-native hello.kt -o hello
 
 ## 接下来做什么？
 
-* 完成[使用 C Interop 和 libcurl 创建应用程序](native-app-with-c-and-libcurl.md) 教程，该教程解释了如何
+* 完成[使用 C Interop 和 libcurl 创建应用程序](native-app-with-c-and-libcurl) 教程，该教程解释了如何
   创建一个 native（原生） HTTP 客户端并与 C 库进行互操作。
-* 了解如何[为真实的 Kotlin/Native 项目编写 Gradle 构建脚本](multiplatform-dsl-reference.md)。
-* 在[文档](gradle.md)中阅读有关 Gradle 构建系统的更多信息。
+* 了解如何[为真实的 Kotlin/Native 项目编写 Gradle 构建脚本](multiplatform-dsl-reference)。
+* 在[文档](gradle)中阅读有关 Gradle 构建系统的更多信息。
   ```

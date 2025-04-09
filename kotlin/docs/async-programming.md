@@ -138,4 +138,4 @@ suspend fun preparePost(): Token {
 
 协程不是一个新概念，更不是 Kotlin 发明的。 它们已经存在了几十年，并且在其他一些编程语言（如 Go）中很流行。 但重要的是要注意，它们在 Kotlin 中的实现方式是，大多数功能都委托给库。 事实上，除了 `suspend` 关键字之外，没有其他关键字添加到该语言中。 这与 C# 等将 `async` 和 `await` 作为语法一部分的语言有些不同。 使用 Kotlin，这些只是库函数。
 
-有关更多信息，请参见 [协程参考](coroutines-overview.md)。
+有关更多信息，请参见 [协程参考](coroutines-overview)。

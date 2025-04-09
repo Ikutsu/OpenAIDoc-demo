@@ -164,7 +164,7 @@ fun main() {
 编译器会抛出一个错误。
 
 如果你的 `when` 表达式有一个主语，你可以使用一个 `else` 分支来确保所有可能的情况都被覆盖，但
-它不是强制性的。例如，如果你的主语是一个 `Boolean`，[`enum` 类](enum-classes.md)，[`sealed` 类](sealed-classes.md)，
+它不是强制性的。例如，如果你的主语是一个 `Boolean`，[`enum` 类](enum-classes)，[`sealed` 类](sealed-classes)，
 或它们的nullable副本之一，你可以在没有 `else` 分支的情况下覆盖所有情况：
 
 ```kotlin
@@ -211,7 +211,7 @@ when (x) {
 }
 ```
 
-你还可以通过 `in` 或 `!in` 关键字检查一个值是否包含在 [范围](ranges.md) 或集合中：
+你还可以通过 `in` 或 `!in` 关键字检查一个值是否包含在 [范围](ranges) 或集合中：
 
 ```kotlin
 when (x) {
@@ -223,7 +223,7 @@ when (x) {
 ```
 
 此外，你可以通过 `is` 或 `!is` 关键字检查一个值是否是特定类型。请注意，
-由于 [智能转换](typecasts.md#smart-casts)，你可以访问该类型的成员函数和属性，而无需
+由于 [智能转换](typecasts#smart-casts)，你可以访问该类型的成员函数和属性，而无需
 任何额外的检查。
 
 ```kotlin
@@ -259,7 +259,7 @@ fun Request.getBody() =
 ### When 表达式中的守卫条件
 
 :::note
-守卫条件是一个 [实验性功能](components-stability.md#stability-levels-explained)，随时可能更改。
+守卫条件是一个 [实验性功能](components-stability#stability-levels-explained)，随时可能更改。
 我们感谢您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-71140/Guard-conditions-in-when-expressions-feedback) 中提供的反馈。
 
 守卫条件允许你在 `when` 表达式的分支中包含多个条件，从而使复杂的控制流更加明确和简洁。
@@ -309,7 +309,7 @@ when (animal) {
 ```
 
 使用布尔运算符 `&&`（AND）或 `||`（OR）在单个分支中组合多个守卫条件。
-在布尔表达式周围使用括号以 [避免混淆](coding-conventions.md#guard-conditions-in-when-expression)：
+在布尔表达式周围使用括号以 [避免混淆](coding-conventions#guard-conditions-in-when-expression)：
 
 ```kotlin
 when (animal) {
@@ -355,7 +355,7 @@ for (item: Int in ints) {
 
 所有这三个函数都需要标记为 `operator`。
 
-要遍历一个数字范围，请使用一个 [范围表达式](ranges.md)：
+要遍历一个数字范围，请使用一个 [范围表达式](ranges)：
 
 ```kotlin
 fun main() {
@@ -423,4 +423,4 @@ do {
 
 ## 循环中的 Break 和 Continue
 
-Kotlin 支持循环中的传统 `break` 和 `continue` 运算符。请参阅 [返回和跳转](returns.md)。
+Kotlin 支持循环中的传统 `break` 和 `continue` 运算符。请参阅 [返回和跳转](returns)。

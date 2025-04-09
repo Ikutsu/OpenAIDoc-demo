@@ -5,7 +5,7 @@ title: "使用 C 互操作和 libcurl 创建应用程序 – 教程"
 
 输出将是一个可执行的命令行应用程序，您可以在 macOS 和 Linux 上运行它，并发出简单的 HTTP GET 请求。
 
-您可以使用命令行直接或通过脚本文件（例如 `.sh` 或 `.bat` 文件）生成 Kotlin 库。但是，这种方法对于具有数百个文件和库的大型项目来说效果不佳。使用构建系统可以通过下载和缓存 Kotlin/Native 编译器二进制文件和具有传递依赖项的库，以及运行编译器和测试来简化流程。Kotlin/Native 可以通过 [Kotlin Multiplatform plugin](gradle-configure-project.md#targeting-multiple-platforms) 使用 [Gradle](https://gradle.org) 构建系统。
+您可以使用命令行直接或通过脚本文件（例如 `.sh` 或 `.bat` 文件）生成 Kotlin 库。但是，这种方法对于具有数百个文件和库的大型项目来说效果不佳。使用构建系统可以通过下载和缓存 Kotlin/Native 编译器二进制文件和具有传递依赖项的库，以及运行编译器和测试来简化流程。Kotlin/Native 可以通过 [Kotlin Multiplatform plugin](gradle-configure-project#targeting-multiple-platforms) 使用 [Gradle](https://gradle.org) 构建系统。
 
 ## 开始之前
 
@@ -30,9 +30,7 @@ title: "使用 C 互操作和 libcurl 创建应用程序 – 教程"
         val isArm64 = System.getProperty("os.arch") == "aarch64"
         val isMingwX64 = hostOs.startsWith("Windows")
         val nativeTarget = when {
-            hostOs == "Mac OS X" && isArm64 -
-:::tip
- macosArm64("native")
+            hostOs == "Mac OS X" && isArm64 `->` macosArm64("native")
             hostOs == "Mac OS X" && !isArm64 `->` macosX64("native")
             hostOs == "Linux" && isArm64 `->` linuxArm64("native")
             hostOs == "Linux" && !isArm64 `->` linuxX64("native")
@@ -51,15 +49,15 @@ title: "使用 C 互操作和 libcurl 创建应用程序 – 教程"
     
     ```
 
-   * 目标是使用 `macosArm64`、`macosX64`、`linuxArm64`、`linuxX64` 和 `mingwX64` 为 macOS、Linux 和 Windows 定义的。请参阅 [supported platforms](native-target-support.md) 的完整列表。
+   * 目标是使用 `macosArm64`、`macosX64`、`linuxArm64`、`linuxX64` 和 `mingwX64` 为 macOS、Linux 和 Windows 定义的。请参阅 [supported platforms](native-target-support) 的完整列表。
    * 条目本身定义了一系列属性，以指示如何生成二进制文件以及应用程序的入口点。这些可以保留为默认值。
-   * C 互操作性配置为构建中的一个附加步骤。默认情况下，C 中的所有符号都导入到 `interop` 包中。您可能需要在 `.kt` 文件中导入整个包。了解有关 [how to configure](gradle-configure-project.md#targeting-multiple-platforms) 它的更多信息。
+   * C 互操作性配置为构建中的一个附加步骤。默认情况下，C 中的所有符号都导入到 `interop` 包中。您可能需要在 `.kt` 文件中导入整个包。了解有关 [how to configure](gradle-configure-project#targeting-multiple-platforms) 它的更多信息。
 
 ## 创建定义文件
 
 在编写原生应用程序时，您通常需要访问某些未包含在 [Kotlin standard library](https://kotlinlang.org/api/latest/jvm/stdlib/) 中的功能，例如发出 HTTP 请求、从磁盘读取和写入等等。
 
-Kotlin/Native 有助于使用标准 C 库，从而打开了可能需要的几乎任何功能的整个生态系统。Kotlin/Native 已经附带了一组预构建的 [platform libraries](native-platform-libs.md)，这些库为标准库提供了一些额外的常用功能。
+Kotlin/Native 有助于使用标准 C 库，从而打开了可能需要的几乎任何功能的整个生态系统。Kotlin/Native 已经附带了一组预构建的 [platform libraries](native-platform-libs)，这些库为标准库提供了一些额外的常用功能。
 
 互操作的理想方案是像调用 Kotlin 函数一样调用 C 函数，遵循相同的签名和约定。这时 cinterop 工具就派上用场了。它接受一个 C 库并生成相应的 Kotlin 绑定，以便该库可以像 Kotlin 代码一样使用。
 
@@ -88,7 +86,7 @@ Kotlin/Native 有助于使用标准 C 库，从而打开了可能需要的几乎
 
    * 如果需要修改某个平台的行为，可以使用 `compilerOpts.osx` 或 `compilerOpts.linux` 之类的格式为选项提供特定于平台的值。在这种情况下，它们是 macOS（`.osx` 后缀）和 Linux（`.linux` 后缀）。也可以使用没有后缀的参数（例如，`linkerOpts=`），并将其应用于所有平台。
 
-   有关可用选项的完整列表，请参阅 [Definition file](native-definition-file.md#properties)。
+   有关可用选项的完整列表，请参阅 [Definition file](native-definition-file#properties)。
 
 :::note
 您需要在系统上安装 `curl` 库二进制文件才能使示例正常工作。在 macOS 和 Linux 上，它们通常包含在内。在 Windows 上，您可以从 [sources](https://curl.se/download.html) 构建它（您需要 Microsoft Visual Studio 或 Windows SDK 命令行工具）。有关更多详细信息，请参阅 [related blog post](https://jonnyzzz.com/blog/2018/10/29/kn-libcurl-windows/)。或者，您可能需要考虑使用 [MinGW/MSYS2](https://www.msys2.org/) `curl` 二进制文件。
@@ -183,4 +181,4 @@ fun main(args: Array<String>) {
 
 ## 接下来做什么
 
-了解更多关于 [Kotlin's interoperability with C](native-c-interop.md)。
+了解更多关于 [Kotlin's interoperability with C](native-c-interop)。

@@ -1,7 +1,7 @@
 ---
 title: "Kotlin 1.7.20 兼容性指南"
 ---
-_[保持语言的现代性](kotlin-evolution-principles.md)_ 和 _[舒适的更新](kotlin-evolution-principles.md)_ 是 Kotlin 语言设计的核心原则。前者认为应该移除那些阻碍语言发展的结构，后者认为应该提前充分沟通移除行为，以尽可能平滑地进行代码迁移。
+_[保持语言的现代性](kotlin-evolution-principles)_ 和 _[舒适的更新](kotlin-evolution-principles)_ 是 Kotlin 语言设计的核心原则。前者认为应该移除那些阻碍语言发展的结构，后者认为应该提前充分沟通移除行为，以尽可能平滑地进行代码迁移。
 
 通常，不兼容的变更只发生在 Feature Release（功能版本）中，但这一次我们不得不在一个增量版本中引入两个这样的变更，以限制 Kotlin 1.7 中变更引入的问题的蔓延。
 

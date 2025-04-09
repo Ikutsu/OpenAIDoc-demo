@@ -19,7 +19,7 @@ _发布时间：2016 年 2 月 15 日_
 
 Kotlin 1.1 的主要新特性是 *协程*，它带来了对 `async`/`await`、`yield` 和类似编程模式的支持。Kotlin 设计的关键特性是协程执行的实现是库的一部分，而不是语言的一部分，因此你不会受到任何特定编程范式或并发库的约束。
 
-协程实际上是一个轻量级的线程，可以被挂起并在以后恢复。协程通过_[挂起函数](coroutines-basics.md#extract-function-refactoring)_支持：调用这样的函数可能会挂起一个协程，并且要启动一个新的协程，我们通常使用匿名挂起函数（即挂起 lambda 表达式）。
+协程实际上是一个轻量级的线程，可以被挂起并在以后恢复。协程通过_[挂起函数](coroutines-basics#extract-function-refactoring)_支持：调用这样的函数可能会挂起一个协程，并且要启动一个新的协程，我们通常使用匿名挂起函数（即挂起 lambda 表达式）。
 
 让我们看一下在外部库 [kotlinx.coroutines](https://github.com/kotlin/kotlinx.coroutines) 中实现的 `async`/`await`：
 
@@ -66,7 +66,7 @@ fun main(args: Array<String>) {
 
 运行上面的代码查看结果。 随意编辑并再次运行！
 
-有关更多信息，请参阅[协程文档](coroutines-overview.md)和[教程](coroutines-and-channels.md)。
+有关更多信息，请参阅[协程文档](coroutines-overview)和[教程](coroutines-and-channels)。
 
 请注意，协程目前被认为是**实验性功能**，这意味着 Kotlin 团队不承诺在最终的 1.1 版本之后支持此功能的向后兼容性。
 
@@ -105,11 +105,11 @@ fun main(args: Array<String>) {
 }
 ```
 
-有关更多详细信息，请参见[类型别名文档](type-aliases.md)和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/type-aliases.md)。
+有关更多详细信息，请参见[类型别名文档](type-aliases)和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/type-aliases)。
 
 ### 绑定的可调用引用
 
-现在，你可以使用 `::` 运算符来获取指向特定对象实例的方法或属性的 [成员引用](reflection.md#function-references)。以前，这只能用 lambda 表达式来表示。这是一个例子：
+现在，你可以使用 `::` 运算符来获取指向特定对象实例的方法或属性的 [成员引用](reflection#function-references)。以前，这只能用 lambda 表达式来表示。这是一个例子：
 
 ```kotlin
 
@@ -121,7 +121,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-阅读 [文档](reflection.md) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/bound-callable-references.md) 了解更多详情。
+阅读 [文档](reflection) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/bound-callable-references) 了解更多详情。
 
 ### 密封类和数据类
 
@@ -147,11 +147,11 @@ fun main(args: Array<String>) {
 }
 ```
 
-阅读 [密封类文档](sealed-classes.md) 或 [密封类](https://github.com/Kotlin/KEEP/blob/master/proposals/sealed-class-inheritance.md) 和 [数据类](https://github.com/Kotlin/KEEP/blob/master/proposals/data-class-inheritance.md) 的 KEEP 了解更多详情。
+阅读 [密封类文档](sealed-classes) 或 [密封类](https://github.com/Kotlin/KEEP/blob/master/proposals/sealed-class-inheritance) 和 [数据类](https://github.com/Kotlin/KEEP/blob/master/proposals/data-class-inheritance) 的 KEEP 了解更多详情。
 
 ### Lambda 表达式中的解构
 
-现在，你可以使用 [解构声明](destructuring-declarations.md) 语法来解包传递给 lambda 表达式的参数。这是一个例子：
+现在，你可以使用 [解构声明](destructuring-declarations) 语法来解包传递给 lambda 表达式的参数。这是一个例子：
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -168,7 +168,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-阅读 [解构声明文档](destructuring-declarations.md) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/destructuring-in-parameters.md) 了解更多详情。
+阅读 [解构声明文档](destructuring-declarations) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/destructuring-in-parameters) 了解更多详情。
 
 ### 未使用参数的下划线
 
@@ -183,7 +183,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-这在 [解构声明](destructuring-declarations.md) 中也有效：
+这在 [解构声明](destructuring-declarations) 中也有效：
 
 ```kotlin
 data class Result(val value: Any, val status: String)
@@ -198,7 +198,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-阅读 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/underscore-for-unused-parameters.md) 了解更多详情。
+阅读 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/underscore-for-unused-parameters) 了解更多详情。
 
 ### 数字字面量中的下划线
 
@@ -217,7 +217,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-阅读 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/underscores-in-numeric-literals.md) 了解更多详情。
+阅读 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/underscores-in-numeric-literals) 了解更多详情。
 
 ### 属性的较短语法
 
@@ -237,7 +237,7 @@ fun main(args: Array<String>) {
 
 ### 内联属性访问器
 
-如果属性没有 backing field （幕后字段），你现在可以使用 `inline` 修饰符标记属性访问器。此类访问器的编译方式与 [内联函数](inline-functions.md) 相同。
+如果属性没有 backing field （幕后字段），你现在可以使用 `inline` 修饰符标记属性访问器。此类访问器的编译方式与 [内联函数](inline-functions) 相同。
 
 ```kotlin
 
@@ -253,11 +253,11 @@ fun main(args: Array<String>) {
 
 你还可以将整个属性标记为 `inline` - 然后修饰符将应用于两个访问器。
 
-阅读 [内联函数文档](inline-functions.md#inline-properties) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/inline-properties.md) 了解更多详情。
+阅读 [内联函数文档](inline-functions#inline-properties) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/inline-properties) 了解更多详情。
 
 ### 局部委托属性
 
-你现在可以将 [委托属性](delegated-properties.md) 语法与局部变量一起使用。一种可能的用途是定义一个惰性计算的局部变量：
+你现在可以将 [委托属性](delegated-properties) 语法与局部变量一起使用。一种可能的用途是定义一个惰性计算的局部变量：
 
 ```kotlin
 import java.util.Random
@@ -280,11 +280,11 @@ fun main(args: Array<String>) {
 }
 ```
 
-阅读 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/local-delegated-properties.md) 了解更多详情。
+阅读 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/local-delegated-properties) 了解更多详情。
 
 ### 拦截委托属性绑定
 
-对于[委托属性](delegated-properties.md)，现在可以使用 `provideDelegate` 运算符拦截委托到属性的绑定。例如，如果我们想在绑定之前检查属性名称，我们可以这样写：
+对于[委托属性](delegated-properties)，现在可以使用 `provideDelegate` 运算符拦截委托到属性的绑定。例如，如果我们想在绑定之前检查属性名称，我们可以这样写：
 
 ```kotlin
 class ResourceLoader<T>(id: ResourceID<T>) {
@@ -306,7 +306,7 @@ class MyUI {
 
 在创建 `MyUI` 实例期间，将为每个属性调用 `provideDelegate` 方法，并且它可以立即执行必要的验证。
 
-阅读 [委托属性文档](delegated-properties.md) 了解更多详情。
+阅读 [委托属性文档](delegated-properties) 了解更多详情。
 
 ### 泛型枚举值访问
 
@@ -327,7 +327,7 @@ fun main(args: Array<String>) {
 
 ### DSL 中隐式接收者的作用域控制
 
-[`@DslMarker`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-dsl-marker/index.html) 注解允许限制在 DSL 上下文中从外部作用域使用接收者。考虑典型的 [HTML 构建器示例](type-safe-builders.md)：
+[`@DslMarker`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-dsl-marker/index.html) 注解允许限制在 DSL 上下文中从外部作用域使用接收者。考虑典型的 [HTML 构建器示例](type-safe-builders)：
 
 ```kotlin
 table {
@@ -341,7 +341,7 @@ table {
 
 在 Kotlin 1.1 中，你可以限制这一点，以便只有在 `td` 的隐式接收者上定义的方法才能在传递给 `td` 的 lambda 表达式中可用。你可以通过定义用 `@DslMarker` 元注解标记的注解并将其应用于标签类的基类来实现这一点。
 
-阅读 [类型安全构建器文档](type-safe-builders.md) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/scope-control-for-implicit-receivers.md) 了解更多详情。
+阅读 [类型安全构建器文档](type-safe-builders) 和 [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/scope-control-for-implicit-receivers) 了解更多详情。
 
 ### rem 运算符
 

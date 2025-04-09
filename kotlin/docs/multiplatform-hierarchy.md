@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Kotlin Multiplatform (KMP) 项目支持分层源码集结构。
-这意味着你可以安排一个中间源码集的分层结构，以便在部分（而非全部）[支持的目标](multiplatform-dsl-reference.md#targets)之间共享通用代码。使用中间源码集有助于你：
+这意味着你可以安排一个中间源码集的分层结构，以便在部分（而非全部）[支持的目标](multiplatform-dsl-reference#targets)之间共享通用代码。使用中间源码集有助于你：
 
 * 为某些目标提供特定的 API。例如，一个库可以在 Kotlin/Native 目标的中间源码集中添加 native-specific APIs，但不在 Kotlin/JVM 目标中添加。
 * 为某些目标使用特定的 API。例如，你可以从 Kotlin Multiplatform 库为构成中间源码集的某些目标提供的丰富 API 中获益。
@@ -310,4 +310,4 @@ Kotlin 目前不支持为以下组合共享源码集：
 * 多个 JS 目标
 
 如果你需要从共享的 native 源码集访问平台特定的 API，IntelliJ IDEA 将帮助你检测可在共享的 native 代码中使用的通用声明。
-对于其他情况，请使用 Kotlin 的[期望和实际声明](multiplatform-expect-actual.md)机制。
+对于其他情况，请使用 Kotlin 的[期望和实际声明](multiplatform-expect-actual)机制。

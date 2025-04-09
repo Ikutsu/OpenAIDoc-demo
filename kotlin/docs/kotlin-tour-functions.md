@@ -5,13 +5,13 @@ title: 函数
 
 :::info
 <p>
-   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types（基本类型）</a><br />
-        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections（集合）</a><br />
-        <img src="/img/icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow（控制流）</a><br />
+   <img src="/img/icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world">Hello world</a><br />
+        <img src="/img/icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types">Basic types（基本类型）</a><br />
+        <img src="/img/icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections">Collections（集合）</a><br />
+        <img src="/img/icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow">Control flow（控制流）</a><br />
         <img src="/img/icon-5.svg" width="20" alt="Fifth step" /> <strong>Functions（函数）</strong><br />
-        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">Classes（类）</a><br />
-        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety（空安全）</a>
+        <img src="/img/icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes">Classes（类）</a><br />
+        <img src="/img/icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety">Null safety（空安全）</a>
 </p>
 
 :::
@@ -61,7 +61,7 @@ fun main() {
 ```
 
 :::note
-我们建议在我们的[编码规范](coding-conventions.md#function-names)中，函数命名以小写字母开头，并使用驼峰命名法，不使用下划线。
+我们建议在我们的[编码规范](coding-conventions#function-names)中，函数命名以小写字母开头，并使用驼峰命名法，不使用下划线。
 
 :::
 
@@ -70,7 +70,7 @@ fun main() {
 为了代码简洁，在调用函数时，不必包含参数名。 但是，包含参数名确实使你的代码更易于阅读。 这称为使用**命名参数**。 如果确实包含参数名，则可以按任何顺序编写参数。
 
 :::note
-在以下示例中，[字符串模板](strings.md#string-templates) (`$`) 用于访问参数值，将其转换为 `String` 类型，然后将它们连接成字符串以进行打印。
+在以下示例中，[字符串模板](strings#string-templates) (`$`) 用于访问参数值，将其转换为 `String` 类型，然后将它们连接成字符串以进行打印。
 
 ```kotlin
 fun printMessageWithPrefix(message: String, prefix: String) {
@@ -204,7 +204,7 @@ fun main() {
 编写一个名为 `circleArea` 的函数，该函数以整数格式获取圆的半径作为参数，并输出该圆的面积。
 
 :::note
-在本练习中，你导入一个包，以便可以通过 `PI` 访问 pi 的值。 有关导入包的更多信息，请参见 [包和导入](packages.md)。
+在本练习中，你导入一个包，以便可以通过 `PI` 访问 pi 的值。 有关导入包的更多信息，请参见 [包和导入](packages)。
 
 :::
 
@@ -506,9 +506,9 @@ fun main() {
 }
 ```
 
-有关 Lambda 表达式的更多信息，请参见 [Lambda 表达式和匿名函数](lambdas.md#lambda-expressions-and-anonymous-functions)。
+有关 Lambda 表达式的更多信息，请参见 [Lambda 表达式和匿名函数](lambdas#lambda-expressions-and-anonymous-functions)。
 
-我们教程的下一步是学习 Kotlin 中的 [类](kotlin-tour-classes.md)。
+我们教程的下一步是学习 Kotlin 中的 [类](kotlin-tour-classes)。
 
 ## Lambda 表达式练习
 
@@ -572,4 +572,4 @@ fun main() {
 
 ## 下一步
 
-[类](kotlin-tour-classes.md)
+[类](kotlin-tour-classes)

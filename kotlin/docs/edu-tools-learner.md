@@ -6,4 +6,4 @@ title: "通过 JetBrains Academy 插件学习 Kotlin"
 查看 [Learner Start Guide](https://plugins.jetbrains.com/plugin/10081-jetbrains-academy/docs/learner-start-guide.html?section=Kotlin%20Koans)，它将帮助你在 IntelliJ IDEA 中开始 Kotlin Koans 课程。
 解决交互式编码挑战，并在 IDE 中获得即时反馈。
 
-如果你想使用 JetBrains Academy 插件进行教学，请阅读 [Teaching Kotlin with JetBrains Academy plugin](edu-tools-educator.md)。
+如果你想使用 JetBrains Academy 插件进行教学，请阅读 [Teaching Kotlin with JetBrains Academy plugin](edu-tools-educator)。
